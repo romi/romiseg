@@ -1,0 +1,84 @@
+#!/usr/bin/env python3
+# -*- coding: utf-8 -*-
+"""
+Created on Fri May  3 16:27:45 2019
+
+@author: alienor
+"""
+
+import torch
+from torch.utils.data.dataset import Dataset  # For custom data-sets
+import torchvision.transforms as transforms
+from PIL import Image
+import numpy as np
+import torchvision
+import matplotlib.pyplot as plt
+import glob
+
+
+
+path_imgs = "data/arabidopsis/"
+
+
+transform = transforms.Compose([
+    # you can add other transformations in this list
+    transforms.ToTensor()])
+
+def init_set(mode, path = path_imgs):
+    if mode not in ['train', 'val', 'test']:
+        print("mode should be 'train', 'val' or 'test'")
+    image_paths = glob.glob(path + mode + "/images/*.png")
+    target_paths = glob.glob(path + mode + "/labels/*.png")
+    return image_paths, target_paths
+
+
+class CustomDataset(Dataset):
+
+    def __init__(self, image_paths, target_paths, train=True):   # initial logic happens like transform
+
+        self.image_paths = image_paths
+        self.target_paths = target_paths
+        self.transforms = transforms.ToTensor()
+
+    def __getitem__(self, index):
+
+        image = Image.open(self.image_paths[index])
+        mask = Image.open(self.target_paths[index])
+        
+        mask = self.read_label(mask)
+        
+        t_image = self.transforms(image)
+        t_mask = self.transforms(mask)
+        t_mask = t_mask.permute(1,2,0)
+        return t_image, t_mask
+
+    def __len__(self):  # return count of sample we have
+
+        return len(self.image_paths)
+    
+    def read_label(self, im):
+        '''This function reads the binary-encoded label of the input image and
+        returns the one hot encoded label. 6 classes: 5 plan organs and ground'''
+        im = np.asarray(im)
+        a, b = im.shape
+        label_image = np.zeros((6, a, b))
+        label_image[0][im == 0] = 1
+        for i in range(1,5): #[binary reading]
+            label_image[i] = im%2
+            im = im//2
+        return label_image
+
+if False: 
+    image_paths, target_paths = init_set('train', path = path_imgs)
+    
+    train_dataset = CustomDataset(image_paths, target_paths, train=True)
+    train_loader = torch.utils.data.DataLoader(train_dataset, batch_size=4, shuffle=True, num_workers=1)
+
+
+if False:
+    for batch_idx, (inputs, labels) in enumerate(train_loader):
+         print(labels.shape)
+         inputs = labels.permute(2, 3, 0, 1)
+         plt.figure()
+         plt.imshow(inputs[:,:,0,0].numpy())
+         plt.show()
