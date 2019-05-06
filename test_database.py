@@ -40,7 +40,7 @@ if __name__ == "__main__":
        fig.add_subplot(rows, columns, 2*i+2)
        plt.axis('off')
        plt.grid(False)
-       img = label[i,4,:,:].int()
+       img = label[i,3,:,:].int()
        img = torchvision.transforms.ToPILImage()(img)
        plt.imshow(img)
     plt.show()
