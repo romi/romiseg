@@ -22,6 +22,10 @@ The images and labels are then loaded in PyTorch format using a custom dataloade
 # Learning phase in 2D
 CNNs to test: DeepLab, SegNet, Unet...
 
+First trial with UNet (70 training images-59 epoch-448x448)
+![](database_sample/first_trial_unet.png)
+![](database_sample/class_pred.png)
+
 # 2D features to 3D compatible with Pytorch
 The real scanner space carving is based on finding the features of a 3D point in projected onto each view of the scanning images. 
 The same process was implemented in Pytorch taking avantage of the GPU to store the 3D space coordinates.

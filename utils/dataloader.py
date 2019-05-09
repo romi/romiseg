@@ -21,11 +21,14 @@ path_imgs = "data/arabidopsis/"
 
 
 transform = transforms.Compose([
-    # you can add other transformations in this list
-    transforms.ToTensor()])
+        transforms.CenterCrop((224, 224)),
+        #transforms.Resize(224),
+        # you can add other transformations in this list
+        transforms.ToTensor()])
 
 def init_set(mode, path = path_imgs):
     if mode not in ['train', 'val', 'test']:
+    
         print("mode should be 'train', 'val' or 'test'")
     image_paths = glob.glob(path + mode + "/images/*.png")
     target_paths = glob.glob(path + mode + "/labels/*.png")
@@ -34,22 +37,23 @@ def init_set(mode, path = path_imgs):
 
 class CustomDataset(Dataset):
 
-    def __init__(self, image_paths, target_paths, train=True):   # initial logic happens like transform
+    def __init__(self, image_paths, target_paths, transform = transform):   # initial logic happens like transform
 
         self.image_paths = image_paths
         self.target_paths = target_paths
-        self.transforms = transforms.ToTensor()
+        self.transforms = transform
 
     def __getitem__(self, index):
 
         image = Image.open(self.image_paths[index])
         mask = Image.open(self.target_paths[index])
-        
-        mask = self.read_label(mask)
-        
         t_image = self.transforms(image)
         t_mask = self.transforms(mask)
-        t_mask = t_mask.permute(1,2,0)
+        
+        t_mask = self.read_label(t_mask)
+        
+        #t_mask = t_mask.permute(1,2,0)
+        t_image = t_image[0:3, :, :]
         return t_image, t_mask
 
     def __len__(self):  # return count of sample we have
@@ -59,11 +63,12 @@ class CustomDataset(Dataset):
     def read_label(self, im):
         '''This function reads the binary-encoded label of the input image and
         returns the one hot encoded label. 6 classes: 5 plan organs and ground'''
-        im = np.asarray(im)
+        im = (im[0]*255).type(torch.int32)
         a, b = im.shape
-        label_image = np.zeros((6, a, b))
+        label_image = torch.zeros((6, a, b))
         label_image[0][im == 0] = 1
-        for i in range(1,5): #[binary reading]
+    
+        for i in range(1,6): #[binary reading]
             label_image[i] = im%2
             im = im//2
         return label_image
