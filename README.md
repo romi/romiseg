@@ -22,8 +22,13 @@ The images and labels are then loaded in PyTorch format using a custom dataloade
 # Learning phase in 2D
 CNNs to test: DeepLab, SegNet, Unet...
 
-First trial with UNet (70 training images-59 epoch-448x448)
-![](database_sample/first_trial_unet.png)
+First trial with UNet (70 training images-59 epoch-448x448)  
+
+![](database_sample/first_trial_unet.png)  
+
+
+Class predictions  
+
 ![](database_sample/class_pred.png)
 
 # 2D features to 3D compatible with Pytorch
