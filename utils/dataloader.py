@@ -20,8 +20,9 @@ import glob
 path_imgs = "data/arabidopsis/"
 
 
-transform = transforms.Compose([
-        transforms.CenterCrop((224, 224)),
+trans = transforms.Compose([
+        #transforms.Resize((896,448)),
+        transforms.CenterCrop((448, 448)),
         #transforms.Resize(224),
         # you can add other transformations in this list
         transforms.ToTensor()])
@@ -37,7 +38,7 @@ def init_set(mode, path = path_imgs):
 
 class CustomDataset(Dataset):
 
-    def __init__(self, image_paths, target_paths, transform = transform):   # initial logic happens like transform
+    def __init__(self, image_paths, target_paths, transform = trans):   # initial logic happens like transform
 
         self.image_paths = image_paths
         self.target_paths = target_paths

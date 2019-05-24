@@ -42,9 +42,11 @@ def plot_3D(voxels):
 def move_camera(torch_voxels, extrinsics, N_cam, prod):
     ind = torch_voxels[:,3]==1
     camera_pos = []
+    fig = plt.figure()
+    ax = fig.add_subplot(111, projection='3d')
     for i in range(0,N_cam):
-        fig = plt.figure()
-        ax = fig.add_subplot(111, projection='3d')
+        #fig = plt.figure()
+        #ax = fig.add_subplot(111, projection='3d')
         vox = prod.clone()
         ax.scatter(vox[i,0,ind], vox[i,1,ind], vox[i,2,ind], s = 1)
         coords_cam = extrinsics[:,:,3]
@@ -55,17 +57,17 @@ def move_camera(torch_voxels, extrinsics, N_cam, prod):
         ax.set_aspect('equal')
         plt.savefig('test_cloud/camera_pos%d.jpg'%i)
         camera_pos.append(imageio.imread('test_cloud/camera_pos%d.jpg'%i))
-        plt.close('all')
+        #plt.close('all')
     imageio.mimsave('test_cloud/camera_pos.gif', camera_pos)   
 
-def local_proj(xy_coords, N_cam):
+def local_proj(xy_coords, N_cam, ind):
     images = []
     for i in range(N_cam):
         fig, ax = plt.subplots(1,1)
 
         image = xy_coords[i,:,ind]
         x = image[0,:].numpy()
-        y = image[1,:].numpy()
+        y = -image[1,:].numpy()
         
         ax.set_aspect('equal')
         plt.scatter(x, y, s = 1)

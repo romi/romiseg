@@ -14,15 +14,18 @@ import numpy as np
 import shutil
 
 if __name__ == "__main__":
+    W = 1920
+    H = 1080
 
-    for i in range(1,50):
-        tool = virtual_scan(w = 896, h = 448)
-        tool.image_and_label(i, N = 10, mode = 'train')
+    for i in range(0, 50):
+
+        tool = virtual_scan(w = W, h = H)
+        tool.image_and_label(i, N = 72, R= 35, z = 60, mode = 'train')
        
     for i in range(51, 80):
-        tool = virtual_scan(w = 896, h = 448)
-        tool.image_and_label(i, N = 10, mode = 'val')
+        tool = virtual_scan(w = W, h = H)
+        tool.image_and_label(i, N = 72, R= 35, z = 60, mode = 'val')
     
-    for i in range(81, 100):
-        tool = virtual_scan(w = 896, h = 448)
-        tool.image_and_label(i, N = 10, mode = 'test')
+    for i in range(81, 82):
+        tool = virtual_scan(w = W, h = H)
+        tool.image_and_label(i, N = 72, R= 35, z = 60, mode = 'test')

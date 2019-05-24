@@ -51,31 +51,39 @@ def views_to_images(torch_voxels, xy_coords, s, cloud_scale, N_cam, maxi):
     ind = torch_voxels[:,3]==1
     coords = xy_coords[:,:,ind].clone()
     maxi = maxi/cloud_scale
-    coords[:, 1, :] = -coords[:,1,:]
-    coords[:,0] = coords[:,0] - torch.mean(coords[:,0]) + maxi[0]/2
-    print(torch.mean(coords[:,0]))
-    coords[:,1] = coords[:,1] - torch.mean(coords[:,1]) + maxi[1]/2
     
+    #coords[:, 2, :] = coords[:,0,:]
+    #coords[:, 0, :] = coords[:,1,:]
+    #coords[:, 1, :] = coords[:,2,:]
+
+    coords[:,0] = coords[:,0]# - torch.mean(coords[:,0]) + maxi[0]/2
+    print(torch.mean(coords[:,0]), torch.max(coords[:,0]),torch.min(coords[:,0]))
+    coords[:,1] = coords[:,1]# - torch.mean(coords[:,1]) + maxi[1]*1/2
+    print(torch.mean(coords[:,1]), torch.max(coords[:,1]),torch.min(coords[:,1]))
+
     maxi = maxi/s
     image = torch.zeros(int(maxi[0])+1, int(maxi[1])+1)
   
-    coords = coords/s
+    #coords = coords/s
     coords = coords.int()
     images = []
-
     for i in range(N_cam):
         image = torch.zeros(int(maxi[0])+1, int(maxi[1])+1)
         ind_i = coords[i][0,:]>0
+        print(np.count_nonzero(ind_i))
         coords_i = coords[i][:, ind_i]
         ind_i = coords_i[1,:]>0
+        print(np.count_nonzero(ind_i))
         coords_i = coords_i[:, ind_i]
         ind_i = coords_i[0,:] < int(maxi[0])
+        print(torch.max(coords_i[0,:]))
         coords_i = coords_i[:, ind_i]
         ind_i = coords_i[1,:] < int(maxi[1])
+        print(torch.max(coords_i[1,:]))
         coords_i = coords_i[:, ind_i]
 
         image[coords_i[0,:].long(), coords_i[1,:].long()] = 1
-        image = image.permute(1,0)
+        #image = image.permute(1,0)
 
         images.append(image)
         

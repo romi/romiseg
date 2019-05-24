@@ -19,6 +19,9 @@ from mpl_toolkits.mplot3d import Axes3D
 from PIL import Image
 import imageio
 
+def avoid_eps(a, eps):
+    a[torch.abs(a)<eps] = 0
+    return a
 
 def basis_vox(min_vec, w, h, l):
     """
@@ -71,10 +74,19 @@ def get_extr(rx, ry, rz, x, y, z):
     rotz[0,1] = -s
     rotz[1,0] = s
     rotz[2,2] = 1
-        
-    rot = torch.mm(rotz, torch.mm(rotx, roty))
+    
+    eps = 1e-7
+    rotz = avoid_eps(rotz, eps)
+    roty = avoid_eps(roty, eps)
+    rotx = avoid_eps(rotx, eps)
+
+    print(rotx)
+    print(roty)
+    print(rotz)
+
+    rot = torch.mm(torch.mm(rotx, roty), rotz)
     trans = torch.tensor([[x], [y], [z]])
-    #trans = -torch.mm(torch.transpose(rot, 0, 1), trans)
+    trans = -torch.mm(torch.transpose(rotz, 0, 1), trans)
     rt[:3,:3] = rot
     rt[:,3] = torch.transpose(trans, 0, 1)
     
@@ -82,15 +94,17 @@ def get_extr(rx, ry, rz, x, y, z):
 
 
 def get_trajectory(N_cam, x0, y0, z0, rx, ry):
-    d_theta = 2 * np.pi/N_cam
+    d_theta = -2 * np.pi/N_cam
     extrinsics = torch.zeros(N_cam, 3, 4)
     for i in range(N_cam):
-        rz = d_theta * i + np.pi #camera pan      
-        pose = get_extr(rx, ry, rz, x0, y0, z0)
+        x1 = x0 * np.cos(i * d_theta) #x pos of camera
+        y1 = x0 * np.sin(i * d_theta) #y pos of camera 
+        rz = d_theta * i + np.pi/2 #camera pan   
+        pose = get_extr(rx, ry, rz, x1, y1, z0)
         extrinsics[i, :,:] = pose
     return extrinsics
 
-def project_coordinates(torch_voxels, intrinsics, extrinsics):
+def project_coordinates(torch_voxels, intrinsics, extrinsics, give_prod):
     torch_voxels = torch_voxels.unsqueeze(0) #homogeneous coordinates
     t = torch_voxels.clone()
     #t = t-torch.mean(t, dim = 1)
@@ -99,10 +113,15 @@ def project_coordinates(torch_voxels, intrinsics, extrinsics):
     t = t.permute(0, 2, 1) #convenient for matrix product
     ext = extrinsics[:,0:3,:] #several camera poses
     prod = torch.matmul(ext.double(), t) #coordinate change
-    prod[:,1,:] /= prod[:,0,:]
-    prod[:,2,:] /= prod[:,0,:]
-    xy_coords = prod[:, 1:3, :]
+    if give_prod == True:
+        prod1 = prod.clone()
+    prod[:,0,:] = prod[:,0,:]/prod[:,2,:]
+    prod[:,1,:] = prod[:,1,:]/prod[:,2,:]
+    prod[:,2,:] = prod[:,2,:]/prod[:,2,:]
+    xy_coords = prod[:, 0:3, :]
     xy_coords = torch.matmul(intrinsics.double(), xy_coords) #coordinate change
-
-    return prod, xy_coords
+    if give_prod == True:
+        return prod1, xy_coords
+    else: 
+        return xy_coords
 
