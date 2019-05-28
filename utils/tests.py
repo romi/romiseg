@@ -45,8 +45,8 @@ def move_camera(torch_voxels, extrinsics, N_cam, prod):
     fig = plt.figure()
     ax = fig.add_subplot(111, projection='3d')
     for i in range(0,N_cam):
-        #fig = plt.figure()
-        #ax = fig.add_subplot(111, projection='3d')
+        fig = plt.figure()
+        ax = fig.add_subplot(111, projection='3d')
         vox = prod.clone()
         ax.scatter(vox[i,0,ind], vox[i,1,ind], vox[i,2,ind], s = 1)
         coords_cam = extrinsics[:,:,3]
@@ -57,7 +57,7 @@ def move_camera(torch_voxels, extrinsics, N_cam, prod):
         ax.set_aspect('equal')
         plt.savefig('test_cloud/camera_pos%d.jpg'%i)
         camera_pos.append(imageio.imread('test_cloud/camera_pos%d.jpg'%i))
-        #plt.close('all')
+        plt.close('all')
     imageio.mimsave('test_cloud/camera_pos.gif', camera_pos)   
 
 def local_proj(xy_coords, N_cam, ind):
