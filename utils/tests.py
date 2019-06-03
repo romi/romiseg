@@ -31,12 +31,12 @@ def plot_3D(voxels):
     
     fig = plt.figure()
     ax = fig.add_subplot(111, projection='3d')
-    vox = voxels[voxels[:,3]==1]
+    vox = voxels[voxels[:,3]>1]
     ax.scatter(vox[:,0], vox[:,1], vox[:,2], s = 1)
     ax.set_xlabel('x')
     ax.set_ylabel('y')
     ax.set_zlabel('z')
-    ax.set_aspect('equal')
+    #ax.set_aspect('equal')
     plt.show()
     
 def move_camera(torch_voxels, extrinsics, N_cam, prod):
@@ -54,7 +54,7 @@ def move_camera(torch_voxels, extrinsics, N_cam, prod):
         ax.set_xlabel('x')
         ax.set_ylabel('y')
         ax.set_zlabel('z')
-        ax.set_aspect('equal')
+        #ax.set_aspect('equal')
         plt.savefig('test_cloud/camera_pos%d.jpg'%i)
         camera_pos.append(imageio.imread('test_cloud/camera_pos%d.jpg'%i))
         plt.close('all')

@@ -37,12 +37,17 @@ def fill_vox(point_cloud, basis_voxels, vox_size, min_vec, w, h, l):
     cloud[:,0] = cloud[:,0]
     cloud[:,1] = cloud[:,1]
     cloud[:,2] = cloud[:,2]
-    voxels = cloud // vox_size
+    voxels = cloud[:,:3] // vox_size
 
     
-    for coords in voxels:
+    #for coords in voxels:
+    #    ind = int(np.array([h*l, l, 1]).dot(coords - min_vec))
+    #    basis_voxels[ind, 3] = 1
+    
+    for loc, coords in enumerate(voxels):
         ind = int(np.array([h*l, l, 1]).dot(coords - min_vec))
-        basis_voxels[ind, 3] = 1
+        basis_voxels[ind, 3] = cloud[loc, 3]
+        
         
     return basis_voxels
 
