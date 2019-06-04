@@ -37,3 +37,12 @@ The same process was implemented in Pytorch taking avantage of the GPU to store 
 
 ![](cloud_sample/virtual_scan_torch4.gif)
 
+#Intermediary result
+![](cloud_sample/reconstruction.png)
+
+#Classification
+Input: x (B, N, N_views, N_class) -> y (B, N) 
+First trial: Linear layer (B, N, N_class x N_views) -> (B, N)
+N - 10⁶ 
+N_views - 72
+N_class = 7
