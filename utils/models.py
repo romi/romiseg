@@ -132,3 +132,27 @@ def reverse_transform(inp):
     inp = (inp * 255).astype(np.uint8)
 
     return inp
+
+class my_model_simple(nn.Module):
+    def __init__(self, n_views = 72, n_class = 7):
+        super(my_model_simple,self).__init__()
+        self.weight = Parameter(torch.Tensor(1, 1, n_views, n_class).to(device))
+        self.bias = Parameter(torch.Tensor(1,5*k,n_class).to(device))
+        self.reset_parameters()
+
+        
+    def reset_parameters(self):
+        init.kaiming_uniform_(self.weight, a=math.sqrt(5))
+        if self.bias is not None:
+            fan_in, _ = init._calculate_fan_in_and_fan_out(self.weight)
+            bound = 1 / math.sqrt(fan_in)
+            init.uniform_(self.bias, -bound, bound)
+            
+    def forward(self,x):
+        print(x.shape, self.weight.shape)
+        x = x * self.weight
+        print(x.shape)
+        x = torch.sum(x, dim = -2, keepdim = True)
+        print(x.shape)
+        #x = x + self.bias
+        return x[:,:,0,:]

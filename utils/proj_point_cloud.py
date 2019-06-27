@@ -37,7 +37,7 @@ def fill_vox(point_cloud, basis_voxels, vox_size, min_vec, w, h, l):
     cloud[:,0] = cloud[:,0]
     cloud[:,1] = cloud[:,1]
     cloud[:,2] = cloud[:,2]
-    voxels = cloud[:,:3] // vox_size
+    voxels = (cloud[:,:3] + vox_size/2) // vox_size
 
     
     #for coords in voxels:
@@ -49,7 +49,7 @@ def fill_vox(point_cloud, basis_voxels, vox_size, min_vec, w, h, l):
         basis_voxels[ind, 3] = cloud[loc, 3]
         
         
-    return basis_voxels
+    return basis_voxels, voxels[0]
 
 
 def views_to_images(torch_voxels, xy_coords, s, cloud_scale, N_cam, maxi):

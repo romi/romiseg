@@ -33,7 +33,7 @@ def init_set(mode, path = path_imgs):
         print("mode should be 'train', 'val' or 'test'")
     image_paths = glob.glob(path + mode + "/images/*.png")
     target_paths = glob.glob(path + mode + "/labels/*.png")
-    return image_paths, target_paths
+    return np.sort(image_paths), np.sort(target_paths)
 
 
 class CustomDataset(Dataset):
@@ -88,3 +88,42 @@ if False:
          plt.figure()
          plt.imshow(inputs[:,:,0,0].numpy())
          plt.show()
+  
+#%%
+         
+def init_3D_set(mode, path = path_imgs):
+    if mode not in ['train', 'val', 'test']:
+    
+        print("mode should be 'train', 'val' or 'test'")
+        
+    image_paths = glob.glob(path + mode + "/images/*.png")
+    target_paths = glob.glob(path + mode + "/3D_label/*.pt")
+    return  np.sort(image_paths), np.sort(target_paths)
+         
+       
+class Dataset_3D(Dataset):
+
+    def __init__(self, image_paths, target_paths, transform = trans, the_shape=2197000):   # initial logic happens like transform
+
+        self.image_paths = image_paths
+        self.target_paths = target_paths
+        self.transforms = transform
+        self.the_shape = the_shape
+
+    def __getitem__(self, index):
+
+        image = Image.open(self.image_paths[index])
+        mask = torch.load(self.target_paths[index])
+        t_image = self.transforms(image)
+        
+        t_mask = torch.sparse.FloatTensor(mask[0].unsqueeze(0), mask[1], 
+                              size = torch.Size([self.the_shape])).to_dense()
+        
+        #t_mask = t_mask.permute(1,2,0)
+        t_image = t_image[0:3, :, :]
+        return t_image, t_mask
+
+    def __len__(self):  # return count of sample we have
+
+        return len(self.image_paths)
+    

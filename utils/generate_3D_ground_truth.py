@@ -28,7 +28,7 @@ def to_sparse(x):
     return indices, values, x.size()
 
 
-def gt_pc_to_vox(filename):
+def gt_pc_to_vox(filename, savename=None):
     cloud_scale = 0.5
     N = int(65/cloud_scale)
     min_vec = [int(-40/cloud_scale), int(-40/cloud_scale),int(-5/cloud_scale)] #Limit of the cloud
@@ -39,7 +39,7 @@ def gt_pc_to_vox(filename):
     gt = read_ply(filename)
     gt_points = np.vstack((gt['x'], gt['y'], gt['z'], gt['green'])).T
     
-    voxels = ppc.fill_vox(gt_points, basis_voxels, cloud_scale, min_vec, N, N, N) #Fill the coordinates
+    voxels, v = ppc.fill_vox(gt_points, basis_voxels, cloud_scale, min_vec, N, N, N) #Fill the coordinates
     
     voxels = torch.tensor(voxels)
     
@@ -49,8 +49,12 @@ def gt_pc_to_vox(filename):
     a = a[:,0].long()
     b = b.long()//50
     vox_sparse = torch.stack([a, b])
-    torch.save(vox_sparse, filename[:-4] + '.pt')
-    
+    if savename==None:
+        torch.save(vox_sparse, filename[:-4] + '.pt')
+    else: 
+        torch.save(vox_sparse, savename + '.pt')
+
+    return v
     #Convert back:
     #vox = torch.sparse.FloatTensor(vox_sparse[0].unsqueeze(0), vox_sparse[1], 
     #size = torch.Size([basis_voxels.shape[0]])).to_dense()

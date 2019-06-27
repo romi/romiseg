@@ -125,3 +125,81 @@ def project_coordinates(torch_voxels, intrinsics, extrinsics, give_prod):
     else: 
         return xy_coords
 
+def correct_coords_outside(coordinates, Sx, Sy, xinit, yinit, val):
+    '''This function ensures that the voxels ot the volume that 
+    don't project onto the different views won't generate index errors when we project them onto the predictions
+    We will associate to them a specific label meaning "voxel projected outside of the image"
+    Inputs: -coodinates xy for each view (torch tensor)
+            -center crop dimensions
+            -image dimensions
+            -value to assign to the coordinates projectiong outside (-1 is a good choice)
+    Output: Modified coordinates
+    '''
+    
+    coords = coordinates.clone()
+    
+    indices = (coords[:,0,:] < (xinit-Sx)/2) #lower bound for x
+    ind_stack = torch.stack([indices]*3, dim = 1)
+    coords[ind_stack] = val
+    
+    indices = (coords[:,1,:] < (yinit-Sy)/2) #lower bound for y
+    ind_stack = torch.stack([indices]*3, dim = 1)
+    coords[ind_stack] = val
+    
+    indices = (coords[:,0,:] > (xinit+Sx)/2) #upper bound for x
+    ind_stack = torch.stack([indices]*3, dim = 1)
+    coords[ind_stack] = val
+    
+    indices = (coords[:,1,:] > (yinit+Sy)/2) #upper bound for y
+    ind_stack = torch.stack([indices]*3, dim = 1)
+    coords[ind_stack] = val
+    
+    return coords.long()
+
+
+def adjust_predictions(preds):
+    '''
+    The predictions have to be flattened to be accessed by the coordinates tensor. 
+    Also a new class has to be added to 
+    describe the voxels prohjecting outside the image. 
+    These voxels will project onto the last element of the flattened predictions
+    that correspond to "pixel outside the image" class.
+    Input: predictions in shape (N_cam, W, H, num_labels) torch tensor
+    Output: Flattened predictions (N_cam * W * H + 1, num_labels + 1)
+    '''
+    outside_proj_label = (preds[:,:,:,0]*0).unsqueeze(-1) 
+    preds = torch.cat([preds, outside_proj_label], dim = 3) #Add a label class: voxel projects outside image
+    preds_flat = torch.flatten(preds, end_dim = -2) #Flatten the predictions
+    
+    outside_label = preds_flat[0] * 0
+    outside_label[-1] = 1 
+    outside_label = outside_label.unsqueeze(0)
+    preds_flat = torch.cat([preds_flat, outside_label]) #Add a last prediction where all 
+    #voxels that project outside the  image will collect their class
+    
+    return preds_flat
+
+
+def flatten_coordinates(coords, shape_predictions):
+    '''
+    To access the predictions by indexing, the indexes have to be modified according to the 
+    flattened predicitions.
+    Inputs: -xy coordinates
+            -shape of the predictions before flattening
+    Output: adapted coordinates + take into account the coordinates that project outside the images
+            they will project onto the last element of the flattened predictions
+    '''
+    xx = coords[:,0]
+    yy = coords[:,1]
+    xy = torch.mul(xx, shape_predictions[2]) + yy  #manually perform ravel_multi_index from numpy, along X and Y 
+    
+    flat_factor = shape_predictions[1] * shape_predictions[2] 
+    flat_vec = torch.mul(torch.linspace(0, shape_predictions[0] - torch.tensor(1), shape_predictions[0]), flat_factor)
+    flat_vec = flat_vec.unsqueeze(1).long()
+    flat_coo = torch.add(xy, flat_vec) #Perform it along the views N_cam
+    flat_coo[xy < 0] = -1 #Set the negative indexes 
+
+    xy_full_flat = torch.flatten(flat_coo)
+    
+    
+    return xy_full_flat
