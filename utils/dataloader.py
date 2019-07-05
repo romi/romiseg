@@ -15,7 +15,7 @@ import torchvision
 import matplotlib.pyplot as plt
 import glob
 
-
+#%%
 
 path_imgs = "data/arabidopsis/"
 
@@ -27,22 +27,25 @@ trans = transforms.Compose([
         # you can add other transformations in this list
         transforms.ToTensor()])
 
-def init_set(mode, path = path_imgs):
+def init_set(mode, path = path_imgs, ext = "png"):
     if mode not in ['train', 'val', 'test']:
     
         print("mode should be 'train', 'val' or 'test'")
-    image_paths = glob.glob(path + mode + "/images/*.png")
+    image_paths = glob.glob(path + mode + "/images/*." + ext)
     target_paths = glob.glob(path + mode + "/labels/*.png")
     return np.sort(image_paths), np.sort(target_paths)
 
 
+
+
 class CustomDataset(Dataset):
 
-    def __init__(self, image_paths, target_paths, transform = trans):   # initial logic happens like transform
+    def __init__(self, image_paths, target_paths, typ = 'virtual', transform = trans):   # initial logic happens like transform
 
         self.image_paths = image_paths
         self.target_paths = target_paths
         self.transforms = transform
+        self.typ = typ
 
     def __getitem__(self, index):
 
@@ -51,7 +54,7 @@ class CustomDataset(Dataset):
         t_image = self.transforms(image)
         t_mask = self.transforms(mask)
         
-        t_mask = self.read_label(t_mask)
+        t_mask = self.read_label(t_mask, self.typ)
         
         #t_mask = t_mask.permute(1,2,0)
         t_image = t_image[0:3, :, :]
@@ -61,17 +64,25 @@ class CustomDataset(Dataset):
 
         return len(self.image_paths)
     
-    def read_label(self, im):
+    def read_label(self, im, typ):
         '''This function reads the binary-encoded label of the input image and
         returns the one hot encoded label. 6 classes: 5 plan organs and ground'''
-        im = (im[0]*255).type(torch.int32)
-        a, b = im.shape
+        im1 = (im[0]*255).type(torch.int32)
+        a, b = im1.shape
         label_image = torch.zeros((6, a, b))
-        label_image[0][im == 0] = 1
-    
-        for i in range(1,6): #[binary reading]
-            label_image[i] = im%2
-            im = im//2
+        if typ == 'virtual':
+            im = (im[0]*255).type(torch.int32)
+            label_image[0][im == 0] = 1
+
+            for i in range(1,6): #[binary reading]
+                label_image[i] = im%2
+                im = im//2
+        if typ == 'real':
+            im = (im[2]*255).type(torch.int32)
+            label_image[0][im == 0] = 1
+            for i in range(1, 6):
+                label_image[i][im//51 == i] = 1
+                
         return label_image
 
 if False: 
