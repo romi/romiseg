@@ -114,6 +114,7 @@ class showclass(object):
         #figure save parameters
         self.date = True #write date and time before figure name
         self.save_name = 'Figure' #setting the format!
+        self.save_folder = 'alienlab_images/'
         self.extension = '.tiff'
 
     def showing(self, x=None, y=None):
@@ -140,8 +141,8 @@ class showclass(object):
             plt.title(self.title_list[i], fontsize = self.fontsize) #update subfigure title
         
         if self.date == True:            
-            plt.savefig('alienlab_images/' + str(datetime.datetime.now().strftime('%Y-%m-%d_%H_%M_')) + self.save_name + self.extension,
+            plt.savefig(self.save_folder + str(datetime.datetime.now().strftime('%Y-%m-%d_%H_%M_')) + self.save_name + self.extension,
                         bbox_inches='tight', frameon = False) #save with the date and time befor the figure name
         else: 
-            plt.savefig('alienlab_images/' + self.save_name + self.extension, bbox_inches='tight', frameon = False)
+            plt.savefig(self.save_folder + self.save_name + self.extension, bbox_inches='tight', frameon = False)
         return f

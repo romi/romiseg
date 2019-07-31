@@ -14,6 +14,7 @@ import numpy as np
 import torchvision
 import matplotlib.pyplot as plt
 import glob
+import random
 
 #%%
 
@@ -22,7 +23,7 @@ path_imgs = "data/arabidopsis/"
 
 trans = transforms.Compose([
         #transforms.Resize((896,448)),
-        transforms.CenterCrop((448, 448)),
+        transforms.CenterCrop((896, 448)),
         #transforms.Resize(224),
         # you can add other transformations in this list
         transforms.ToTensor()])
@@ -40,21 +41,24 @@ def init_set(mode, path = path_imgs, ext = "png"):
 
 class CustomDataset(Dataset):
 
-    def __init__(self, image_paths, target_paths, typ = 'virtual', transform = trans):   # initial logic happens like transform
+    def __init__(self, image_paths, target_paths, transform = trans):   # initial logic happens like transform
 
         self.image_paths = image_paths
         self.target_paths = target_paths
         self.transforms = transform
-        self.typ = typ
 
     def __getitem__(self, index):
-
+        angle = random.randint(0,360)
         image = Image.open(self.image_paths[index])
+        image = image.rotate(angle)
         mask = Image.open(self.target_paths[index])
+        mask = mask.rotate(angle)
         t_image = self.transforms(image)
+        #t_image = transforms.Normalize([0.485, 0.456, 0.406, 0.5], [0.229, 0.224, 0.225, 0.22])(t_image)
+
         t_mask = self.transforms(mask)
         
-        t_mask = self.read_label(t_mask, self.typ)
+        t_mask = self.read_label(t_mask, self.target_paths[index])
         
         #t_mask = t_mask.permute(1,2,0)
         t_image = t_image[0:3, :, :]
@@ -64,20 +68,20 @@ class CustomDataset(Dataset):
 
         return len(self.image_paths)
     
-    def read_label(self, im, typ):
+    def read_label(self, im, name):
         '''This function reads the binary-encoded label of the input image and
         returns the one hot encoded label. 6 classes: 5 plan organs and ground'''
         im1 = (im[0]*255).type(torch.int32)
         a, b = im1.shape
         label_image = torch.zeros((6, a, b))
-        if typ == 'virtual':
+        if 'plant' not in name:
             im = (im[0]*255).type(torch.int32)
             label_image[0][im == 0] = 1
 
             for i in range(1,6): #[binary reading]
                 label_image[i] = im%2
                 im = im//2
-        if typ == 'real':
+        else:
             im = (im[2]*255).type(torch.int32)
             label_image[0][im == 0] = 1
             for i in range(1, 6):
@@ -101,15 +105,6 @@ if False:
          plt.show()
   
 #%%
-         
-def init_3D_set(mode, path = path_imgs):
-    if mode not in ['train', 'val', 'test']:
-    
-        print("mode should be 'train', 'val' or 'test'")
-        
-    image_paths = glob.glob(path + mode + "/images/*.png")
-    target_paths = glob.glob(path + mode + "/3D_label/*.pt")
-    return  np.sort(image_paths), np.sort(target_paths)
          
        
 class Dataset_3D(Dataset):
@@ -138,3 +133,18 @@ class Dataset_3D(Dataset):
 
         return len(self.image_paths)
     
+def init_3D_set(mode, path = path_imgs, N_subsample = 1, N_cam = 72):
+    if mode not in ['train', 'val', 'test']:
+    
+        print("mode should be 'train', 'val' or 'test'")
+        
+    image_paths = np.sort(glob.glob(path + mode + "/images/*.jpg"))
+    target_paths = np.sort(glob.glob(path + mode + "/3D_label/*.pt"))
+    target_paths = np.repeat(target_paths, N_cam)
+
+    return  image_paths[::N_subsample], target_paths[::N_subsample]
+
+
+trans = transforms.Compose([
+    transforms.CenterCrop((896, 448)),
+    transforms.ToTensor()])

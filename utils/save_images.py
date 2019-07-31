@@ -10,7 +10,7 @@ import requests
 from io import BytesIO
 import os
 from lettucethink.db.fsdb import DB
-
+import pandas as pd
 
 
 import urllib.request
@@ -55,9 +55,9 @@ class virtual_scan():
             os.makedirs(folder_name)
             
     
-    def load_im(self,num):
+    def load_im(self,num, dx, dy, dz):
         '''This function loads the arabidopsis mesh. It should be included in the data folder associated to the virtual scanner as a .obj '''
-        url_part = "load/arabidopsis_%s"%num
+        url_part = "load/arabidopsis_%s?dx=%f&dy=%f&dz=%f"%(num, dx, dy, dz)
         contents = urllib.request.urlopen(self.localhost + url_part).read()
         return contents
     
@@ -92,12 +92,13 @@ class virtual_scan():
             url_part = 'render?mat=Color_%d'%label
             response = requests.get(self.localhost + url_part)
             collect_image = np.array(Image.open(BytesIO(response.content)))[:,:,0]
-            collect_image[collect_image != 64] = 2**i  #Binary encoding to describe
+            #print(collect_image[0,0], collect_image.min(), collect_image.sum())
+            collect_image[collect_image != 0] = 2**i  #Binary encoding to describe
             #plt.imshow(collect_image, cmap = 'gray')
             #plt.title(titles[i])
 
             #the possibiility of multiclass for 1 pixel
-            collect_image[collect_image == 64] = 0
+            #collect_image[collect_image == 64] = 0
 
             img += collect_image
         #plt.show()
@@ -250,7 +251,7 @@ class virtual_scan():
             file.set_metadata(metadata)
             
             
-    def image_and_label(self, n, N=None, R=None, z = None, rx = None, ry = None, mode = None):
+    def image_and_label(self, n, N=None, R=None, z = None, rx = None, ry = None, path = None, mode = None, label = True):
         if N is None:
             N = self.N
         if R is None:
@@ -263,15 +264,15 @@ class virtual_scan():
             ry = self.ry
 
         #Save to database    
-        if mode == None:
+        if path == None:
             self.create('segmentation_arabidopsis')
             database = DB('segmentation_arabidopsis')
-            scan = database.create_scan('arabidopsis%03d'%n)
+            scan = database.get_scan('arabidopsis%03d'%n)
             file_images = scan.get_fileset('images', create = True)
             file_labels = scan.get_fileset('labels', create = True)
         
         else:
-            database = DB('data/arabidopsis')
+            database = DB(path)
             scan = database.get_scan(mode)
             print(scan)
             file_images = scan.get_fileset('images', create = True)
@@ -280,7 +281,11 @@ class virtual_scan():
         d_theta = 2 * np.pi/N
                 
         #LOAD IMAGE IN BLENDER
-        c = self.load_im(n)
+        
+        print(path + mode +'/' + mode+ '.txt')
+        df = pd.read_pickle(path + mode +'/' + mode+ '.txt')
+        (dx, dy, dz) = tuple(df['xyz'][df['number'] == n])[0]
+        c = self.load_im(n, dx, dy, dz)
         
         #TRAJECTORY, mode = 'train'
         for i in range(N):
@@ -291,15 +296,18 @@ class virtual_scan():
             rz = d_theta * i * 180/np.pi + 90 #camera pan
             
             im = self.render(x, y, z, rx, ry, rz) #call blender 
+
+
             file = file_images.create_file('arabidopsis%03d_image%03d'%(n,i))
             file.write_image('png',im)
-            
-            im = self.get_label(x, y, z, rx, ry, rz) #call blender 
-            im = im.astype(np.uint8)
-            #SAVE IMAGE
-            file = file_labels.create_file('arabidopsis%03d_image%03d'%(n,i))
-            file.write_image('png',im)
+            print('A')
+            if label == True:
+                print('b')
+                im = self.get_label(x, y, z, rx, ry, rz) #call blender 
+                im = im.astype(np.uint8)
+                #SAVE IMAGE
+                file = file_labels.create_file('arabidopsis%03d_image%03d'%(n,i))
+                file.write_image('png',im)
             metadata = {"pose": [x, y, z, rx * np.pi/180, rz * np.pi/180]}            
             file.set_metadata(metadata)
-        
             

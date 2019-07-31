@@ -156,3 +156,21 @@ class my_model_simple(nn.Module):
         print(x.shape)
         #x = x + self.bias
         return x[:,:,0,:]
+    
+# Prediction
+def evaluate(inputs, model):
+    device = torch.device("cuda:0" if torch.cuda.is_available() else "cpu")
+
+
+    with torch.no_grad():
+        inputs.requires_grad = False
+        # Get the first batch
+        inputs = inputs.to(device)
+
+        pred = model(inputs)
+        # The loss functions include the sigmoid function.
+        pred = F.sigmoid(pred)
+        
+    return pred
+
+
