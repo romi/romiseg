@@ -12,11 +12,12 @@ from torchvision import models
 from collections import defaultdict
 import torch.nn.functional as F
 from utils.loss import dice_loss
-from utils.dataloader import Dataset_3D, init_3D_set, trans
+from utils.dataloader import Dataset_3D, init_3D_set
 import utils.alienlab as alien
 from utils.ply import write_ply, read_ply
 import numpy as np
 from utils.models import ResNetUNet, my_model_simple, evaluate
+import segmentation_models_pytorch as smp
 
 
 from tqdm import tqdm
@@ -91,6 +92,7 @@ def write_ply_labels(dbfile, data, ext="ply"):
 
 
 
+    
 class Dataset(Dataset):
 
     def __init__(self, image_paths, transform):   # initial logic happens like transform
@@ -111,57 +113,25 @@ class Dataset(Dataset):
         return len(self.image_paths)
 
 
-def build_voxel_volume(scan, extrinsics, intrinsics, min_vox, num_vox, N_cam  = 72, cloud_scale = 2,
-                       Sx= 896, Sy = 448, xinit = 1080, yinit = 1616, label_num = 6):
-    #Voxel representation of the point cloud
-    basis_voxels = vtc.basis_vox(min_vox, num_vox[0], num_vox[1], num_vox[2])*cloud_scale#List of coordinates  
-    
-    v = cloud_scale//2
-    basis_voxels[:,0] += v
-    inds = [2,2,1,2,0,1,2,1]
-    val = [1, -1, 1, 1, -1, -1, -1, 1]
-
-    voxel_folder = scan.get_fileset('voxel_coord', create = True)
-    print('generation of the 3D volume to carve')
-    for i in tqdm(range(len(inds))):
-
-        basis_voxels[:, inds[i]] += v * val[i]
-        #Camera projection
-        torch_voxels = torch.from_numpy(basis_voxels)    
-       
-        #Perspective projection
+def voxel_to_pred_by_project(the_shape, torch_voxels, intrinsics, extrinsics, preds_flat, pred_pad, Sx, Sy, xinit, yinit):
         xy_coords = vtc.project_coordinates(torch_voxels, intrinsics, extrinsics, give_prod = False)
-        
         #permute x and y coordinates
         xy_coords[:, 2, :] = xy_coords[:,0,:]
         xy_coords[:, 0, :] = xy_coords[:,1,:]
         xy_coords[:, 1, :] = xy_coords[:,2,:]
         
         coords = vtc.correct_coords_outside(xy_coords, Sx, Sy, xinit, yinit, -1) #correct the coordinates that project outside
-        the_shape = torch.Size([N_cam, xinit, yinit, label_num])
         xy_full_flat = vtc.flatten_coordinates(coords, the_shape)
-        
-        dic = {}
-        dic['xy_full_flat'] = xy_full_flat
-        dic['torch_voxels'] = torch_voxels
-        f = voxel_folder.create_file('voxels_coords_%d'%i)
-        write_torch(f, dic)    
-          
-        
-        #torch.save(torch_voxels, 'voxel_coord/voxels_real_%d.pt'%i)
-        #torch.save(xy_full_flat, 'voxel_coord/coordinates_real_%d.pt'%i)
-        
-        
-        #write_ply('voxel_coord/cage_%d.ply'%i, torch_voxels.detach().cpu().numpy(),
-        #  ['x', 'y', 'z', 'labels'])
-        
-        del torch_voxels
+        assign_preds = preds_flat[xy_full_flat].reshape(pred_pad.shape[0], 
+                                                xy_full_flat.shape[0]//pred_pad.shape[0], preds_flat.shape[-1])
         del xy_full_flat
         
-
-
-def segmentation_space_carving(extrinsics, intrinsics, min_vox, num_vox, N_cam, Sx, 
-                               Sy, xinit, yinit, cloud_scale, label_names, images_fileset, scan):
+        assign_preds = torch.sum(assign_preds, dim = 0)
+        torch_voxels[:,3] = torch.argmax(assign_preds, dim = 1)
+        return torch_voxels
+    
+def segmentation_space_carving(extrinsics, intrinsics, min_vox, max_vox, num_vox, N_cam, Sx, 
+                               Sy, xinit, yinit, cloud_scale, label_names, images_fileset, scan, model_segmentation_name):
     
     
     device = torch.device("cuda:0" if torch.cuda.is_available() else "cpu")
@@ -176,27 +146,23 @@ def segmentation_space_carving(extrinsics, intrinsics, min_vox, num_vox, N_cam, 
     
     image_set = Dataset(images_fileset, transform = trans) 
     batch_size = 1
-    
-    build_voxel_volume(scan, extrinsics, intrinsics, min_vox, num_vox, N_cam, cloud_scale,
-                         Sx, Sy, xinit, yinit, len(label_names))
-    
     sample = 1
 
     
     loader = DataLoader(image_set, batch_size=batch_size, shuffle=False, num_workers=0)
     
-    #name0 = 'unet_arabidopsis_lr_1e4'
-    #model_segmentation = torch.load( 'model_weights/' + name0 + '.pt')[0]
+    #name0 = 'unet_448_long_train'
+    #name0  = 'unet_resnet101_arabidopsis_rotation_table1.2'
+    #model_segmentation_name = 'table1_test1_arabidopsis_resnet18_epoch15_rotate_False'
     
+    segmentation_folder = '/home/alienor/Documents/Segmentation/'
+    model_segmentation = torch.load( segmentation_folder + model_segmentation_name + '.pt')[0]
+    try: 
+        model_segmentation = model_segmentation.module
+    except:
+        model_segmentation = model_segmentation
 
     
-    model_segmentation = ResNetUNet(len(label_names)).to(device)
-    model_segmentation.load_state_dict(torch.load('/home/alienor/Documents/Segmentation/model_weights/weights_unet_448_long_train.pt')) #needs utils.models imported
-
-
-    
-    #model_segmentation = torch.load('model_weights/trained_unet_real_data.pt')
-    #model_classification = torch.load("/home/alienor/Documents/Segmentation/classification_trials/shifting_blur1_weight_classview_bias_none_lr_005_wb_1e5_wc_1e4.pt")
     with torch.no_grad():
     
         g = alien.showclass()
@@ -238,36 +204,79 @@ def segmentation_space_carving(extrinsics, intrinsics, min_vox, num_vox, N_cam, 
     
         preds_flat = vtc.adjust_predictions(pred_pad)
         
-        voxel_folder = scan.get_fileset('voxel_coord', create = False)
-
+        basis_voxels = vtc.basis_vox_pipeline(min_vox, max_vox, num_vox[0], num_vox[1], num_vox[2])#List of coordinates  
+        vol = torch.from_numpy(basis_voxels)    
+        the_shape = torch.Size([N_cam, xinit, yinit, len(label_names)])
+        assign_preds = voxel_to_pred_by_project(the_shape, vol, intrinsics, extrinsics, preds_flat, pred_pad,Sx, Sy, xinit, yinit)
+        restrict = (assign_preds[:,3] != 6)*(assign_preds[:,3] != 0)
+        new_volume = vol[restrict]
+        #print(new_volume)
+        v = cloud_scale
         full_plant = []
-        print('Space carving')
-        for datafile in tqdm(voxel_folder.get_files()):
-            dic = read_torch(datafile)
-            xy_full_flat = dic['xy_full_flat']
-            #xy_full_flat = torch.load('voxel_coord/coordinates_real_%d.pt'%i).to(device)[::sample]
-            assign_preds_0 = preds_flat[xy_full_flat].reshape(pred_pad.shape[0], 
-                                                            xy_full_flat.shape[0]//pred_pad.shape[0], preds_flat.shape[-1])
-            del xy_full_flat
-            
-            vol = dic['torch_voxels']
-            #vol = torch.load('voxel_coord/voxels_real_%d.pt'%i)
+        full_plant.append(new_volume)
+        #print(new_volume.shape)
+        all_volumes = [new_volume]
 
-            vol[:,3] = torch.argmax(torch.sum(assign_preds_0, dim = 0), dim = 1)
-            predo = torch.max(torch.sum(assign_preds_0, dim = 0), dim = 0)
-            full_plant.append(vol)
-        total_points = torch.cat(full_plant, dim = 0)
-        #inds = (total_points[:,3] != 0)*(total_points[:,3] != 6)
-        inds = (total_points[:,3] != 6) * (total_points[:,3] != 0)
+        full_plant = [new_volume]
+        for i in tqdm(range(2)):
+            v = v/2
+            shift = torch.tensor([[v,0,0,0],
+                                 [0,v,0,0],
+                                 [-v,0,0,0],
+                                 [0,0,v,0],
+                                 [v,0,0,0],
+                                 [0,-v,0,0],
+                                 [-v,0,0,0],
+                                 [0,-v,0,0],
+                                 [v, 0, 0,0],
+                                 [0,0,-v,0],
+                                 [-v, 0,0,0],
+                                 [0,0,-v,0],
+                                 [v, 0,0,0],
+                                 [0,v,0,0],
+                                 [0, v,0,0],
+                                 [-v, 0,0,0],
+                                 [0,-v,0,0],
+                                 [-v, 0,0,0],
+                                 [0,v,0,0],
+                                 [0,0,v,0],
+                                 [0,-v,0,0],
+                                 [0,v,v,0],
+                                 [0,-v,0,0],
+                                 [0,-v,0,0],
+                                 [0,0,-v,0],
+                                 [0,0,-v,0]  
+    
+             ]).double()
+            #print(v)
+            for j in range(shift.shape[0]):
+                volume_shift = new_volume + shift[j]
+                assign_preds = voxel_to_pred_by_project(the_shape, volume_shift, intrinsics, 
+                                                    extrinsics, preds_flat, pred_pad,Sx, Sy, xinit, yinit)
+                #print(new_volume.shape, assign_preds.shape)
+                full_plant.append(assign_preds)
+            new_volume = torch.cat(full_plant, dim = 0)
+            full_plant = []
+        total_points = new_volume
+
+        inds = (total_points[:,3] != 6)*(total_points[:,3] != 0)
         final_volume = total_points[inds].detach().cpu().numpy()
+        #final_volume[final_volume[:,3]==5]=4
+        #print(final_volume.shape)
+
         del vol
      
     end = time.time()
     
-
-    segmentation_folder = scan.get_fileset('SegmentedPC', create = True)
-    f = segmentation_folder.create_file('SegmentedPC')
+    save_name = os.path.split(model_segmentation_name)[-1][:-3]
+    segmentation_folder = scan.get_fileset('SegmentedPC' , create = True)
+    f = segmentation_folder.create_file( save_name + '_SegmentedPC')
     write_ply_labels(f, final_volume)   
+    for i, tick in enumerate(label_names):
+        f = segmentation_folder.create_file(save_name + '_' + tick)
+        write_ply_labels(f, total_points[total_points[:,3] == i].detach().cpu().numpy())   
+
+
     
     print('3D reconstruction successfully achieved in ', end - begin, 's')
     

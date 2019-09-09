@@ -23,15 +23,35 @@ def avoid_eps(a, eps):
     a[torch.abs(a)<eps] = 0
     return a
 
+
 def basis_vox(min_vec, w, h, l):
     """
     Voxelize a point cloud. List of voxel coordinates occupied by a point.
     """
 
     minx, miny, minz = min_vec
-    X = np.linspace(minx, minx + w-1, w)
-    Y = np.linspace(miny, miny + h-1, h)
-    Z = np.linspace(minz, minz + l-1, l)
+    X = np.linspace(minx, minx + w -1, w)
+    Y = np.linspace(miny, miny + w -1, h)
+    Z = np.linspace(minz, minz + w -1, l)
+    
+    voxels = np.zeros((w*h*l,4))
+    voxels[:,0] = np.repeat(X, h*l)
+    Y_bis = np.repeat(Y, l)
+    voxels[:,1] = np.tile(Y_bis, w)
+    voxels[:,2] = np.tile(Z, h*w)
+    
+    return voxels
+
+def basis_vox_pipeline(min_vec, max_vec, w, h, l):
+    """
+    Voxelize a point cloud. List of voxel coordinates occupied by a point.
+    """
+
+    minx, miny, minz = min_vec
+    maxx, maxy, maxz = max_vec
+    X = np.linspace(minx, maxx, w)
+    Y = np.linspace(miny, maxy, h)
+    Z = np.linspace(minz, maxz, l)
     
     voxels = np.zeros((w*h*l,4))
     voxels[:,0] = np.repeat(X, h*l)
