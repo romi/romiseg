@@ -13,6 +13,9 @@ from torchvision import transforms
 
 from PIL import Image
 from tqdm import tqdm
+import requests
+import os
+import time
 
 
 #made in CSL
@@ -21,7 +24,17 @@ from utils.models import evaluate
 
 
 
-
+def download_file(url, target_dir):
+    local_filename = url.split('/')[-1]
+    # NOTE the stream=True parameter below
+    with requests.get(url, stream=True) as r:
+        r.raise_for_status()
+        with open(target_dir + '/' +local_filename, 'wb') as f:
+            for chunk in r.iter_content(chunk_size=8192): 
+                if chunk: # filter out keep-alive new chunks
+                    f.write(chunk)
+                    # f.flush()
+    return local_filename
 
 
     
@@ -67,9 +80,21 @@ def segmentation(Sx, Sy, label_names, images_fileset, scan, model_segmentation_n
         batch_size = 1       
         loader = DataLoader(image_set, batch_size=batch_size, shuffle=False, num_workers=0)
         
-        #Access the previously trained segmenttion network
-        segmentation_folder = '/home/alienor/Documents/Segmentation/'
-        model_segmentation = torch.load( segmentation_folder + model_segmentation_name + '.pt')[0]
+        #Access the previously trained segmenttion network stored in db.romi-project.eu
+        
+        #Save folder
+        directory = os.path.split(os.getcwd())[0]
+        directory = os.path.split(directory)[0]
+        weights_folder = directory + '/Segmentation/weights_segmentation/'
+
+        #if not already saved, download from database 
+        if model_segmentation_name not in os.listdir(weights_folder):
+            
+            url = 'http://db.romi-project.eu/models/' + model_segmentation_name
+            
+            download_file(url, weights_folder)
+            
+        model_segmentation = torch.load(weights_folder + model_segmentation_name)[0]
         
         try: 
             model_segmentation = model_segmentation.module
