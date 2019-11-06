@@ -11,7 +11,7 @@ import torch.nn as nn
 from torchvision import models
 from collections import defaultdict
 import torch.nn.functional as F
-from utils.loss import dice_loss
+from romiseg.utils.loss import dice_loss
 from torchvision import transforms, datasets, models
 import numpy as np
 

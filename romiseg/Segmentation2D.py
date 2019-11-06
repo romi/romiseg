@@ -19,7 +19,7 @@ import appdirs
 
 #made in CSL
 from romidata import io
-from utils.models import evaluate
+from romiseg.utils.models import evaluate
 
 
 

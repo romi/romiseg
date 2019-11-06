@@ -8,17 +8,14 @@ Created on Wed Nov  6 12:20:54 2019
 
 import os
 import sys
-from shutil import rmtree
-from shutil import copyfile
+
 
 import re
 
 import platform
 import subprocess
 
-import romiscan
 import site
-import pathlib
 from distutils.sysconfig import get_python_inc
 
 from distutils.version import LooseVersion
@@ -101,10 +98,10 @@ install_requires=[
         'torchvision',
         'smp==0.0.1',
         'appdirs',
-        'PIL',
+        'Pillow',
         'tqdm',
         'torch',
-        'romidata',
+
         
         'requests',
         'mako'
@@ -119,14 +116,13 @@ else:
 
 s = setup(
     name='romiseg',
-    version=romiseg.__version__,
+    version='0.0.1',
     packages=find_packages(),
-    scripts=['bin/run-scan', 'bin/run-pipeline', 'bin/sync-scans'],
     author='Alienor Lahlou',
     author_email='alienor.lahlou@espci.org',
     description='Image multiclass segmentation using CNN models trained on virtual images (PyTorch)',
     long_description='',
-    url = 'https://github.com/romi/Segmentation'
+    url = 'https://github.com/romi/Segmentation',
     cmdclass=dict(build_ext=CMakeBuild),
     zip_safe=False,
     install_requires=install_requires,
