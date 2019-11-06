@@ -47,13 +47,15 @@ class Dataset(Dataset):
 
     def __getitem__(self, index):
 
-        image = Image.fromarray(io.read_image(self.image_paths[index]))
+        db_file = self.image_paths[index]
+        image = Image.fromarray(io.read_image(db_file))
+        id_im = db_file.id
         
         t_image = self.transforms(image) #crop the images
         
         t_image = t_image[0:3, :, :] #select RGB channels
         
-        return t_image
+        return t_image, id_im
 
     def __len__(self):  # return count of sample
         return len(self.image_paths)
@@ -78,7 +80,6 @@ def segmentation(Sx, Sy, label_names, images_fileset, scan, model_segmentation_n
         image_set = Dataset(images_fileset, transform = trans) 
         batch_size = 1       
         loader = DataLoader(image_set, batch_size=batch_size, shuffle=False, num_workers=0)
-        
         #Access the previously trained segmenttion network stored in db.romi-project.eu
         
         #Save folder
@@ -108,17 +109,19 @@ def segmentation(Sx, Sy, label_names, images_fileset, scan, model_segmentation_n
         
         with torch.no_grad():
             pred_tot = []
+            id_list = []
             count = 0
             print('Image segmentation by the CNN')
         
-            for inputs in tqdm(loader):
+            for inputs, id_im in tqdm(loader):
                 inputs = inputs.to(device) #input image on GPU
                 outputs = evaluate(inputs, model_segmentation)  #output image
                 pred_tot.append(outputs)
+                id_list.append(id_im)
                 count += 1
                 
         pred_tot = torch.cat(pred_tot, dim = 0)
         pred_pad = torch.zeros((N_cam, len(label_names), xinit, yinit)) #reverse the crop in order to match the colmap parameters
         pred_pad[:,:,(xinit-Sx)//2:(xinit+Sx)//2,(yinit-Sy)//2:(yinit+Sy)//2] = pred_tot #To fit the camera parameters
         
-        return pred_pad
+        return pred_pad, id_list
