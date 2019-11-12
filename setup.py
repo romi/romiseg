@@ -26,13 +26,17 @@ dir_path = os.path.abspath(os.path.dirname(os.path.realpath(__file__)))
 
 install_requires=[
         'torchvision',
-        'smp==0.0.1',
+        'segmentation-models-pytorch==0.0.1',
         'appdirs',
         'Pillow',
         'tqdm',
-        'torch',        
+        'torch==1.1.0',        
         'requests',
-        'mako'
+        'mako',
+        'tensorboard',
+        'future',       
+        
+        
     ]
 
 

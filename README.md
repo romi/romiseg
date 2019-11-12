@@ -1,48 +1,60 @@
-# Segmentation
-Virtual plant segmentation methods using 2D images generated from the virtual scanner and neural networks. Python/Pytorch
+# Annotation and finetuning tool
 
-# Database
-The database is generated using the virtual scanner (https://github.com/romi/blender_virtual_scanner). The first step is to activate the virtual scanner following the steps described in the repo.
+### Introduction
 
-The class virtual_scan in save_images repo is used to generate the images and the labels from the virtual arabidopsis database.
+This script allows you to fine-tune a pixel-per-pixel segmentation network on your own dataset of images. 
+The first part of the script allows you to generate this dataset by manually annotating images of your choice using LabelMe.
+The second part consists in training a pre-trained network of your choice on your new dataset.
 
-![](database_sample/labels_ara14.png)
+Example of use: ROMI pipeline segmentation.
+The segmentation networks integrated in the ROMI pipeline were trained on arabidopsis. If you want to reconstruct another plant species, for example from a 3D scan of a tomatoe, it will hardly work:
+[]
+The present module allows you to annotate manually images from the scan of tomatoes, and re-train the network. Then, launch the pipeline again with the updated network. The results are good enough to allow a 3D reconstruction.
+[]
 
-*Note on the labels: when the 3D cloud is projected onto images with the pinhole model, many points of the cloud project onto the same pixel. Therefore, one pixel can be associated to several classes.
-We keep this representation when collecting the labels. 
-The point cloud is projected onto images for each class, and we use hot encoding to represent the multiclass. 
-For example if both flowers and leaves project onto one pixel, the class will be 10100 (there are 5 classes in total). 
-To save the labels in a more compact way, we encode the label into its decimal form, as the label can be seen as a binary number. 
-2⁵ = 32 therefore the labels are encoded in a grey-level image with values between 0 and 31.*
+This tool relies on the file pipeline.toml used by the virtual scanner. 
 
+### Installation
 
-The images and labels are then loaded in PyTorch format using a custom dataloader.
-![](database_sample/datagenerator.png)
+From the virtual environment created for Scan3D: 
 
-# Learning phase in 2D
-CNNs to test: DeepLab, SegNet, Unet...
-
-First trial with UNet (70 training images-59 epoch-448x448)  
-
-![](database_sample/first_trial_unet.png)  
+git clone 
 
 
-Class predictions  
 
-![](database_sample/class_pred.png)
+### Preliminary set-up
 
-# 2D features to 3D compatible with Pytorch
-The real scanner space carving is based on finding the features of a 3D point in projected onto each view of the scanning images. 
-The same process was implemented in Pytorch taking avantage of the GPU to store the 3D space coordinates.
+First update the pipeline.toml folder according to the one in this directory.
 
-![](cloud_sample/virtual_scan_torch4.gif)
+You need to give a save location for your new database: directory_images (replace the 'complete here' by location full path)
+You need to give a fetch and save location for the weights of the segmentation networks: directory_weights (replace the 'complete here' by location full path). 
+If the pre-trained network is not already present in this folder, it will be fetched from the database db.romi-project.eu.
 
-#Intermediary result
-![](cloud_sample/reconstruction.png)
+You can also change the number of epochs for the training.
 
-#Classification
-Input: x (B, N, N_views, N_class) -> y (B, N) 
-First trial: Linear layer (B, N, N_class x N_views) -> (B, N)
-N - 10⁶ 
-N_views - 72
-N_class = 7
+### Runing the tool
+
+ipython
+import open3d (due to confluct between open3d and Torch, open3d has to be imported first).
+from romiseg.utils.finetune import finetune
+finetune()
+
+### Set-by-step
+
+(If you haven't correctly filled the pipeline.toml file to give correct folder location, pop-up windows will ask you to indicate the location of the folders where to save dataset and weights.)
+
+First you will have to select images you want to annotate. 3 images should be enough.
+Then, LabelMe will pop-up with the first selected image. You can annotate the image with the "Create Polygon" function. The classes are flower, stem, leaf, fruit, peduncle and are already set-up in LabelMe.
+Save the .json label file in the suggested folder (it corresponds to directory_images where the images you just selected have also been copied).
+When you close LabelMe the next image you have selected will automaticall pop-up.
+
+When all the images are labelled a pop-up image will show a random sample of the training dataset you have generated. Close this window and press enter.
+The training will automatically start for the number of epochs indicated in pipeline.toml
+
+Once the training is over, the weights are automatically saved in the weights folder and the pipeline.toml file is updated with the name of the fine_tuned segmentation network.
+
+You can launch the scan3D pipeline on the scan and the result should be better then before the fine-tuning.
+ 
+
+
+

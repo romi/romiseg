@@ -12,6 +12,12 @@ Created on Thu Feb 14 22:29:53 2019
 
 import os
 cwd = os.getcwd()
+
+
+def create_folder_if(directory):
+    if not os.path.exists(directory):
+        os.makedirs(directory)
+
 def catch_file(direc = cwd ):
     """Opens a dialog window to select a file. Default directory: current directory
     direc [str]: directory to open (default: current directory)
@@ -116,8 +122,9 @@ class showclass(object):
         self.save_name = 'Figure' #setting the format!
         self.save_folder = 'alienlab_images/'
         self.extension = '.tiff'
+        self.save_im = True
 
-    def showing(self, x=None, y=None):
+    def showing(self, x=None, y=None, showit = False):
         if type(x) != tuple and type(x) != list: #When there is only one image, convert it in a list element
             x = [x]
             
@@ -133,6 +140,10 @@ class showclass(object):
             
         f = plt.figure(figsize = self.figsize)
         
+        if showit == True:
+            plt.ion()
+            plt.show()
+        
         for i in range(N):
             plt.subplot(ROWS, COLS, i+1)
             plt.imshow(x[i], cmap = self.cmap)
@@ -140,9 +151,14 @@ class showclass(object):
             plt.grid(False)
             plt.title(self.title_list[i], fontsize = self.fontsize) #update subfigure title
         
-        if self.date == True:            
-            plt.savefig(self.save_folder + str(datetime.datetime.now().strftime('%Y-%m-%d_%H_%M_')) + self.save_name + self.extension,
-                        bbox_inches='tight', frameon = False) #save with the date and time befor the figure name
-        else: 
-            plt.savefig(self.save_folder + self.save_name + self.extension, bbox_inches='tight', frameon = False)
+        if showit == True:
+            plt.pause(0.01)
+            input("Press [enter] to continue.")
+        if self.save_im == True:
+            if self.date == True:            
+                plt.savefig(self.save_folder + str(datetime.datetime.now().strftime('%Y-%m-%d_%H_%M_')) + self.save_name + self.extension,
+                            bbox_inches='tight', frameon = False) #save with the date and time befor the figure name
+            else: 
+                plt.savefig(self.save_folder + self.save_name + self.extension, bbox_inches='tight', frameon = False)
+
         return f
