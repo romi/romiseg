@@ -31,7 +31,7 @@ import toml
 #with open("finetune_intro.md", "r") as fh:
 #    long_description = fh.read()
 def finetune():
-        pipeline = '/home/alienor/Documents/Scan3D/script/pipeline.toml'
+        pipeline = '../Scan3D/script/pipeline.toml'
         param_pipe = toml.load(pipeline)
         param = param_pipe['Segmentation2D']
         directory_images = param['directory_images']
