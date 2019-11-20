@@ -30,7 +30,7 @@ install_requires=[
         'appdirs',
         'Pillow',
         'tqdm',
-        'torch==1.1.0',        
+        'torch',        
         'requests',
         'mako',
         'tensorboard',

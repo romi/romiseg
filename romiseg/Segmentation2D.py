@@ -9,7 +9,7 @@ Created on Mon Jul  8 16:17:15 2019
 import torch
 from torch.utils.data import DataLoader, Dataset
 from torchvision import transforms
-
+import appdirs
 from tqdm import tqdm
 from PIL import Image
 from tkinter import filedialog
@@ -66,12 +66,13 @@ def segmentation(Sx, Sy, label_names, images_fileset, scan, model_segmentation_n
         #Access the previously trained segmenttion network stored in db.romi-project.eu
         
         #Save folder
-        #weights_folder = appdirs.user_cache_dir()
-        #directory_weights = '/home/alienor/Documents/database/WEIGHTS'
+        directory_weights = appdirs.user_cache_dir()
         
-        if directory_weights == 'complete here':
-            directory_weights = filedialog.askdirectory(initialdir="/home/", title='create folder to save fine-tuning weights')
-            create_folder_if(directory_weights)
+        #directory_weights = '/home/alienor/Documents/database/WEIGHTS'
+        #if directory_weights == 'complete here':
+        #   directory_weights = filedialog.askdirectory(initialdir="/home/", title='create folder to save fine-tuning weights')
+        #   create_folder_if(directory_weights)
+        
         model_segmentation = save_and_load_model(directory_weights, model_segmentation_name)
         
     

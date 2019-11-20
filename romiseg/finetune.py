@@ -7,6 +7,8 @@ Created on Wed Nov  6 10:50:33 2019
 """
 
 #import open3d
+import argparse
+import appdirs
 
 import numpy as np
 import os
@@ -20,18 +22,24 @@ root.withdraw()
 from tkinter import filedialog
 
 
+
 from romiseg.utils.train_from_dataset import fine_tune_train
 from romiseg.utils.active_contour import run_refine
 from romiseg.utils.alienlab import create_folder_if
 
 import toml
 
+default_config_dir = os.path.join(appdirs.user_config_dir(), "romiscan")
 
+
+parser = argparse.ArgumentParser(description='Process some integers.')
+parser.add_argument('--config', dest='config', default=default_config_dir,
+                    help='config dir, default: %s'%default_config_dir)
 
 #with open("finetune_intro.md", "r") as fh:
 #    long_description = fh.read()
-def finetune():
-        pipeline = '/home/alienor/Documents/Scan3D/script/pipeline.toml'
+
+def finetune(pipeline):
         param_pipe = toml.load(pipeline)
         param = param_pipe['Segmentation2D']
         directory_images = param['directory_images']
@@ -46,10 +54,13 @@ def finetune():
             create_folder_if(directory_images)
             param['directory_images'] = directory_images
             
-        if directory_weights == 'complete here':
-            directory_weights = filedialog.askdirectory(initialdir="/home/", title='create folder to save fine-tuning weights')
-            create_folder_if(directory_weights)
-            param['directory_weights'] = directory_weights
+        #Save folder
+        directory_weights = appdirs.user_cache_dir()
+        
+        #if directory_weights == 'complete here':
+        #    directory_weights = filedialog.askdirectory(initialdir="/home/", title='create folder to save fine-tuning weights')
+        #    create_folder_if(directory_weights)
+        #    param['directory_weights'] = directory_weights
         #directory_images = '/home/alienor/Documents/database/FINETUNE'
         #directory_weights = '/home/alienor/Documents/database/WEIGHTS'
         
