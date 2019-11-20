@@ -34,7 +34,8 @@ install_requires=[
         'requests',
         'mako',
         'tensorboard',
-        'future',       
+        'future',
+        'labelme',       
         
         
     ]
@@ -43,6 +44,7 @@ install_requires=[
 s = setup(
     name='romiseg',
     version='0.0.1',
+    scripts=['romiseg/finetune.py'],
     packages=find_packages(),
     author='Alienor Lahlou',
     author_email='alienor.lahlou@espci.org',

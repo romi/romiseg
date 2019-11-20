@@ -44,7 +44,7 @@ param_pipe = toml.load(args.config)
 
 param = param_pipe['Segmentation2D']
 directory_images = param['directory_images']
-directory_weights = param['directory_weights']
+#directory_weights = param['directory_weights']
 model_segmentation_name = param['model_segmentation_name']
 Sx = param['Sx']
 Sy = param['Sy']
@@ -104,7 +104,7 @@ param['model_segmentation_name'] = new_model_name
 text = toml.dumps(param_pipe)
    
 
-text_file = open(pipeline, "w")
+text_file = open(args.config, "w")
 text_file.write(text)
 text_file.close()
 
