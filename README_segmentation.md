@@ -2,22 +2,22 @@
 
 
 We suggest the following organisation of folder for training and database
-'''
+```
 .  
-├── weights *empty, to save model weights*  
-├── board *empty, for tensorboard visualisation*  
+├── weights #empty, to save model weights 
+├── board #empty, for tensorboard visualisation  
 └── data  
     └── dataset  
                 ├── train  
-                │       ├── images *training images (png or jpg) RGB*  
-                │       └── labels *training labels (specific format, read the doc)*  
+                │       ├── images #training images (png or jpg) RGB  ```
+                │       └── labels #training labels (specific format, read the doc) 
                 ├── val  
                 │       ├── images  
                 │       └── labels  
                 └── test  
                         ├── images  
                         └── labels  
-'''
+```
 The parent directory should be sepcified in the file parameters_train.toml
 
 
@@ -35,8 +35,8 @@ the training parameters are to be filled in parameters_train.toml.
 ## Launch training
 
 simply launch   
-'''  
+```  
 python train_cnn.py  
-'''  
+```
 
 you can also import the train_cnn function for multiple tests
