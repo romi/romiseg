@@ -9,12 +9,15 @@ Created on Thu Nov  7 09:56:38 2019
 
 import torch
 from torch.optim import lr_scheduler
+import torchvision
 import torch.optim as optim
 import torch.nn.functional as F
 from collections import defaultdict
 
-from romiseg.utils.dataloader_finetune import Dataset_im_label, plot_dataset, init_set
+from tqdm import tqdm
 
+from romiseg.utils.dataloader_finetune import Dataset_im_label, plot_dataset, init_set
+import romiseg.utils.alienlab as alien
 
 from torch.utils.tensorboard import SummaryWriter
 
@@ -22,6 +25,7 @@ from torch.utils.data import DataLoader
 
 from torchvision import transforms
 
+import matplotlib.pyplot as plt
 import os
 import requests
 import copy
@@ -111,7 +115,7 @@ def print_metrics(metrics, epoch_samples, phase):
 
     print("{}: {}".format(phase, ", ".join(outputs)))
 
-def train_model(dataloaders, model, optimizer, scheduler, writer, num_epochs=25):
+def train_model(dataloaders, model, optimizer, scheduler, writer, num_epochs=25, viz = False, label_names = []):
     L = []
     best_model_wts = copy.deepcopy(model.state_dict())
     best_loss = 1e10
@@ -136,6 +140,7 @@ def train_model(dataloaders, model, optimizer, scheduler, writer, num_epochs=25)
 
             metrics = defaultdict(float)
             epoch_samples = 0
+            
 
             for inputs, labels in dataloaders[phase]:
                 inputs = inputs.to(device)
@@ -181,27 +186,33 @@ def train_model(dataloaders, model, optimizer, scheduler, writer, num_epochs=25)
                 best_model_wts = copy.deepcopy(model.state_dict())
         
             #plot 4 images to visualize the data
-            """
-            images_tot = []
-            titles_tot = []
-            
-            for i in range(num_classes):
+        if viz == True:
+ 
+            plt.ioff()
+            fig = plt.figure(figsize = (14, 6))
+        
+            col = len(label_names)
+            for i in range(col):
+                plt.subplot(2, col, 2*i + 1)
+                plt.axis('off')
+                plt.grid(False)
                 img = inputs[0]
                 img = torchvision.transforms.ToPILImage()(img.detach().cpu())
-                images_tot.append(img)
-                titles_tot.append('image')
-                img = outputs[0,i,:,:].int()
+                plt.imshow(img)
+                plt.title('image')
+                img = F.sigmoid(outputs[0,i,:,:])
                 img = torchvision.transforms.ToPILImage()(img.detach().cpu())
-                images_tot.append(img)
-                titles_tot.append(labels_names[i])
-            g = alien.showclass()
-            g.col_num = num_classes
-            g.figsize = ((14, 8))
-            g.title_list = titles_tot
-            fig = g.showing(images_tot)        
+                plt.subplot(2, col, 2*i + 2)
+                plt.axis('off')
+                plt.grid(False)
+                plt.imshow(img)
+                plt.title(label_names[i])
+            
+            
+            
             writer.add_figure('Segmented images', fig, epoch)
-            """
-    
+                
+        
         #time_elapsed = time.time() - since
         #print('{:.0f}m {:.0f}s'.format(time_elapsed // 60, time_elapsed % 60))
 
@@ -226,12 +237,15 @@ def fine_tune_train(path_train, path_val, weights_folder, label_names, tsboard_n
 ])
     
     image_train, target_train = init_set('', path_train, 'jpg')
-    train_dataset = Dataset_im_label(image_train, target_train, transform = trans) 
+    image_val, target_val = init_set('', path_val, 'jpg')
+
+    train_dataset = Dataset_im_label(image_train, target_train, transform = trans)
+    val_dataset = Dataset_im_label(image_val, target_val, transform = trans) 
+    
+        
     batch_size = min(num_classes, len(image_train))
     train_loader = torch.utils.data.DataLoader(train_dataset, batch_size=batch_size, shuffle=True, num_workers=1)
     
-    image_val, target_val = init_set('', path_val, 'jpg')
-    val_dataset = Dataset_im_label(image_val, target_val, transform = trans) 
     
     plot_dataset(train_loader, label_names, batch_size) #display training set
     
@@ -270,6 +284,9 @@ def fine_tune_train(path_train, path_val, weights_folder, label_names, tsboard_n
     
     
     return model, new_model_name
+
+
+
 
     
 # Prediction

@@ -75,8 +75,8 @@ class Dataset_im_label(Dataset):
         for i in range(1, 6):
             label_image[i][im//51 == i] = 1
         '''
-        
-        im = (im[2]*255).type(torch.int32)
+        ind = im.shape[0]-1
+        im = (im[ind]*255).type(torch.int32)
         label_image[0][im == 0] = 1
 
         for i in range(1,6): #[binary reading]
@@ -85,7 +85,7 @@ class Dataset_im_label(Dataset):
         return label_image
     
 
-def plot_dataset(train_loader, labels_names, batch_size):
+def plot_dataset(train_loader, labels_names, batch_size, showit = True):
     images, label = next(iter(train_loader))
     
     #plot 4 images to visualize the data
@@ -105,5 +105,5 @@ def plot_dataset(train_loader, labels_names, batch_size):
     g.col_num = 3
     g.figsize = ((14, 14))
     g.title_list = titles_tot
-    fig = g.showing(images_tot, showit = True,)
+    fig = g.showing(images_tot, showit,)
     return fig

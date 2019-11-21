@@ -129,7 +129,7 @@ class showclass(object):
             x = [x]
             
         N = len(x)
-        
+
         COLS = self.col_num
         if N == 1: #when there is only one image
             ROWS, COLS = 1, 1
