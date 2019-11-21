@@ -8,15 +8,15 @@ We suggest the following organisation of folder for training and database
 ├── board #empty, for tensorboard visualisation  
 └── data  
     └── dataset  
-                ├── train  
-                │       ├── images #training images (png or jpg) RGB  ```
-                │       └── labels #training labels (specific format, read the doc) 
-                ├── val  
-                │       ├── images  
-                │       └── labels  
-                └── test  
-                        ├── images  
-                        └── labels  
+            ├── train  
+            │       ├── images #training images (png or jpg) RGB
+            │       └── labels #training labels (specific format, read the doc) 
+            ├── val  
+            │       ├── images  
+            │       └── labels  
+            └── test  
+                    ├── images  
+                    └── labels  
 ```
 The parent directory should be sepcified in the file [parameters_train.toml](https://github.com/romi/Segmentation/blob/master/romiseg/parameters_train.toml)
 
