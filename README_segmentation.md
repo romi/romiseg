@@ -1,4 +1,4 @@
-###Training a network from a database.
+### Training a network from a database.
 
 
 We suggest the following organisation of folder for training and database
@@ -18,7 +18,7 @@ We suggest the following organisation of folder for training and database
                         ├── images  
                         └── labels  
 ```
-The parent directory should be sepcified in the file parameters_train.toml
+The parent directory should be sepcified in the file [parameters_train.toml](https://github.com/romi/Segmentation/blob/master/romiseg/parameters_train.toml)
 
 
 ## Generate a dataset with blender
