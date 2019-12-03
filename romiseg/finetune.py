@@ -29,7 +29,7 @@ from romiseg.utils.alienlab import create_folder_if
 
 import toml
 
-default_config_dir = os.path.join(appdirs.user_config_dir(), "romiscan")
+default_config_dir = '/home/alienor/Documents/Scan3D/config/segmentation2d.toml' #os.path.join(appdirs.user_config_dir(), "romiscan")
 
 
 parser = argparse.ArgumentParser(description='Process some integers.')
