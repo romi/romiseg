@@ -1,6 +1,9 @@
 [Segmentation2D]
 
-path = '/home/alienor/Documents/training2D/'
+
+path = "/home/alienor/Documents/database/TRAINING/" 
+#'/home/alienor/Documents/training2D/'
+
 
 directory_weights = "weights"
 model_segmentation_name = "resnet34"
@@ -15,5 +18,7 @@ Sx = 896
 Sy = 896
 
 epochs = 10
+
 batch = 2
+
 learning_rate = 1e-4
