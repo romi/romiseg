@@ -1,24 +1,20 @@
 [Segmentation2D]
 
-
-path = "/home/alienor/Documents/database/TRAINING/" 
-#'/home/alienor/Documents/training2D/'
-
+path = '/home/alienor/Documents/training2D/'
 
 directory_weights = "weights"
-model_segmentation_name = "resnet34"
+model_segmentation_name = "resnet18"
 
 tsboard = "board"
 
-directory_dataset= "data/small_set/"
+directory_dataset= "data/database/"
 
-labels = 'background,flower,peduncle,stem,leaf,fruit'
+labels = 'background,class_0,class_1,class_2' 
+#'background,flower,peduncle,stem,leaf,fruit'
 
-Sx = 896
-Sy = 896
+Sx = 128
+Sy = 128
 
-epochs = 10
-
-batch = 2
-
+epochs = 100
+batch = 10
 learning_rate = 1e-4

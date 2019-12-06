@@ -85,20 +85,20 @@ class Dataset_im_label(Dataset):
         return label_image
     
 
-def plot_dataset(train_loader, labels_names, batch_size, showit = True):
+def plot_dataset(train_loader, label_names, batch_size, showit = True):
     images, label = next(iter(train_loader))
     
     #plot 4 images to visualize the data
     images_tot = []
     titles_tot = []
-    for i in range(batch_size):
+    for i in range(min(batch_size, len(label_names))):
         img = images[i]
         img = img.permute(1, 2, 0)
         images_tot.append(img)
         titles_tot.append('image')
         img = label[i,i,:,:].int()
         images_tot.append(img)
-        titles_tot.append(labels_names[i])
+        titles_tot.append(label_names[i])
     g = alien.showclass()
     g.save_im = False
 
