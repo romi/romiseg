@@ -5,6 +5,13 @@ Created on Thu Nov 21 09:18:24 2019
 
 @author: alienor
 """
+#!/usr/bin/env python3
+# -*- coding: utf-8 -*-
+"""
+Created on Thu Nov 21 09:18:24 2019
+
+@author: alienor
+"""
 import open3d
 
 import os
@@ -29,6 +36,22 @@ from romidata import fsdb
 from romiseg.utils.train_from_dataset import train_model
 from romiseg.utils.dataloader_finetune import plot_dataset
 from romiseg.utils import segmentation_model
+
+import romiseg.utils.vox_to_coord as vtc
+from romiseg.utils.generate_volume import generate_volume
+
+
+default_config_dir = "romiseg/parameters_train.toml"
+
+parser = argparse.ArgumentParser(description='Process some integers.')
+
+parser.add_argument('--config', dest='config', default=default_config_dir,
+                    help='config dir, default: %s'%default_config_dir)
+
+
+args = parser.parse_args()
+
+
 
 param_pipe = toml.load(args.config)
 
@@ -55,6 +78,10 @@ batch_size = param2['batch']
 learning_rate = param2['learning_rate']
 
 
+param3 = param_pipe['Reconstruction3D']
+N_vox = param3['N_vox']
+coord_file_loc = path + param3['coord_file_loc']
+
 
 
 ############################################################################################################################
@@ -79,7 +106,7 @@ def init_set(mode, path):
 
 
 
-class Dataset_im_label(Dataset): 
+class Dataset_im_label_3D(Dataset): 
     """Data handling for Pytorch Dataloader"""
 
     def __init__(self, image_paths, label_paths, transform):  
@@ -116,7 +143,6 @@ class Dataset_im_label(Dataset):
         somme = labels.sum(axis = 0)
         background = somme == 0
         background = background.astype(somme.dtype)
-        background = background*255
         dimx, dimy = background.shape
         background = np.expand_dims(background, axis = 0)
         labels = np.concatenate((background, labels), axis = 0)
@@ -124,9 +150,12 @@ class Dataset_im_label(Dataset):
         return labels
 
 
+
+
+generate_volume(directory_dataset, coord_file_loc, Sx, Sy, N_vox, label_names)
 #def cnn_train(directory_weights, directory_dataset, label_names, tsboard, batch_size, epochs,
 #                    model_segmentation_name, Sx, Sy):
-    
+
 #Training board
 writer = SummaryWriter(tsboard)
 num_classes = len(label_names)
@@ -143,6 +172,8 @@ path_train = directory_dataset# + '/train/'
 
 image_train, target_train = init_set('', path_train)
 image_val, target_val = init_set('', path_val)
+
+
     
 train_dataset = Dataset_im_label(image_train, target_train, transform = trans)
 val_dataset = Dataset_im_label(image_val, target_val, transform = trans) 
@@ -150,7 +181,7 @@ val_dataset = Dataset_im_label(image_val, target_val, transform = trans)
 train_loader = torch.utils.data.DataLoader(train_dataset, batch_size=batch_size, shuffle=True, num_workers=1)
 
 #Show input images 
-fig = plot_dataset(train_loader, label_names, batch_size, showit = True) #display training set
+fig = plot_dataset(train_loader, label_names, batch_size, showit = False) #display training set
 writer.add_figure('Dataset images', fig, 0)
 
    
@@ -161,6 +192,7 @@ dataloaders = {
 device = torch.device("cuda:0" if torch.cuda.is_available() else "cpu")
 print(device)
 
+'''
 #Load model
 model = smp.Unet(model_segmentation_name, classes=num_classes, encoder_weights='imagenet').cuda()
 #model = models.segmentation.fcn_resnet101(pretrained=True)
@@ -183,7 +215,6 @@ for l in model.base_layers:
     for param in l.parameters():
         param.requires_grad = False
    
-'''
 #Choice of optimizer, can be changed
 optimizer_ft = optim.Adam(filter(lambda p: p.requires_grad, model.parameters()), lr=learning_rate)
 #make learning rate evolve
@@ -193,7 +224,7 @@ exp_lr_scheduler = lr_scheduler.StepLR(optimizer_ft, step_size=30, gamma=0.1)
 model = train_model(dataloaders, model, optimizer_ft, exp_lr_scheduler, writer, 
                     num_epochs = epochs, viz = True, label_names = label_names)
 #save model
-model_name =  model_segmentation_name + os.path.split(directory_dataset)[1] +'_%d_%d'%(Sx,Sy)+ '_epoch%d.pt'%epochs
+model_name =  model_segmentation_name + os.path.split(directory_dataset)[1] + '_epoch%d.pt'%epochs
 torch.save(model, directory_weights + '/' + model_name)
 
 '''
@@ -203,3 +234,5 @@ torch.save(model, directory_weights + '/' + model_name)
 cnn_train(directory_weights, directory_dataset, label_names, tsboard, batch_size, epochs,
                     model_segmentation_name, Sx, Sy)
 '''
+"""
+
