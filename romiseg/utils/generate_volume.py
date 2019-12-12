@@ -22,7 +22,10 @@ from romiseg.utils.dataloader_finetune import plot_dataset
 from romiseg.utils import segmentation_model
 
 import romiseg.utils.vox_to_coord as vtc
+import romiseg.utils.generate_3D_ground_truth as gt_vox
 
+
+pcd_loc = '/home/alienor/Documents/blender_virtual_scanner/data/COSEG/guitar/'
 
 default_config_dir = "../parameters_train.toml"
 
@@ -79,7 +82,7 @@ def build_bounding_box(scan, N_vox):
     cloud_scale = (xyz/N_vox)**(1/3)
     num_vox = (max_vox - min_vox)//(cloud_scale) + 1
     num_vox = num_vox.astype(int)
-    return min_vox, max_vox, num_vox, cloud_scale
+    return min_vox - 10, max_vox + 10, num_vox, cloud_scale
 
     
 def read_intrinsics(camera_model):
@@ -161,30 +164,42 @@ def build_voxel_volume(scan, coord_file_loc, extrinsics, intrinsics, min_vox, ma
     io.write_torch(voxel_file, torch_voxels)
     torch.save(xy_full_flat, coord_file_loc + 'coords.pt')
     torch.save(torch_voxels, coord_file_loc + 'voxels.pt')
-    del torch_voxels
     del xy_full_flat
     del coords
+    
+    return torch_voxels
 
 def generate_volume(directory_dataset, coord_file_loc, Sx, Sy, N_vox, label_names):
     
     db = fsdb.FSDB(directory_dataset)
     db.connect()
     scan = db.get_scans()[0]
-    print(scan.id)
     
     images = scan.get_fileset('images').get_files(query = {'channel' : 'rgb'})
     camera = images[0].metadata['camera']['camera_model']
     xinit, yinit, intrinsics = read_intrinsics(camera)
-    print(intrinsics)
     N_cam = len(images)
     extrinsics = read_extrinsics(images, N_cam)
-    print(extrinsics)
     min_vox, max_vox, num_vox, cloud_scale = build_bounding_box(scan, N_vox)
     
-    build_voxel_volume(scan, coord_file_loc, extrinsics, intrinsics, min_vox, max_vox, num_vox, N_cam, cloud_scale,
+    torch_voxels = build_voxel_volume(scan, coord_file_loc, extrinsics, intrinsics, min_vox, max_vox, num_vox, N_cam, cloud_scale,
                            Sx, Sy, xinit, yinit, len(label_names))
     
         
     db.disconnect()
+    return torch_voxels, num_vox, min_vox, cloud_scale
     
-#generate_volume(directory_dataset, coord_file_loc, Sx, Sy, N_vox, label_names)
+torch_voxels, num_vox, min_vox, cloud_scale = generate_volume(directory_dataset, coord_file_loc, Sx, Sy, N_vox, label_names)
+    
+#def generate_ground_truth(directory_dataset, pcd_loc, torch_voxels ):
+db = fsdb.FSDB(directory_dataset)
+db.connect()
+for scan in db.get_scans():
+    fetch_pcd = np.load(pcd_loc + scan.id + ".npz")
+    pcd = fetch_pcd[fetch_pcd.files[0]]   
+    vox = gt_vox.gt_pc_to_vox(pcd, torch_voxels, num_vox, min_vox, cloud_scale )
+    gt_3D = scan.get_fileset('ground_truth_3D', create = True)
+    f = gt_3D.get_file('voxel_classes', create = True)
+    io.write_torch(f, vox)
+db.disconnect()
+

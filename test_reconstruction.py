@@ -30,6 +30,8 @@ from romiseg.utils import segmentation_model
 
 import romiseg.utils.vox_to_coord as vtc
 from romiseg.utils.generate_volume import generate_volume
+from romiseg.utils.ply import read_ply, write_ply
+
 
 
 default_config_dir = "romiseg/parameters_train.toml"
@@ -73,11 +75,13 @@ param3 = param_pipe['Reconstruction3D']
 N_vox = param3['N_vox']
 coord_file_loc = path + param3['coord_file_loc']
 
+generate_volume(directory_dataset, coord_file_loc, Sx, Sy, N_vox, label_names)
+
 
 db = fsdb.FSDB(directory_dataset)
 db.connect()
 scan = db.get_scans()[0]
-print(scan.id)
+print('Reference scan used to generate data: ', scan.id)
 
 masks = scan.get_fileset('images')
 
@@ -86,6 +90,35 @@ pred_tot = []
 for i, seg in enumerate(gt):
     seg = io.read_npz(seg)
     seg = seg[seg.files[0]]
+    somme = seg.sum(axis = 0)
+    background = somme == 0
+    background = background.astype(somme.dtype)
+    background = background*255
+    dimx, dimy = background.shape
+    background = np.expand_dims(background, axis = 0)
+    seg = np.concatenate((background, seg), axis = 0)
+    
     pred_tot.append(seg)
 
-pred_tot = np.array(pred_tot)
+pred_tot = torch.Tensor(pred_tot)
+
+pred_tot = pred_tot.permute(0,2,3,1)
+preds_flat = vtc.adjust_predictions(pred_tot)
+
+
+xy_full_flat = torch.load(coord_file_loc + '/coords.pt')
+voxels = torch.load(coord_file_loc + '/voxels.pt')
+
+assign_preds = preds_flat[xy_full_flat].reshape(pred_tot.shape[0], 
+                                        xy_full_flat.shape[0]//pred_tot.shape[0], preds_flat.shape[-1])
+
+assign_preds = torch.sum(assign_preds, dim = 0)
+voxels[:,3] = torch.argmax(assign_preds, dim = 1)
+voxels = voxels[voxels[:,3] != 0]
+write_ply(coord_file_loc +  '/test_rec.ply', [voxels.numpy()],
+      ['x', 'y', 'z', 'label'])
+    
+    
+
+
+db.disconnect()

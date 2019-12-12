@@ -30,6 +30,18 @@ from romiseg.utils.train_from_dataset import train_model
 from romiseg.utils.dataloader_finetune import plot_dataset
 from romiseg.utils import segmentation_model
 
+
+default_config_dir = "romiseg/parameters_train.toml"
+
+parser = argparse.ArgumentParser(description='Process some integers.')
+
+parser.add_argument('--config', dest='config', default=default_config_dir,
+                    help='config dir, default: %s'%default_config_dir)
+
+
+args = parser.parse_args()
+
+
 param_pipe = toml.load(args.config)
 
 direc = param_pipe['Directory']
@@ -37,7 +49,7 @@ direc = param_pipe['Directory']
 path = direc['path']
 directory_weights = path + direc['directory_weights']
 model_segmentation_name = direc['model_segmentation_name']
-tsboard = path +  direc['tsboard']
+tsboard = path +  direc['tsboard'] + '/2D_segmentation'
 directory_dataset = path + direc['directory_dataset']
 
 

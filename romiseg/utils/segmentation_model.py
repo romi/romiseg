@@ -143,7 +143,7 @@ def voxel_to_pred_by_project(the_shape, torch_voxels, intrinsics, extrinsics, pr
 
 class ResNetUNet_3D(nn.Module):
 
-    def __init__(self, n_class, xinit, yinit, Sx, Sy, N_cam, reduction_factor):
+    def __init__(self, n_class, xinit, yinit, Sx, Sy, N_cam, reduction_factor, coord_file_loc):
         super().__init__()
 
         # Use ResNet18 as the encoder with the pretrained weights
@@ -250,7 +250,7 @@ class ResNetUNet_3D(nn.Module):
         
         x = F.sigmoid(x)
         
-        xy_full_flat = torch.load('voxel_coord/coordinates_full_pipe.pt').to(device)
+        xy_full_flat = torch.load(self.coord_file_loc + '/coords.pt').to(device)
                                 
         #haut = torch.empty(N_red, label_num, (xinit-Sx)//2, yinit, requires_grad = True).to(device)   
         #bas = torch.empty(N_red, label_num, (xinit-Sx)//2, yinit, requires_grad = True).to(device)   
