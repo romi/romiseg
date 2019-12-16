@@ -143,7 +143,7 @@ def voxel_to_pred_by_project(the_shape, torch_voxels, intrinsics, extrinsics, pr
 
 class ResNetUNet_3D(nn.Module):
 
-    def __init__(self, n_class, xinit, yinit, Sx, Sy, N_cam, reduction_factor, coord_file_loc):
+    def __init__(self, n_class, coord_file_loc):
         super().__init__()
 
         # Use ResNet18 as the encoder with the pretrained weights
@@ -175,11 +175,11 @@ class ResNetUNet_3D(nn.Module):
         self.conv_last = nn.Conv2d(64, n_class, 1)
         
             
-        
-        self.xinit = xinit
-        self.yinit = yinit
-        self.Sx = Sx
-        self.Sy = Sy
+        self.coord_file_loc = coord_file_loc
+        #self.xinit = xinit
+        #self.yinit = yinit
+        #self.Sx = Sx
+        #self.Sy = Sy
 
 
     def forward(self, input):
@@ -248,7 +248,7 @@ class ResNetUNet_3D(nn.Module):
         #print(x.shape)    
         x = self.conv_last(x)
         
-        x = F.sigmoid(x)
+       
         
         xy_full_flat = torch.load(self.coord_file_loc + '/coords.pt').to(device)
                                 
@@ -265,7 +265,7 @@ class ResNetUNet_3D(nn.Module):
 
         #pred_pad = pred_pad.permute(0,2,3,1)
         #print(preds.shape)        
-        pred_pad = x.permute(0, 2, 3, 1)
+        pred_pad = F.sigmoid(x).permute(0, 2, 3, 1)
         pred_pad = vtc.adjust_predictions(pred_pad)
         #print(preds.shape)
         pred_pad = pred_pad[xy_full_flat].reshape(N_frames, 
@@ -277,5 +277,6 @@ class ResNetUNet_3D(nn.Module):
         #print(preds.shape)
         #print(torch.max(preds, dim = 0))
         #print(preds.shape)
+        del xy_full_flat
 
-        return pred_pad, x
+        return x, pred_pad

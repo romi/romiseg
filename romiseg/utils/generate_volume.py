@@ -20,6 +20,7 @@ from romidata import fsdb
 from romiseg.utils.train_from_dataset import train_model
 from romiseg.utils.dataloader_finetune import plot_dataset
 from romiseg.utils import segmentation_model
+from romiseg.utils.ply import write_ply
 
 import romiseg.utils.vox_to_coord as vtc
 import romiseg.utils.generate_3D_ground_truth as gt_vox
@@ -27,7 +28,7 @@ import romiseg.utils.generate_3D_ground_truth as gt_vox
 
 pcd_loc = '/home/alienor/Documents/blender_virtual_scanner/data/COSEG/guitar/'
 
-default_config_dir = "../parameters_train.toml"
+default_config_dir = "/home/alienor/Documents/scanner-meta-repository/Segmentation/romiseg/parameters_train.toml"
 
 parser = argparse.ArgumentParser(description='Process some integers.')
 
@@ -71,18 +72,16 @@ coord_file_loc = path + param3['coord_file_loc']
 
 def build_bounding_box(scan, N_vox):
     bbox = scan.metadata['bounding_box']
-    disp = scan.metadata['displacement']
     bkeys = list(bbox.keys())
-    dkeys = list(disp.keys())
-    min_vox = np.array([bbox[bkeys[i]][0] - disp[dkeys[i]] for i in range(len(bkeys))])
-    max_vox = np.array([bbox[bkeys[i]][1] - disp[dkeys[i]] for i in range(len(bkeys))])
+    min_vox = np.array([bbox[bkeys[i]][0] - 10 for i in range(len(bkeys))])
+    max_vox = np.array([bbox[bkeys[i]][1] + 10 for i in range(len(bkeys))])
     bound = max_vox - min_vox
     xyz = bound[0] * bound[1] * bound[2]        
     
     cloud_scale = (xyz/N_vox)**(1/3)
     num_vox = (max_vox - min_vox)//(cloud_scale) + 1
     num_vox = num_vox.astype(int)
-    return min_vox - 10, max_vox + 10, num_vox, cloud_scale
+    return min_vox, max_vox, num_vox, cloud_scale
 
     
 def read_intrinsics(camera_model):
@@ -162,8 +161,8 @@ def build_voxel_volume(scan, coord_file_loc, extrinsics, intrinsics, min_vox, ma
     io.write_torch(coord_file, xy_full_flat)
     voxel_file = volume.get_file('voxels', create=True)
     io.write_torch(voxel_file, torch_voxels)
-    torch.save(xy_full_flat, coord_file_loc + 'coords.pt')
-    torch.save(torch_voxels, coord_file_loc + 'voxels.pt')
+    torch.save(xy_full_flat, coord_file_loc + '/coords.pt')
+    torch.save(torch_voxels, coord_file_loc + '/voxels.pt')
     del xy_full_flat
     del coords
     
@@ -190,16 +189,35 @@ def generate_volume(directory_dataset, coord_file_loc, Sx, Sy, N_vox, label_name
     return torch_voxels, num_vox, min_vox, cloud_scale
     
 torch_voxels, num_vox, min_vox, cloud_scale = generate_volume(directory_dataset, coord_file_loc, Sx, Sy, N_vox, label_names)
-    
+  
 #def generate_ground_truth(directory_dataset, pcd_loc, torch_voxels ):
 db = fsdb.FSDB(directory_dataset)
 db.connect()
 for scan in db.get_scans():
+    disp = scan.metadata['displacement']
+    gt_3D = scan.get_fileset('ground_truth_3D', create = True)
     fetch_pcd = np.load(pcd_loc + scan.id + ".npz")
     pcd = fetch_pcd[fetch_pcd.files[0]]   
-    vox = gt_vox.gt_pc_to_vox(pcd, torch_voxels, num_vox, min_vox, cloud_scale )
-    gt_3D = scan.get_fileset('ground_truth_3D', create = True)
+    pcd[:,0] += disp['dx'] + cloud_scale/2
+    pcd[:,1] += disp['dy'] + cloud_scale/2
+    pcd[:,2] += disp['dz'] + cloud_scale/2
+    [w, h, l] = num_vox
+    voxels = (pcd[:,:3]  - min_vox) // cloud_scale
+    torch_voxels = torch.load(coord_file_loc + '/voxels.pt')
+    
+    for loc, coords in enumerate(voxels):
+        shift = coords
+        if shift[0]>0 and shift[0]<w:
+            if shift[1]> 0 and shift[1]<h:
+                if shift[2]> 0 and shift[2]<l:
+                    
+                    ind = int(np.array([h*l, l, 1]).dot(shift))
+                    torch_voxels[ind, 3] = pcd[loc, 3]
+    
     f = gt_3D.get_file('voxel_classes', create = True)
-    io.write_torch(f, vox)
+    io.write_torch(f, torch_voxels)
+    vox = torch_voxels
+    lala = vox[vox[:,-1] != 0]
+    write_ply(coord_file_loc + '/test_gt_%s.ply'%scan.id, [lala.numpy()], ['x', 'y', 'z', 'label'])
 db.disconnect()
 

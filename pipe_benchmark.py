@@ -28,17 +28,19 @@ from torch.utils.data import DataLoader
 from torch.utils.data import Dataset
 from torch.optim import lr_scheduler
 import torch.optim as optim
+import torch.nn as nn
+
 #from torchvision import models
 
 from romidata import io
 from romidata import fsdb
 
-from romiseg.utils.train_from_dataset import train_model
+from romiseg.utils.train_3D import train_model_voxels
 from romiseg.utils.dataloader_finetune import plot_dataset
 from romiseg.utils import segmentation_model
 
 import romiseg.utils.vox_to_coord as vtc
-from romiseg.utils.generate_volume import generate_volume
+#from romiseg.utils.generate_volume import generate_volume
 
 
 default_config_dir = "romiseg/parameters_train.toml"
@@ -60,7 +62,7 @@ direc = param_pipe['Directory']
 path = direc['path']
 directory_weights = path + direc['directory_weights']
 model_segmentation_name = direc['model_segmentation_name']
-tsboard = path +  direc['tsboard']
+tsboard = path +  direc['tsboard'] + '/full_pipe'
 directory_dataset = path + direc['directory_dataset']
 
 
@@ -92,6 +94,7 @@ def init_set(mode, path):
     scans = db.get_scans()
     image_files = []
     gt_files = []
+    voxel_files= []
     for s in scans:
         f = s.get_fileset('images')
         list_files = f.files
@@ -100,19 +103,21 @@ def init_set(mode, path):
         for shot in shots:
             image_files += f.get_files({'shot_id':shot, 'channel':'rgb'})
             gt_files += f.get_files({'shot_id':shot, 'channel':'segmentation'})
-
+            v = s.get_fileset('ground_truth_3D')
+            voxel_files += v.get_files()
     db.disconnect()
-    return image_files, gt_files
+    return image_files, gt_files, voxel_files
 
 
 
 class Dataset_im_label_3D(Dataset): 
     """Data handling for Pytorch Dataloader"""
 
-    def __init__(self, image_paths, label_paths, transform):  
+    def __init__(self, image_paths, label_paths, voxel_path, transform):  
 
         self.image_paths = image_paths
         self.label_paths = label_paths
+        self.voxel_path = voxel_path
         self.transforms = transform
 
     def __getitem__(self, index):
@@ -133,7 +138,10 @@ class Dataset_im_label_3D(Dataset):
             t_label = self.transforms(t_label)
             torch_labels.append(t_label)
         torch_labels = torch.cat(torch_labels, dim = 0)
-        return t_image, torch_labels
+        
+        voxel = io.read_torch(self.voxel_path[index])
+        
+        return t_image, torch_labels, voxel
 
     def __len__(self):  # return count of sample
         return len(self.image_paths)
@@ -142,7 +150,7 @@ class Dataset_im_label_3D(Dataset):
 
         somme = labels.sum(axis = 0)
         background = somme == 0
-        background = background.astype(somme.dtype)
+        background = background.astype(somme.dtype)*255
         dimx, dimy = background.shape
         background = np.expand_dims(background, axis = 0)
         labels = np.concatenate((background, labels), axis = 0)
@@ -152,7 +160,7 @@ class Dataset_im_label_3D(Dataset):
 
 
 
-generate_volume(directory_dataset, coord_file_loc, Sx, Sy, N_vox, label_names)
+#generate_volume(directory_dataset, coord_file_loc, Sx, Sy, N_vox, label_names)
 #def cnn_train(directory_weights, directory_dataset, label_names, tsboard, batch_size, epochs,
 #                    model_segmentation_name, Sx, Sy):
 
@@ -170,19 +178,19 @@ trans = transforms.Compose([
 path_val = directory_dataset# + '/val/'
 path_train = directory_dataset# + '/train/'
 
-image_train, target_train = init_set('', path_train)
-image_val, target_val = init_set('', path_val)
+image_train, target_train, voxel_train = init_set('', path_train)
+image_val, target_val, voxel_val = init_set('', path_val)
 
 
     
-train_dataset = Dataset_im_label(image_train, target_train, transform = trans)
-val_dataset = Dataset_im_label(image_val, target_val, transform = trans) 
+train_dataset = Dataset_im_label_3D(image_train, target_train, voxel_train, transform = trans)
+val_dataset = Dataset_im_label_3D(image_val, target_val, voxel_val, transform = trans) 
         
 train_loader = torch.utils.data.DataLoader(train_dataset, batch_size=batch_size, shuffle=True, num_workers=1)
 
 #Show input images 
-fig = plot_dataset(train_loader, label_names, batch_size, showit = False) #display training set
-writer.add_figure('Dataset images', fig, 0)
+#fig = plot_dataset(train_loader, label_names, batch_size, showit = False) #display training set
+#writer.add_figure('Dataset images', fig, 0)
 
    
 dataloaders = {
@@ -208,7 +216,7 @@ for child in  a[0].children():
    
 
       
-model = segmentation_model.ResNetUNet(num_classes).to(device)
+model = segmentation_model.ResNetUNet_3D(num_classes, coord_file_loc).to(device)
 
 # freeze backbone layers
 for l in model.base_layers:
@@ -221,7 +229,15 @@ optimizer_ft = optim.Adam(filter(lambda p: p.requires_grad, model.parameters()),
 exp_lr_scheduler = lr_scheduler.StepLR(optimizer_ft, step_size=30, gamma=0.1)
 
 #Run training
-model = train_model(dataloaders, model, optimizer_ft, exp_lr_scheduler, writer, 
+#wb = 5/1e6
+#wc = 1/1e4
+#weights = [wb, wc, wc, wc, wc, wc, wb] #[ 1 / number of instances for each class]
+#class_weights = torch.FloatTensor(weights).cuda()
+
+
+voxel_loss = nn.CrossEntropyLoss()#weight=class_weights)
+
+model = train_model_voxels('Segmentation', dataloaders, model, optimizer_ft, exp_lr_scheduler, writer, voxel_loss,
                     num_epochs = epochs, viz = True, label_names = label_names)
 #save model
 model_name =  model_segmentation_name + os.path.split(directory_dataset)[1] + '_epoch%d.pt'%epochs
@@ -234,5 +250,5 @@ torch.save(model, directory_weights + '/' + model_name)
 cnn_train(directory_weights, directory_dataset, label_names, tsboard, batch_size, epochs,
                     model_segmentation_name, Sx, Sy)
 '''
-"""
+
 

@@ -75,7 +75,7 @@ param3 = param_pipe['Reconstruction3D']
 N_vox = param3['N_vox']
 coord_file_loc = path + param3['coord_file_loc']
 
-generate_volume(directory_dataset, coord_file_loc, Sx, Sy, N_vox, label_names)
+#generate_volume(directory_dataset, coord_file_loc, Sx, Sy, N_vox, label_names)
 
 
 db = fsdb.FSDB(directory_dataset)
@@ -102,18 +102,19 @@ for i, seg in enumerate(gt):
 
 pred_tot = torch.Tensor(pred_tot)
 
-pred_tot = pred_tot.permute(0,2,3,1)
+pred_tot = pred_tot.permute(0,2,3,1)//255
 preds_flat = vtc.adjust_predictions(pred_tot)
 
 
 xy_full_flat = torch.load(coord_file_loc + '/coords.pt')
 voxels = torch.load(coord_file_loc + '/voxels.pt')
 
+    
 assign_preds = preds_flat[xy_full_flat].reshape(pred_tot.shape[0], 
                                         xy_full_flat.shape[0]//pred_tot.shape[0], preds_flat.shape[-1])
-
 assign_preds = torch.sum(assign_preds, dim = 0)
-voxels[:,3] = torch.argmax(assign_preds, dim = 1)
+assign_preds[:,0] *= 2
+voxels[:,3] = torch.argmax(assign_preds[:,:-1], dim = 1)
 voxels = voxels[voxels[:,3] != 0]
 write_ply(coord_file_loc +  '/test_rec.ply', [voxels.numpy()],
       ['x', 'y', 'z', 'label'])
