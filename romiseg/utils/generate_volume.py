@@ -24,6 +24,7 @@ from romiseg.utils.ply import write_ply
 
 import romiseg.utils.vox_to_coord as vtc
 import romiseg.utils.generate_3D_ground_truth as gt_vox
+import tqdm
 
 
 pcd_loc = '/home/alienor/Documents/blender_virtual_scanner/data/COSEG/guitar/'
@@ -73,8 +74,8 @@ coord_file_loc = path + param3['coord_file_loc']
 def build_bounding_box(scan, N_vox):
     bbox = scan.metadata['bounding_box']
     bkeys = list(bbox.keys())
-    min_vox = np.array([bbox[bkeys[i]][0] - 10 for i in range(len(bkeys))])
-    max_vox = np.array([bbox[bkeys[i]][1] + 10 for i in range(len(bkeys))])
+    min_vox = np.array([bbox[bkeys[i]][0] - 15 for i in range(len(bkeys))])
+    max_vox = np.array([bbox[bkeys[i]][1] + 15 for i in range(len(bkeys))])
     bound = max_vox - min_vox
     xyz = bound[0] * bound[1] * bound[2]        
     
@@ -188,36 +189,58 @@ def generate_volume(directory_dataset, coord_file_loc, Sx, Sy, N_vox, label_name
     db.disconnect()
     return torch_voxels, num_vox, min_vox, cloud_scale
     
-torch_voxels, num_vox, min_vox, cloud_scale = generate_volume(directory_dataset, coord_file_loc, Sx, Sy, N_vox, label_names)
   
-#def generate_ground_truth(directory_dataset, pcd_loc, torch_voxels ):
-db = fsdb.FSDB(directory_dataset)
-db.connect()
-for scan in db.get_scans():
-    disp = scan.metadata['displacement']
-    gt_3D = scan.get_fileset('ground_truth_3D', create = True)
-    fetch_pcd = np.load(pcd_loc + scan.id + ".npz")
-    pcd = fetch_pcd[fetch_pcd.files[0]]   
-    pcd[:,0] += disp['dx'] + cloud_scale/2
-    pcd[:,1] += disp['dy'] + cloud_scale/2
-    pcd[:,2] += disp['dz'] + cloud_scale/2
-    [w, h, l] = num_vox
-    voxels = (pcd[:,:3]  - min_vox) // cloud_scale
-    torch_voxels = torch.load(coord_file_loc + '/voxels.pt')
+def generate_ground_truth(directory_dataset, pcd_loc, coord_file_loc, 
+                          Sx, Sy, N_vox, label_names):
+    torch_voxels, num_vox, min_vox, cloud_scale = generate_volume(directory_dataset, 
+                                                                  coord_file_loc, 
+                                                                  Sx,
+                                                                  Sy,
+                                                                  N_vox,
+                                                                  label_names)
     
-    for loc, coords in enumerate(voxels):
-        shift = coords
-        if shift[0]>0 and shift[0]<w:
-            if shift[1]> 0 and shift[1]<h:
-                if shift[2]> 0 and shift[2]<l:
-                    
-                    ind = int(np.array([h*l, l, 1]).dot(shift))
-                    torch_voxels[ind, 3] = pcd[loc, 3]
+    db = fsdb.FSDB(directory_dataset)
+    db.connect()
+
+    for scan in db.get_scans():
+        
+        disp = scan.metadata['displacement']
+        gt_3D = scan.get_fileset('ground_truth_3D', create = True)
+        fetch_pcd = np.load(pcd_loc + scan.id + ".npz")
+        pcd = fetch_pcd[fetch_pcd.files[0]]   
+        pcd[:,0] += disp['dx'] + cloud_scale/2
+        pcd[:,1] += disp['dy'] + cloud_scale/2
+        pcd[:,2] += disp['dz'] + cloud_scale/2
+        [w, h, l] = num_vox
+        voxels = pcd
+        voxels[:,:3] = (voxels[:,:3]  - min_vox) // cloud_scale
+        torch_voxels = torch.load(coord_file_loc + '/voxels.pt')
     
-    f = gt_3D.get_file('voxel_classes', create = True)
-    io.write_torch(f, torch_voxels)
-    vox = torch_voxels
-    lala = vox[vox[:,-1] != 0]
-    write_ply(coord_file_loc + '/test_gt_%s.ply'%scan.id, [lala.numpy()], ['x', 'y', 'z', 'label'])
-db.disconnect()
+        voxels = voxels[voxels[:,0] > 0]
+        voxels = voxels[voxels[:,1] > 0]
+        voxels = voxels[voxels[:,2] > 0]
+        
+        voxels = voxels[voxels[:,0] < w]
+        voxels = voxels[voxels[:,1] < h]
+        voxels = voxels[voxels[:,2] < l]
+    
+        ind = (voxels[:,:3].dot(np.array([h*l, l, 1]))).astype(int)
+        torch_voxels[ind, 3] = torch.Tensor(voxels[:,3]).double()
+        
+        """
+        for loc, coords in enumerate(voxels):
+            shift = coords
+            if shift[0]>0 and shift[0]<w:
+                if shift[1]> 0 and shift[1]<h:
+                    if shift[2]> 0 and shift[2]<l:
+                        
+                        ind = int(np.array([h*l, l, 1]).dot(shift))
+                        torch_voxels[ind, 3] = pcd[loc, 3]
+        """
+        f = gt_3D.get_file('voxel_classes', create = True)
+        io.write_torch(f, torch_voxels)
+        vox = torch_voxels
+        lala = vox[vox[:,-1] != 0]
+        write_ply(coord_file_loc + '/test_gt_%s.ply'%scan.id, [lala.numpy()], ['x', 'y', 'z', 'label'])
+    db.disconnect()
 

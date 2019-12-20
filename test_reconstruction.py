@@ -29,12 +29,15 @@ from romiseg.utils.dataloader_finetune import plot_dataset
 from romiseg.utils import segmentation_model
 
 import romiseg.utils.vox_to_coord as vtc
-from romiseg.utils.generate_volume import generate_volume
+from romiseg.utils.generate_volume import generate_ground_truth
 from romiseg.utils.ply import read_ply, write_ply
 
 
 
-default_config_dir = "romiseg/parameters_train.toml"
+pcd_loc = '/home/alienor/Documents/blender_virtual_scanner/data/COSEG/guitar/'
+
+default_config_dir = "/home/alienor/Documents/scanner-meta-repository/Segmentation/romiseg/parameters_train.toml"
+
 
 parser = argparse.ArgumentParser(description='Process some integers.')
 
@@ -75,8 +78,8 @@ param3 = param_pipe['Reconstruction3D']
 N_vox = param3['N_vox']
 coord_file_loc = path + param3['coord_file_loc']
 
-#generate_volume(directory_dataset, coord_file_loc, Sx, Sy, N_vox, label_names)
-
+generate_ground_truth(directory_dataset, pcd_loc, coord_file_loc, 
+                           Sx, Sy, N_vox, label_names)
 
 db = fsdb.FSDB(directory_dataset)
 db.connect()
@@ -109,13 +112,28 @@ preds_flat = vtc.adjust_predictions(pred_tot)
 xy_full_flat = torch.load(coord_file_loc + '/coords.pt')
 voxels = torch.load(coord_file_loc + '/voxels.pt')
 
+assign_preds = preds_flat[xy_full_flat].reshape(pred_tot.shape[0], 
+                                        xy_full_flat.shape[0]//pred_tot.shape[0], preds_flat.shape[-1])
+assign_preds = assign_preds[:,:,0:-1]
+assign_preds = torch.log(assign_preds)
+assign_preds = torch.sum(assign_preds, dim = 0)
+
+#assign_preds = torch.sum(assign_preds, dim = -1)
+preds_max = torch.max(assign_preds, dim = -1).values
+voxels[:,3] = torch.argmax(assign_preds, dim = -1)
+voxels = voxels[preds_max >= 0]
+voxels = voxels[voxels[:,3] != 0]
+
+"""
     
 assign_preds = preds_flat[xy_full_flat].reshape(pred_tot.shape[0], 
                                         xy_full_flat.shape[0]//pred_tot.shape[0], preds_flat.shape[-1])
-assign_preds = torch.sum(assign_preds, dim = 0)
-assign_preds[:,0] *= 2
+assign_preds = torch.sum(torch.log(assign_preds + 0.01), dim = 0)
+#assign_preds[:,0] *= 2
 voxels[:,3] = torch.argmax(assign_preds[:,:-1], dim = 1)
 voxels = voxels[voxels[:,3] != 0]
+
+"""
 write_ply(coord_file_loc +  '/test_rec.ply', [voxels.numpy()],
       ['x', 'y', 'z', 'label'])
     

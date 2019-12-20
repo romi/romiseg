@@ -66,7 +66,7 @@ def segmentation(Sx, Sy, label_names, images_fileset, scan, model_segmentation_n
         #Access the previously trained segmenttion network stored in db.romi-project.eu
         
         #Save folder
-        directory_weights = appdirs.user_cache_dir()
+        #directory_weights = appdirs.user_cache_dir()
         
         #directory_weights = '/home/alienor/Documents/database/WEIGHTS'
         #if directory_weights == 'complete here':
@@ -96,7 +96,6 @@ def segmentation(Sx, Sy, label_names, images_fileset, scan, model_segmentation_n
                 pred_tot.append(outputs)
                 id_list.append(id_im)
                 count += 1
-                
         pred_tot = torch.cat(pred_tot, dim = 0)
         pred_pad = torch.zeros((N_cam, len(label_names), xinit, yinit)) #reverse the crop in order to match the colmap parameters
         pred_pad[:,:,(xinit-Sx)//2:(xinit+Sx)//2,(yinit-Sy)//2:(yinit+Sy)//2] = pred_tot #To fit the camera parameters

@@ -86,8 +86,9 @@ class Dataset_im_label(Dataset):
     
 
 def plot_dataset(train_loader, label_names, batch_size, showit = True):
-    images, label = next(iter(train_loader))
-    
+    all_data = next(iter(train_loader))
+    images = all_data[0]
+    label = all_data[1]
     #plot 4 images to visualize the data
     images_tot = []
     titles_tot = []
@@ -96,7 +97,7 @@ def plot_dataset(train_loader, label_names, batch_size, showit = True):
         img = img.permute(1, 2, 0)
         images_tot.append(img)
         titles_tot.append('image')
-        img = label[i,i,:,:].int()
+        img = label[i,i,:,:]*255#.int()
         images_tot.append(img)
         titles_tot.append(label_names[i])
     g = alien.showclass()
@@ -106,4 +107,5 @@ def plot_dataset(train_loader, label_names, batch_size, showit = True):
     g.figsize = ((14, 14))
     g.title_list = titles_tot
     fig = g.showing(images_tot, showit,)
+    
     return fig

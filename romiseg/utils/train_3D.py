@@ -18,6 +18,7 @@ from tqdm import tqdm
 
 from romiseg.utils.dataloader_finetune import Dataset_im_label, plot_dataset, init_set
 import romiseg.utils.alienlab as alien
+from romiseg.utils.ply import write_ply
 
 from torch.utils.tensorboard import SummaryWriter
 
@@ -29,6 +30,7 @@ import matplotlib.pyplot as plt
 import os
 import requests
 import copy
+import numpy as np
 
 
 import warnings
@@ -115,13 +117,13 @@ def print_metrics(metrics, epoch_samples, phase):
 
     print("{}: {}".format(phase, ", ".join(outputs)))
 
-def train_model_voxels(train_type, dataloaders, model, optimizer, scheduler, writer, voxel_loss, num_epochs=25, viz = False, label_names = []):
+def train_model_voxels(train_type, dataloaders, model, optimizer, scheduler, writer, voxel_loss, torch_voxels, num_epochs=25, viz = False, label_names = []):
     L = []
     best_model_wts = copy.deepcopy(model.state_dict())
     best_loss = 1e10
     loss_test = []
 
-    
+    layer_0 = torch.nn.Linear(len(label_names), len(label_names)).to(device)
 
     for epoch in range(num_epochs):
         print('Running epoch %d/%d'%(epoch, num_epochs), end="\r")
@@ -145,7 +147,7 @@ def train_model_voxels(train_type, dataloaders, model, optimizer, scheduler, wri
             for inputs, labels, voxels in dataloaders[phase]:
                 inputs = inputs.to(device)
                 labels = labels.to(device)
-                voxels = voxels.to(device)
+                voxels = voxels.to(device).long()
 
                 # zero the parameter gradients
                 optimizer.zero_grad()
@@ -154,12 +156,14 @@ def train_model_voxels(train_type, dataloaders, model, optimizer, scheduler, wri
                 # track history if only in train
                 with torch.set_grad_enabled(phase == 'train'):
                     outputs = model(inputs)
-                    #print(outputs[0].shape, outputs[1].shape)
-                    #print(labels.shape, voxels[0].shape)
+
                     if train_type == 'Segmentation':
                         loss = calc_loss(outputs[0], labels, metrics)
                     if train_type == 'Fullpipe':
-                        loss = voxel_loss(outputs[1][:,:-1], voxels[0])
+                        print(outputs[1].shape)
+                        preds = outputs[1][:,:-1]
+                        preds = layer_0(preds)        
+                        loss = voxel_loss(torch.exp(preds), voxels[0, :, 3])
                     #print(loss)
                     # backward + optimize only if in training phase
                     if phase == 'train':
@@ -218,7 +222,43 @@ def train_model_voxels(train_type, dataloaders, model, optimizer, scheduler, wri
             
             
             writer.add_figure('Segmented images', fig, epoch)
-                
+            
+            
+            colors = ['r.', 'k.', 'g.', 'b.', 'o.', 'l.']
+
+            fig = plt.figure(figsize = (10,10))
+            ax = plt.axes(projection='3d')
+            ax.set_xlim(-60, 60)
+            ax.set_ylim(-60, 60)
+            ax.set_zlim(-60, 60)
+            ax.set_xlabel('x')
+            ax.set_ylabel('y')
+            ax.set_zlabel('z')
+            #ax.set_aspect('equal')
+            ax.set_title('Ground truth predictions')
+            assign_preds = outputs[1]
+            assign_preds = torch.argmax(assign_preds, dim = -1)
+            for i, label in enumerate(label_names):
+                if i != 0:
+
+                    inds = assign_preds == i
+                    inds = inds.cpu()
+                    print(np.count_nonzero(inds))
+                    pred_label = torch_voxels[inds].detach().cpu()
+                    ax.scatter3D(pred_label[:,0], pred_label[:,1], pred_label[:,2], colors[1], s=10)
+                    
+                    inds = voxels[0, :, 3] == i
+                    inds = inds.cpu()
+                    print(np.count_nonzero(inds))
+                    pred_label = torch_voxels[inds].detach().cpu()
+                    ax.scatter3D(pred_label[:,0], pred_label[:,1], pred_label[:,2], colors[2], s=10)
+
+            
+            torch_voxels[:,3] = 0
+            torch_voxels[:,3] = assign_preds
+            writer.add_figure('Segmented point cloud', fig, epoch)
+            voxels_class = torch_voxels[torch_voxels[:,3] != 0]
+            write_ply('/home/alienor/Documents/training2D/volume/training_epoch_%d'%epoch, voxels_class.detach().cpu().numpy(), ['x', 'y', 'z', 'labels'])    
         
         #time_elapsed = time.time() - since
         #print('{:.0f}m {:.0f}s'.format(time_elapsed // 60, time_elapsed % 60))

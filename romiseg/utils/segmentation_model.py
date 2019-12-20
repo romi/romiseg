@@ -264,7 +264,7 @@ class ResNetUNet_3D(nn.Module):
         # (yinit-Sy)//2:(yinit+Sy)//2] = x #To fit the camera parameters
 
         #pred_pad = pred_pad.permute(0,2,3,1)
-        #print(preds.shape)        
+        #print(preds.shape)
         pred_pad = F.sigmoid(x).permute(0, 2, 3, 1)
         pred_pad = vtc.adjust_predictions(pred_pad)
         #print(preds.shape)
@@ -273,6 +273,8 @@ class ResNetUNet_3D(nn.Module):
         #print(preds.shape)
         #preds[:,:,6] = 0
         #print(preds.shape)
+        #print(pred_pad)
+        pred_pad = torch.log(pred_pad)
         pred_pad = torch.sum(pred_pad, dim = 0)
         #print(preds.shape)
         #print(torch.max(preds, dim = 0))

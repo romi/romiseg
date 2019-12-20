@@ -189,8 +189,8 @@ val_dataset = Dataset_im_label_3D(image_val, target_val, voxel_val, transform = 
 train_loader = torch.utils.data.DataLoader(train_dataset, batch_size=batch_size, shuffle=True, num_workers=1)
 
 #Show input images 
-#fig = plot_dataset(train_loader, label_names, batch_size, showit = False) #display training set
-#writer.add_figure('Dataset images', fig, 0)
+fig = plot_dataset(train_loader, label_names, batch_size, showit = False) #display training set
+writer.add_figure('Dataset images', fig, 0)
 
    
 dataloaders = {
@@ -214,7 +214,7 @@ for child in  a[0].children():
         param.requires_grad = False
 '''
    
-
+voxels = torch.load(coord_file_loc + '/voxels.pt').to(device)
       
 model = segmentation_model.ResNetUNet_3D(num_classes, coord_file_loc).to(device)
 
@@ -237,8 +237,25 @@ exp_lr_scheduler = lr_scheduler.StepLR(optimizer_ft, step_size=30, gamma=0.1)
 
 voxel_loss = nn.CrossEntropyLoss()#weight=class_weights)
 
-model = train_model_voxels('Segmentation', dataloaders, model, optimizer_ft, exp_lr_scheduler, writer, voxel_loss,
-                    num_epochs = epochs, viz = True, label_names = label_names)
+ext_name = '_segmentation_' + str(Sx) + '_' + str(Sy) + '_epoch%d.pt'%epochs
+new_model_name = model_segmentation_name + ext_name
+
+if False:
+    model = train_model_voxels('Segmentation', dataloaders, model, optimizer_ft, exp_lr_scheduler, writer, voxel_loss, voxels,
+                        num_epochs = epochs, viz = True, label_names = label_names)
+        
+    model.save_state_dict(directory_weights + '/' + new_model_name)
+else:
+    model = torch.load(directory_weights + '/' + new_model_name)[0]
+
+dataloaders = {
+    'train': DataLoader(train_dataset, batch_size=batch_size, shuffle=False, num_workers=0),
+    'val': DataLoader(val_dataset, batch_size=batch_size, shuffle=False, num_workers=0)
+    }
+#
+#model = train_model_voxels('Fullpipe', dataloaders, model, optimizer_ft, exp_lr_scheduler, writer, voxel_loss, voxels,
+ #                   num_epochs = epochs, viz = True, label_names = label_names)
+
 #save model
 model_name =  model_segmentation_name + os.path.split(directory_dataset)[1] + '_epoch%d.pt'%epochs
 torch.save(model, directory_weights + '/' + model_name)

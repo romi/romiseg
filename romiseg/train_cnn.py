@@ -31,7 +31,7 @@ from romiseg.utils.dataloader_finetune import plot_dataset
 from romiseg.utils import segmentation_model
 
 
-default_config_dir = "romiseg/parameters_train.toml"
+default_config_dir = "/home/alienor/Documents/scanner-meta-repository/Segmentation/romiseg/parameters_train.toml"
 
 parser = argparse.ArgumentParser(description='Process some integers.')
 
