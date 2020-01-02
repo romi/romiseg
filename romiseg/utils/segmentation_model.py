@@ -174,6 +174,13 @@ class ResNetUNet_3D(nn.Module):
 
         self.conv_last = nn.Conv2d(64, n_class, 1)
         
+        lin = torch.nn.Linear(n_class+1, n_class)
+        lin.weight.data.fill_(0)
+        lin.weight.data.fill_diagonal_(1)
+        lin.bias.data.fill_(0)
+        self.class_layer = nn.Sequential(lin, 
+                                         nn.ReLU(inplace=True))
+
             
         self.coord_file_loc = coord_file_loc
         #self.xinit = xinit
@@ -265,7 +272,7 @@ class ResNetUNet_3D(nn.Module):
 
         #pred_pad = pred_pad.permute(0,2,3,1)
         #print(preds.shape)
-        pred_pad = F.sigmoid(x).permute(0, 2, 3, 1)
+        pred_pad = F.sigmoid(torch.flip(x, dims = [0])).permute(0, 2, 3, 1)
         pred_pad = vtc.adjust_predictions(pred_pad)
         #print(preds.shape)
         pred_pad = pred_pad[xy_full_flat].reshape(N_frames, 
@@ -273,12 +280,15 @@ class ResNetUNet_3D(nn.Module):
         #print(preds.shape)
         #preds[:,:,6] = 0
         #print(preds.shape)
-        #print(pred_pad)
-        pred_pad = torch.log(pred_pad)
-        pred_pad = torch.sum(pred_pad, dim = 0)
+        
+        pred_pad = self.class_layer(pred_pad)
+        #pred_pad = pred_pad.clamp(min=1e-8)
+        #pred_pad = torch.log(pred_pad)
+        #pred_pad  = torch.sum(pred_pad, dim = 0)
+        pred_pad = torch.prod(pred_pad, dim = 0)
+        
         #print(preds.shape)
         #print(torch.max(preds, dim = 0))
         #print(preds.shape)
         del xy_full_flat
-
-        return x, pred_pad
+        return [x, pred_pad]

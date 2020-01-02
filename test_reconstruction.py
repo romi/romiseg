@@ -92,16 +92,11 @@ gt = masks.get_files(query={'channel':'segmentation'})
 pred_tot = []
 for i, seg in enumerate(gt):
     seg = io.read_npz(seg)
-    seg = seg[seg.files[0]]
-    somme = seg.sum(axis = 0)
-    background = somme == 0
-    background = background.astype(somme.dtype)
-    background = background*255
-    dimx, dimy = background.shape
-    background = np.expand_dims(background, axis = 0)
-    seg = np.concatenate((background, seg), axis = 0)
-    
-    pred_tot.append(seg)
+    class_pred = []
+    for j, class_name in enumerate(seg.files):
+        class_pred.append(seg[seg.files[j]])
+    class_pred = np.stack(class_pred, axis = 0)
+    pred_tot.append(class_pred)
 
 pred_tot = torch.Tensor(pred_tot)
 
@@ -122,7 +117,7 @@ assign_preds = torch.sum(assign_preds, dim = 0)
 preds_max = torch.max(assign_preds, dim = -1).values
 voxels[:,3] = torch.argmax(assign_preds, dim = -1)
 voxels = voxels[preds_max >= 0]
-voxels = voxels[voxels[:,3] != 0]
+#voxels = voxels[voxels[:,3] != 0]
 
 """
     

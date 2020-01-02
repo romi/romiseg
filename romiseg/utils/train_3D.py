@@ -8,6 +8,7 @@ Created on Thu Nov  7 09:56:38 2019
 
 
 import torch
+from torch import autograd
 from torch.optim import lr_scheduler
 import torchvision
 import torch.optim as optim
@@ -117,14 +118,26 @@ def print_metrics(metrics, epoch_samples, phase):
 
     print("{}: {}".format(phase, ", ".join(outputs)))
 
-def train_model_voxels(train_type, dataloaders, model, optimizer, scheduler, writer, voxel_loss, torch_voxels, num_epochs=25, viz = False, label_names = []):
+
+class classification(torch.nn.Module):
+    def __init__(self,D_in,D_out):
+        super(classification, self).__init__()
+        lin = torch.nn.Linear(D_in,D_in)
+        #lin.weight.data = torch.eye(D_in, requires_grad = True).to(device)
+        #lin.bias.data.fill_(0)
+        self.layer = torch.nn.Sequential(lin)
+    def forward(self,x):
+        out = self.layer(x)
+        return out
+
+
+def train_model_voxels(train_type, dataloaders, model, optimizer, scheduler, writer, 
+                       voxel_loss, torch_voxels, num_epochs=25, viz = False, label_names = []):
     L = []
-    best_model_wts = copy.deepcopy(model.state_dict())
+    #best_model_wts = copy.deepcopy(model.state_dict())
     best_loss = 1e10
     loss_test = []
-
-    layer_0 = torch.nn.Linear(len(label_names), len(label_names)).to(device)
-
+    n_classes = len(label_names)
     for epoch in range(num_epochs):
         print('Running epoch %d/%d'%(epoch, num_epochs), end="\r")
 
@@ -138,7 +151,7 @@ def train_model_voxels(train_type, dataloaders, model, optimizer, scheduler, wri
                 model.train()  # Set model to training mode
             else:
                 model.eval()   # Set model to evaluate mode
-
+                
             metrics = defaultdict(float)
             epoch_samples = 0
             
@@ -156,19 +169,22 @@ def train_model_voxels(train_type, dataloaders, model, optimizer, scheduler, wri
                 # track history if only in train
                 with torch.set_grad_enabled(phase == 'train'):
                     outputs = model(inputs)
-
+                    pred_class = outputs[1]
                     if train_type == 'Segmentation':
                         loss = calc_loss(outputs[0], labels, metrics)
                     if train_type == 'Fullpipe':
-                        print(outputs[1].shape)
-                        preds = outputs[1][:,:-1]
-                        preds = layer_0(preds)        
-                        loss = voxel_loss(torch.exp(preds), voxels[0, :, 3])
+                        #print(outputs[1].shape)
+                        #pred_class = pred_class[:,:-1]
+                        #pred_class = torch.exp(pred_class)
+
+                        loss = calc_loss(outputs[0], labels, metrics) + F.cross_entropy(pred_class, voxels[0, :, 3])#voxel_loss(pred_class, voxels[0, :, n_classes - 1])
+                        print('%.15f'%loss)
                     #print(loss)
                     # backward + optimize only if in training phase
                     if phase == 'train':
-                        loss.backward()
-                        optimizer.step()
+                        with autograd.detect_anomaly():
+                            loss.backward()
+                            optimizer.step()
 
                 # statistics
                 epoch_samples += inputs.size(0)
@@ -187,6 +203,7 @@ def train_model_voxels(train_type, dataloaders, model, optimizer, scheduler, wri
                 # forward
                 # track history if only in train
                 outputs = model(inputs)
+
                 out = torch.argmax(outputs[0], dim = 1)
                 loss_test.append(my_metric(out, lab))
                 
@@ -194,7 +211,7 @@ def train_model_voxels(train_type, dataloaders, model, optimizer, scheduler, wri
             if phase == 'val' and epoch_loss < best_loss:
                 #print("saving best model")
                 best_loss = epoch_loss
-                best_model_wts = copy.deepcopy(model.state_dict())
+                #best_model_wts = copy.deepcopy(model.state_dict())
         
             #plot 4 images to visualize the data
         if viz == True:
@@ -236,28 +253,31 @@ def train_model_voxels(train_type, dataloaders, model, optimizer, scheduler, wri
             ax.set_zlabel('z')
             #ax.set_aspect('equal')
             ax.set_title('Ground truth predictions')
-            assign_preds = outputs[1]
-            assign_preds = torch.argmax(assign_preds, dim = -1)
+            pred_class = outputs[1]#[:,:-1]
+            #pred_class = torch.exp(pred_class)
+            #preds_max = torch.max(pred_class, dim = -1).values
+            pred_class = torch.argmax(pred_class, dim = -1)
             for i, label in enumerate(label_names):
-                if i != 0:
-
-                    inds = assign_preds == i
-                    inds = inds.cpu()
-                    print(np.count_nonzero(inds))
-                    pred_label = torch_voxels[inds].detach().cpu()
-                    ax.scatter3D(pred_label[:,0], pred_label[:,1], pred_label[:,2], colors[1], s=10)
-                    
+                if i != 0:                    
+                                        
                     inds = voxels[0, :, 3] == i
                     inds = inds.cpu()
                     print(np.count_nonzero(inds))
                     pred_label = torch_voxels[inds].detach().cpu()
                     ax.scatter3D(pred_label[:,0], pred_label[:,1], pred_label[:,2], colors[2], s=10)
 
-            
+                    inds = (pred_class == i)
+                    inds = inds.cpu()
+                    print(np.count_nonzero(inds))
+                    pred_label = torch_voxels[inds].detach().cpu()
+                    ax.scatter3D(pred_label[:,0], pred_label[:,1], pred_label[:,2], colors[1], s=10)
+
+
+            print(model.class_layer[0].weight.data, model.class_layer[0].bias.data)
             torch_voxels[:,3] = 0
-            torch_voxels[:,3] = assign_preds
+            torch_voxels[:,3] = pred_class
             writer.add_figure('Segmented point cloud', fig, epoch)
-            voxels_class = torch_voxels[torch_voxels[:,3] != 0]
+            voxels_class = torch_voxels[(torch_voxels[:,3] != 0)*(torch_voxels[:,3] != len(label_names))]
             write_ply('/home/alienor/Documents/training2D/volume/training_epoch_%d'%epoch, voxels_class.detach().cpu().numpy(), ['x', 'y', 'z', 'labels'])    
         
         #time_elapsed = time.time() - since
@@ -266,7 +286,7 @@ def train_model_voxels(train_type, dataloaders, model, optimizer, scheduler, wri
     #print('Best val loss: {:4f}'.format(best_loss))
 
     # load best model weights
-        model.load_state_dict(best_model_wts)
+        #model.load_state_dict(best_model_wts)
     return model, L, loss_test
 
 

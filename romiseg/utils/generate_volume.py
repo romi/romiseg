@@ -208,9 +208,9 @@ def generate_ground_truth(directory_dataset, pcd_loc, coord_file_loc,
         gt_3D = scan.get_fileset('ground_truth_3D', create = True)
         fetch_pcd = np.load(pcd_loc + scan.id + ".npz")
         pcd = fetch_pcd[fetch_pcd.files[0]]   
-        pcd[:,0] += disp['dx'] + cloud_scale/2
-        pcd[:,1] += disp['dy'] + cloud_scale/2
-        pcd[:,2] += disp['dz'] + cloud_scale/2
+        pcd[:,0] += float(disp['dx']) + cloud_scale/2
+        pcd[:,1] += float(disp['dy']) + cloud_scale/2
+        pcd[:,2] += float(disp['dz']) + cloud_scale/2
         [w, h, l] = num_vox
         voxels = pcd
         voxels[:,:3] = (voxels[:,:3]  - min_vox) // cloud_scale
