@@ -142,7 +142,7 @@ def train_model(dataloaders, model, optimizer, scheduler, writer, num_epochs=25,
             epoch_samples = 0
             
 
-            for inputs, labels in dataloaders[phase]:
+            for inputs, labels in tqdm(dataloaders[phase]):
                 inputs = inputs.to(device)
                 labels = labels.to(device)
 
@@ -159,7 +159,7 @@ def train_model(dataloaders, model, optimizer, scheduler, writer, num_epochs=25,
                     if phase == 'train':
                         loss.backward()
                         optimizer.step()
-
+                        #print(model.conv_last.weight.grad, model.conv_last.bias.grad)
                 # statistics
                 epoch_samples += inputs.size(0)
 

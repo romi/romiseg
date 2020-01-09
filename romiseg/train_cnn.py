@@ -13,8 +13,9 @@ import toml
 from PIL import Image
 import numpy as np
 
-import segmentation_models_pytorch as smp
+#import segmentation_models_pytorch as smp
 import torch
+from torch.autograd import Variable
 from torchvision import transforms
 from torch.utils.tensorboard import SummaryWriter
 from torch.utils.data import DataLoader
@@ -31,7 +32,7 @@ from romiseg.utils.dataloader_finetune import plot_dataset
 from romiseg.utils import segmentation_model
 
 
-default_config_dir = "/home/alienor/Documents/scanner-meta-repository/Segmentation/romiseg/parameters_train.toml"
+default_config_dir = "/home/tim/shared/Segmentation/romiseg/parameters_train.toml"
 
 parser = argparse.ArgumentParser(description='Process some integers.')
 
@@ -70,6 +71,11 @@ learning_rate = param2['learning_rate']
 
 
 ############################################################################################################################
+def gaussian(ins, is_training, mean, stddev):
+    if is_training:
+        noise = Variable(ins.data.new(ins.size()).normal_(mean, stddev))
+        return ins + noise
+    return torch.clamp(ins,0,1)
 
 def init_set(mode, path):
     db = fsdb.FSDB(path)
@@ -105,33 +111,48 @@ class Dataset_im_label(Dataset):
         db_file = self.image_paths[index]
         image = Image.fromarray(io.read_image(db_file))
         #id_im = db_file.id
+        t_image = transforms.ColorJitter(brightness=0, contrast=0, saturation=0, hue=0)(image)
         t_image = self.transforms(image) #crop the images
+        
         t_image = t_image[0:3, :, :] #select RGB channels
         
         db_file = self.label_paths[index]
         npz = io.read_npz(db_file)
-        labels = npz[npz.files[0]]
-        labels = self.read_label(labels)
         torch_labels = []
-        for i in range(labels.shape[0]):
-            t_label = Image.fromarray(np.uint8(labels[i]))
+
+        for i in range(len(npz.files)):    
+            
+            labels = npz[npz.files[i]]
+            #labels = self.read_label(labels)
+            t_label = Image.fromarray(np.uint8(labels))
             t_label = self.transforms(t_label)
             torch_labels.append(t_label)
         torch_labels = torch.cat(torch_labels, dim = 0)
-        return t_image, torch_labels
+        somme = torch_labels.sum(dim = 0)
+        background = somme == 0
+        background = background.float()
+        background = background
+        dimx, dimy = background.shape
+        background = background.unsqueeze(0)
+        torch_labels = torch.cat((background, torch_labels), dim = 0)
+        return gaussian(t_image, is_training = True, mean = 0, stddev =  1/100), torch_labels
 
     def __len__(self):  # return count of sample
         return len(self.image_paths)
 
     def read_label(self, labels):
-
         somme = labels.sum(axis = 0)
         background = somme == 0
         background = background.astype(somme.dtype)
         background = background*255
         dimx, dimy = background.shape
         background = np.expand_dims(background, axis = 0)
+        print(labels.shape[0])
+        if labels.shape[0] == 5:
+            labels = np.concatenate((background*0, labels), axis = 0)
+        
         labels = np.concatenate((background, labels), axis = 0)
+        
         
         return labels
 
@@ -150,15 +171,18 @@ trans = transforms.Compose([
                             ])
 
 #Load images and ground truth
-path_val = directory_dataset# + '/val/'
-path_train = directory_dataset# + '/train/'
+path_val = directory_dataset + '/val/'
+path_train = directory_dataset + '/train/'
+path_test = directory_dataset + '/test/'
 
 image_train, target_train = init_set('', path_train)
 image_val, target_val = init_set('', path_val)
-    
+image_test, target_test = init_set('', path_test)
+
 train_dataset = Dataset_im_label(image_train, target_train, transform = trans)
 val_dataset = Dataset_im_label(image_val, target_val, transform = trans) 
-        
+test_dataset = Dataset_im_label(image_test, target_test, transform = trans)
+
 train_loader = torch.utils.data.DataLoader(train_dataset, batch_size=batch_size, shuffle=True, num_workers=1)
 
 #Show input images 
@@ -168,13 +192,14 @@ writer.add_figure('Dataset images', fig, 0)
    
 dataloaders = {
     'train': DataLoader(train_dataset, batch_size=batch_size, shuffle=True, num_workers=0),
-    'val': DataLoader(val_dataset, batch_size=batch_size, shuffle=True, num_workers=0)
-    }
+    'val': DataLoader(val_dataset, batch_size=batch_size, shuffle=True, num_workers=0),
+    'test': DataLoader(test_dataset, batch_size=batch_size, shuffle=True, num_workers=0),
+   }
 device = torch.device("cuda:0" if torch.cuda.is_available() else "cpu")
 print(device)
-
+'''
 #Load model
-model = smp.Unet(model_segmentation_name, classes=num_classes, encoder_weights='imagenet').cuda()
+#model = smp.Unet(model_segmentation_name, classes=num_classes, encoder_weights='imagenet').cuda()
 #model = models.segmentation.fcn_resnet101(pretrained=True)
 #model = torch.nn.Sequential(model, torch.nn.Linear(21, num_classes)).cuda()
 
@@ -195,7 +220,7 @@ for l in model.base_layers:
     for param in l.parameters():
         param.requires_grad = False
    
-'''
+
 #Choice of optimizer, can be changed
 optimizer_ft = optim.Adam(filter(lambda p: p.requires_grad, model.parameters()), lr=learning_rate)
 #make learning rate evolve
@@ -215,3 +240,4 @@ torch.save(model, directory_weights + '/' + model_name)
 cnn_train(directory_weights, directory_dataset, label_names, tsboard, batch_size, epochs,
                     model_segmentation_name, Sx, Sy)
 '''
+

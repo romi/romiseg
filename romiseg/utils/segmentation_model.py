@@ -291,4 +291,5 @@ class ResNetUNet_3D(nn.Module):
         #print(torch.max(preds, dim = 0))
         #print(preds.shape)
         del xy_full_flat
+
         return [x, pred_pad]
