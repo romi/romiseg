@@ -32,19 +32,35 @@ This tool relies on the file pipeline.toml used by the virtual scanner.
 
 From the virtual environment created for Scan3D: 
 ```
-git clone https://github.com/romi/Segmentation
+git clone https://github.com/romi/Segmentation@benchmark
 ```
 
 
 ### Preliminary set-up
 
-First update the pipeline.toml folder according to the one in this directory.
+First update the .toml file of the luigi task 2D Segmentation according to the one in this directory.
 
 You need to give a save location for your new database: directory_images (replace the 'complete here' by location full path)
 
 You need to give a fetch and save location for the weights of the segmentation networks: directory_weights (replace the 'complete here' by location full path). 
 
+
+
+```
+[Segmentation2D]
+upstream_task = "Scan"
+Sx = 896
+Sy = 896
+N_vox = 1000000
+label_names = "background,flower,peduncle,stem,bud,leaf,fruit"
+model_segmentation_name = "table1_test5_hdri_arabidopsis_resnet50_epoch15_rotate_True_finetune_3_epoch50_finetune_folder_epoch20.pt"
+directory_images = "complete_here"
+directory_weights = "complete_here"
+finetune_epochs = 20
+```
+
 If the pre-trained network is not already present in this folder, it will be fetched from the database db.romi-project.eu.
+n2D]
 
 You can also change the number of epochs for the training.
 
