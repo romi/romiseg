@@ -177,7 +177,8 @@ def train_model_voxels(train_type, dataloaders, model, optimizer, scheduler, wri
                         #pred_class = pred_class[:,:-1]
                         #pred_class = torch.exp(pred_class)
 
-                        loss = calc_loss(outputs[0], labels, metrics) + F.cross_entropy(pred_class, voxels[0, :, 3])#voxel_loss(pred_class, voxels[0, :, n_classes - 1])
+                        loss = calc_loss(outputs[0], labels, metrics) + voxel_loss(pred_class, voxels[0, :, n_classes - 1])
+                        #F.cross_entropy(pred_class, voxels[0, :, 3])
                         print('%.15f'%loss)
                     #print(loss)
                     # backward + optimize only if in training phase
@@ -263,8 +264,8 @@ def train_model_voxels(train_type, dataloaders, model, optimizer, scheduler, wri
                     inds = voxels[0, :, 3] == i
                     inds = inds.cpu()
                     print(np.count_nonzero(inds))
-                    pred_label = torch_voxels[inds].detach().cpu()
-                    ax.scatter3D(pred_label[:,0], pred_label[:,1], pred_label[:,2], colors[2], s=10)
+                    pred_label_gt = torch_voxels[inds].detach().cpu()
+                    ax.scatter3D(pred_label_gt[:,0], pred_label_gt[:,1], pred_label_gt[:,2], colors[2], s=10)
 
                     inds = (pred_class == i)
                     inds = inds.cpu()
@@ -287,6 +288,13 @@ def train_model_voxels(train_type, dataloaders, model, optimizer, scheduler, wri
 
     # load best model weights
         #model.load_state_dict(best_model_wts)
+        
+    torch_voxels[:,3] = 0
+    torch_voxels[:,3] = voxels[0, :,3]
+    writer.add_figure('Segmented point cloud', fig, epoch)
+    voxels_class = torch_voxels[(torch_voxels[:,3] != 0)*(torch_voxels[:,3] != len(label_names))]
+    write_ply('/home/alienor/Documents/training2D/volume/ground_truth', voxels_class.detach().cpu().numpy(), ['x', 'y', 'z', 'labels'])    
+    
     return model, L, loss_test
 
 

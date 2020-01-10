@@ -13,6 +13,7 @@ import torchvision
 import torch.optim as optim
 import torch.nn.functional as F
 from collections import defaultdict
+import matplotlib.pyplot as plt
 
 from tqdm import tqdm
 
@@ -247,8 +248,8 @@ def fine_tune_train(path_train, path_val, weights_folder, label_names, tsboard_n
     train_loader = torch.utils.data.DataLoader(train_dataset, batch_size=batch_size, shuffle=True, num_workers=1)
     
     
-    plot_dataset(train_loader, label_names, batch_size) #display training set
-    
+    fig = plot_dataset(train_loader, label_names, batch_size) #display training set
+    plt.show(block=True)
     print('Now the network will train on the data you annotated')
 
     

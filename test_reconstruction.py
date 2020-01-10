@@ -78,7 +78,7 @@ param3 = param_pipe['Reconstruction3D']
 N_vox = param3['N_vox']
 coord_file_loc = path + param3['coord_file_loc']
 
-generate_ground_truth(directory_dataset, pcd_loc, coord_file_loc, 
+generate_ground_truth(directory_dataset + '/val/', pcd_loc, coord_file_loc, 
                            Sx, Sy, N_vox, label_names)
 
 db = fsdb.FSDB(directory_dataset)

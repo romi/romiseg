@@ -169,7 +169,9 @@ class Dataset_im_label_3D(Dataset):
 
 
 
-generate_volume(directory_dataset + '/train', coord_file_loc, Sx, Sy, N_vox, label_names)
+generate_volume(directory_dataset + '/train/', coord_file_loc, Sx, Sy, N_vox, label_names)
+generate_volume(directory_dataset + '/val/', coord_file_loc, Sx, Sy, N_vox, label_names)
+
 #def cnn_train(directory_weights, directory_dataset, label_names, tsboard, batch_size, epochs,
 #                    model_segmentation_name, Sx, Sy):
 
@@ -239,23 +241,20 @@ optimizer_ft = optim.Adam(filter(lambda p: p.requires_grad, model.parameters()),
 exp_lr_scheduler = lr_scheduler.StepLR(optimizer_ft, step_size=30, gamma=0.1)
 
 #Run training
-#wb = 5/1e6
-#wc = 1/1e4
-#weights = [wb, wc, wc, wc, wc, wc, wb] #[ 1 / number of instances for each class]
-#class_weights = torch.FloatTensor(weights).cuda()
-
-#def voxel_loss(pred, gt, n_classes):
-#    onehot = Variable(torch.zeros((gt.shape[0], n_classes+1))).to(device)
-#    onehot = onehot.scatter(1, gt.unsqueeze(1).long(), 1)
-#    return(torch.sum(pred * onehot))
+w_back = 1
+w_class = 30
+weights = [w_back] + [w_class]*(num_classes-1) #[ 1 / number of instances for each class]
+class_weights = torch.FloatTensor(weights).cuda()
 
 
-voxel_loss = nn.CrossEntropyLoss()#weight=class_weights)
+
+
+voxel_loss = nn.CrossEntropyLoss(weight=class_weights)
 
 ext_name = '_segmentation_' + str(Sx) + '_' + str(Sy) + '_epoch%d.pt'%epochs
 new_model_name = model_segmentation_name + ext_name
 
-if True:
+if False:
     model = train_model_voxels('Segmentation', dataloaders, model, optimizer_ft, exp_lr_scheduler, writer, voxel_loss, voxels,
                         num_epochs = epochs, viz = True, label_names = label_names)
         
