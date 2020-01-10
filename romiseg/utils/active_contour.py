@@ -108,60 +108,79 @@ def refine(imname, xys=[], beta=.0001, alpha=.01, tau=10, d=1,Nit=10000, ksave=1
    return xs, ys
  
 
-def run_refine0(f, beta, alpha, tau, d, Nit, plotit=None, saveit=None):
-  polys = json.load(open(f[:-4] + '.json'))['shapes']
-  ps=[np.array(p['points']) for p in polys]
-  labels = [p['label'] for p in polys]
-  label_color = {'background':0, 'flower': 51, 'peduncle': 102, 'stem' : 153, 'leaf': 204, 'fruit': 255}
-
-  im=cv2.imread(f)
-  im = im * 0
-#  if plotit: cv2.polylines(im, ps, True, (242,240,218), thickness=10)
-  conts=[]
-  for i, p in enumerate(ps):
-     init_cont = closeCont(p, 1)
-     color = label_color[labels[i]]
-     print(color)
-     xys=refine(f, init_cont, beta, alpha, tau, d, Nit, ksave=1)
-     if plotit: cv2.fillPoly(im, [np.array([xys]).astype(np.int).T], color)
-     conts.append(xys)
-  if True: 
-      cv2.imwrite(plotit,im)
-  
-  if saveit: np.save(saveit,conts)
-  return conts
-
-
-import romiseg.utils.alienlab as alien
-#g = alien.showclass()
-#g.save_im = False
-def run_refine(f, beta, alpha, tau, d, Nit, plotit=None):
-    polys = json.load(open(f[:-4] + '.json'))['shapes']
-    ps=np.array([np.array(p['points']) for p in polys])
-    labels = np.array([p['label'] for p in polys])
-    label_color = {'background':0, 'flower': 1, 'peduncle': 2, 'stem' :4 , 'leaf': 8, 'fruit': 16}
-    num_labels = len(label_color)
-    keys = list(label_color.keys())
-      
-    im = cv2.imread(f)
-    im = im * 0
-    all_im = [im*0] * num_labels #one per label
+def run_refine(f, beta, alpha, tau, d, Nit, plotit=None, saveit=None):
+      polys = json.load(open(f[:-4] + '.json'))['shapes']
+      ps=[np.array(p['points']) for p in polys]
+      labels = [p['label'] for p in polys]
+      label_color = {'background':0, 'flower': 51, 'peduncle': 102, 'stem' : 153, 'leaf': 204, 'fruit': 255}
+    
+      im=cv2.imread(f)
+      im = im * 0
     #  if plotit: cv2.polylines(im, ps, True, (242,240,218), thickness=10)
-    for i, k in enumerate(keys):
-        points = ps[labels == k]
-        im = im * 0
-        for p in points:
-            init_cont = closeCont(p, 1)
-            color = label_color[k]      
-            xys = refine(f, init_cont, beta, alpha, tau, d, Nit, ksave=1)
-            cv2.fillPoly(im, [np.array([xys]).astype(np.int).T], color)
-        cv2.imwrite(plotit, im)
-        #g.showing(im[:,:,0], showit = True)
-        all_im[i] = cv2.imread(plotit)
-    im = sum(all_im)
-    cv2.imwrite(plotit, im)
-              
-         
+      conts=[]
+      for i, p in enumerate(ps):
+         init_cont = closeCont(p, 1)
+         color = label_color[labels[i]]
+         print(color)
+         xys=refine(f, init_cont, beta, alpha, tau, d, Nit, ksave=1)
+         if plotit: cv2.fillPoly(im, [np.array([xys]).astype(np.int).T], color)
+         conts.append(xys)
+      if True: 
+          cv2.imwrite(plotit,im)
+      
+      if saveit: np.save(saveit,conts)
+      return conts
 
+def run_refine_romidata(f, beta, alpha, tau, d, Nit, class_names, plotit=None, saveit=None):
+      polys = json.load(open(f[:-4] + '.json'))['shapes']
+      ps=[np.array(p['points']) for p in polys]
+      labels = [p['label'] for p in polys]
+    
+    
+      im = cv2.imread(f)
+      im = im * 0
+      npz = {class_name:im[:,:,0]*0 for class_name in class_names}
+      print(npz.keys())
+    
+      #  if plotit: cv2.polylines(im, ps, True, (242,240,218), thickness=10)
+      #conts=[]
+      for i, p in enumerate(ps):
+         init_cont = closeCont(p, 1)
+         print(labels[i])
+         xys=refine(f, init_cont, beta, alpha, tau, d, Nit, ksave=1)
+         if plotit: cv2.fillPoly(npz[labels[i]], [np.array([xys]).astype(np.int).T], 255)
+      return npz
+  #   conts.append(xys)
+     
+  #if True: 
+  #    cv2.imwrite(plotit,im)
+  
+  #if saveit: np.save(saveit,conts)
+  #return conts
+
+
+#imdir = "/home/alienor/Documents/database/FINETUNE/images"
+#files = glob.glob(imdir + '/*.jpg')
+#for f in files:
+#    npz = run_refine(f, 1,1,1,1,1,class_names = 'background,flower,peduncle,stem,bud,leaf,fruit'.split(','), plotit=True)
+
+#%%
+if False:
+    f = fnames[0]
+    for beta in range(-6, 6):
+        for alpha in range(-6, 6):
+            for tau in range(-6, 6):
+                for d in range(-6, 6):
+                    print(f)
+                    run_refine(f, 10**(beta), 10**(alpha),
+                               10**(tau), 10**(d), 1000, 
+                               plotit = f[:-4] + 'contours%d_%d_%d_%d.png'%(beta, alpha, tau, d))
+#%%
+if False:
+    jsfiles = np.sort(glob.glob(imdir + "*.json"))
+    for f in fnames:
+        if f[:-4]+ '.json' in jsfiles:
+            run_refine(f, 1, 1, 1, 1, 1, 
+                       plotit = f[:-4]  + "_contours.png")
 
         

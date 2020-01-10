@@ -225,9 +225,6 @@ def train_model(dataloaders, model, optimizer, scheduler, writer, num_epochs=25,
 
 
 
-
-
-
 def fine_tune_train(path_train, path_val, weights_folder, label_names, tsboard_name,
                     model_segmentation_name, Sx, Sy, num_epochs, scan):
     num_classes = len(label_names)
