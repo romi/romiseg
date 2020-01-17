@@ -17,8 +17,7 @@ import toml
 from romidata import io
 from romidata import fsdb
 
-from romiseg.utils.train_from_dataset import train_model
-from romiseg.utils.dataloader_finetune import plot_dataset
+from romiseg.utils.train_from_dataset import train_model, plot_dataset
 from romiseg.utils import segmentation_model
 from romiseg.utils.ply import write_ply
 

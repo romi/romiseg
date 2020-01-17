@@ -9,17 +9,15 @@ Created on Mon Jul  8 16:17:15 2019
 import torch
 from torch.utils.data import DataLoader, Dataset
 from torchvision import transforms
-import appdirs
 from tqdm import tqdm
 from PIL import Image
-from tkinter import filedialog
 
-#import appdirs
 
 #made in CSL
 from romidata import io
 from romiseg.utils.train_from_dataset import evaluate, save_and_load_model
-from romiseg.utils.alienlab import create_folder_if
+import logging
+logger = logging.getLogger('romiscan')
 
 class Dataset_im_id(Dataset): 
     """Data handling for Pytorch Dataloader"""
@@ -53,7 +51,7 @@ def segmentation(Sx, Sy, label_names, images_fileset, scan, model_segmentation_n
         """
 
         device = torch.device("cuda:0" if torch.cuda.is_available() else "cpu") #Select GPU
-        print(device, ' used for images segmentation')
+        logger.debug(str(device) + ' used for images segmentation')
         
         trans = transforms.Compose([ #Define transform of the image
                 transforms.CenterCrop((Sx, Sy)),
@@ -72,7 +70,7 @@ def segmentation(Sx, Sy, label_names, images_fileset, scan, model_segmentation_n
         #if directory_weights == 'complete here':
         #   directory_weights = filedialog.askdirectory(initialdir="/home/", title='create folder to save fine-tuning weights')
         #   create_folder_if(directory_weights)
-        
+        logger.debug('Model name:' + str(model_segmentation_name))
         model_segmentation = save_and_load_model(directory_weights, model_segmentation_name)
         
     
@@ -88,7 +86,7 @@ def segmentation(Sx, Sy, label_names, images_fileset, scan, model_segmentation_n
             pred_tot = []
             id_list = []
             count = 0
-            print('Image segmentation by the CNN')
+            logger.debug('Image segmentation by the CNN')
         
             for inputs, id_im in tqdm(loader):
                 inputs = inputs.to(device) #input image on GPU

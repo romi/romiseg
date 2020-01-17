@@ -28,7 +28,7 @@ install_requires=[
         'torchvision',
         'segmentation-models-pytorch==0.0.1',
         'appdirs',
-        'Pillow',
+        'Pillow==6.1',
         'tqdm',
         'torch',        
         'requests',

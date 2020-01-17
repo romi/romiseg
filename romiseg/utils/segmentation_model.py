@@ -147,6 +147,7 @@ class ResNetUNet_3D(nn.Module):
         super().__init__()
 
         # Use ResNet18 as the encoder with the pretrained weights
+        self.n_class = n_class
         self.base_model = models.resnet101(pretrained=True)
         self.base_layers = list(self.base_model.children())
 
@@ -279,14 +280,14 @@ class ResNetUNet_3D(nn.Module):
                                xy_full_flat.shape[0]//N_frames, pred_pad.shape[-1])
         #print(preds.shape)
         #preds[:,:,6] = 0
-        #print(preds.shape)
+        #print(preds.shape, n_class)
         
         pred_pad = self.class_layer(pred_pad)
         #pred_pad = pred_pad.clamp(min=1e-8)
         #pred_pad = torch.log(pred_pad)
         #pred_pad  = torch.sum(pred_pad, dim = 0)
         pred_pad = torch.prod(pred_pad, dim = 0)
-        
+       # print(pred_pad.shape)
         #print(preds.shape)
         #print(torch.max(preds, dim = 0))
         #print(preds.shape)

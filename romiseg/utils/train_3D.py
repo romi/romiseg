@@ -14,12 +14,17 @@ import torchvision
 import torch.optim as optim
 import torch.nn.functional as F
 from collections import defaultdict
+from torch.utils.data import Dataset
 
 from tqdm import tqdm
+from PIL import Image
 
-from romiseg.utils.dataloader_finetune import Dataset_im_label, plot_dataset, init_set
+from romiseg.utils.train_from_dataset import Dataset_im_label, plot_dataset, init_set
 import romiseg.utils.alienlab as alien
 from romiseg.utils.ply import write_ply
+
+from romidata import io
+from romidata import fsdb
 
 from torch.utils.tensorboard import SummaryWriter
 
@@ -130,6 +135,85 @@ class classification(torch.nn.Module):
         out = self.layer(x)
         return out
 
+def init_set(mode, path):
+    db = fsdb.FSDB(path)
+    db.connect()
+    scans = db.get_scans()
+    image_files = []
+    gt_files = []
+    voxel_files= []
+    for s in scans:
+        f = s.get_fileset('images')
+        list_files = f.files
+        shots = [list_files[i].metadata['shot_id'] for i in range(len(list_files))]      
+        shots = list(set(shots))
+        for shot in shots:
+            image_files += f.get_files({'shot_id':shot, 'channel':'rgb'})
+            gt_files += f.get_files({'shot_id':shot, 'channel':'segmentation'})
+            v = s.get_fileset('ground_truth_3D')
+            voxel_files += v.get_files()
+    db.disconnect()
+    return image_files, gt_files, voxel_files
+
+
+
+class Dataset_im_label_3D(Dataset): 
+    """Data handling for Pytorch Dataloader"""
+
+    def __init__(self, image_paths, label_paths, voxel_path, transform):  
+
+        self.image_paths = image_paths
+        self.label_paths = label_paths
+        self.voxel_path = voxel_path
+        self.transforms = transform
+
+    def __getitem__(self, index):
+
+        db_file = self.image_paths[index]
+        image = Image.fromarray(io.read_image(db_file))
+        #id_im = db_file.id
+        t_image = self.transforms(image) #crop the images
+        t_image = t_image[0:3, :, :] #select RGB channels
+        
+        db_file = self.label_paths[index]
+        npz = io.read_npz(db_file)
+        torch_labels = []
+
+
+        for i in range(len(npz.files)):    
+            
+            labels = npz[npz.files[i]]
+            #labels = self.read_label(labels)
+            t_label = Image.fromarray(np.uint8(labels))
+            t_label = self.transforms(t_label)
+            torch_labels.append(t_label)
+        torch_labels = torch.cat(torch_labels, dim = 0)
+        somme = torch_labels.sum(dim = 0)
+        background = somme == 0
+        background = background.float()
+        background = background
+        dimx, dimy = background.shape
+        background = background.unsqueeze(0)
+        torch_labels = torch.cat((background, torch_labels), dim = 0)
+        
+        voxel = io.read_torch(self.voxel_path[index])
+        
+        return t_image, torch_labels, voxel
+
+    def __len__(self):  # return count of sample
+        return len(self.image_paths)
+
+    def read_label(self, labels):
+
+        somme = labels.sum(axis = 0)
+        background = somme == 0
+        background = background.astype(somme.dtype)*255
+        dimx, dimy = background.shape
+        background = np.expand_dims(background, axis = 0)
+        labels = np.concatenate((background, labels), axis = 0)
+        
+        return labels
+
 
 def train_model_voxels(train_type, dataloaders, model, optimizer, scheduler, writer, 
                        voxel_loss, torch_voxels, num_epochs=25, viz = False, label_names = []):
@@ -157,10 +241,10 @@ def train_model_voxels(train_type, dataloaders, model, optimizer, scheduler, wri
             
 
 
-            for inputs, labels, voxels in dataloaders[phase]:
+            for inputs, labels, voxels in tqdm(dataloaders[phase]):
                 inputs = inputs.to(device)
                 labels = labels.to(device)
-                voxels = voxels.to(device).long()
+                voxels = voxels.long().to(device)
 
                 # zero the parameter gradients
                 optimizer.zero_grad()
@@ -179,7 +263,7 @@ def train_model_voxels(train_type, dataloaders, model, optimizer, scheduler, wri
 
                         loss = calc_loss(outputs[0], labels, metrics) + voxel_loss(pred_class, voxels[0, :, n_classes - 1])
                         #F.cross_entropy(pred_class, voxels[0, :, 3])
-                        print('%.15f'%loss)
+                        #print('loss %.15f'%loss)
                     #print(loss)
                     # backward + optimize only if in training phase
                     if phase == 'train':
@@ -263,18 +347,18 @@ def train_model_voxels(train_type, dataloaders, model, optimizer, scheduler, wri
                                         
                     inds = voxels[0, :, 3] == i
                     inds = inds.cpu()
-                    print(np.count_nonzero(inds))
+                    print('ground truth ', label, np.count_nonzero(inds))
                     pred_label_gt = torch_voxels[inds].detach().cpu()
                     ax.scatter3D(pred_label_gt[:,0], pred_label_gt[:,1], pred_label_gt[:,2], colors[2], s=10)
 
                     inds = (pred_class == i)
                     inds = inds.cpu()
-                    print(np.count_nonzero(inds))
+                    print('prediction ', label, np.count_nonzero(inds))
                     pred_label = torch_voxels[inds].detach().cpu()
                     ax.scatter3D(pred_label[:,0], pred_label[:,1], pred_label[:,2], colors[1], s=10)
 
 
-            print(model.class_layer[0].weight.data, model.class_layer[0].bias.data)
+            #print(model.class_layer[0].weight.data, model.class_layer[0].bias.data)
             torch_voxels[:,3] = 0
             torch_voxels[:,3] = pred_class
             writer.add_figure('Segmented point cloud', fig, epoch)

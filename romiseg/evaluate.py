@@ -27,7 +27,7 @@ import torch.optim as optim
 from romidata import io
 from romidata import fsdb
 
-from romiseg.utils.train_from_dataset import init_set, Dataset_im_label, train_model, plot_dataset, save_and_load_model
+from romiseg.utils.train_from_dataset import init_set, Dataset_im_label, train_model, plot_dataset, evaluate, save_and_load_model
 from romiseg.utils import segmentation_model
 
 
@@ -54,9 +54,9 @@ directory_dataset = path + direc['directory_dataset']
 
 param2 = param_pipe['Segmentation2D']
 model_name = param2["model_name"]
+label_names = param2['labels'].split(',')
 model_segmentation_name = param2["model_segmentation_name"]
 
-label_names = param2['labels'].split(',')
 
 
 Sx = param2['Sx']
@@ -70,12 +70,10 @@ learning_rate = param2['learning_rate']
 
 ############################################################################################################################
 
-
-def cnn_train(directory_weights, directory_dataset, label_names, tsboard, batch_size, epochs,
+def cnn_eval(directory_weights, directory_dataset, label_names, tsboard, batch_size, epochs,
                     model, Sx, Sy, load_model = False):
         
     #Training board
-    writer = SummaryWriter(tsboard)
     
     #image transformation for training, can be modified for data augmentation
     trans = transforms.Compose([
@@ -84,46 +82,29 @@ def cnn_train(directory_weights, directory_dataset, label_names, tsboard, batch_
                                 ])
     
     #Load images and ground truth
-    path_val = directory_dataset + '/val/'
-    path_train = directory_dataset + '/train/'
-    path_test = directory_dataset + '/test/'
-    
-    image_train, target_train = init_set('', path_train)
-    image_val, target_val = init_set('', path_val)
+    path_test = directory_dataset
     image_test, target_test = init_set('', path_test)
-    
-    train_dataset = Dataset_im_label(image_train, target_train, transform = trans)
-    val_dataset = Dataset_im_label(image_val, target_val, transform = trans) 
+
     test_dataset = Dataset_im_label(image_test, target_test, transform = trans)
     
-    train_loader = torch.utils.data.DataLoader(train_dataset, batch_size=batch_size, shuffle=True, num_workers=1)
+    test_loader = torch.utils.data.DataLoader(test_dataset, batch_size=batch_size, shuffle=True, num_workers=1)
     
-    #Show input images 
-    fig = plot_dataset(train_loader, label_names, batch_size, showit = True) #display training set
-    writer.add_figure('Dataset images', fig, 0)
+    with torch.no_grad():
+        pred_tot = []
+        id_list = []
+        count = 0
+        print('Image segmentation by the CNN')
     
-       
-    dataloaders = {
-        'train': DataLoader(train_dataset, batch_size=batch_size, shuffle=True, num_workers=0),
-        'val': DataLoader(val_dataset, batch_size=batch_size, shuffle=True, num_workers=0),
-        'test': DataLoader(test_dataset, batch_size=batch_size, shuffle=True, num_workers=0),
-       }
-
-
+        for inputs, id_im in test_loader:
+            inputs = inputs.to(device) #input image on GPU
+            outputs = evaluate(inputs, model)  #output image
+            pred_tot.append(outputs)
+            id_list.append(id_im)
+            count += 1
     
-    #Choice of optimizer, can be changed
-    optimizer_ft = optim.Adam(filter(lambda p: p.requires_grad, model.parameters()), lr=learning_rate)
-    #make learning rate evolve
-    exp_lr_scheduler = lr_scheduler.StepLR(optimizer_ft, step_size=30, gamma=0.1)
-    
-    #Run training
-    model = train_model(dataloaders, model, optimizer_ft, exp_lr_scheduler, writer, 
-                        num_epochs = epochs, viz = True, label_names = label_names)
-    #save model
 
-    return model
+    return pred_tot
 
-#######
     
 if __name__ == '__main__':     
 
@@ -145,21 +126,35 @@ if __name__ == '__main__':
     num_classes = len(label_names)
     device = torch.device("cuda:0" if torch.cuda.is_available() else "cpu")
     
-   # model = segmentation_model.ResNetUNet(num_classes).to(device)
-    model = save_and_load_model(directory_weights, model_segmentation_name)
-                                
-    # freeze backbone layers
-    for l in model.base_layers:
-        for param in l.parameters():
-            param.requires_grad = False
-   
+    model = torch.load(directory_weights+'/'+ model_segmentation_name)
 
-    model = cnn_train(directory_weights, directory_dataset, label_names, tsboard, batch_size, epochs,
-                     model, Sx, Sy)
+    trans = transforms.Compose([
+                                transforms.CenterCrop((Sx, Sy)),
+                                transforms.ToTensor(),
+                                ])
+    
+    #Load images and ground truth
+    path_test = directory_dataset +'/test/'
+    image_test, target_test = init_set('', path_test)
 
-    model_name =  model_name + os.path.split(directory_dataset)[1] +'_%d_%d'%(Sx,Sy)+ '_epoch%d.pt'%epochs
+    test_dataset = Dataset_im_label(image_test, target_test, transform = trans)
     
-    torch.save(model, directory_weights + '/' + model_name)
+    test_loader = torch.utils.data.DataLoader(test_dataset, batch_size=batch_size, shuffle=True, num_workers=1)
     
+    with torch.no_grad():
+        pred_tot = []
+        id_list = []
+        count = 0
+        print('Image segmentation by the CNN')
     
-    
+        for inputs, labels in test_loader:
+            inputs = inputs.to(device) #input image on GPU
+            outputs = evaluate(inputs, model)  #output image
+            pred_tot.append(outputs)
+            id_list.append(id_im)
+            count += 1
+
+    a = pred_tot[0]
+    import matplotlib.pyplot as plt
+    plt.imshow(a[0,1].cpu().numpy())
+    plt.show()
