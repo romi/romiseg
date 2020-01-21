@@ -29,7 +29,7 @@ from torch.utils.tensorboard import SummaryWriter
 from torch.utils.data import Dataset
 
 from romidata import fsdb
-
+import torchvision.transforms.functional as TF
 from torch.utils.data import DataLoader
 
 from torchvision import transforms
@@ -38,6 +38,8 @@ import matplotlib.pyplot as plt
 import os
 import requests
 import copy
+import math
+import random
 
 
 import warnings
@@ -100,7 +102,7 @@ def init_set(mode, path):
     image_files = []
     gt_files = []
     for s in scans:
-       # print(s.id)
+        #print(s.id)
         f = s.get_fileset('images')
         #print(f)
         list_files = f.files
@@ -128,12 +130,13 @@ class Dataset_im_label(Dataset):
 
 
     def __getitem__(self, index):
-
+        angle = random.randint(-90, 90)
         db_file = self.image_paths[index]
         image = Image.fromarray(io.read_image(db_file))
         #id_im = db_file.id
-        t_image = transforms.ColorJitter(brightness=0, contrast=0, saturation=0, hue=0)(image)
-        t_image = self.transforms(image) #crop the images
+        t_image = TF.rotate(image, angle, expand = True)
+        t_image = transforms.ColorJitter(brightness=0, contrast=0, saturation=0, hue=0)(t_image)
+        t_image = self.transforms(t_image) #crop the images
 
         t_image = t_image[0:3, :, :] #select RGB channels
 
@@ -146,8 +149,10 @@ class Dataset_im_label(Dataset):
             labels = npz[npz.files[i]]
             #labels = self.read_label(labels)
             t_label = Image.fromarray(np.uint8(labels))
+            t_label = TF.rotate(t_label, angle, expand = True)
             t_label = self.transforms(t_label)
             torch_labels.append(t_label)
+
             
         torch_labels = torch.cat(torch_labels, dim = 0)
         somme = torch_labels.sum(dim = 0)
@@ -157,7 +162,7 @@ class Dataset_im_label(Dataset):
         dimx, dimy = background.shape
         background = background.unsqueeze(0)
         torch_labels = torch.cat((background, torch_labels), dim = 0)
-        return gaussian(t_image, is_training = True, mean = 0, stddev =  1/255), torch_labels
+        return gaussian(t_image, is_training = True, mean = 0, stddev =  1/100), torch_labels
 
     def __len__(self):  # return count of sample
         return len(self.image_paths)
@@ -222,7 +227,7 @@ def print_metrics(metrics, epoch_samples, phase):
     print("{}: {}".format(phase, ", ".join(outputs)))
 
 def train_model(dataloaders, model, optimizer, scheduler, writer, num_epochs=25, viz = False, label_names = []):
-    L = []
+    L = {'bce':[], 'dice':[]}
     best_model_wts = copy.deepcopy(model.state_dict())
     best_loss = 1e10
     loss_test = []
@@ -269,9 +274,10 @@ def train_model(dataloaders, model, optimizer, scheduler, writer, num_epochs=25,
                 # statistics
                 epoch_samples += inputs.size(0)
 
-            #print_metrics(metrics, epoch_samples, phase)
+            print_metrics(metrics, epoch_samples, phase)
             epoch_loss = metrics['loss'] / epoch_samples
-            L.append(epoch_loss)
+            L['bce'].append(metrics['bce']/epoch_samples)
+            L['dice'].append(metrics['dice']/epoch_samples)
             writer.add_scalar('train/crossentropy', epoch_loss, epoch)
         
             if phase == 'val':
@@ -283,7 +289,7 @@ def train_model(dataloaders, model, optimizer, scheduler, writer, num_epochs=25,
                 # track history if only in train
                 outputs = model(inputs)
                 out = torch.argmax(outputs, dim = 1)
-                loss_test.append(my_metric(out, lab))
+                #loss_test.append(my_metric(out, lab))
                 
             # deep copy the model
             if phase == 'val' and epoch_loss < best_loss:
@@ -322,11 +328,11 @@ def train_model(dataloaders, model, optimizer, scheduler, writer, num_epochs=25,
         #time_elapsed = time.time() - since
         #print('{:.0f}m {:.0f}s'.format(time_elapsed // 60, time_elapsed % 60))
 
-    #print('Best val loss: {:4f}'.format(best_loss))
+    print('Best val loss: {:4f}'.format(best_loss))
 
-    # load best model weights
-        model.load_state_dict(best_model_wts)
-    return model, L, loss_test
+    # load best model weights 
+    model.load_state_dict(best_model_wts)
+    return model, L#, loss_test
 
 
 
@@ -391,7 +397,7 @@ def fine_tune_train(path_train, path_val, weights_folder, label_names, tsboard_n
 
 
 
-def plot_dataset(train_loader, label_names, batch_size, showit = True):
+def plot_dataset(train_loader, label_names, batch_size):
     all_data = next(iter(train_loader))
     images = all_data[0]
     label = all_data[1]
@@ -412,7 +418,7 @@ def plot_dataset(train_loader, label_names, batch_size, showit = True):
     g.col_num = 3
     g.figsize = ((14, 14))
     g.title_list = titles_tot
-    fig = g.showing(images_tot, showit,)
+    fig = g.showing(images_tot)
     
     return fig
 
@@ -429,6 +435,27 @@ def evaluate(inputs, model):
         # The loss functions include the sigmoid function.
         #for i in range(pred.shape[1]):
         #    pred[:,1,:,:] = F.sigmoid(pred[:,1,:,:])
+
         pred = F.sigmoid(pred)
+        
+        
     return pred
     
+def test(inputs, labels, model):
+    metrics = defaultdict(float)
+
+    with torch.no_grad():
+        inputs.requires_grad = False
+        # Get the first batch
+        inputs = inputs.to(device)
+
+        pred = model(inputs)
+        # The loss functions include the sigmoid function.
+        #for i in range(pred.shape[1]):
+        #    pred[:,1,:,:] = F.sigmoid(pred[:,1,:,:])
+        loss = calc_loss(pred, labels, metrics)
+
+        pred = F.sigmoid(pred)
+        
+        
+    return pred, metrics

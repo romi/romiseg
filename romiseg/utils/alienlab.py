@@ -124,7 +124,8 @@ class showclass(object):
         self.extension = '.tiff'
         self.save_im = True
 
-    def showing(self, x=None, y=None, showit = False):
+    def multi(self, x=None):
+    
         if type(x) != tuple and type(x) != list: #When there is only one image, convert it in a list element
             x = [x]
             
@@ -140,10 +141,6 @@ class showclass(object):
             
         f = plt.figure(figsize = self.figsize)
         
-        if showit == True:
-            plt.ion()
-            plt.show()
-        
         for i in range(N):
             plt.subplot(ROWS, COLS, i+1)
             plt.imshow(x[i], cmap = self.cmap)
@@ -151,14 +148,21 @@ class showclass(object):
             plt.grid(False)
             plt.title(self.title_list[i], fontsize = self.fontsize) #update subfigure title
         
-        if showit == True:
-            plt.pause(0.01)
-            input("Press [enter] to continue.")
-        if self.save_im == True:
-            if self.date == True:            
-                plt.savefig(self.save_folder + str(datetime.datetime.now().strftime('%Y-%m-%d_%H_%M_')) + self.save_name + self.extension,
-                            bbox_inches='tight', frameon = False) #save with the date and time befor the figure name
-            else: 
-                plt.savefig(self.save_folder + self.save_name + self.extension, bbox_inches='tight', frameon = False)
-
         return f
+    
+    def saving(self, x = None):
+        f = self.multi(x)
+        if self.date == True:            
+            f.savefig(self.save_folder + str(datetime.datetime.now().strftime('%Y-%m-%d_%H_%M_')) + self.save_name + self.extension,
+                    bbox_inches='tight', frameon = False) #save with the date and time befor the figure name
+        else: 
+            f.savefig(self.save_folder + self.save_name + self.extension, bbox_inches='tight', frameon = False)
+        return f
+    
+    def showing(self, x=None):
+        f = self.multi(x)
+        f.show()    
+        #f.pause(0.01)
+        #input("Press [enter] to continue.")
+        return f
+        

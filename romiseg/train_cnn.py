@@ -99,7 +99,7 @@ def cnn_train(directory_weights, directory_dataset, label_names, tsboard, batch_
     train_loader = torch.utils.data.DataLoader(train_dataset, batch_size=batch_size, shuffle=True, num_workers=1)
     
     #Show input images 
-    fig = plot_dataset(train_loader, label_names, batch_size, showit = True) #display training set
+    fig = plot_dataset(train_loader, label_names, batch_size) #display training set
     writer.add_figure('Dataset images', fig, 0)
     
        
@@ -145,8 +145,8 @@ if __name__ == '__main__':
     num_classes = len(label_names)
     device = torch.device("cuda:0" if torch.cuda.is_available() else "cpu")
     
-   # model = segmentation_model.ResNetUNet(num_classes).to(device)
-    model = save_and_load_model(directory_weights, model_segmentation_name)
+    model = segmentation_model.ResNetUNet(num_classes).to(device)
+   # model = save_and_load_model(directory_weights, model_segmentation_name)
                                 
     # freeze backbone layers
     for l in model.base_layers:
