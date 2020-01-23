@@ -67,6 +67,8 @@ directory_dataset = finetune['directory_images']
 finetune_epochs = finetune['finetune_epochs']
 batch_size = finetune['batch']
 
+subprocess.call(["gio", "mount", "ssh://db.romi-project.eu"])
+
 #if directory_dataset == 'complete here':
     #directory_dataset = filedialog.askdirectory(initialdir="/home/", title='create folder to save fine-tuning images')
     #create_folder_if(directory_dataset)
@@ -84,7 +86,7 @@ batch_size = finetune['batch']
 
 
 
-files = askopenfilenames(initialdir = os.path.split(directory_dataset)[0], 
+files = askopenfilenames(initialdir = os.path.split("/home/")[0], 
                          title = 'Select some pictures to annotate')
 lst = list(files)
 
@@ -123,6 +125,9 @@ if len(lst) > 0:
         io.write_npz(f_label, npz)
     db.disconnect()
  
+    
+subprocess.run(["rsync", "-av", directory_dataset, appdirs.user_cache_dir()])
+directory_dataset = appdirs.user_cache_dir()
 label_names = labels.split(',')
 
 
@@ -136,7 +141,7 @@ for l in model.base_layers:
         param.requires_grad = False
        
 model = cnn_train(directory_weights, directory_dataset, label_names, tsboard, batch_size, finetune_epochs,
-                    model, Sx, Sy)
+                    model, Sx, Sy, showit = True)
 
 model_name =  model_segmentation_name[:-3] + os.path.split(directory_dataset)[1] +'_%d_%d_'%(Sx,Sy)+ 'finetune_epoch%d.pt'%finetune_epochs
 
@@ -155,3 +160,5 @@ text_file.close()
 print('/n')
 print("You have fine-tunned the segmentation network with the images you manually annotated.")
 print("The pipeline should work better on your images now, let's launch it again")
+
+subprocess.call(["gio", "mount", "-u", "ssh://db.romi-project.eu"])

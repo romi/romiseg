@@ -397,7 +397,7 @@ def fine_tune_train(path_train, path_val, weights_folder, label_names, tsboard_n
 
 
 
-def plot_dataset(train_loader, label_names, batch_size):
+def plot_dataset(train_loader, label_names, batch_size, showit=False):
     all_data = next(iter(train_loader))
     images = all_data[0]
     label = all_data[1]
@@ -418,7 +418,10 @@ def plot_dataset(train_loader, label_names, batch_size):
     g.col_num = 3
     g.figsize = ((14, 14))
     g.title_list = titles_tot
-    fig = g.showing(images_tot)
+    if showit == False:
+        fig = g.saving(images_tot)
+    else: 
+        fig = g.showing(images_tot)
     
     return fig
 

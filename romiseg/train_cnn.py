@@ -71,7 +71,7 @@ learning_rate = param2['learning_rate']
 
 
 def cnn_train(directory_weights, directory_dataset, label_names, tsboard, batch_size, epochs,
-                    model, Sx, Sy, load_model = False):
+                    model, Sx, Sy, load_model = False, showit = False):
         
     #Training board
     writer = SummaryWriter(tsboard)
@@ -98,7 +98,7 @@ def cnn_train(directory_weights, directory_dataset, label_names, tsboard, batch_
     train_loader = torch.utils.data.DataLoader(train_dataset, batch_size=batch_size, shuffle=True, num_workers=1)
     
     #Show input images 
-    fig = plot_dataset(train_loader, label_names, batch_size) #display training set
+    fig = plot_dataset(train_loader, label_names, batch_size, showit = showit) #display training set
     writer.add_figure('Dataset images', fig, 0)
     
        
@@ -128,8 +128,12 @@ if __name__ == '__main__':
 
     
     '''
+<<<<<<< Updated upstream
     #Load model
 
+=======
+    #Load model   
+>>>>>>> Stashed changes
     #model = models.segmentation.fcn_resnet101(pretrained=True)
     #model = torch.nn.Sequential(model, torch.nn.Linear(21, num_classes)).cuda()
     

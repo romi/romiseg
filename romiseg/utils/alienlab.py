@@ -160,9 +160,10 @@ class showclass(object):
         return f
     
     def showing(self, x=None):
+        plt.ion()
         f = self.multi(x)
         f.show()    
-        #f.pause(0.01)
-        #input("Press [enter] to continue.")
+        plt.pause(0.01)
+        input("Press [enter] to continue.")
         return f
         
