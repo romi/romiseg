@@ -129,6 +129,7 @@ if __name__ == '__main__':
     
     '''
     #Load model
+
     #model = models.segmentation.fcn_resnet101(pretrained=True)
     #model = torch.nn.Sequential(model, torch.nn.Linear(21, num_classes)).cuda()
     

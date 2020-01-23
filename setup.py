@@ -28,7 +28,7 @@ install_requires=[
         'torchvision',
         'segmentation-models-pytorch==0.0.1',
         'appdirs',
-        'Pillow',
+        'Pillow==6.1',
         'tqdm',
         'torch',        
         'requests',
@@ -44,7 +44,7 @@ install_requires=[
 s = setup(
     name='romiseg',
     version='0.0.1',
-    scripts=['romiseg/finetune.py'],
+    scripts=['romiseg/finetune.py', 'romiseg/train_cnn.py'],
     packages=find_packages(),
     author='Alienor Lahlou',
     author_email='alienor.lahlou@espci.org',

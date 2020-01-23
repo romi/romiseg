@@ -12,16 +12,24 @@ from torch.optim import lr_scheduler
 import torchvision
 import torch.optim as optim
 import torch.nn.functional as F
+from torch.autograd import Variable
 from collections import defaultdict
 import matplotlib.pyplot as plt
+from PIL import Image
 
 from tqdm import tqdm
 
-from romiseg.utils.dataloader_finetune import Dataset_im_label, plot_dataset, init_set
+
 import romiseg.utils.alienlab as alien
 
-from torch.utils.tensorboard import SummaryWriter
+from romidata import io
+import numpy as np
 
+from torch.utils.tensorboard import SummaryWriter
+from torch.utils.data import Dataset
+
+from romidata import fsdb
+import torchvision.transforms.functional as TF
 from torch.utils.data import DataLoader
 
 from torchvision import transforms
@@ -30,6 +38,8 @@ import matplotlib.pyplot as plt
 import os
 import requests
 import copy
+import math
+import random
 
 
 import warnings
@@ -62,7 +72,11 @@ def save_and_load_model(weights_folder, model_segmentation_name):
         
         download_file(url, weights_folder)
         
-    model_segmentation = torch.load(weights_folder + '/' + model_segmentation_name)[0]
+    model_segmentation = torch.load(weights_folder + '/' + model_segmentation_name)
+    try:
+        model_segmentation = model_segmentation[0]
+    except:
+        model_segmentation = model_segmentation
     
     try: 
         model_segmentation = model_segmentation.module
@@ -72,6 +86,102 @@ def save_and_load_model(weights_folder, model_segmentation_name):
     return model_segmentation
 
 
+
+
+def gaussian(ins, is_training, mean, stddev):
+    if is_training:
+        noise = Variable(ins.data.new(ins.size()).normal_(mean, stddev))
+        return torch.clamp(ins + noise, 0, 1)
+    return torch.clamp(ins,0,1)
+
+
+def init_set(mode, path):
+    db = fsdb.FSDB(path)
+    db.connect()
+    scans = db.get_scans()
+    image_files = []
+    gt_files = []
+    for s in scans:
+        #print(s.id)
+        f = s.get_fileset('images')
+        #print(f)
+        list_files = f.files
+        #for i in range(len(list_files)):
+         #   f0 = list_files[i]
+            #print(f0.metadata.keys(), f0.metadata['channel'], f0.metadata['shot_id'])
+        shots = [list_files[i].metadata['shot_id'] for i in range(len(list_files))]
+        shots = list(set(shots))
+        for shot in shots:
+            image_files += f.get_files({'shot_id':shot, 'channel':'rgb'})
+            gt_files += f.get_files({'shot_id':shot, 'channel':'segmentation'})
+
+    db.disconnect()
+    return image_files, gt_files
+
+
+class Dataset_im_label(Dataset):
+    """Data handling for Pytorch Dataloader"""
+
+    def __init__(self, image_paths, label_paths, transform):
+
+        self.image_paths = image_paths
+        self.label_paths = label_paths
+        self.transforms = transform
+
+
+    def __getitem__(self, index):
+        angle = random.randint(-90, 90)
+        db_file = self.image_paths[index]
+        image = Image.fromarray(io.read_image(db_file))
+        #id_im = db_file.id
+        t_image = TF.rotate(image, angle, expand = True)
+        t_image = transforms.ColorJitter(brightness=0, contrast=0, saturation=0, hue=0)(t_image)
+        t_image = self.transforms(t_image) #crop the images
+
+        t_image = t_image[0:3, :, :] #select RGB channels
+
+        db_file = self.label_paths[index]
+        npz = io.read_npz(db_file)
+        torch_labels = []
+
+        for i in range(len(npz.files)):
+
+            labels = npz[npz.files[i]]
+            #labels = self.read_label(labels)
+            t_label = Image.fromarray(np.uint8(labels))
+            t_label = TF.rotate(t_label, angle, expand = True)
+            t_label = self.transforms(t_label)
+            torch_labels.append(t_label)
+
+            
+        torch_labels = torch.cat(torch_labels, dim = 0)
+        somme = torch_labels.sum(dim = 0)
+        background = somme == 0
+        background = background.float()
+        background = background
+        dimx, dimy = background.shape
+        background = background.unsqueeze(0)
+        torch_labels = torch.cat((background, torch_labels), dim = 0)
+        return gaussian(t_image, is_training = True, mean = 0, stddev =  1/100), torch_labels
+
+    def __len__(self):  # return count of sample
+        return len(self.image_paths)
+
+    def read_label(self, labels):
+        somme = labels.sum(axis = 0)
+        background = somme == 0
+        background = background.astype(somme.dtype)
+        background = background*255
+        dimx, dimy = background.shape
+        background = np.expand_dims(background, axis = 0)
+        #print(labels.shape[0])
+        if labels.shape[0] == 5:
+            labels = np.concatenate((background*0, labels), axis = 0)
+
+        labels = np.concatenate((background, labels), axis = 0)
+
+
+        return labels
 
 
 
@@ -117,7 +227,7 @@ def print_metrics(metrics, epoch_samples, phase):
     print("{}: {}".format(phase, ", ".join(outputs)))
 
 def train_model(dataloaders, model, optimizer, scheduler, writer, num_epochs=25, viz = False, label_names = []):
-    L = []
+    L = {'bce':[], 'dice':[]}
     best_model_wts = copy.deepcopy(model.state_dict())
     best_loss = 1e10
     loss_test = []
@@ -164,9 +274,10 @@ def train_model(dataloaders, model, optimizer, scheduler, writer, num_epochs=25,
                 # statistics
                 epoch_samples += inputs.size(0)
 
-            #print_metrics(metrics, epoch_samples, phase)
+            print_metrics(metrics, epoch_samples, phase)
             epoch_loss = metrics['loss'] / epoch_samples
-            L.append(epoch_loss)
+            L['bce'].append(metrics['bce']/epoch_samples)
+            L['dice'].append(metrics['dice']/epoch_samples)
             writer.add_scalar('train/crossentropy', epoch_loss, epoch)
         
             if phase == 'val':
@@ -178,7 +289,7 @@ def train_model(dataloaders, model, optimizer, scheduler, writer, num_epochs=25,
                 # track history if only in train
                 outputs = model(inputs)
                 out = torch.argmax(outputs, dim = 1)
-                loss_test.append(my_metric(out, lab))
+                #loss_test.append(my_metric(out, lab))
                 
             # deep copy the model
             if phase == 'val' and epoch_loss < best_loss:
@@ -217,13 +328,11 @@ def train_model(dataloaders, model, optimizer, scheduler, writer, num_epochs=25,
         #time_elapsed = time.time() - since
         #print('{:.0f}m {:.0f}s'.format(time_elapsed // 60, time_elapsed % 60))
 
-    #print('Best val loss: {:4f}'.format(best_loss))
+    print('Best val loss: {:4f}'.format(best_loss))
 
-    # load best model weights
-        model.load_state_dict(best_model_wts)
-    return model, L, loss_test
-
-
+    # load best model weights 
+    model.load_state_dict(best_model_wts)
+    return model, L#, loss_test
 
 
 
@@ -237,8 +346,8 @@ def fine_tune_train(path_train, path_val, weights_folder, label_names, tsboard_n
     transforms.ToTensor(),
 ])
     
-    image_train, target_train = init_set('', path_train, 'jpg')
-    image_val, target_val = init_set('', path_val, 'jpg')
+    image_train, target_train = init_set('', path_train)
+    image_val, target_val = init_set('', path_val)
 
     train_dataset = Dataset_im_label(image_train, target_train, transform = trans)
     val_dataset = Dataset_im_label(image_val, target_val, transform = trans) 
@@ -288,6 +397,30 @@ def fine_tune_train(path_train, path_val, weights_folder, label_names, tsboard_n
 
 
 
+def plot_dataset(train_loader, label_names, batch_size):
+    all_data = next(iter(train_loader))
+    images = all_data[0]
+    label = all_data[1]
+    #plot 4 images to visualize the data
+    images_tot = []
+    titles_tot = []
+    for i in range(min(batch_size, len(label_names))):
+        img = images[i]
+        img = img.permute(1, 2, 0)
+        images_tot.append(img)
+        titles_tot.append('image')
+        img = label[i,i,:,:]*255#.int()
+        images_tot.append(img)
+        titles_tot.append(label_names[i])
+    g = alien.showclass()
+    g.save_im = False
+
+    g.col_num = 3
+    g.figsize = ((14, 14))
+    g.title_list = titles_tot
+    fig = g.showing(images_tot)
+    
+    return fig
 
     
 # Prediction
@@ -300,7 +433,29 @@ def evaluate(inputs, model):
 
         pred = model(inputs)
         # The loss functions include the sigmoid function.
+        #for i in range(pred.shape[1]):
+        #    pred[:,1,:,:] = F.sigmoid(pred[:,1,:,:])
+
         pred = F.sigmoid(pred)
+        
         
     return pred
     
+def test(inputs, labels, model):
+    metrics = defaultdict(float)
+
+    with torch.no_grad():
+        inputs.requires_grad = False
+        # Get the first batch
+        inputs = inputs.to(device)
+
+        pred = model(inputs)
+        # The loss functions include the sigmoid function.
+        #for i in range(pred.shape[1]):
+        #    pred[:,1,:,:] = F.sigmoid(pred[:,1,:,:])
+        loss = calc_loss(pred, labels, metrics)
+
+        pred = F.sigmoid(pred)
+        
+        
+    return pred, metrics

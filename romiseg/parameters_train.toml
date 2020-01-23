@@ -1,23 +1,23 @@
 [Directory]
 
-path = '/home/tim/shared/'
+path = '/home/alienor/Documents/training2D/'
 
 directory_weights = "weights"
 model_segmentation_name = "resnet18"
 
 tsboard = "board"
 
-directory_dataset= "dataset/"
+directory_dataset= "data/database/"
 
 [Segmentation2D]
 
-labels = 'background,flower,peduncle,stem,leaf,fruit'
+labels ='background,Color_1, Color_2, Color_3' #'background,flower,peduncle,stem,bud,leaf,fruit'
 
-Sx = 896
-Sy = 896 
+Sx = 256
+Sy = 256 
 
-epochs = 50
-batch = 1
+epochs = 1
+batch = 16
 
 learning_rate = 1e-4
 
