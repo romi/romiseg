@@ -55,8 +55,7 @@ except:
 try:    
     tsboard = direc['tsboard'] + '/finetune'
 except:
-    tsboard = "board/finetune"
-    os.mkdir(tsboard)
+    tsboard = appdirs.user_cache_dir()
 
 param2 = param_pipe['Segmentation2D']
 labels = param2['labels']
