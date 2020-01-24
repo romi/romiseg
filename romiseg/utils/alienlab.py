@@ -123,6 +123,7 @@ class showclass(object):
         self.save_folder = 'alienlab_images/'
         self.extension = '.tiff'
         self.save_im = True
+        self.spacing = 0.2
 
     def multi(self, x=None):
     
@@ -146,7 +147,9 @@ class showclass(object):
             plt.imshow(x[i], cmap = self.cmap)
             plt.axis('off')
             plt.grid(False)
-            plt.title(self.title_list[i], fontsize = self.fontsize) #update subfigure title
+            plt.subplots_adjust(wspace=self.spacing, hspace=self.spacing)
+            if self.title_list != None:
+                plt.title(self.title_list[i], fontsize = self.fontsize) #update subfigure title
         
         return f
     

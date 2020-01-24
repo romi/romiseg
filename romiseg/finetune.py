@@ -47,11 +47,16 @@ print(args.config)
 
 param_pipe = toml.load(str(args.config))
 
-direc = param_pipe['TrainingDirectory']
-path = direc['path']
-directory_weights = path + direc['directory_weights']
-tsboard = path +  direc['tsboard'] + '/finetune'
-
+direc = param_pipe['Finetune']
+try:
+    directory_weights = direc['directory_weights']
+except:
+    directory_weights = appdirs.user_cache_dir()
+try:    
+    tsboard = direc['tsboard'] + '/finetune'
+except:
+    tsboard = "board/finetune"
+    os.mkdir(tsboard)
 
 param2 = param_pipe['Segmentation2D']
 labels = param2['labels']
