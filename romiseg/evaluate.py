@@ -205,4 +205,4 @@ if __name__ == '__main__':
     g.date = True
     g.title_list = im_class
     g.multi(pred_tot[0:100])
-    g.savit()
+    g.saving()
