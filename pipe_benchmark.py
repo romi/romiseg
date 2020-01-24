@@ -20,7 +20,6 @@ import toml
 from PIL import Image
 import numpy as np
 
-import segmentation_models_pytorch as smp
 import torch
 from torch.autograd import Variable
 from torchvision import transforms
@@ -133,7 +132,6 @@ print(device)
 
 '''
 #Load model
-model = smp.Unet(model_segmentation_name, classes=num_classes, encoder_weights='imagenet').cuda()
 #model = models.segmentation.fcn_resnet101(pretrained=True)
 #model = torch.nn.Sequential(model, torch.nn.Linear(21, num_classes)).cuda()
 

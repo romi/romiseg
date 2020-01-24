@@ -42,11 +42,10 @@ args = parser.parse_args()
 
 param_pipe = toml.load(args.config)
 
-direc = param_pipe['Directory']
+direc = param_pipe['TrainingDirectory']
 
 path = direc['path']
 directory_weights = path + direc['directory_weights']
-model_segmentation_name = direc['model_segmentation_name']
 tsboard = path +  direc['tsboard']
 directory_dataset = path + direc['directory_dataset']
 
