@@ -32,7 +32,7 @@ This tool relies on the file pipeline.toml used by the virtual scanner.
 
 From the virtual environment created for Scan3D: 
 ```
-git clone https://github.com/romi/Segmentation@benchmark
+git clone https://github.com/romi/Segmentation@dev
 ```
 
 
@@ -40,40 +40,36 @@ git clone https://github.com/romi/Segmentation@benchmark
 
 First update the .toml file of the luigi task 2D Segmentation according to the one in this directory.
 
-You need to give a save location for your new database: directory_images (replace the 'complete here' by location full path)
-
-You need to give a fetch and save location for the weights of the segmentation networks: directory_weights (replace the 'complete here' by location full path). 
-
-
+The code will mount db.romi-project.eu locally to allow saving the annotations directly on the shared database, and to collect tall the annotated images from the database to do the training.
+The weights will be saved in the cache, the mounted database too, as well as the tensorboard log.
 
 ```
 [Segmentation2D]
 upstream_task = "Scan"
+query = "{\"channel\":\"rgb\"}"
+labels = "background,flower,peduncle,stem,bud,leaf,fruit"
+model_name = "Resnet101"
+model_segmentation_name = "Resnet101_896_896_epoch51.pt" #model to finetune
 Sx = 896
 Sy = 896
-N_vox = 1000000
-label_names = "background,flower,peduncle,stem,bud,leaf,fruit"
-model_segmentation_name = "table1_test5_hdri_arabidopsis_resnet50_epoch15_rotate_True_finetune_3_epoch50_finetune_folder_epoch20.pt"
-directory_images = "complete_here"
-directory_weights = "complete_here"
-finetune_epochs = 20
+learning_rate = 0.0001
+
+[Finetune]
+finetune_epochs = 10 
+batch = 1
 ```
 
-If the pre-trained network is not already present in this folder, it will be fetched from the database db.romi-project.eu.
+If the pre-trained network is not already present in the cache, it will be fetched from the database db.romi-project.eu.
 n2D]
 
 You can also change the number of epochs for the training.
 
 ### Runing the tool
 ```
-ipython
->import open3d #due to conflict between open3d and Torch, open3d has to be imported first
->from romiseg.utils.finetune import finetune
->finetune()
+finetune.py --config [/path/to/config_file]
 ```
 ### Set-by-step
 
-(If you haven't correctly filled the pipeline.toml file to give correct folder location, pop-up windows will ask you to indicate the location of the folders where to save dataset and weights.)
 
 First you will have to select images you want to annotate. 3 images should be enough.
 
@@ -98,7 +94,7 @@ The training will automatically start for the number of epochs indicated in pipe
 
 Once the training is over, the weights are automatically saved in the weights folder and the pipeline.toml file is updated with the name of the fine_tuned segmentation network.
 
-You can launch the scan3D pipeline on the scan and the result should be better then before the fine-tuning.
+You can launch the scan3D pipeline on the scan and the result should be better then before the fine-tuning. The name of the new network is automatically updated.
  
 
 
