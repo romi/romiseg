@@ -72,7 +72,6 @@ model_segmentation_name = param2['model_segmentation_name']
 
 
 finetune = param_pipe['Finetune']
-directory_dataset = finetune['directory_images']
 finetune_epochs = finetune['finetune_epochs']
 batch_size = finetune['batch']
 
@@ -83,7 +82,7 @@ txt = subprocess.run(["mountpoint", mount_loc])
 print(txt==0)
 txt = input("Ready to mount romi-project.eu? (y/n)")
 if txt == 'y':
-    subprocess.run(["sshfs", user_name + '@db.romi-project.eu:/data/', mount_loc])
+    subprocess.run(["sshfs", user_name + '@db.romi-project.eu:/data/finetune/', mount_loc])
 
 
     
@@ -111,7 +110,7 @@ if txt == 'y':
     if len(lst) > 0:
         host_scan = files[0].split('/')[-3] 
     
-        db = fsdb.FSDB(directory_dataset + '/train/')
+        db = fsdb.FSDB(mount_loc + '/train/')
         db.connect()
         
         scan = db.get_scan(host_scan, create=True)
@@ -144,7 +143,7 @@ if txt == 'y':
         db.disconnect()
      
         
-    subprocess.run(["rsync", "-av", directory_dataset, appdirs.user_cache_dir()])
+    subprocess.run(["rsync", "-av", mount_loc, appdirs.user_cache_dir()])
     directory_dataset = appdirs.user_cache_dir()
     label_names = labels.split(',')
     
