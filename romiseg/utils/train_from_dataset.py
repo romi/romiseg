@@ -97,7 +97,7 @@ def model_from_fileset(model_file):
     except:
         model_segmentation = model_segmentation
     label_names = model_file.get_metadata('label_names')
-    return model_segmentation, label_names
+    return model_segmentation, np.sort(label_names)
 
     
 

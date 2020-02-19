@@ -128,12 +128,7 @@ if __name__ == '__main__':
 
     
     '''
-<<<<<<< Updated upstream
-    #Load model
 
-=======
-    #Load model   
->>>>>>> Stashed changes
     #model = models.segmentation.fcn_resnet101(pretrained=True)
     #model = torch.nn.Sequential(model, torch.nn.Linear(21, num_classes)).cuda()
     
@@ -144,11 +139,12 @@ if __name__ == '__main__':
         for param in child.parameters():
             param.requires_grad = False
     '''
-       
-    num_classes = len(label_names)
+    path_train = directory_dataset + '/train/'
+    image_train, channels = init_set('', path_train)
+
     device = torch.device("cuda:0" if torch.cuda.is_available() else "cpu")
     
-    model = segmentation_model.ResNetUNet(num_classes).to(device)
+    model = segmentation_model.ResNetUNet(len(channels)).to(device)
    # model = save_and_load_model(directory_weights, model_segmentation_name)
                                 
     # freeze backbone layers
@@ -157,7 +153,7 @@ if __name__ == '__main__':
             param.requires_grad = False
    
 
-    model = cnn_train(directory_weights, directory_dataset, label_names, tsboard, batch_size, epochs,
+    model = cnn_train(directory_weights, directory_dataset, channels, tsboard, batch_size, epochs,
                      model, Sx, Sy)
 
     model_name =  model_name + os.path.split(directory_dataset)[1] +'_%d_%d'%(Sx,Sy)+ '_epoch%d.pt'%epochs
