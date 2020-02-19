@@ -183,7 +183,7 @@ if __name__ == '__main__':
             pred_tot.append(inputs[0].permute(1,2,0).cpu())
             im_class.append('image')
             
-            ind_class = random.choice([0,1,2,3,4])
+            ind_class = random.choice([0,1,2,3,4,5])
             pred_tot.append(outputs[0, ind_class].cpu())
             im_class.append(channels[ind_class])
 

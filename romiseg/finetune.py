@@ -64,11 +64,14 @@ except:
 procede = False
 
 param2 = param_pipe['Segmentation2D']
-labels = param2['labels']
+#labels = param2['labels']
 Sx = param2['Sx']
 Sy = param2['Sy']
 learning_rate = param2['learning_rate']
 model_segmentation_name = param2['model_segmentation_name']
+
+device = torch.device("cuda:0" if torch.cuda.is_available() else "cpu")
+model, label_names = save_and_load_model(directory_weights, model_segmentation_name).to(device)
 
 
 
@@ -115,7 +118,7 @@ if len(lst) > 0:
         io.write_image(f_im, im)
         
         im_save = fsdb._file_path(f_im)
-        subprocess.run(['labelme', im_save, '-O', im_save, '--labels', labels])
+        subprocess.run(['labelme', im_save, '-O', im_save, '--labels', ','.join(labels)])
         
         npz = run_refine_romidata(im_save, 1, 1, 1, 1, 1, class_names = labels.split(',')[1:], 
                            plotit = im_save)
@@ -130,12 +133,9 @@ if len(lst) > 0:
     
 subprocess.run(["rsync", "-av", directory_dataset, appdirs.user_cache_dir()])
 directory_dataset = appdirs.user_cache_dir()
-label_names = labels.split(',')
 
 
-device = torch.device("cuda:0" if torch.cuda.is_available() else "cpu")
 
-model = save_and_load_model(directory_weights, model_segmentation_name).to(device)
 
 # freeze backbone layers
 for l in model.base_layers:

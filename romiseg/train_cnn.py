@@ -53,7 +53,6 @@ directory_dataset = path + direc['directory_dataset']
 
 param2 = param_pipe['Segmentation2D']
 model_name = param2["model_name"]
-model_segmentation_name = param2["model_segmentation_name"]
 
 #label_names = param2['labels'].split(',')
 
@@ -157,8 +156,12 @@ if __name__ == '__main__':
                      model, Sx, Sy)
 
     model_name =  model_name + os.path.split(directory_dataset)[1] +'_%d_%d'%(Sx,Sy)+ '_epoch%d.pt'%epochs
-    
-    torch.save(model, directory_weights + '/' + model_name)
-    
+    db = fsdb.FSDB(directory_weights)
+    s = db.get_scan('models', create = True)
+    f = s.get_fileset('models', create = True)
+    file = f.create_file(model_name)
+    io.write_torch(file, model)
+    file.set_metadata({'model_id':model_name, 'label_names':channels.tolist()})
+
     
     
