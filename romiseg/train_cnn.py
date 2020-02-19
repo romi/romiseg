@@ -91,8 +91,8 @@ def cnn_train(directory_weights, directory_dataset, label_names, tsboard, batch_
     image_test, channels = init_set('', path_test)
     
     train_dataset = Dataset_im_label(image_train, channels, transform = trans, path = path_train)
-    val_dataset = Dataset_im_label(image_val, channels, transform = trans, path = path_train) 
-    test_dataset = Dataset_im_label(image_test, channels, transform = trans, path = path_train)
+    val_dataset = Dataset_im_label(image_val, channels, transform = trans, path = path_val) 
+    test_dataset = Dataset_im_label(image_test, channels, transform = trans, path = path_test)
     
     train_loader = torch.utils.data.DataLoader(train_dataset, batch_size=batch_size, shuffle=True, num_workers=1)
     
