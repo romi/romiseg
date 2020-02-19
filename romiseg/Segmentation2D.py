@@ -16,7 +16,7 @@ from PIL import Image
 
 #made in CSL
 from romidata import io
-from romiseg.utils.train_from_dataset import evaluate, save_and_load_model
+from romiseg.utils.train_from_dataset import evaluate, save_and_load_model, model_from_fileset
 import logging
 logger = logging.getLogger('romiscan')
 
@@ -72,7 +72,7 @@ class ResizeFit(object):
         new_img = ImageOps.expand(new_img, padding)
         return new_img
 
-def segmentation(Sx, Sy, label_names, images_fileset, scan, model_segmentation_name, directory_weights, resize=False):
+def segmentation(Sx, Sy, images_fileset, model_file, resize=False):
         """Inputs a set of N_cam images of an object from different points of view and segmentes the images in N_label classes, 
         pixel per pixel.
         Outputs a matrix of size [N_cam, N_labels, xinit, yinit].
@@ -103,9 +103,9 @@ def segmentation(Sx, Sy, label_names, images_fileset, scan, model_segmentation_n
         #if directory_weights == 'complete here':
         #   directory_weights = filedialog.askdirectory(initialdir="/home/", title='create folder to save fine-tuning weights')
         #   create_folder_if(directory_weights)
-        logger.debug('Model name:' + str(model_segmentation_name))
-        model_segmentation = save_and_load_model(directory_weights, model_segmentation_name)
-        
+        logger.debug('Model name:' + str(model_file.get_metadata('model_id')))
+        #model_segmentation = save_and_load_model(directory_weights, model_segmentation_name)
+        model_segmentation, label_names = model_from_fileset(model_file)
     
         #GET ORIGINAL IMAGE SIZE and number(could be in image metadata instead)    
         s = io.read_image(images_fileset[0]).shape

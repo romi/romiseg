@@ -71,7 +71,7 @@ def save_and_load_model(weights_folder, model_segmentation_name):
         url = 'http://db.romi-project.eu/models/' + model_segmentation_name 
         
         download_file(url, weights_folder)
-        
+   
     model_segmentation = torch.load(weights_folder + '/' + model_segmentation_name)
     try:
         model_segmentation = model_segmentation[0]
@@ -85,8 +85,21 @@ def save_and_load_model(weights_folder, model_segmentation_name):
             
     return model_segmentation
 
+def model_from_fileset(model_file):
+    model_segmentation = io.read_torch(model_file)
+    try:
+        model_segmentation = model_segmentation[0]
+    except:
+        model_segmentation = model_segmentation
+    
+    try: 
+        model_segmentation = model_segmentation.module
+    except:
+        model_segmentation = model_segmentation
+    label_names = model_file.get_metadata('label_names')
+    return model_segmentation, label_names
 
-
+    
 
 def gaussian(ins, is_training, mean, stddev):
     if is_training:
@@ -99,73 +112,67 @@ def init_set(mode, path):
     db = fsdb.FSDB(path)
     db.connect()
     scans = db.get_scans()
-    image_files = []
-    gt_files = []
+    shots = []
     for s in scans:
-        #print(s.id)
         f = s.get_fileset('images')
+        
         #print(f)
-        list_files = f.files
+        list_files = f.get_files( query = {'channel':'rgb'})
         #for i in range(len(list_files)):
          #   f0 = list_files[i]
             #print(f0.metadata.keys(), f0.metadata['channel'], f0.metadata['shot_id'])
-        shots = [list_files[i].metadata['shot_id'] for i in range(len(list_files))]
-        shots = list(set(shots))
-        for shot in shots:
-            image_files += f.get_files({'shot_id':shot, 'channel':'rgb'})
-            gt_files += f.get_files({'shot_id':shot, 'channel':'segmentation'})
+        shots += [{"scan": s.id, "shot_id": list_files[i].metadata['shot_id']} for i in range(len(list_files))]
 
+    channels = f.get_metadata('channels')
+    channels = copy.copy(channels)
+    channels.remove('rgb')
     db.disconnect()
-    return image_files, gt_files
-
+    return shots, np.sort(channels)
 
 class Dataset_im_label(Dataset):
     """Data handling for Pytorch Dataloader"""
 
-    def __init__(self, image_paths, label_paths, transform):
+    def __init__(self, shots, channels, transform, path):
 
-        self.image_paths = image_paths
-        self.label_paths = label_paths
+        self.shots = shots
+        self.channels = channels
         self.transforms = transform
+        self.path = path
 
 
     def __getitem__(self, index):
+        db = fsdb.FSDB(self.path)
+        db.connect()
+        db_file_meta = self.shots[index]
+        s = db.get_scan(db_file_meta['scan'])
+        image_file = s.get_fileset('images').get_files(query = {'channel':'rgb', 'shot_id':db_file_meta['shot_id']})[0]
         angle = random.randint(-90, 90)
-        db_file = self.image_paths[index]
-        image = Image.fromarray(io.read_image(db_file))
+
+        image = Image.fromarray(io.read_image(image_file))
         #id_im = db_file.id
         t_image = TF.rotate(image, angle, expand = True)
         t_image = transforms.ColorJitter(brightness=0, contrast=0, saturation=0, hue=0)(t_image)
         t_image = self.transforms(t_image) #crop the images
 
         t_image = t_image[0:3, :, :] #select RGB channels
-
-        db_file = self.label_paths[index]
-        npz = io.read_npz(db_file)
         torch_labels = []
 
-        for i in range(len(npz.files)):
+        
+        for c in self.channels:
+            labels = s.get_fileset('images').get_files(query = {'channel':c, 'shot_id':db_file_meta['shot_id']})[0]
+            t_label = Image.fromarray(io.read_image(labels))
 
-            labels = npz[npz.files[i]]
-            #labels = self.read_label(labels)
-            t_label = Image.fromarray(np.uint8(labels))
             t_label = TF.rotate(t_label, angle, expand = True)
             t_label = self.transforms(t_label)
             torch_labels.append(t_label)
 
-            
         torch_labels = torch.cat(torch_labels, dim = 0)
-        somme = torch_labels.sum(dim = 0)
-        background = somme == 0
-        background = background.float()
-        background = background
-        dimx, dimy = background.shape
-        background = background.unsqueeze(0)
-        torch_labels = torch.cat((background, torch_labels), dim = 0)
+        db.disconnect()
+
         return gaussian(t_image, is_training = True, mean = 0, stddev =  1/100), torch_labels
 
     def __len__(self):  # return count of sample
-        return len(self.image_paths)
+        return len(self.shots)
 
     def read_label(self, labels):
         somme = labels.sum(axis = 0)

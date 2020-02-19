@@ -30,7 +30,7 @@ from romiseg.utils.train_from_dataset import init_set, Dataset_im_label, train_m
 from romiseg.utils import segmentation_model
 
 
-default_config_dir = "/home/alienor/Documents/scanner-meta-repository/Scan3D/config/segmentation2d_arabidopsis.toml"
+default_config_dir = "/home/alienor/Documents/scanner-meta-repository/Scan3D/default/segmentation2d_arabidopsis.toml"
 
 parser = argparse.ArgumentParser(description='Process some integers.')
 
@@ -55,7 +55,7 @@ param2 = param_pipe['Segmentation2D']
 model_name = param2["model_name"]
 model_segmentation_name = param2["model_segmentation_name"]
 
-label_names = param2['labels'].split(',')
+#label_names = param2['labels'].split(',')
 
 
 Sx = param2['Sx']
@@ -87,13 +87,13 @@ def cnn_train(directory_weights, directory_dataset, label_names, tsboard, batch_
     path_train = directory_dataset + '/train/'
     path_test = directory_dataset + '/test/'
     
-    image_train, target_train = init_set('', path_train)
-    image_val, target_val = init_set('', path_val)
-    image_test, target_test = init_set('', path_test)
+    image_train, channels = init_set('', path_train)
+    image_val, channels = init_set('', path_val)
+    image_test, channels = init_set('', path_test)
     
-    train_dataset = Dataset_im_label(image_train, target_train, transform = trans)
-    val_dataset = Dataset_im_label(image_val, target_val, transform = trans) 
-    test_dataset = Dataset_im_label(image_test, target_test, transform = trans)
+    train_dataset = Dataset_im_label(image_train, channels, transform = trans, path = path_train)
+    val_dataset = Dataset_im_label(image_val, channels, transform = trans, path = path_train) 
+    test_dataset = Dataset_im_label(image_test, channels, transform = trans, path = path_train)
     
     train_loader = torch.utils.data.DataLoader(train_dataset, batch_size=batch_size, shuffle=True, num_workers=1)
     
