@@ -132,24 +132,29 @@ def run_refine(f, beta, alpha, tau, d, Nit, plotit=None, saveit=None):
       return conts
 
 def run_refine_romidata(f, beta, alpha, tau, d, Nit, class_names, plotit=None, saveit=None):
-      polys = json.load(open(f[:-4] + '.json'))['shapes']
-      ps=[np.array(p['points']) for p in polys]
-      labels = [p['label'] for p in polys]
-    
-    
-      im = cv2.imread(f)
-      im = im * 0
-      npz = {class_name:im[:,:,0]*0 for class_name in class_names}
-      print(npz.keys())
-    
-      #  if plotit: cv2.polylines(im, ps, True, (242,240,218), thickness=10)
-      #conts=[]
-      for i, p in enumerate(ps):
-         init_cont = closeCont(p, 1)
-         print(labels[i])
-         xys=refine(f, init_cont, beta, alpha, tau, d, Nit, ksave=1)
-         if plotit: cv2.fillPoly(npz[labels[i]], [np.array([xys]).astype(np.int).T], 255)
-      return npz
+    polys = json.load(open(f[:-4] + '.json'))['shapes']
+    ps=[np.array(p['points']) for p in polys]
+    labels = [p['label'] for p in polys]
+
+
+    im = cv2.imread(f)
+    im = im * 0
+    npz = {class_name:im[:,:,0]*0 for class_name in class_names}
+    back = im[:,:,0]*0
+  #  if plotit: cv2.polylines(im, ps, True, (242,240,218), thickness=10)
+  #conts=[]
+    for i, p in enumerate(ps):
+        init_cont = closeCont(p, 1)
+        print(labels[i])
+        xys=refine(f, init_cont, beta, alpha, tau, d, Nit, ksave=1)
+        if plotit: cv2.fillPoly(npz[labels[i]], [np.array([xys]).astype(np.int).T], 255)
+        
+    for k in npz.keys:
+        back += npz[labels[i]]
+    back = ( back == 0 ) * 255
+    npz['background'] = back
+    return npz
+  
   #   conts.append(xys)
      
   #if True: 

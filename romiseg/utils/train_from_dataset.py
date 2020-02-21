@@ -16,6 +16,7 @@ from torch.autograd import Variable
 from collections import defaultdict
 import matplotlib.pyplot as plt
 from PIL import Image
+import appdirs
 
 from tqdm import tqdm
 
@@ -107,6 +108,31 @@ def gaussian(ins, is_training, mean, stddev):
         return torch.clamp(ins + noise, 0, 1)
     return torch.clamp(ins,0,1)
 
+class ResizeFit(object):
+    def __init__(self, size, interpolation=Image.BILINEAR):
+        self.size = size
+        self.interpolation = interpolation
+
+    def padding(self, img):
+        aspect_ratio = self.size[0] / self.size[1]
+        old_aspect_ratio = img.size[0] / img.size[1]
+
+        if aspect_ratio < old_aspect_ratio:
+            new_size = (self.size[0], int(1/old_aspect_ratio * self.size[0]))
+        else:
+            new_size = (int(old_aspect_ratio * self.size[1]), self.size[1])
+
+        diff = [self.size[i] - new_size[i] for i in range(2)]
+        padding =  diff[0]//2, diff[1]//2, (diff[0] + 1) //2, (diff[1] + 1)//2
+        return new_size, padding
+
+    def __call__(self, img):
+        from PIL import ImageOps
+        new_size, padding = self.padding(img)
+        new_img = img.resize(new_size, resample=self.interpolation)
+        new_img = ImageOps.expand(new_img, padding)
+        return new_img
+
 
 def init_set(mode, path):
     db = fsdb.FSDB(path)
@@ -115,8 +141,6 @@ def init_set(mode, path):
     shots = []
     for s in scans:
         f = s.get_fileset('images')
-        
-        #print(f)
         list_files = f.get_files( query = {'channel':'rgb'})
         #for i in range(len(list_files)):
          #   f0 = list_files[i]
@@ -233,7 +257,7 @@ def print_metrics(metrics, epoch_samples, phase):
 
     print("{}: {}".format(phase, ", ".join(outputs)))
 
-def train_model(dataloaders, model, optimizer, scheduler, writer, num_epochs=25, viz = False, label_names = []):
+def train_model(f_weights, dataloaders, model, optimizer, scheduler, writer, num_epochs=25, viz = False, label_names = []):
     L = {'bce':[], 'dice':[]}
     best_model_wts = copy.deepcopy(model.state_dict())
     best_loss = 1e10
@@ -330,7 +354,15 @@ def train_model(dataloaders, model, optimizer, scheduler, writer, num_epochs=25,
             
             
             writer.add_figure('Segmented images', fig, epoch)
-                
+        if epoch%10==0:
+            model_name =  'tmp_epoch%d'%epoch
+        
+            file = f_weights.create_file(model_name)
+            io.write_torch(file, model)
+            file.set_metadata({'model_id':model_name, 'label_names':label_names.tolist()})
+
+
+            
         
         #time_elapsed = time.time() - since
         #print('{:.0f}m {:.0f}s'.format(time_elapsed // 60, time_elapsed % 60))

@@ -23,7 +23,7 @@ from tkinter import filedialog
 import getpass
 
 from romiseg.train_cnn import cnn_train
-from romiseg.utils.train_from_dataset import save_and_load_model
+from romiseg.utils.train_from_dataset import model_from_fileset
 from romiseg.utils.active_contour import run_refine_romidata
 from romidata import fsdb, io
 
@@ -43,7 +43,6 @@ parser.add_argument('--config', dest='config', default=default_config_dir,
 
 args = parser.parse_args()
 
-print(args.config)
 
 param_pipe = toml.load(str(args.config))
 
@@ -68,10 +67,18 @@ param2 = param_pipe['Segmentation2D']
 Sx = param2['Sx']
 Sy = param2['Sy']
 learning_rate = param2['learning_rate']
-model_segmentation_name = param2['model_segmentation_name']
+model_id = param2['model_id']
 
 device = torch.device("cuda:0" if torch.cuda.is_available() else "cpu")
-model, label_names = save_and_load_model(directory_weights, model_segmentation_name).to(device)
+#model, label_names = save_and_load_model(directory_weights, model_segmentation_name).to(device)
+
+db_w = fsdb.FSDB(directory_weights)
+db_w.connect()
+s_w = db_w.get_scan('models')
+f_weights = s_w.get_fileset('models')
+model_file = f_weights.get_file(model_id)
+model, label_names = model_from_fileset(model_file)
+model = model.to(device)
 
 
 
@@ -83,12 +90,13 @@ mount_loc = appdirs.user_cache_dir() + '/data_mount/'
 if not os.path.exists(mount_loc):
     os.mkdir(mount_loc)
 txt = subprocess.run(["mountpoint", mount_loc])
-if not txt:
-    quest = input("Ready to mount romi-project.eu? (y/n) ")
-    if not quest == 'y':
-        exit()
 
-    subprocess.run(["sshfs", user_name + '@db.romi-project.eu:/data/', mount_loc])
+
+quest = input("Ready to mount romi-project.eu? (y/n) ")
+if not quest == 'y':
+    exit()
+
+subprocess.run(["sshfs", user_name + '@db.romi-project.eu:/data/', mount_loc])
 
 directory_dataset = mount_loc + '/finetune/'
 
@@ -103,7 +111,6 @@ if len(lst) > 0:
     
     scan = db.get_scan(host_scan, create=True)
     fileset = scan.get_fileset('images', create = True)
-    
     imgs = np.sort(files)
     
     
@@ -120,14 +127,14 @@ if len(lst) > 0:
         im_save = fsdb._file_path(f_im)
         subprocess.run(['labelme', im_save, '-O', im_save, '--labels', ','.join(labels)])
         
-        npz = run_refine_romidata(im_save, 1, 1, 1, 1, 1, class_names = labels.split(',')[1:], 
+        npz = run_refine_romidata(im_save, 1, 1, 1, 1, 1, class_names = label_names.split(',')[1:], 
                            plotit = im_save)
-        print(npz)
         
-        f_label = fileset.create_file(im_name + '_segmentation')
-        f_label.set_metadata('shot_id', im_name)
-        f_label.set_metadata('channel', 'segmentation')
-        io.write_npz(f_label, npz)
+        for channel in label_names:
+            f_label = fileset.create_file(im_name + '_' + channel)
+            f_label.set_metadata('shot_id', im_name)
+            f_label.set_metadata('channel', channel)
+            io.write_image(f_label, npz[channel])
     db.disconnect()
  
     
@@ -141,16 +148,19 @@ directory_dataset = appdirs.user_cache_dir()
 for l in model.base_layers:
     for param in l.parameters():
         param.requires_grad = False
-       
-model = cnn_train(directory_weights, directory_dataset, label_names, tsboard, batch_size, finetune_epochs,
+
+
+model = cnn_train(f_weights, directory_dataset, label_names, tsboard, batch_size, finetune_epochs,
                     model, Sx, Sy, showit = True)
 
-model_name =  model_segmentation_name[:-3] + os.path.split(directory_dataset)[1] +'_%d_%d_'%(Sx,Sy)+ 'finetune_epoch%d.pt'%finetune_epochs
+model_name =  model_id[:-3] + os.path.split(directory_dataset)[1] +'_%d_%d_'%(Sx,Sy)+ 'finetune_epoch%d'%finetune_epochs
 
-torch.save(model, directory_weights + '/' + model_name)
+file = f_weights.create_file(model_name)
+io.write_torch(file, model)
+file.set_metadata({'model_id':model_name, 'label_names':label_names.tolist()})
 
 
-param2['model_segmentation_name'] = model_name
+param2['model_id'] = model_name
 
 text = toml.dumps(param_pipe)
    

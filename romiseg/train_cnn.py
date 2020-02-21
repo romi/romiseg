@@ -26,7 +26,7 @@ import torch.optim as optim
 from romidata import io
 from romidata import fsdb
 
-from romiseg.utils.train_from_dataset import init_set, Dataset_im_label, train_model, plot_dataset, save_and_load_model
+from romiseg.utils.train_from_dataset import ResizeFit, init_set, Dataset_im_label, train_model, plot_dataset, save_and_load_model
 from romiseg.utils import segmentation_model
 
 
@@ -69,17 +69,19 @@ learning_rate = param2['learning_rate']
 ############################################################################################################################
 
 
-def cnn_train(directory_weights, directory_dataset, label_names, tsboard, batch_size, epochs,
-                    model, Sx, Sy, load_model = False, showit = False):
+def cnn_train(f_weights, directory_dataset, label_names, tsboard, batch_size, epochs,
+                    model, Sx, Sy, load_model = False, showit = False, resize = False):
         
     #Training board
     writer = SummaryWriter(tsboard)
     
     #image transformation for training, can be modified for data augmentation
-    trans = transforms.Compose([
-                                transforms.CenterCrop((Sx, Sy)),
-                                transforms.ToTensor(),
-                                ])
+    if resize:
+        trans = transforms.Compose([ResizeFit((Sx, Sy)), transforms.ToTensor()])
+    else:
+        trans = transforms.Compose([ #Define transform of the image
+            transforms.CenterCrop((Sx, Sy)),
+            transforms.ToTensor()])
     
     #Load images and ground truth
     path_val = directory_dataset + '/val/'
@@ -115,7 +117,7 @@ def cnn_train(directory_weights, directory_dataset, label_names, tsboard, batch_
     exp_lr_scheduler = lr_scheduler.StepLR(optimizer_ft, step_size=30, gamma=0.1)
     
     #Run training
-    model = train_model(dataloaders, model, optimizer_ft, exp_lr_scheduler, writer, 
+    model = train_model(f_weights, dataloaders, model, optimizer_ft, exp_lr_scheduler, writer, 
                         num_epochs = epochs, viz = True, label_names = label_names)
     #save model
 
@@ -151,17 +153,18 @@ if __name__ == '__main__':
         for param in l.parameters():
             param.requires_grad = False
    
-
-    model = cnn_train(directory_weights, directory_dataset, channels, tsboard, batch_size, epochs,
-                     model, Sx, Sy)
-
-    model_name =  model_name + os.path.split(directory_dataset)[1] +'_%d_%d'%(Sx,Sy)+ '_epoch%d.pt'%epochs
     db = fsdb.FSDB(directory_weights)
     s = db.get_scan('models', create = True)
-    f = s.get_fileset('models', create = True)
-    file = f.create_file(model_name)
+    f_weights = s.get_fileset('models', create = True)
+    
+    model = cnn_train(f_weights, directory_dataset, channels, tsboard, batch_size, epochs,
+                     model, Sx, Sy, resize = True)
+
+    model_name =  model_name + os.path.split(directory_dataset)[1] +'_%d_%d'%(Sx,Sy)+ '_epoch%d'%epochs
+
+    file = f_weights.create_file(model_name)
     io.write_torch(file, model)
     file.set_metadata({'model_id':model_name, 'label_names':channels.tolist()})
 
-    
+
     
