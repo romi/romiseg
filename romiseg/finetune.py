@@ -112,7 +112,9 @@ if len(lst) > 0:
     scan = db.get_scan(host_scan, create=True)
     fileset = scan.get_fileset('images', create = True)
     imgs = np.sort(files)
-    
+    label_names = label_names.tolist()
+    fileset.set_metadata({'channels':['rgb'] + label_names})
+
     
     for i, path in enumerate(imgs):
         im_name = host_scan + '_' + os.path.split(path)[1][:-4]
@@ -125,9 +127,9 @@ if len(lst) > 0:
         io.write_image(f_im, im)
         
         im_save = fsdb._file_path(f_im)
-        subprocess.run(['labelme', im_save, '-O', im_save, '--labels', ','.join(labels)])
+        subprocess.run(['labelme', im_save, '-O', im_save, '--labels', ','.join(label_names)])
         
-        npz = run_refine_romidata(im_save, 1, 1, 1, 1, 1, class_names = label_names.split(',')[1:], 
+        npz = run_refine_romidata(im_save, 1, 1, 1, 1, 1, class_names = label_names, 
                            plotit = im_save)
         
         for channel in label_names:
@@ -151,7 +153,7 @@ for l in model.base_layers:
 
 
 model = cnn_train(f_weights, directory_dataset, label_names, tsboard, batch_size, finetune_epochs,
-                    model, Sx, Sy, showit = True)
+                    model, Sx, Sy, showit = True, resize = True)
 
 model_name =  model_id[:-3] + os.path.split(directory_dataset)[1] +'_%d_%d_'%(Sx,Sy)+ 'finetune_epoch%d'%finetune_epochs
 

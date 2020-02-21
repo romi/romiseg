@@ -157,8 +157,10 @@ if __name__ == '__main__':
     s = db.get_scan('models', create = True)
     f_weights = s.get_fileset('models', create = True)
     
-    model = cnn_train(f_weights, directory_dataset, channels, tsboard, batch_size, epochs,
-                     model, Sx, Sy, resize = False)
+
+    model = cnn_train(f_weights, directory_dataset, channels, tsboard + "_%d_%d"%(Sx,Sy) + directory_dataset, batch_size, epochs,
+                     model, Sx, Sy, resize = True)
+
 
     model_name =  model_name + os.path.split(directory_dataset)[1] +'_%d_%d'%(Sx,Sy)+ '_epoch%d'%epochs
 

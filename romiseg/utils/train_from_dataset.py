@@ -151,6 +151,7 @@ def init_set(mode, path):
     channels = copy.copy(channels)
     channels.remove('rgb')
     db.disconnect()
+    print(channels)
     return shots, np.sort(channels)
 
 class Dataset_im_label(Dataset):

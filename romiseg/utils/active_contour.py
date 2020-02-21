@@ -140,7 +140,7 @@ def run_refine_romidata(f, beta, alpha, tau, d, Nit, class_names, plotit=None, s
     im = cv2.imread(f)
     im = im * 0
     npz = {class_name:im[:,:,0]*0 for class_name in class_names}
-    back = im[:,:,0]*0
+    back = npz['background']
   #  if plotit: cv2.polylines(im, ps, True, (242,240,218), thickness=10)
   #conts=[]
     for i, p in enumerate(ps):
@@ -149,8 +149,8 @@ def run_refine_romidata(f, beta, alpha, tau, d, Nit, class_names, plotit=None, s
         xys=refine(f, init_cont, beta, alpha, tau, d, Nit, ksave=1)
         if plotit: cv2.fillPoly(npz[labels[i]], [np.array([xys]).astype(np.int).T], 255)
         
-    for k in npz.keys:
-        back += npz[labels[i]]
+    for k in npz.keys():
+        back += npz[k]
     back = ( back == 0 ) * 255
     npz['background'] = back
     return npz
