@@ -174,7 +174,9 @@ class Dataset_im_label(Dataset):
 
         image = Image.fromarray(io.read_image(image_file))
         #id_im = db_file.id
-        t_image = TF.rotate(image, angle, expand = True)
+        filler = 0.0 if image.mode.startswith("F") else 0
+        num_bands = len(image.getbands())
+        t_image = TF.rotate(image, angle, expand = True, fill=tuple([filler] * num_bands))
         t_image = transforms.ColorJitter(brightness=0, contrast=0, saturation=0, hue=0)(t_image)
         t_image = self.transforms(t_image) #crop the images
 
@@ -186,7 +188,10 @@ class Dataset_im_label(Dataset):
             labels = s.get_fileset('images').get_files(query = {'channel':c, 'shot_id':db_file_meta['shot_id']})[0]
             t_label = Image.fromarray(io.read_image(labels))
 
-            t_label = TF.rotate(t_label, angle, expand = True)
+            filler = 0.0 if t_label.mode.startswith("F") else 0
+            num_bands = len(t_label.getbands())
+
+            t_label = TF.rotate(t_label, angle, expand = True, fill=tuple([filler] * num_bands))
             t_label = self.transforms(t_label)
             torch_labels.append(t_label)
 

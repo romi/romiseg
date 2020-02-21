@@ -134,9 +134,8 @@ def segmentation(Sx, Sy, images_fileset, model_file, resize=False):
             sample_image = PIL.Image.fromarray(io.read_image(images_fileset[0]))
             original_size = io.read_image(images_fileset[0]).shape[:2]
             _, padding = ResizeFit((Sx, Sy)).padding(sample_image)
-            print(padding)
             pred_pad = pred_tot[:,:,padding[1]:-1-padding[3],padding[0]:-1-padding[2]] #reverse padding
-            pred_pad = F.interpolate(pred_pad, size=original_size)
+            pred_pad = F.interpolate(pred_pad, size=original_size, mode='bilinear')
 
         else:
             pred_pad = torch.zeros((N_cam, len(label_names), xinit, yinit)) #reverse the crop in order to match the colmap parameters

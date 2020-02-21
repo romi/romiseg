@@ -99,8 +99,8 @@ def cnn_train(f_weights, directory_dataset, label_names, tsboard, batch_size, ep
     train_loader = torch.utils.data.DataLoader(train_dataset, batch_size=batch_size, shuffle=True, num_workers=1)
     
     #Show input images 
-    fig = plot_dataset(train_loader, label_names, batch_size, showit = True) #display training set
-    writer.add_figure('Dataset images', fig, 0)
+    # fig = plot_dataset(train_loader, label_names, batch_size, showit = True) #display training set
+    # writer.add_figure('Dataset images', fig, 0)
     
        
     dataloaders = {
@@ -158,7 +158,7 @@ if __name__ == '__main__':
     f_weights = s.get_fileset('models', create = True)
     
     model = cnn_train(f_weights, directory_dataset, channels, tsboard, batch_size, epochs,
-                     model, Sx, Sy, resize = True)
+                     model, Sx, Sy, resize = False)
 
     model_name =  model_name + os.path.split(directory_dataset)[1] +'_%d_%d'%(Sx,Sy)+ '_epoch%d'%epochs
 
