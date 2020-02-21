@@ -189,7 +189,10 @@ class Dataset_im_label(Dataset):
             labels = s.get_fileset('images').get_files(query = {'channel':c, 'shot_id':db_file_meta['shot_id']})[0]
             t_label = Image.fromarray(io.read_image(labels))
 
-            filler = 0.0 if t_label.mode.startswith("F") else 0
+            if c == "background":
+                filler = 1.0 if t_label.mode.startswith("F") else 255
+            else:
+                filler = 0.0 if t_label.mode.startswith("F") else 0
             num_bands = len(t_label.getbands())
 
             t_label = TF.rotate(t_label, angle, expand = True, fill=tuple([filler] * num_bands))
