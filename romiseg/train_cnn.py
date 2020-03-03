@@ -80,15 +80,12 @@ def cnn_train(f_weights, directory_dataset, label_names, tsboard, batch_size, ep
 
         trans = transforms.Compose([ResizeCrop((Sx, Sy)), 
                                     transforms.ToTensor(),
-                                    transforms.Normalize(mean=[0.485, 0.456, 0.406],
-                                                         std=[0.229, 0.224, 0.225]) #imagenet,
+                                     #imagenet,
                                     ])
     else:
         trans = transforms.Compose([ #Define transform of the image
             transforms.CenterCrop((Sx, Sy)),
-            transforms.ToTensor(),
-            transforms.Normalize(mean=[0.485, 0.456, 0.406],
-                                 std=[0.229, 0.224, 0.225])]) #imagenet
+            transforms.ToTensor()]) #imagenet
     
     #Load images and ground truth
     path_val = directory_dataset + '/val/'
