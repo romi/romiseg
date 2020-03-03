@@ -133,7 +133,33 @@ class ResizeFit(object):
         new_img = ImageOps.expand(new_img, padding)
         return new_img
 
+class ResizeCrop(object):
+    def __init__(self, size, interpolation=Image.BILINEAR):
+        self.size = size
+        self.interpolation = interpolation
 
+    def padding(self, img):
+        aspect_ratio = self.size[0] / self.size[1]
+        old_aspect_ratio = img.size[0] / img.size[1]
+
+        if aspect_ratio > old_aspect_ratio:
+            new_size = (self.size[0], int(1/old_aspect_ratio * self.size[0]))
+        else:
+            new_size = (int(old_aspect_ratio * self.size[1]), self.size[1])
+
+        diff = [- self.size[i] + new_size[i] for i in range(2)]
+        padding =  diff[0]//2, diff[1]//2, (diff[0] + 1) //2, (diff[1] + 1)//2
+
+
+        return new_size, padding
+
+    def __call__(self, img):
+        from PIL import ImageOps
+        new_size, padding = self.padding(img)
+        new_img = img.resize(new_size, resample=self.interpolation)
+        new_img = ImageOps.crop(new_img, padding)
+        return new_img
+    
 def init_set(mode, path):
     db = fsdb.FSDB(path)
     db.connect()
@@ -183,6 +209,7 @@ class Dataset_im_label(Dataset):
 
         t_image = t_image[0:3, :, :] #select RGB channels
         torch_labels = []
+        print(t_image.max())
 
         
         for c in self.channels:
@@ -198,6 +225,7 @@ class Dataset_im_label(Dataset):
             t_label = TF.rotate(t_label, angle, expand = True, fill=tuple([filler] * num_bands))
             t_label = self.transforms(t_label)
             torch_labels.append(t_label)
+            print(c, t_label.max())
 
         torch_labels = torch.cat(torch_labels, dim = 0)
         db.disconnect()
@@ -391,7 +419,9 @@ def fine_tune_train(path_train, path_val, weights_folder, label_names, tsboard_n
     
     trans = transforms.Compose([
     transforms.CenterCrop((Sx, Sy)),
-    transforms.ToTensor(),
+    transforms.Normalize(mean=[0.485, 0.456, 0.406],
+                                 std=[0.229, 0.224, 0.225]), #imagenet
+    transforms.ToTensor()
 ])
     
     image_train, target_train = init_set('', path_train)

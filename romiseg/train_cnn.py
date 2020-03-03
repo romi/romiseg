@@ -26,7 +26,7 @@ import torch.optim as optim
 from romidata import io
 from romidata import fsdb
 
-from romiseg.utils.train_from_dataset import ResizeFit, init_set, Dataset_im_label, train_model, plot_dataset, save_and_load_model
+from romiseg.utils.train_from_dataset import ResizeCrop, init_set, Dataset_im_label, train_model, plot_dataset, save_and_load_model
 from romiseg.utils import segmentation_model
 
 
@@ -77,11 +77,18 @@ def cnn_train(f_weights, directory_dataset, label_names, tsboard, batch_size, ep
     
     #image transformation for training, can be modified for data augmentation
     if resize:
-        trans = transforms.Compose([ResizeFit((Sx, Sy)), transforms.ToTensor()])
+
+        trans = transforms.Compose([ResizeCrop((Sx, Sy)), 
+                                    transforms.ToTensor(),
+                                    transforms.Normalize(mean=[0.485, 0.456, 0.406],
+                                                         std=[0.229, 0.224, 0.225]) #imagenet,
+                                    ])
     else:
         trans = transforms.Compose([ #Define transform of the image
             transforms.CenterCrop((Sx, Sy)),
-            transforms.ToTensor()])
+            transforms.ToTensor(),
+            transforms.Normalize(mean=[0.485, 0.456, 0.406],
+                                 std=[0.229, 0.224, 0.225])]) #imagenet
     
     #Load images and ground truth
     path_val = directory_dataset + '/val/'
@@ -159,7 +166,7 @@ if __name__ == '__main__':
     
 
     model = cnn_train(f_weights, directory_dataset, channels, tsboard + "_%d_%d"%(Sx,Sy) + directory_dataset, batch_size, epochs,
-                     model, Sx, Sy, resize = True)
+                     model, Sx, Sy, resize = False)
 
 
     model_name =  model_name + os.path.split(directory_dataset)[1] +'_%d_%d'%(Sx,Sy)+ '_epoch%d'%epochs

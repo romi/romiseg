@@ -56,7 +56,7 @@ try:
 except:
     tsboard = appdirs.user_cache_dir()
 try:
-    user_name = direc['directory_weights']
+    user_name = direc['user_name']
 except:
     user_name = getpass.getuser()
 
@@ -91,12 +91,10 @@ if not os.path.exists(mount_loc):
     os.mkdir(mount_loc)
 txt = subprocess.run(["mountpoint", mount_loc])
 
-
+"""
 quest = input("Ready to mount romi-project.eu? (y/n) ")
-if not quest == 'y':
-    exit()
-
-subprocess.run(["sshfs", user_name + '@db.romi-project.eu:/data/', mount_loc])
+if quest == 'y':
+   subprocess.run(["sshfs", user_name + '@db.romi-project.eu:/data/', mount_loc])
 
 directory_dataset = mount_loc + '/finetune/'
 
@@ -139,8 +137,8 @@ if len(lst) > 0:
             io.write_image(f_label, npz[channel])
     db.disconnect()
  
-    
-subprocess.run(["rsync", "-av", directory_dataset, appdirs.user_cache_dir()])
+"""  
+#subprocess.run(["rsync", "-av", directory_dataset, appdirs.user_cache_dir()])
 directory_dataset = appdirs.user_cache_dir()
 
 
@@ -153,7 +151,7 @@ for l in model.base_layers:
 
 
 model = cnn_train(f_weights, directory_dataset, label_names, tsboard, batch_size, finetune_epochs,
-                    model, Sx, Sy, showit = True, resize = True)
+                    model, Sx, Sy, showit = True, resize = False)
 
 model_name =  model_id[:-3] + os.path.split(directory_dataset)[1] +'_%d_%d_'%(Sx,Sy)+ 'finetune_epoch%d'%finetune_epochs
 

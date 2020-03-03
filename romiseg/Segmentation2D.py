@@ -12,6 +12,7 @@ from torch.utils.data import DataLoader, Dataset
 from torchvision import transforms
 from tqdm import tqdm
 from PIL import Image
+from romiseg.utils.train_from_dataset import ResizeCrop, ResizeFit
 
 
 #made in CSL
@@ -37,40 +38,14 @@ class Dataset_im_id(Dataset):
         t_image = self.transforms(image) #crop the images
         
         t_image = t_image[0:3, :, :] #select RGB channels
-        
+        print(t_image.max())
         return t_image, id_im
 
     def __len__(self):  # return count of sample
         return len(self.image_paths)
 
 
-class ResizeFit(object):
-    def __init__(self, size, interpolation=Image.BILINEAR):
-        self.size = size
-        self.interpolation = interpolation
 
-    def padding(self, img):
-        aspect_ratio = self.size[0] / self.size[1]
-        old_aspect_ratio = img.size[0] / img.size[1]
-
-        if aspect_ratio < old_aspect_ratio:
-            new_size = (self.size[0], int(1/old_aspect_ratio * self.size[0]))
-        else:
-            new_size = (int(old_aspect_ratio * self.size[1]), self.size[1])
-
-        diff = [self.size[i] - new_size[i] for i in range(2)]
-        padding =  diff[0]//2, diff[1]//2, (diff[0] + 1) //2, (diff[1] + 1)//2
-        return new_size, padding
-
-    def __call__(self, img):
-        from PIL import ImageOps
-        old_size = img.size  # old_size[0] is in (width, height) format
-
-
-        new_size, padding = self.padding(img)
-        new_img = img.resize(new_size, resample=self.interpolation)
-        new_img = ImageOps.expand(new_img, padding)
-        return new_img
 
 def segmentation(Sx, Sy, images_fileset, model_file, resize=False):
         """Inputs a set of N_cam images of an object from different points of view and segmentes the images in N_label classes, 
@@ -82,13 +57,19 @@ def segmentation(Sx, Sy, images_fileset, model_file, resize=False):
 
         device = torch.device("cuda:0" if torch.cuda.is_available() else "cpu") #Select GPU
         logger.debug(str(device) + ' used for images segmentation')
+        resize=True
 
         if resize:
-            trans = transforms.Compose([ResizeFit((Sx, Sy)), transforms.ToTensor()])
+            trans = transforms.Compose([ResizeCrop((Sx, Sy)), 
+                                    transforms.ToTensor(),
+                                    transforms.Normalize(mean=[0.485, 0.456, 0.406],
+                                                         std=[0.229, 0.224, 0.225])]) #imagenet
         else:
             trans = transforms.Compose([ #Define transform of the image
                 transforms.CenterCrop((Sx, Sy)),
-                transforms.ToTensor()])
+                transforms.ToTensor(),
+                transforms.Normalize(mean=[0.485, 0.456, 0.406],
+                                     std=[0.229, 0.224, 0.225])]) 
         
         #PyTorch Dataloader
         image_set = Dataset_im_id(images_fileset, transform = trans) 
@@ -120,25 +101,24 @@ def segmentation(Sx, Sy, images_fileset, model_file, resize=False):
             id_list = []
             count = 0
             logger.debug('Image segmentation by the CNN')
-        
+            im = Image.new("RGB", (Sx, Sy))
+            new_size, padding = ResizeFit((xinit, yinit)).padding(im)       
             for inputs, id_im in tqdm(loader):
                 inputs = inputs.to(device) #input image on GPU
                 outputs = evaluate(inputs, model_segmentation)  #output image
+                outputs = F.interpolate(outputs, new_size, mode = 'bilinear')
                 pred_tot.append(outputs)
                 id_list.append(id_im)
                 count += 1
         pred_tot = torch.cat(pred_tot, dim = 0)
+        pred_pad = torch.zeros((N_cam, len(label_names), xinit, yinit))
+        pred_pad[:,:,padding[0]:pred_pad.size(2)-padding[2],padding[1]:pred_pad.size(3)-padding[3]] = pred_tot
 
-        if resize:
-            import PIL
-            sample_image = PIL.Image.fromarray(io.read_image(images_fileset[0]))
-            original_size = io.read_image(images_fileset[0]).shape[:2]
-            _, padding = ResizeFit((Sx, Sy)).padding(sample_image)
-            pred_pad = pred_tot[:,:,padding[1]:-1-padding[3],padding[0]:-1-padding[2]] #reverse padding
-            pred_pad = F.interpolate(pred_pad, size=original_size, mode='bilinear')
-
-        else:
-            pred_pad = torch.zeros((N_cam, len(label_names), xinit, yinit)) #reverse the crop in order to match the colmap parameters
-            pred_pad[:,:,(xinit-Sx)//2:(xinit+Sx)//2,(yinit-Sy)//2:(yinit+Sy)//2] = pred_tot #To fit the camera parameters
+#        if resize:
+#                pass
+#        else:
+#     
+#            pred_pad = torch.zeros((N_cam, len(label_names), xinit, yinit)) #reverse the crop in order to match the colmap parameters
+#            pred_pad[:,:,(xinit-Sx)//2:(xinit+Sx)//2,(yinit-Sy)//2:(yinit+Sy)//2] = pred_tot #To fit the camera parameters
         
         return pred_pad, id_list
