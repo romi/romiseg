@@ -201,13 +201,13 @@ class Dataset_im_label(Dataset):
 
         image = Image.fromarray(io.read_image(image_file))
         #id_im = db_file.id
-        filler = 0.0 if image.mode.startswith("F") else 0
+        filler = (0.485, 0.456, 0.406)
         num_bands = len(image.getbands())
-        t_image = TF.rotate(image, angle, expand = True, fill=tuple([filler] * num_bands))
+        t_image = transforms.Normalize(mean=[0.485, 0.456, 0.406],
+                    std=[0.229, 0.224, 0.225])(image)
+        t_image = TF.rotate(image, angle, expand = True, fill=filler)
         t_image = transforms.ColorJitter(brightness=0, contrast=0, saturation=0, hue=0)(t_image)
         t_image = self.transforms(t_image) #crop the images
-        t_image = transforms.Normalize(mean=[0.485, 0.456, 0.406],
-                    std=[0.229, 0.224, 0.225])(t_image)
         t_image = t_image[0:3, :, :] #select RGB channels
         torch_labels = []
         print(t_image.max())

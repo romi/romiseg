@@ -27,7 +27,7 @@ dir_path = os.path.abspath(os.path.dirname(os.path.realpath(__file__)))
 install_requires=[
         'torchvision',
         'appdirs',
-        'Pillow>=7.0',
+        'Pillow',
         'tqdm',
         'torch',        
         'requests',
