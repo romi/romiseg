@@ -180,6 +180,16 @@ def init_set(mode, path):
     print(channels)
     return shots, np.sort(channels)
 
+class MyRotationTransform:
+    """Rotate by one of the given angles."""
+
+    def __init__(self, angle, fill):
+        self.angle = angle
+        self.fill = fill
+
+    def __call__(self, x):
+        return TF.rotate(x, self.angle, fill=self.fill)
+
 class Dataset_im_label(Dataset):
     """Data handling for Pytorch Dataloader"""
 
@@ -199,39 +209,39 @@ class Dataset_im_label(Dataset):
         image_file = s.get_fileset('images').get_files(query = {'channel':'rgb', 'shot_id':db_file_meta['shot_id']})[0]
         angle = random.randint(-90, 90)
 
+
         image = Image.fromarray(io.read_image(image_file))
+        padding = image.size
+        pad = transforms.Pad(padding, padding_mode='reflect')
+        crop = transforms.CenterCrop(image.size)
         #id_im = db_file.id
-        filler = (0.485, 0.456, 0.406)
-        num_bands = len(image.getbands())
+        rot = MyRotationTransform(angle, fill=(0,0,0))
+        trans = transforms.Compose([pad, rot, crop, transforms.ToTensor()])
+        t_image = trans(image)
         t_image = transforms.Normalize(mean=[0.485, 0.456, 0.406],
-                    std=[0.229, 0.224, 0.225])(image)
-        t_image = TF.rotate(image, angle, expand = True, fill=filler)
-        t_image = transforms.ColorJitter(brightness=0, contrast=0, saturation=0, hue=0)(t_image)
-        t_image = self.transforms(t_image) #crop the images
+                    std=[0.229, 0.224, 0.225])(transforms.ToTensor()(t_image))
+        
         t_image = t_image[0:3, :, :] #select RGB channels
         torch_labels = []
-        print(t_image.max())
-
         
         for c in self.channels:
             labels = s.get_fileset('images').get_files(query = {'channel':c, 'shot_id':db_file_meta['shot_id']})[0]
             t_label = Image.fromarray(io.read_image(labels))
+            t_label = t_label.convert('1')
 
-            if c == "background":
-                filler = 1.0 if t_label.mode.startswith("F") else 255
-            else:
-                filler = 0.0 if t_label.mode.startswith("F") else 0
             num_bands = len(t_label.getbands())
 
-            t_label = TF.rotate(t_label, angle, expand = True, fill=tuple([filler] * num_bands))
-            t_label = self.transforms(t_label)
-            torch_labels.append(t_label)
+            rot.fill = (0,)
+            t_label = trans(t_label)
+            print(t_label.size())
+            # t_label = self.transforms(t_label)
             print(c, t_label.max())
+            torch_labels.append(t_label)
 
         torch_labels = torch.cat(torch_labels, dim = 0)
         db.disconnect()
 
-        return gaussian(t_image, is_training = True, mean = 0, stddev =  1/100), torch_labels
+        return gaussian(t_image, is_training = True, mean = 0, stddev =  np.random.rand()*1/100), torch_labels
 
     def __len__(self):  # return count of sample
         return len(self.shots)
