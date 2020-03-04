@@ -12,6 +12,7 @@ from torch.optim import lr_scheduler
 import torchvision
 import torch.optim as optim
 import torch.nn.functional as F
+from torch.nn import MaxPool2d
 from torch.autograd import Variable
 from collections import defaultdict
 import matplotlib.pyplot as plt
@@ -193,11 +194,11 @@ class MyRotationTransform:
 class Dataset_im_label(Dataset):
     """Data handling for Pytorch Dataloader"""
 
-    def __init__(self, shots, channels, transform, path):
+    def __init__(self, shots, channels, size, path):
 
         self.shots = shots
         self.channels = channels
-        self.transforms = transform
+        self.size = size
         self.path = path
 
 
@@ -208,36 +209,38 @@ class Dataset_im_label(Dataset):
         s = db.get_scan(db_file_meta['scan'])
         image_file = s.get_fileset('images').get_files(query = {'channel':'rgb', 'shot_id':db_file_meta['shot_id']})[0]
         angle = random.randint(-90, 90)
+        scale = 1 + np.random.rand()
 
 
         image = Image.fromarray(io.read_image(image_file))
         padding = image.size
+        resize = ResizeCrop(self.size)
         pad = transforms.Pad(padding, padding_mode='reflect')
-        crop = transforms.CenterCrop(image.size)
+        crop = transforms.CenterCrop(self.size)
+        scale = transforms.Resize(np.asarray((np.array(self.size) * scale),dtype=int).tolist())
         #id_im = db_file.id
         rot = MyRotationTransform(angle, fill=(0,0,0))
-        trans = transforms.Compose([pad, rot, crop, transforms.ToTensor()])
+        trans = transforms.Compose([resize, scale, pad, rot, crop, transforms.ToTensor()])
         t_image = trans(image)
-        t_image = transforms.Normalize(mean=[0.485, 0.456, 0.406],
-                    std=[0.229, 0.224, 0.225])(transforms.ToTensor()(t_image))
-        
         t_image = t_image[0:3, :, :] #select RGB channels
-        torch_labels = []
+        t_image = transforms.Normalize(mean=[0.485, 0.456, 0.406],
+                    std=[0.229, 0.224, 0.225])(t_image)
         
-        for c in self.channels:
+        torch_labels = []
+
+        
+        for i, c in enumerate(self.channels):
             labels = s.get_fileset('images').get_files(query = {'channel':c, 'shot_id':db_file_meta['shot_id']})[0]
-            t_label = Image.fromarray(io.read_image(labels))
-            t_label = t_label.convert('1')
+            if c != 'background':
+                t_label = Image.fromarray(1.0 * (io.read_image(labels) > 0))
+            else:
+                t_label = Image.fromarray(1.0 * (io.read_image(labels) == 255))
 
             num_bands = len(t_label.getbands())
 
-            rot.fill = (0,)
+            rot.fill = 0.
             t_label = trans(t_label)
-            print(t_label.size())
-            # t_label = self.transforms(t_label)
-            print(c, t_label.max())
             torch_labels.append(t_label)
-
         torch_labels = torch.cat(torch_labels, dim = 0)
         db.disconnect()
 
@@ -253,7 +256,6 @@ class Dataset_im_label(Dataset):
         background = background*255
         dimx, dimy = background.shape
         background = np.expand_dims(background, axis = 0)
-        #print(labels.shape[0])
         if labels.shape[0] == 5:
             labels = np.concatenate((background*0, labels), axis = 0)
 
@@ -493,14 +495,17 @@ def plot_dataset(train_loader, label_names, batch_size, showit=False):
     #plot 4 images to visualize the data
     images_tot = []
     titles_tot = []
-    for i in range(min(batch_size, len(label_names))):
-        img = images[i]
+    for j in range(batch_size):
+        if j * len(label_names) >= 14*14:
+            break
+        img = images[j]
         img = img.permute(1, 2, 0)
         images_tot.append(img)
         titles_tot.append('image')
-        img = label[i,i,:,:]*255#.int()
-        images_tot.append(img)
-        titles_tot.append(label_names[i])
+        for i in range(len(label_names)):
+            img = label[j,i,:,:]*255#.int()
+            images_tot.append(img)
+            titles_tot.append(label_names[i])
     g = alien.showclass()
     g.save_im = False
 

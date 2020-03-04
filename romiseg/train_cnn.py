@@ -70,22 +70,10 @@ learning_rate = param2['learning_rate']
 
 
 def cnn_train(f_weights, directory_dataset, label_names, tsboard, batch_size, epochs,
-                    model, Sx, Sy, load_model = False, showit = False, resize = False):
+                    model, Sx, Sy, load_model = False, showit = False):
         
     #Training board
     writer = SummaryWriter(tsboard)
-    
-    #image transformation for training, can be modified for data augmentation
-    if resize:
-
-        trans = transforms.Compose([ResizeCrop((Sx, Sy)), 
-                                    transforms.ToTensor(),
-                                     #imagenet,
-                                    ])
-    else:
-        trans = transforms.Compose([ #Define transform of the image
-            transforms.CenterCrop((Sx, Sy)),
-            transforms.ToTensor()]) #imagenet
     
     #Load images and ground truth
     path_val = directory_dataset + '/val/'
@@ -96,15 +84,15 @@ def cnn_train(f_weights, directory_dataset, label_names, tsboard, batch_size, ep
     image_val, channels = init_set('', path_val)
     image_test, channels = init_set('', path_test)
     
-    train_dataset = Dataset_im_label(image_train, channels, transform = trans, path = path_train)
-    val_dataset = Dataset_im_label(image_val, channels, transform = trans, path = path_val) 
-    test_dataset = Dataset_im_label(image_test, channels, transform = trans, path = path_test)
+    train_dataset = Dataset_im_label(image_train, channels, size = (Sx, Sy), path = path_train)
+    val_dataset = Dataset_im_label(image_val, channels, size = (Sx, Sy), path = path_val) 
+    test_dataset = Dataset_im_label(image_test, channels, size = (Sx, Sy), path = path_test)
     
     train_loader = torch.utils.data.DataLoader(train_dataset, batch_size=batch_size, shuffle=True, num_workers=1)
     
     #Show input images 
-    # fig = plot_dataset(train_loader, label_names, batch_size, showit = True) #display training set
-    # writer.add_figure('Dataset images', fig, 0)
+    fig = plot_dataset(train_loader, label_names, batch_size, showit = True) #display training set
+    writer.add_figure('Dataset images', fig, 0)
     
        
     dataloaders = {
@@ -163,8 +151,7 @@ if __name__ == '__main__':
     
 
     model = cnn_train(f_weights, directory_dataset, channels, tsboard + "_%d_%d"%(Sx,Sy) + directory_dataset, batch_size, epochs,
-                     model, Sx, Sy, resize = False)
-
+                     model, Sx, Sy)
 
     model_name =  model_name + os.path.split(directory_dataset)[1] +'_%d_%d'%(Sx,Sy)+ '_epoch%d'%epochs
 
