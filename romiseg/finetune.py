@@ -153,7 +153,7 @@ for l in model.base_layers:
 model = cnn_train(f_weights, directory_dataset, label_names, tsboard, batch_size, finetune_epochs,
                     model, Sx, Sy, showit = True, resize = False)
 
-model_name =  model_id[:-3] + os.path.split(directory_dataset)[1] +'_%d_%d_'%(Sx,Sy)+ 'finetune_epoch%d'%finetune_epochs
+model_name =  model_id + os.path.split(directory_dataset)[1] +'_%d_%d_'%(Sx,Sy)+ 'finetune_epoch%d'%finetune_epochs
 
 file = f_weights.create_file(model_name)
 io.write_torch(file, model)
