@@ -32,7 +32,7 @@ class Dataset_im_id(Dataset):
     def __getitem__(self, index):
 
         db_file = self.image_paths[index]
-        image = Image.fromarray(io.read_image(db_file))
+        image = Image.fromarray(io.read_image(db_file)[:,:,:3])
         id_im = db_file.id
         
         t_image = self.transforms(image) #crop the images
@@ -57,22 +57,15 @@ def segmentation(Sx, Sy, images_fileset, model_file, resize=False):
 
         device = torch.device("cuda:0" if torch.cuda.is_available() else "cpu") #Select GPU
         logger.debug(str(device) + ' used for images segmentation')
-        resize=True
 
-        if resize:
-            trans = transforms.Compose([ResizeCrop((Sx, Sy)), 
-                                    transforms.ToTensor(),
-                                    transforms.Normalize(mean=[0.485, 0.456, 0.406],
-                                                         std=[0.229, 0.224, 0.225])]) #imagenet
-        else:
-            trans = transforms.Compose([ #Define transform of the image
-                transforms.CenterCrop((Sx, Sy)),
-                transforms.ToTensor(),
-                transforms.Normalize(mean=[0.485, 0.456, 0.406],
-                                     std=[0.229, 0.224, 0.225])]) 
+        trans = transforms.Compose([ResizeCrop((Sx, Sy)), 
+                                transforms.ToTensor()])
+                                # transforms.Normalize(mean=[0.485, 0.456, 0.406],
+                                                     # std=[0.229, 0.224, 0.225])]) #imagenet
         
         #PyTorch Dataloader
         image_set = Dataset_im_id(images_fileset, transform = trans) 
+        # image_test, channels = init_set('', path_train)
         batch_size = 1       
         loader = DataLoader(image_set, batch_size=batch_size, shuffle=False, num_workers=0)
         #Access the previously trained segmenttion network stored in db.romi-project.eu

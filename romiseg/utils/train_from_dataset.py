@@ -194,12 +194,14 @@ class MyRotationTransform:
 class Dataset_im_label(Dataset):
     """Data handling for Pytorch Dataloader"""
 
-    def __init__(self, shots, channels, size, path):
+    def __init__(self, shots, channels, size, path, labels=True, data_augmentation=True):
 
         self.shots = shots
         self.channels = channels
         self.size = size
         self.path = path
+        self.get_labels = labels
+        self.data_augmentation = data_augmentation
 
 
     def __getitem__(self, index):
@@ -221,14 +223,14 @@ class Dataset_im_label(Dataset):
         #id_im = db_file.id
         rot = MyRotationTransform(angle, fill=(0,0,0))
         trans = transforms.Compose([resize, scale, pad, rot, crop, transforms.ToTensor()])
+
         t_image = trans(image)
         t_image = t_image[0:3, :, :] #select RGB channels
         t_image = transforms.Normalize(mean=[0.485, 0.456, 0.406],
                     std=[0.229, 0.224, 0.225])(t_image)
-        
-        torch_labels = []
 
         
+        torch_labels = []
         for i, c in enumerate(self.channels):
             labels = s.get_fileset('images').get_files(query = {'channel':c, 'shot_id':db_file_meta['shot_id']})[0]
             if c != 'background':
@@ -243,7 +245,6 @@ class Dataset_im_label(Dataset):
             torch_labels.append(t_label)
         torch_labels = torch.cat(torch_labels, dim = 0)
         db.disconnect()
-
         return gaussian(t_image, is_training = True, mean = 0, stddev =  np.random.rand()*1/100), torch_labels
 
     def __len__(self):  # return count of sample
