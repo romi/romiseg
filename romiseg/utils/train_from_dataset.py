@@ -103,11 +103,11 @@ def model_from_fileset(model_file):
 
     
 
-def gaussian(ins, is_training, mean, stddev):
+def gaussian(ins, is_training, mean, stddev, dyn = 1):
     if is_training:
         noise = Variable(ins.data.new(ins.size()).normal_(mean, stddev))
         return torch.clamp(ins + noise, 0, 1)
-    return torch.clamp(ins,0,1)
+    return torch.clamp(ins,0, dyn)
 
 class ResizeFit(object):
     def __init__(self, size, interpolation=Image.BILINEAR):
@@ -178,7 +178,6 @@ def init_set(mode, path):
     channels = copy.copy(channels)
     channels.remove('rgb')
     db.disconnect()
-    print(channels)
     return shots, np.sort(channels)
 
 class MyRotationTransform:
@@ -223,15 +222,16 @@ class Dataset_im_label(Dataset):
         #id_im = db_file.id
         rot = MyRotationTransform(angle, fill=(0,0,0))
         trans = transforms.Compose([resize, scale, pad, rot, crop, transforms.ToTensor()])
-
         t_image = trans(image)
         t_image = t_image[0:3, :, :] #select RGB channels
         t_image = transforms.Normalize(mean=[0.485, 0.456, 0.406],
                     std=[0.229, 0.224, 0.225])(t_image)
-
-        
+        dyn = t_image.max()
+        t_image = gaussian(t_image, is_training = True,
+                           mean = 0, stddev =  np.random.rand()*1/100, dyn = dyn)
         torch_labels = []
         for i, c in enumerate(self.channels):
+            
             labels = s.get_fileset('images').get_files(query = {'channel':c, 'shot_id':db_file_meta['shot_id']})[0]
             if c != 'background':
                 t_label = Image.fromarray(1.0 * (io.read_image(labels) > 0))
@@ -245,7 +245,8 @@ class Dataset_im_label(Dataset):
             torch_labels.append(t_label)
         torch_labels = torch.cat(torch_labels, dim = 0)
         db.disconnect()
-        return gaussian(t_image, is_training = True, mean = 0, stddev =  np.random.rand()*1/100), torch_labels
+
+        return t_image, torch_labels
 
     def __len__(self):  # return count of sample
         return len(self.shots)

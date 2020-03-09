@@ -79,7 +79,6 @@ def cnn_train(f_weights, directory_dataset, label_names, tsboard, batch_size, ep
     path_val = directory_dataset + '/val/'
     path_train = directory_dataset + '/train/'
     path_test = directory_dataset + '/test/'
-    
     image_train, channels = init_set('', path_train)
     image_val, channels = init_set('', path_val)
     image_test, channels = init_set('', path_test)
@@ -133,6 +132,7 @@ if __name__ == '__main__':
             param.requires_grad = False
     '''
     path_train = directory_dataset + '/train/'
+
     image_train, channels = init_set('', path_train)
 
     device = torch.device("cuda:0" if torch.cuda.is_available() else "cpu")
@@ -148,7 +148,6 @@ if __name__ == '__main__':
     db = fsdb.FSDB(directory_weights)
     s = db.get_scan('models', create = True)
     f_weights = s.get_fileset('models', create = True)
-    
 
     model = cnn_train(f_weights, directory_dataset, channels, tsboard + "_%d_%d"%(Sx,Sy) + directory_dataset, batch_size, epochs,
                      model, Sx, Sy)
