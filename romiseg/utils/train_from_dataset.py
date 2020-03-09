@@ -106,8 +106,8 @@ def model_from_fileset(model_file):
 def gaussian(ins, is_training, mean, stddev, dyn = 1):
     if is_training:
         noise = Variable(ins.data.new(ins.size()).normal_(mean, stddev))
-        return torch.clamp(ins + noise, 0, 1)
-    return torch.clamp(ins,0, dyn)
+        return torch.clamp(ins + noise, -dyn, dyn)
+    return torch.clamp(ins,-dyn, dyn)
 
 class ResizeFit(object):
     def __init__(self, size, interpolation=Image.BILINEAR):
@@ -210,25 +210,33 @@ class Dataset_im_label(Dataset):
         s = db.get_scan(db_file_meta['scan'])
         image_file = s.get_fileset('images').get_files(query = {'channel':'rgb', 'shot_id':db_file_meta['shot_id']})[0]
         angle = random.randint(-90, 90)
-        scale = 1 + np.random.rand()
+        #scale = 1 + np.random.rand()
 
 
         image = Image.fromarray(io.read_image(image_file))
         padding = image.size
+        print(padding)
         resize = ResizeCrop(self.size)
+        print(self.size)
         pad = transforms.Pad(padding, padding_mode='reflect')
         crop = transforms.CenterCrop(self.size)
-        scale = transforms.Resize(np.asarray((np.array(self.size) * scale),dtype=int).tolist())
+        #scale = transforms.Resize(np.asarray((np.array(self.size) * scale),dtype=int).tolist())
         #id_im = db_file.id
-        rot = MyRotationTransform(angle, fill=(0,0,0))
-        trans = transforms.Compose([resize, scale, pad, rot, crop, transforms.ToTensor()])
+        #rot = MyRotationTransform(angle, fill=0.5)
+        #trans = transforms.Compose([resize, scale, pad, rot, crop, transforms.ToTensor()])
+        trans = transforms.Compose([resize, pad])
         t_image = trans(image)
+        t_image = t_image.rotate(angle, resample = 2)
+        trans = transforms.Compose([crop, transforms.ToTensor()])
+        t_image = trans(t_image)
         t_image = t_image[0:3, :, :] #select RGB channels
         t_image = transforms.Normalize(mean=[0.485, 0.456, 0.406],
                     std=[0.229, 0.224, 0.225])(t_image)
         dyn = t_image.max()
+        print(t_image.min())
         t_image = gaussian(t_image, is_training = True,
                            mean = 0, stddev =  np.random.rand()*1/100, dyn = dyn)
+        print(t_image.max())
         torch_labels = []
         for i, c in enumerate(self.channels):
             
@@ -240,7 +248,7 @@ class Dataset_im_label(Dataset):
 
             num_bands = len(t_label.getbands())
 
-            rot.fill = 0.
+            #rot.fill = 0.
             t_label = trans(t_label)
             torch_labels.append(t_label)
         torch_labels = torch.cat(torch_labels, dim = 0)

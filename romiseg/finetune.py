@@ -91,7 +91,7 @@ if not os.path.exists(mount_loc):
     os.mkdir(mount_loc)
 txt = subprocess.run(["mountpoint", mount_loc])
 
-"""
+
 quest = input("Ready to mount romi-project.eu? (y/n) ")
 if quest == 'y':
    subprocess.run(["sshfs", user_name + '@db.romi-project.eu:/data/', mount_loc])
@@ -137,8 +137,8 @@ if len(lst) > 0:
             io.write_image(f_label, npz[channel])
     db.disconnect()
  
-"""  
-#subprocess.run(["rsync", "-av", directory_dataset, appdirs.user_cache_dir()])
+  
+subprocess.run(["rsync", "-av", directory_dataset, appdirs.user_cache_dir()])
 directory_dataset = appdirs.user_cache_dir()
 
 
@@ -151,7 +151,7 @@ for l in model.base_layers:
 
 
 model = cnn_train(f_weights, directory_dataset, label_names, tsboard, batch_size, finetune_epochs,
-                    model, Sx, Sy, showit = True, resize = False)
+                    model, Sx, Sy, showit = True)
 
 model_name =  model_id + os.path.split(directory_dataset)[1] +'_%d_%d_'%(Sx,Sy)+ 'finetune_epoch%d'%finetune_epochs
 
