@@ -82,6 +82,7 @@ model = model.to(device)
 
 
 
+
 finetune = param_pipe['Finetune']
 finetune_epochs = finetune['finetune_epochs']
 batch_size = finetune['batch']
@@ -122,7 +123,7 @@ if len(lst) > 0:
         f_im = fileset.create_file(im_name + '_rgb')
         f_im.set_metadata('shot_id', im_name)
         f_im.set_metadata('channel', 'rgb')
-        io.write_image(f_im, im)
+        io.write_image(f_im, im, ext = 'png')
         
         im_save = fsdb._file_path(f_im)
         subprocess.run(['labelme', im_save, '-O', im_save, '--labels', ','.join(label_names)])
@@ -134,7 +135,7 @@ if len(lst) > 0:
             f_label = fileset.create_file(im_name + '_' + channel)
             f_label.set_metadata('shot_id', im_name)
             f_label.set_metadata('channel', channel)
-            io.write_image(f_label, npz[channel])
+            io.write_image(f_label, npz[channel], ext = 'png')
     db.disconnect()
  
   
@@ -150,8 +151,8 @@ for l in model.base_layers:
         param.requires_grad = False
 
 
-model = cnn_train(f_weights, directory_dataset, label_names, tsboard, batch_size, finetune_epochs,
-                    model, Sx, Sy, showit = True)
+model = cnn_train(f_weights, directory_dataset, np.array(label_names), tsboard, batch_size, finetune_epochs,
+                    model, Sx, Sy, showit = True, data_augmentation = False)
 
 model_name =  model_id + os.path.split(directory_dataset)[1] +'_%d_%d_'%(Sx,Sy)+ 'finetune_epoch%d'%finetune_epochs
 

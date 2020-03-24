@@ -70,7 +70,7 @@ learning_rate = param2['learning_rate']
 
 
 def cnn_train(f_weights, directory_dataset, label_names, tsboard, batch_size, epochs,
-                    model, Sx, Sy, load_model = False, showit = False):
+                    model, Sx, Sy, load_model = False, showit = False, data_augmentation = True):
         
     #Training board
     writer = SummaryWriter(tsboard)
@@ -83,9 +83,9 @@ def cnn_train(f_weights, directory_dataset, label_names, tsboard, batch_size, ep
     image_val, channels = init_set('', path_val)
     image_test, channels = init_set('', path_test)
     
-    train_dataset = Dataset_im_label(image_train, channels, size = (Sx, Sy), path = path_train)
-    val_dataset = Dataset_im_label(image_val, channels, size = (Sx, Sy), path = path_val) 
-    test_dataset = Dataset_im_label(image_test, channels, size = (Sx, Sy), path = path_test)
+    train_dataset = Dataset_im_label(image_train, channels, size = (Sx, Sy), path = path_train, data_augmentation = data_augmentation)
+    val_dataset = Dataset_im_label(image_val, channels, size = (Sx, Sy), path = path_val, data_augmentation = data_augmentation) 
+    test_dataset = Dataset_im_label(image_test, channels, size = (Sx, Sy), path = path_test,  data_augmentation = data_augmentation)
     
     train_loader = torch.utils.data.DataLoader(train_dataset, batch_size=batch_size, shuffle=True, num_workers=1)
     

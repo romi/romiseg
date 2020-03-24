@@ -170,8 +170,8 @@ def init_set(mode, path):
         f = s.get_fileset('images')
         list_files = f.get_files( query = {'channel':'rgb'})
         #for i in range(len(list_files)):
-         #   f0 = list_files[i]
-            #print(f0.metadata.keys(), f0.metadata['channel'], f0.metadata['shot_id'])
+            #f0 = list_files[i]
+            #sprint(f0.metadata.keys(), f0.metadata['channel'], f0.metadata['shot_id'])
         shots += [{"scan": s.id, "shot_id": list_files[i].metadata['shot_id']} for i in range(len(list_files))]
 
     channels = f.get_metadata('channels')
@@ -209,34 +209,35 @@ class Dataset_im_label(Dataset):
         db_file_meta = self.shots[index]
         s = db.get_scan(db_file_meta['scan'])
         image_file = s.get_fileset('images').get_files(query = {'channel':'rgb', 'shot_id':db_file_meta['shot_id']})[0]
-        angle = random.randint(-90, 90)
-        #scale = 1 + np.random.rand()
-
-
-        image = Image.fromarray(io.read_image(image_file))
-        padding = image.size
-        print(padding)
-        resize = ResizeCrop(self.size)
-        print(self.size)
-        pad = transforms.Pad(padding, padding_mode='reflect')
-        crop = transforms.CenterCrop(self.size)
-        #scale = transforms.Resize(np.asarray((np.array(self.size) * scale),dtype=int).tolist())
-        #id_im = db_file.id
-        #rot = MyRotationTransform(angle, fill=0.5)
-        #trans = transforms.Compose([resize, scale, pad, rot, crop, transforms.ToTensor()])
-        trans = transforms.Compose([resize, pad])
-        t_image = trans(image)
-        t_image = t_image.rotate(angle, resample = 2)
-        trans = transforms.Compose([crop, transforms.ToTensor()])
-        t_image = trans(t_image)
+        #print(db_file_meta['shot_id'])
+        image = Image.fromarray(io.read_image(image_file))	
+        if self.data_augmentation == True:
+                angle = random.randint(-90, 90)
+                #scale = 1 + np.random.rand()     	
+                padding = image.size
+                resize = ResizeCrop(self.size)
+                pad = transforms.Pad(padding, padding_mode='reflect')
+                crop = transforms.CenterCrop(self.size)
+                #scale = transforms.Resize(np.asarray((np.array(self.size) * scale),dtype=int).tolist())
+                #id_im = db_file.id
+                #rot = MyRotationTransform(angle, fill=0.5)
+                #trans = transforms.Compose([resize, scale, pad, rot, crop, transforms.ToTensor()])
+                trans1 = transforms.Compose([resize, pad])
+                t_image = trans1(image)
+                t_image = t_image.rotate(angle, resample = 2)
+                trans2 = transforms.Compose([crop, transforms.ToTensor()])
+                t_image = trans2(t_image)
+        else: 
+                t_image = ResizeCrop(self.size)(image)
+                t_image = transforms.ToTensor()(t_image)
+        
         t_image = t_image[0:3, :, :] #select RGB channels
         t_image = transforms.Normalize(mean=[0.485, 0.456, 0.406],
                     std=[0.229, 0.224, 0.225])(t_image)
         dyn = t_image.max()
-        print(t_image.min())
-        t_image = gaussian(t_image, is_training = True,
+        if self.data_augmentation == True: 
+                t_image = gaussian(t_image, is_training = True,
                            mean = 0, stddev =  np.random.rand()*1/100, dyn = dyn)
-        print(t_image.max())
         torch_labels = []
         for i, c in enumerate(self.channels):
             
@@ -247,9 +248,13 @@ class Dataset_im_label(Dataset):
                 t_label = Image.fromarray(1.0 * (io.read_image(labels) == 255))
 
             num_bands = len(t_label.getbands())
-
-            #rot.fill = 0.
-            t_label = trans(t_label)
+            if self.data_augmentation == True:
+                    t_label = trans1(t_label)
+                    t_label = t_label.rotate(angle, resample = 2)
+                    t_label = trans2(t_label)
+            else:
+                    t_label = ResizeCrop(self.size)(t_label)
+                    t_label = transforms.ToTensor()(t_label)
             torch_labels.append(t_label)
         torch_labels = torch.cat(torch_labels, dim = 0)
         db.disconnect()

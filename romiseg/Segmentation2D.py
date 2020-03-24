@@ -59,9 +59,9 @@ def segmentation(Sx, Sy, images_fileset, model_file, resize=False):
         logger.debug(str(device) + ' used for images segmentation')
 
         trans = transforms.Compose([ResizeCrop((Sx, Sy)), 
-                                transforms.ToTensor()])
-                                #transforms.Normalize(mean=[0.485, 0.456, 0.406],
-                                #                     std=[0.229, 0.224, 0.225])]) #imagenet
+                                transforms.ToTensor(),
+                                transforms.Normalize(mean=[0.485, 0.456, 0.406],
+                                                     std=[0.229, 0.224, 0.225])]) #imagenet
         
         #PyTorch Dataloader
         image_set = Dataset_im_id(images_fileset, transform = trans) 
