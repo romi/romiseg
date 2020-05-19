@@ -35,7 +35,8 @@ install_requires=[
         'tensorboard',
         'future',
         'labelme',       
-        
+        'pyyaml',
+		'pyqt5==5.14',
         
     ]
 
