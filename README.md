@@ -32,7 +32,7 @@ This tool relies on the file pipeline.toml used by the virtual scanner.
 
 From the virtual environment created for Scan3D: 
 ```
-git clone https://github.com/romi/Segmentation@dev
+git clone https://github.com/romi/romiseg@dev
 ```
 
 
