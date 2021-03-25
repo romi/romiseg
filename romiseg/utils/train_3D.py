@@ -23,8 +23,8 @@ from romiseg.utils.train_from_dataset import Dataset_im_label, plot_dataset, ini
 import romiseg.utils.alienlab as alien
 from romiseg.utils.ply import write_ply
 
-from romidata import io
-from romidata import fsdb
+from plantdb import io
+from plantdb import fsdb
 
 from torch.utils.tensorboard import SummaryWriter
 

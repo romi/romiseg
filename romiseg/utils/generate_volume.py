@@ -5,7 +5,7 @@ Created on Tue Dec 10 15:50:24 2019
 
 @author: alienor
 """
-from romidata import io, fsdb
+from plantdb import io, fsdb
 import torch
 import romiseg.utils.vox_to_coord as vtc
 import numpy as np
@@ -14,8 +14,8 @@ import numpy as np
 import argparse
 import toml
 
-from romidata import io
-from romidata import fsdb
+from plantdb import io
+from plantdb import fsdb
 
 from romiseg.utils.train_from_dataset import train_model, plot_dataset
 from romiseg.utils import segmentation_model
