@@ -23,8 +23,8 @@ from torch.optim import lr_scheduler
 import torch.optim as optim
 #from torchvision import models
 
-from romidata import io
-from romidata import fsdb
+from plantdb import io
+from plantdb import fsdb
 
 from romiseg.utils.train_from_dataset import ResizeCrop, init_set, Dataset_im_label, train_model, plot_dataset, save_and_load_model
 from romiseg.utils import segmentation_model

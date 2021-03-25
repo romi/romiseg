@@ -21,8 +21,8 @@ from torch.optim import lr_scheduler
 import torch.optim as optim
 #from torchvision import models
 
-from romidata import io
-from romidata import fsdb
+from plantdb import io
+from plantdb import fsdb
 
 from romiseg.utils.train_from_dataset import train_model
 from romiseg.utils.dataloader_finetune import plot_dataset

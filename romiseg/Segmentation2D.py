@@ -16,7 +16,7 @@ from romiseg.utils.train_from_dataset import ResizeCrop, ResizeFit
 
 
 #made in CSL
-from romidata import io
+from plantdb import io
 from romiseg.utils.train_from_dataset import evaluate, save_and_load_model, model_from_fileset
 import logging
 logger = logging.getLogger('romiscan')
