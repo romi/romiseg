@@ -25,7 +25,7 @@ import getpass
 from romiseg.train_cnn import cnn_train
 from romiseg.utils.train_from_dataset import model_from_fileset
 from romiseg.utils.active_contour import run_refine_romidata
-from romidata import fsdb, io
+from plantdb import fsdb, io
 
 import toml
 
