@@ -17,7 +17,7 @@ install_requires = [
     'pyyaml',
     'requests',
     'tensorboard',
-    'torch <1.11',
+    'torch<1.11',
     'torchvision',
     'tqdm'
 ]
