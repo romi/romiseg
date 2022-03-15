@@ -1,45 +1,26 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
-"""
-Created on Wed Nov  6 12:20:54 2019
-
-@author: alienor
-"""
-
 import os
-import sys
 
-
-import re
-
-import platform
-import subprocess
-
-import site
-from distutils.sysconfig import get_python_inc
-
-from distutils.version import LooseVersion
-from setuptools import setup, Extension, find_packages
-from setuptools.command.build_ext import build_ext
+from setuptools import find_packages
+from setuptools import setup
 
 dir_path = os.path.abspath(os.path.dirname(os.path.realpath(__file__)))
 
-install_requires=[
-        'torchvision',
-        'appdirs',
-        'Pillow',
-        'tqdm',
-        'torch',        
-        'requests',
-        'mako',
-        'tensorboard',
-        'future',
-        'labelme',       
-        'pyyaml',
-		'pyqt5==5.14',
-        
-    ]
-
+install_requires = [
+    'appdirs',
+    'future',
+    'labelme',
+    'mako',
+    'Pillow',
+    'pyqt5==5.14',
+    'pyyaml',
+    'requests',
+    'tensorboard',
+    'torch <1.11',
+    'torchvision',
+    'tqdm'
+]
 
 s = setup(
     name='romiseg',
@@ -50,10 +31,7 @@ s = setup(
     author_email='alienor.lahlou@espci.org',
     description='Image multiclass segmentation using CNN models trained on virtual images (PyTorch)',
     long_description='',
-    url = 'https://github.com/romi/Segmentation',
+    url='https://github.com/romi/romiseg',
     install_requires=install_requires,
     include_package_data=True,
 )
-
-
-
