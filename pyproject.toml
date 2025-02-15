@@ -1,0 +1,58 @@
+[build-system]
+requires = ["setuptools>=42"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "romiseg"
+version = "0.1.0"
+description = "Image multiclass semantic segmentation using CNN models trained on virtual plant images (PyTorch)."
+readme = "README.md"
+license = { name = "GPL-3.0-or-later" }
+authors = [
+    { name = "Alienor Lahlou", email = "alienor.lahlou@espci.org" }
+]
+maintainers = [
+    { name = "Jonathan Legrand", email = "jonathan.legrand@ens-lyon.fr" }
+]
+classifiers = [
+    "Programming Language :: Python :: 3",
+    "Development Status :: 4 - Beta",
+    "Intended Audience :: Science/Research",
+    "License :: OSI Approved :: GNU Lesser General Public License v3 or later (LGPLv3+)"
+]
+keywords = [
+    "Robotics for Microfarms",
+    "ROMI",
+    "U-Net",
+    "Deep CNN",
+    "Virtual Plant",
+    "semantic segmentation",
+    "PyTorch",
+]
+requires-python = ">=3.8"
+dependencies = [
+    "appdirs",
+    "future",
+    "Pillow",
+    "requests",
+    "torch<2",
+    "torchvision",
+    "tqdm"
+]
+
+[project.scripts]
+finetune = "romiseg.finetune:main"
+train_cnn = "romiseg.train_cnn:main"
+
+[project.urls]
+Homepage = "https://romi-project.eu/"
+Documentation = "https://docs.romi-project.eu/plant_imager/"
+Repository = "https://github.com/romi/romiseg"
+Issues = "https://github.com/romi/romiseg/issues"
+
+[project.optional-dependencies]
+train = [
+    "labelme",
+    "pyqt5==5.14",
+    "tensorboard",
+]
