@@ -1,1 +1,1 @@
-from .Segmentation2D import segmentation
+from .segmentation_2d import segmentation
