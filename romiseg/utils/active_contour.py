@@ -380,7 +380,7 @@ def run_refine_romidata(f, beta, alpha, tau, d, Nit, class_names, plotit=None, s
 
     Returns
     -------
-    Dict[str, np.ndarray]
+    Dict[str, numpy.ndarray]
         A dictionary where keys are class names and values are binary masks
         (numpy arrays) for the corresponding classes.
     """

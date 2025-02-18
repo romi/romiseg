@@ -113,7 +113,7 @@ def basis_vox_pipeline(min_vec, max_vec, w, h, l):
 
     Returns
     -------
-    np.ndarray
+    numpy.ndarray
         A 2D array of shape `(w * h * l, 4)` where each row represents a single voxel.
         The first three columns contain the (x, y, z) coordinates of the
         voxel, while the fourth column remains initialized to zero.
