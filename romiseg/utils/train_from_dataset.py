@@ -30,8 +30,8 @@ from torchvision import transforms
 from tqdm import tqdm
 
 import romiseg.utils.alienlab as alien
-from plantdb import fsdb
-from plantdb import io
+from plantdb.commons import fsdb
+from plantdb.commons import io
 
 warnings.filterwarnings("ignore")
 

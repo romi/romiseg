@@ -26,8 +26,8 @@ from torch.utils.tensorboard import SummaryWriter
 from torchvision import transforms
 from tqdm import tqdm
 
-from plantdb import fsdb
-from plantdb import io
+from plantdb.commons import fsdb
+from plantdb.commons import io
 from romiseg.utils.ply import write_ply
 from romiseg.utils.train_from_dataset import Dataset_im_label
 from romiseg.utils.train_from_dataset import init_set

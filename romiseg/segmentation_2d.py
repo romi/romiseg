@@ -31,7 +31,7 @@ from torch.utils.data import Dataset
 from torchvision import transforms
 from tqdm import tqdm
 
-from plantdb import io
+from plantdb.commons import io
 from romiseg.utils.train_from_dataset import ResizeCrop
 from romiseg.utils.train_from_dataset import ResizeFit
 from romiseg.utils.train_from_dataset import evaluate
@@ -254,7 +254,7 @@ def fileset_segmentation(Sx, Sy, images_fileset, model_file):
     >>> from PIL import Image
     >>> from skimage.morphology import binary_dilation, disk
     >>> from romiseg.segmentation_2d import fileset_segmentation
-    >>> from plantdb.test_database import test_database
+    >>> from plantdb.commons.test_database import test_database
     >>> db = test_database(with_models=True)
     >>> db.connect()
     >>> scan = db.get_scan("real_plant_analyzed")
@@ -358,7 +358,7 @@ def file_segmentation(Sx, Sy, image_path, model_segmentation, label_names, devic
     >>> from skimage.morphology import binary_dilation, disk
     >>> from romiseg.segmentation_2d import file_segmentation
     >>> from romiseg.utils.train_from_dataset import model_from_fileset
-    >>> from plantdb.test_database import test_database
+    >>> from plantdb.commons.test_database import test_database
     >>> db = test_database(with_models=True)
     >>> db.connect()
     >>> scan = db.get_scan("real_plant_analyzed")

@@ -30,8 +30,8 @@ import toml
 import torch
 from PIL import Image
 
-from plantdb import fsdb
-from plantdb import io
+from plantdb.commons import fsdb
+from plantdb.commons import io
 from romiseg.train_cnn import cnn_train
 from romiseg.utils.active_contour import run_refine_romidata
 from romiseg.utils.train_from_dataset import model_from_fileset

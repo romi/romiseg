@@ -27,8 +27,8 @@ import torch.optim as optim
 #from torchvision import models
 
 from numpy import random
-from plantdb import io
-from plantdb import fsdb
+from plantdb.commons import io
+from plantdb.commons import fsdb
 
 from tqdm import tqdm
 from romiseg.utils.train_from_dataset import init_set, Dataset_im_label, train_model, plot_dataset, test, save_and_load_model

@@ -26,8 +26,8 @@ from torch.optim import lr_scheduler
 from torch.utils.data import DataLoader
 from torch.utils.tensorboard import SummaryWriter
 
-from plantdb import fsdb
-from plantdb import io
+from plantdb.commons import fsdb
+from plantdb.commons import io
 from romiseg.utils import segmentation_model
 from romiseg.utils.train_from_dataset import Dataset_im_label
 from romiseg.utils.train_from_dataset import init_set
