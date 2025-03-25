@@ -26,12 +26,12 @@ from pathlib import Path
 import torch
 import torch.nn.functional as F
 from PIL import Image
+from plantdb.commons import io
 from torch.utils.data import DataLoader
 from torch.utils.data import Dataset
 from torchvision import transforms
 from tqdm import tqdm
 
-from plantdb.commons import io
 from romiseg.utils.train_from_dataset import ResizeCrop
 from romiseg.utils.train_from_dataset import ResizeFit
 from romiseg.utils.train_from_dataset import evaluate
@@ -322,12 +322,14 @@ def fileset_segmentation(Sx, Sy, images_fileset, model_file):
         # Initialize an empty tensor to contain predictions with padding reversed
         pred_pad = torch.zeros((len(label_names), xinit, yinit))
         # Reverse padding applied earlier to match the original image dimensions
-        pred_pad[:, padding[0]:pred_pad.size(1) - padding[2], padding[1]:pred_pad.size(2) - padding[3]] = outputs.squeeze(0)
+        pred_pad[:, padding[0]:pred_pad.size(1) - padding[2],
+        padding[1]:pred_pad.size(2) - padding[3]] = outputs.squeeze(0)
         pred_images.append(pred_pad)
 
     return pred_images
 
-def file_segmentation(Sx, Sy, image_path, model_segmentation, label_names, device, resize=False,):
+
+def file_segmentation(Sx, Sy, image_path, model_segmentation, label_names, device, resize=False, ):
     """Segments a single image using a pretrained deep learning model.
 
     Parameters

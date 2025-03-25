@@ -21,6 +21,8 @@ import torch.optim as optim
 import torchvision
 import torchvision.transforms.functional as TF
 from PIL import Image
+from plantdb.commons import fsdb
+from plantdb.commons import io
 from torch.autograd import Variable
 from torch.optim import lr_scheduler
 from torch.utils.data import DataLoader
@@ -30,12 +32,12 @@ from torchvision import transforms
 from tqdm import tqdm
 
 import romiseg.utils.alienlab as alien
-from plantdb.commons import fsdb
-from plantdb.commons import io
 
 warnings.filterwarnings("ignore")
 
 device = torch.device("cuda:0" if torch.cuda.is_available() else "cpu")
+
+
 # print(device)
 
 

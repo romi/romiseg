@@ -18,6 +18,8 @@ import torch.nn.functional as F
 import torch.optim as optim
 import torchvision
 from PIL import Image
+from plantdb.commons import fsdb
+from plantdb.commons import io
 from torch import autograd
 from torch.optim import lr_scheduler
 from torch.utils.data import DataLoader
@@ -26,8 +28,6 @@ from torch.utils.tensorboard import SummaryWriter
 from torchvision import transforms
 from tqdm import tqdm
 
-from plantdb.commons import fsdb
-from plantdb.commons import io
 from romiseg.utils.ply import write_ply
 from romiseg.utils.train_from_dataset import Dataset_im_label
 from romiseg.utils.train_from_dataset import init_set
@@ -249,6 +249,7 @@ class classification(torch.nn.Module):
     layer : torch.nn.Sequential
         The sequential container holding the layers of the neural network.
     """
+
     def __init__(self, D_in, D_out):
         super(classification, self).__init__()
         lin = torch.nn.Linear(D_in, D_in)
