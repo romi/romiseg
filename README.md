@@ -1,12 +1,10 @@
-# ROMISeg
+# [![ROMI_logo](docs/assets/images/ROMI_logo_green_25.svg)](https://romi-project.eu) / romiseg
 
 [![Licence](https://img.shields.io/github/license/romi/romiseg?color=lightgray)](https://www.gnu.org/licenses/lgpl-3.0.en.html)
 [![Python Version](https://img.shields.io/python/required-version-toml?tomlFilePath=https%3A%2F%2Fraw.githubusercontent.com%2Fromi%2Fromiseg%2Frefs%2Fheads%2Fdev%2Fpyproject.toml&logo=python&logoColor=white)]()
 [![PyPI - Version](https://img.shields.io/pypi/v/romiseg?logo=pypi&logoColor=white)](https://pypi.org/project/romiseg/)
 [![Conda - Version](https://img.shields.io/conda/vn/romi-eu/romiseg?logo=anaconda&logoColor=white&label=romi-eu&color=%2344A833)](https://anaconda.org/romi-eu/romiseg)
 [![GitHub branch check runs](https://img.shields.io/github/check-runs/romi/romiseg/dev)](https://github.com/romi/romiseg)
-
-[![ROMI_logo](docs/assets/images/ROMI_logo_green.svg)](https://romi-project.eu)
 
 ## Overview
 
