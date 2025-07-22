@@ -10,8 +10,8 @@ dependencies = [
     "future",
     "Pillow",
     "requests",
-    "torch<2",
-    "torchvision",
+    "torch>=2.0.0",
+    "torchvision>=0.15.0",
     "tqdm",
     "plantdb.commons",
 ]
@@ -46,8 +46,8 @@ classifiers = [
 ]
 
 [project.scripts]
-finetune = "romiseg.finetune:main"
-train_cnn = "romiseg.train_cnn:main"
+finetune = "romiseg.cli.finetune:main"
+train_cnn = "romiseg.cli.train_cnn:main"
 
 [project.urls]
 homepage = "https://romi-project.eu/"
@@ -58,6 +58,7 @@ issues = "https://github.com/romi/romiseg/issues"
 [project.optional-dependencies]
 train = [
     "labelme",
+    "matplotlib",
     "pyqt5==5.14",
     "tensorboard",
 ]

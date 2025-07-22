@@ -18,13 +18,19 @@ This package contains trained CNN models and methods dedicated to performs seman
 git clone https://github.com/romi/romiseg
 ```
 
+### Optional - Create a conda environment
+
+```shell
+conda create -n romiseg python==3.10
+```
+
 ### Install PyTorch & dependencies
 
 ```shell
-python -m pip install torch==1.12.1+cu102 torchvision==0.13.1+cu102 torchaudio==0.12.1 --extra-index-url https://download.pytorch.org/whl/cu102
+python -m pip install 'torch>=2.0.0' 'torchvision>=0.15.0' --extra-index-url 'https://download.pytorch.org/whl/cu118'
 ```
 
-We install it for CUDA 10.2, as it is reasonably old to work with your CUDA toolkit.
+We install it for CUDA 11.8, which is compatible with the latest PyTorch 2.x versions.
 
 ### Install `romiseg`
 

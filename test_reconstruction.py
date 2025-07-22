@@ -7,12 +7,10 @@ Created on Thu Nov 21 09:18:24 2019
 import argparse
 
 import numpy as np
-import segmentation_models_pytorch as smp
 import toml
 import torch
 from plantdb.commons import fsdb
 from plantdb.commons import io
-from romiseg.utils.dataloader_finetune import plot_dataset
 
 import romiseg.utils.vox_to_coord as vtc
 from romiseg.utils.generate_volume import generate_ground_truth
