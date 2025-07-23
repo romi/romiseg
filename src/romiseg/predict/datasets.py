@@ -14,7 +14,7 @@ from PIL import Image
 from plantdb.commons import io
 from torch.utils.data import Dataset
 
-logger = logging.getLogger('romiscan')
+logger = logging.getLogger('romiseg')
 
 
 class DatasetImId(Dataset):
