@@ -48,6 +48,7 @@ classifiers = [
 [project.scripts]
 finetune = "romiseg.cli.finetune:main"
 train_cnn = "romiseg.cli.train_cnn:main"
+convert_model = "romiseg.cli.convert_model:main"
 
 [project.urls]
 homepage = "https://romi-project.eu/"
