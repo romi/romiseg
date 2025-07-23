@@ -54,7 +54,6 @@ Example usage
 
 """
 
-
 import argparse
 import logging
 import sys
@@ -269,7 +268,14 @@ def process_directory(directory, output_dir=None, pattern="*.pt", recursive=Fals
     logger.info(f"- Skipped: {skipped}")
 
 
-if __name__ == "__main__":
+def parser():
+    """Parses command-line arguments.
+
+    Returns
+    -------
+    argparse.ArgumentParser
+        A configured argument parser with an option for specifying the configuration directory.
+    """
     parser = argparse.ArgumentParser(description="Convert PyTorch models to state dictionary format")
     parser.add_argument("input", help="Input model file or directory")
     parser.add_argument("--output", help="Output file or directory (optional)")
@@ -281,7 +287,11 @@ if __name__ == "__main__":
                         choices=["DEBUG", "INFO", "WARNING", "ERROR", "CRITICAL"],
                         help="Set the logging level")
 
-    args = parser.parse_args()
+    return parser
+
+
+def main():
+    args = parser().parse_args()
 
     # Setup logging
     log_level = getattr(logging, args.log_level)
@@ -300,3 +310,7 @@ if __name__ == "__main__":
         process_directory(input_path, args.output, args.pattern, args.recursive, args.overwrite)
     else:
         logger.error(f"Input path {input_path} does not exist")
+
+
+if __name__ == "__main__":
+    main()
