@@ -63,3 +63,14 @@ train = [
     "pyqt5==5.14",
     "tensorboard",
 ]
+
+doc = [
+    "mkdocs",
+    "mkdocs-material",
+    "mkdocstrings[python]",
+    "pymdown-extensions",
+    "markdown-exec[ansi]",
+    "mkdocs-gen-files",
+    "mkdocs-literate-nav",
+    "mkdocs-section-index",
+]
