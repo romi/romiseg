@@ -1,20 +1,21 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 
+# Created on Wed Nov  6 10:50:33 2019
+#
+# @author: alienor
+
 """
-Fine-tuning CLI.
+# Fine-tuning CLI.
 
 This script handles fine-tuning a model and managing its configuration, making it easier
 for users to set up, execute, and modify training tasks.
 
-Key Features:
+## Key Features
+
 - **Configuration Parsing**: Utilities (`parser`, `parse_config`) for handling experiment configurations, ensuring flexible and streamlined setup.
 - **Fine-Tuning**: Run the main fine-tuning process, delegating tasks to other helper functions.
 - Update existing configuration settings on the fly, streamlining adaptation to different tasks.
-
-Created on Wed Nov  6 10:50:33 2019
-
-@author: alienor
 """
 
 import argparse

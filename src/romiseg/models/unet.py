@@ -2,9 +2,9 @@
 # -*- coding: utf-8 -*-
 
 """
-2D UNet model definitions for the romiseg package.
+# 2D UNet Model.
 
-This module contains the 2D UNet model definitions.
+This module contains the 2D UNet model definitions and related utilities.
 """
 
 import torch

@@ -2,7 +2,7 @@
 # -*- coding: utf-8 -*-
 
 """
-Dataset classes for prediction with segmentation models.
+# Dataset Classes.
 
 This module contains dataset classes used for making predictions with segmentation models.
 """

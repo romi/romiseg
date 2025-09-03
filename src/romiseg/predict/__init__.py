@@ -2,7 +2,7 @@
 # -*- coding: utf-8 -*-
 
 """
-Prediction utilities for the romiseg package.
+# Prediction Submodule.
 
 This module contains utilities for making predictions with trained segmentation models.
 """

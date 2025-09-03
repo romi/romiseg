@@ -2,7 +2,7 @@
 # -*- coding: utf-8 -*-
 
 """
-Training utilities for the romiseg package.
+# Train Submodule.
 
 This module contains utilities for training segmentation models.
 """

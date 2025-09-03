@@ -2,7 +2,7 @@
 # -*- coding: utf-8 -*-
 
 """
-Common utilities for the romiseg package.
+# Common Utilities.
 
 This module contains utilities that are used by both training and prediction code.
 """

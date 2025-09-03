@@ -2,7 +2,7 @@
 # -*- coding: utf-8 -*-
 
 """
-Metrics for evaluating segmentation models.
+# Evaluation Metrics.
 
 This module contains metrics used for evaluating segmentation models.
 """

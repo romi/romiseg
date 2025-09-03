@@ -2,7 +2,7 @@
 # -*- coding: utf-8 -*-
 
 """
-Evaluation functions for segmentation models.
+# Evaluation Functions.
 
 This module contains functions for evaluating segmentation models.
 """

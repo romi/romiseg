@@ -1,19 +1,20 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 
+# Created on Thu Nov 21 09:18:24 2019
+#
+# @author: alienor
+
 """
-CNN Training CLI
+# CNN Training CLI
 
 This script provides tools for configuring, training, and managing convolutional neural network (CNN) models.
 
-Key Features:
+## Key Features
+
 - **Configuration Parsing**: Utilities (`parser`, `parse_config`) for handling experiment configurations, ensuring flexible and streamlined setup.
 - **Model Training**: A `cnn_train` function for training neural networks with support for custom datasets, batch sizes, epochs, and more.
 - **Experiment Management**: Includes features for managing and saving trained models and tracking metadata to ensure reproducibility.
-
-Created on Thu Nov 21 09:18:24 2019
-
-@author: alienor
 """
 
 import argparse
@@ -57,7 +58,7 @@ def parser():
 
 
 def parse_config(config):
-    """Parses configuration file for a 2D segmentation task and retrieves relevant parameters.
+    """Parses a configuration file for a 2D segmentation task and retrieves relevant parameters.
 
     Parameters
     ----------
@@ -130,10 +131,6 @@ def cnn_train(f_weights, directory_dataset, label_names, tsboard, batch_size, ep
         Width of the input images to the model.
     Sy : int
         Height of the input images to the model.
-    load_model : bool, optional
-        Whether to load a pre-trained model at the start (default is False).
-    showit : bool, optional
-        Whether to visualize the training dataset images (default is False).
     data_augmentation : bool, optional
         Whether to apply data augmentation on the training dataset (default is True).
 

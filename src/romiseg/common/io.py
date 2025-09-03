@@ -2,7 +2,7 @@
 # -*- coding: utf-8 -*-
 
 """
-I/O utilities for the romiseg package.
+# I/O Utilities.
 
 This module contains utilities for file I/O operations.
 """

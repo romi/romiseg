@@ -2,7 +2,7 @@
 # -*- coding: utf-8 -*-
 
 """
-Segmentation functions for the romiseg package.
+# Segmentation Functions.
 
 This module contains functions for segmenting images using trained models.
 """

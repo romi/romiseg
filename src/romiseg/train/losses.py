@@ -2,7 +2,7 @@
 # -*- coding: utf-8 -*-
 
 """
-Loss functions for training segmentation models.
+# Loss Functions.
 
 This module contains loss functions used for training segmentation models.
 """

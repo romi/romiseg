@@ -2,7 +2,7 @@
 # -*- coding: utf-8 -*-
 
 """
-Training functions for segmentation models.
+# Training Functions.
 
 This module contains functions for training segmentation models.
 """

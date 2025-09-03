@@ -2,7 +2,7 @@
 # -*- coding: utf-8 -*-
 
 """
-Dataset utilities for the romiseg package.
+# Dataset Utilities.
 
 This module contains utilities for working with datasets.
 """

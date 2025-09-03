@@ -2,7 +2,7 @@
 # -*- coding: utf-8 -*-
 
 """
-Visualization utilities for the romiseg package.
+# Visualization Utilities.
 
 This module contains utilities for visualizing data and results.
 """

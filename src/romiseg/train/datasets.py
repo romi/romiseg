@@ -2,7 +2,7 @@
 # -*- coding: utf-8 -*-
 
 """
-Dataset classes for training segmentation models.
+# Dataset Classes.
 
 This module contains dataset classes used for training segmentation models.
 """

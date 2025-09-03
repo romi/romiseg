@@ -1,10 +1,11 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 
-"""
-Created on Thu Nov 21 09:18:24 2019
+# Created on Thu Nov 21 09:18:24 2019
+#
+# @author: alienor
 
-@author: alienor
+"""
 """
 
 import argparse

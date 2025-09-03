@@ -2,7 +2,7 @@
 # -*- coding: utf-8 -*-
 
 """
-3D-specific training functionality for segmentation models.
+# Train 3D Models.
 
 This module contains functions for training 3D segmentation models.
 """

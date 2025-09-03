@@ -2,7 +2,7 @@
 # -*- coding: utf-8 -*-
 
 """
-Image transformation utilities for the romiseg package.
+# Image Transformation.
 
 This module contains utilities for transforming images.
 """

@@ -2,7 +2,7 @@
 # -*- coding: utf-8 -*-
 
 """
-3D UNet model definitions for the romiseg package.
+# 3D UNet Model.
 
 This module contains the 3D UNet model definitions and related utilities.
 """

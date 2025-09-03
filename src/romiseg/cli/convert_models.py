@@ -2,56 +2,53 @@
 # -*- coding: utf-8 -*-
 
 """
-Script to convert PyTorch models to state dictionary format.
+# Convert PyTorch models to state dictionary format.
 
 This script can be used to convert PyTorch models to state dictionary format, which is a simpler format
 that can be used to share models between different platforms.
 
 The script supports both single model files and directories containing multiple model files.
 
-Usage
------
+## Usage
 
-.. code-block:: shell
+```shell
+python convert_models.py <input> [--output <output>] [--pattern <pattern>] [--recursive] [--overwrite] [--log-level <level>]
+python convert_models.py --help
+python convert_models.py --version
+```
 
-    $ python convert_models.py <input> [--output <output>] [--pattern <pattern>] [--recursive] [--overwrite] [--log-level <level>]
-    $ python convert_models.py --help
-    $ python convert_models.py --version
+## Example usage
 
-Example usage
--------------
-
-.. code-block:: python
-
-    >>> from romiseg.cli.convert_models import setup_module_alias
-    >>> from romiseg.cli.convert_models import convert_model_to_state_dict
-    >>> from plantdb.commons import io
-    >>> from plantdb.commons.test_database import test_database
-    >>> from romiseg.models.unet import ResNetUNet
-    >>> # Set up a test database with an old API model with weights_only=True
-    >>> db = test_database('real_plant', with_models=True)
-    >>> db.connect(unsafe=True)
-    >>> # Get the model fileset and model file
-    >>> model_name = 'Resnet_896_896_epoch50.pt'
-    >>> models_fileset = db.get_scan('models').get_fileset('models')
-    >>> models_file = models_fileset.get_file(model_name.split('.')[0])
-    >>> # Get the label names from the model metadata
-    >>> label_names = models_file.get_metadata('label_names')
-    >>> print(label_names)
-    >>> # Set up the module alias and convert the model to state dict
-    >>> setup_module_alias()
-    >>> state_model_file = convert_model_to_state_dict(models_file.path())
-    >>> # Check the state dict was saved correctly
-    >>> assert state_model_file.exists()
-    >>> # Load the state dict and instantiate model
-    >>> model = ResNetUNet(len(label_names))
-    >>> model.load_state_dict(io.read_torch(state_model_file))
-    >>> # Clean up
-    >>> db_path = db.path()
-    >>> db.disconnect()
-    >>> import shutil
-    >>> shutil.rmtree(db_path)
-
+```python
+>>> from romiseg.cli.convert_models import setup_module_alias
+>>> from romiseg.cli.convert_models import convert_model_to_state_dict
+>>> from plantdb.commons import io
+>>> from plantdb.commons.test_database import test_database
+>>> from romiseg.models.unet import ResNetUNet
+>>> # Set up a test database with an old API model with weights_only=True
+>>> db = test_database('real_plant', with_models=True)
+>>> db.connect(unsafe=True)
+>>> # Get the model fileset and model file
+>>> model_name = 'Resnet_896_896_epoch50.pt'
+>>> models_fileset = db.get_scan('models').get_fileset('models')
+>>> models_file = models_fileset.get_file(model_name.split('.')[0])
+>>> # Get the label names from the model metadata
+>>> label_names = models_file.get_metadata('label_names')
+>>> print(label_names)
+>>> # Set up the module alias and convert the model to state dict
+>>> setup_module_alias()
+>>> state_model_file = convert_model_to_state_dict(models_file.path())
+>>> # Check the state dict was saved correctly
+>>> assert state_model_file.exists()
+>>> # Load the state dict and instantiate model
+>>> model = ResNetUNet(len(label_names))
+>>> model.load_state_dict(io.read_torch(state_model_file))
+>>> # Clean up
+>>> db_path = db.path()
+>>> db.disconnect()
+>>> import shutil
+>>> shutil.rmtree(db_path)
+```
 """
 
 import argparse
