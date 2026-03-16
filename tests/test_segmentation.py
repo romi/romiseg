@@ -29,7 +29,7 @@ class TestSegmentation(unittest.TestCase):
         db = test_database(self.dataset_name, with_models=True)
         self.tmp_dir = db.path()
         # Connect to database with unsafe mode (allows write operations)
-        db.connect(unsafe=True)
+        db.connect()
         # Get scan from database and extract image file paths
         scan = db.get_scan(self.dataset_name)
         self.images_fileset = [f.path() for f in scan.get_fileset('images').get_files()]

@@ -27,7 +27,7 @@ python convert_models.py --version
 >>> from romiseg.models.unet import ResNetUNet
 >>> # Set up a test database with an old API model with weights_only=True
 >>> db = test_database('real_plant', with_models=True)
->>> db.connect(unsafe=True)
+>>> db.connect()
 >>> # Get the model fileset and model file
 >>> model_name = 'Resnet_896_896_epoch50.pt'
 >>> models_fileset = db.get_scan('models').get_fileset('models')
