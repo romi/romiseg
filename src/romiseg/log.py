@@ -143,7 +143,6 @@ def get_logger(logger_name, log_file=None, log_level=DEFAULT_LOG_LEVEL):
     logging.Logger
         The configured logger instance ready to log messages with the specified settings.
     """
-    logger_name = logger_name.split(".")[-1]
     if not logging.getLogger(logger_name).hasHandlers():
         return _get_logger(logger_name, log_file=log_file, log_level=log_level)
     return logging.getLogger(logger_name)
@@ -169,7 +168,7 @@ def _get_logger(logger_name, log_file=None, log_level=DEFAULT_LOG_LEVEL):
 
     Returns
     -------
-    logger : logging.Logger
+    logging.Logger
         The configured logger instance ready to log messages with the specified settings.
     """
     logger = logging.getLogger(logger_name)
