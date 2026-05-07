@@ -20,7 +20,6 @@ for users to set up, execute, and modify training tasks.
 
 import argparse
 import getpass
-import logging
 import os
 import subprocess
 from tkinter.filedialog import askopenfilenames
@@ -31,14 +30,15 @@ import toml
 import torch
 from PIL import Image
 
-from plantdb.commons import fsdb
 from plantdb.commons import io
+from plantdb.commons.fsdb.core import FSDB
+from plantdb.commons.fsdb.path_helpers import _file_path
 from romiseg.cli.train_cnn import cnn_train
-from romiseg.common.io import model_from_fileset
+from romiseg.common.io import model_from_file
+from romiseg.log import get_logger
 from romiseg.utils.active_contour import run_refine_romidata
 
-logger = logging.getLogger(__file__)
-
+logger = get_logger(__name__)
 default_config = "/home/alienor/Documents/scanner-meta-repository/Scan3D/default/segmentation2d_arabidopsis.toml"
 
 
@@ -67,6 +67,9 @@ def parser():
 
     parser.add_argument('--config', dest='config', type=str, default=default_config,
                         help='config dir, default: %s' % default_config)
+    parser.add_argument("--log-level", default="INFO",
+                        choices=["DEBUG", "INFO", "WARNING", "ERROR", "CRITICAL"],
+                        help="Set the logging level")
 
     return parser
 
@@ -172,12 +175,13 @@ def fine_tune_segmentation_model(directory_weights, tsboard, batch_size, user_na
     device = torch.device("cuda:0" if torch.cuda.is_available() else "cpu")
     # model, label_names = save_and_load_model(directory_weights, model_segmentation_name).to(device)
 
-    db_w = fsdb.FSDB(directory_weights)
+    db_w = FSDB(directory_weights)
     db_w.connect()
     s_w = db_w.get_scan('models')
     f_weights = s_w.get_fileset('models')
     model_file = f_weights.get_file(model_id)
-    model, label_names = model_from_fileset(model_file)
+    label_names = model_file.get_metadata('label_names')
+    model = model_from_file(model_file.path(), label_names)
     model = model.to(device)
 
     mount_loc = appdirs.user_cache_dir() + '/data_mount/'
@@ -197,7 +201,7 @@ def fine_tune_segmentation_model(directory_weights, tsboard, batch_size, user_na
 
     if len(lst) > 0:
         host_scan = files[0].split('/')[-3]
-        db = fsdb.FSDB(directory_dataset + '/train/')
+        db = FSDB(directory_dataset + '/train/')
         db.connect()
 
         scan = db.get_scan(host_scan, create=True)
@@ -215,7 +219,7 @@ def fine_tune_segmentation_model(directory_weights, tsboard, batch_size, user_na
             f_im.set_metadata('channel', 'rgb')
             io.write_image(f_im, im, ext='png')
 
-            im_save = fsdb._file_path(f_im)
+            im_save = _file_path(f_im)
             subprocess.run(['labelme', im_save, '-O', im_save, '--labels', ','.join(label_names)])
 
             npz = run_refine_romidata(im_save, 1, 1, 1, 1, 1, class_names=label_names,
@@ -277,6 +281,8 @@ def update_toml_config(config, model_name):
 
 def main():
     args = parser().parse_args()
+    logger.setLevel(args.log_level)
+    logger.name = "finetune"
     model_name = fine_tune_segmentation_model(*parse_config(args.config))
     update_toml_config(args.config, model_name)
 
