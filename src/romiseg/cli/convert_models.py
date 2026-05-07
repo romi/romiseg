@@ -26,7 +26,7 @@ python convert_models.py --version
 >>> from plantdb.commons.test_database import test_database
 >>> from romiseg.models.unet import ResNetUNet
 >>> # Set up a test database with an old API model with weights_only=True
->>> db = test_database('real_plant', with_models=True)
+>>> db = test_database('real_plant', with_models=True, no_auth=True)
 >>> db.connect()
 >>> # Get the model fileset and model file
 >>> model_name = 'Resnet_896_896_epoch50.pt'
@@ -52,52 +52,24 @@ python convert_models.py --version
 """
 
 import argparse
-import logging
 import sys
 import types
 from pathlib import Path
+from typing import Any
 
 import torch
-from colorlog import ColoredFormatter
 
-# Configure logger
-logger = logging.getLogger('convert_models')
+from romiseg.log import get_logger
 
-# Define the log message format for colored logs.
-# The color is dynamically applied using `log_color` and `bg_blue` and reset after styling.
-COLOR_LOG_FMT = "{log_color}{levelname:<8}{reset} {bg_blue}[{name}]{reset} {message}"
-
-# Create a colored logging formatter instance for enhanced log readability in terminal outputs.
-# Applies colors for log levels, resets the style after application, and uses the same `{}` style formatting.
-COLORED_FORMATTER = ColoredFormatter(
-    COLOR_LOG_FMT,
-    datefmt=None,  # No date is included in the log format.
-    reset=True,  # Automatically reset styles applied to the log after each log message.
-    style='{',  # Use the `{}` style of string formatting.
-)
+logger = get_logger(__name__)
 
 
-def setup_logging(level=logging.INFO):
-    """Set up logging configuration."""
-    # Get the root logger
-    logger.setLevel(level)
-
-    # Clear any existing handlers
-    for handler in logger.handlers[:]:
-        logger.removeHandler(handler)
-
-    # Create a console handler and set its formatter to the colored formatter
-    console_handler = logging.StreamHandler()
-    console_handler.setFormatter(COLORED_FORMATTER)
-
-    # Add the handler to the root logger
-    logger.addHandler(console_handler)
-
-
-def setup_module_alias():
-    """Create temporary module alias for backward compatibility.
-    Old API was using a class named 'ResNetUNet' in the 'utils.segmentation_model' module.
-    New API uses a class named 'ResNetUNet' in the 'models.unet' module.
+def setup_module_alias() -> None:
+    """
+    Create temporary module alias for backward compatibility.
+    
+    Old API (< 0.3.0) was using a class named 'ResNetUNet' in the 'utils.segmentation_model' module.
+    New API (>= 0.3.0) uses a class named 'ResNetUNet' in the 'models.unet' module.
     """
     # Create a dummy module
     dummy_module = types.ModuleType('romiseg.utils.segmentation_model')
@@ -110,12 +82,15 @@ def setup_module_alias():
     logger.info("Module alias created for backward compatibility")
 
 
-def extract_model_state_dict(loaded_obj):
-    """Extract state dictionary from a loaded model object.
+def extract_model_state_dict(loaded_obj: Any) -> dict[str, Any] | None:
+    """
+    Extract state dictionary from a loaded model object.
+
     Parameters
     ----------
     loaded_obj : object
         The loaded object from torch.load
+
     Returns
     -------
     dict or None
@@ -143,17 +118,20 @@ def extract_model_state_dict(loaded_obj):
     return state_dict
 
 
-def save_state_dict(state_dict, output_path):
-    """Save a state dictionary to disk.
+def save_state_dict(state_dict: dict, output_path: Path) -> Path:
+    """
+    Save a state dictionary to disk.
+
     Parameters
     ----------
     state_dict : dict
         The state dictionary to save
-    output_path : Path
+    output_path : pathlib.Path
         Path where to save the state dictionary
+
     Returns
     -------
-    Path
+    pathlib.Path
         The path where the state dictionary was saved
     """
     torch.save(state_dict, output_path)
@@ -161,8 +139,13 @@ def save_state_dict(state_dict, output_path):
     return output_path
 
 
-def convert_model_to_state_dict(input_path, output_path=None, overwrite=False):
+def convert_model_to_state_dict(
+        input_path: str | Path,
+        output_path: str | Path | None = None,
+        overwrite: bool = False,
+) -> Path | None:
     """Load a full model file and save just its state dictionary
+
     Parameters
     ----------
     input_path : str or pathlib.Path
@@ -171,9 +154,10 @@ def convert_model_to_state_dict(input_path, output_path=None, overwrite=False):
         Path to save the state dict. If None, will append '_state_dict' to the input path
     overwrite : bool, optional
         Whether to overwrite existing files
+
     Returns
     -------
-    str
+    Path or None
         Path to the saved state dict file
     """
     if not isinstance(input_path, Path):
@@ -187,7 +171,8 @@ def convert_model_to_state_dict(input_path, output_path=None, overwrite=False):
 
     # Check if output file already exists
     if output_path.exists() and not overwrite:
-        raise FileExistsError(f"Output file {output_path} already exists. Use --overwrite to force.")
+        logger.warning(f"Output file {output_path} already exists. Use `overwrite=True` to force re-convertion.")
+        return output_path
 
     logger.info(f"Loading model from: {input_path}")
     try:
@@ -207,13 +192,20 @@ def convert_model_to_state_dict(input_path, output_path=None, overwrite=False):
     return save_state_dict(state_dict, output_path)
 
 
-def process_directory(directory, output_dir=None, pattern="*.pt", recursive=False, overwrite=False):
+def process_directory(
+        directory: str | Path,
+        output_dir: str | Path | None = None,
+        pattern: str = "*.pt",
+        recursive: bool = False,
+        overwrite: bool = False,
+) -> None:
     """Process all model files in a directory
+    
     Parameters
     ----------
-    directory : str
+    directory : str or pathlib.Path
         Directory containing model files
-    output_dir : str, optional
+    output_dir : str or pathlib.Path or None
         Directory to save state dicts. If None, saves in the same directory
     pattern : str
         File pattern to match (default: "*.pt")
@@ -265,7 +257,7 @@ def process_directory(directory, output_dir=None, pattern="*.pt", recursive=Fals
     logger.info(f"- Skipped: {skipped}")
 
 
-def parser():
+def parser() -> argparse.ArgumentParser:
     """Parses command-line arguments.
 
     Returns
@@ -274,12 +266,16 @@ def parser():
         A configured argument parser with an option for specifying the configuration directory.
     """
     parser = argparse.ArgumentParser(description="Convert PyTorch models to state dictionary format")
-    parser.add_argument("input", help="Input model file or directory")
-    parser.add_argument("--output", help="Output file or directory (optional)")
+    parser.add_argument("input",
+                        help="Input model file or directory")
+    parser.add_argument("--output",
+                        help="Output file or directory (optional)")
     parser.add_argument("--pattern", default="*.pt",
                         help="File pattern to match when input is a directory (default: *.pt)")
-    parser.add_argument("--recursive", action="store_true", help="Search subdirectories recursively")
-    parser.add_argument("--overwrite", action="store_true", help="Overwrite existing files")
+    parser.add_argument("--recursive", action="store_true",
+                        help="Search subdirectories recursively")
+    parser.add_argument("--overwrite", action="store_true",
+                        help="Overwrite existing files")
     parser.add_argument("--log-level", default="INFO",
                         choices=["DEBUG", "INFO", "WARNING", "ERROR", "CRITICAL"],
                         help="Set the logging level")
@@ -291,8 +287,8 @@ def main():
     args = parser().parse_args()
 
     # Setup logging
-    log_level = getattr(logging, args.log_level)
-    setup_logging(level=log_level)
+    logger.setLevel(args.log_level)
+    logger.name = "convert_model"
 
     # Set up module alias for backward compatibility
     setup_module_alias()
