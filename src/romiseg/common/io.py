@@ -8,62 +8,35 @@ This module contains utilities for file I/O operations.
 """
 
 import os
+from pathlib import Path
+
 import requests
 import torch
-import numpy as np
-from plantdb.commons import io
 
+from plantdb.commons import io
+from romiseg.cli.convert_models import convert_model_to_state_dict
+from romiseg.cli.convert_models import setup_module_alias
+from romiseg.log import get_logger
+
+logger = get_logger(__name__)
 # Current working directory
 cwd = os.getcwd()
 
 
-def create_folder_if(directory):
-    """
-    Creates a directory if it doesn't exist.
-    
-    Parameters
-    ----------
-    directory : str
-        Path to the directory to create.
-    """
-    if not os.path.exists(directory):
-        os.makedirs(directory)
-
-
-def catch_file(direc=cwd):
-    """
-    Opens a dialog window to select a file.
-    
-    Parameters
-    ----------
-    direc : str, optional
-        Directory to open. Default is current directory.
-        
-    Returns
-    -------
-    str
-        Path to the selected file.
-    """
-    from PyQt5 import QtWidgets
-    fname = QtWidgets.QaFileDialog.getOpenFileName(None, directory=direc, caption="Select a video file...",
-                                                  filter="All files (*)")
-    return fname[0]
-
-
-def download_file(url, target_dir):
+def download_file(url: str | Path, target_dir: str | Path) -> Path:
     """
     Downloads a file from a URL to a target directory.
-    
+
     Parameters
     ----------
-    url : str
+    url : str or pathlib.Path
         URL of the file to download.
-    target_dir : str
+    target_dir : str or pathlib.Path
         Directory to save the file to.
-        
+
     Returns
     -------
-    str
+    pathlib.Path
         Name of the downloaded file.
     """
     local_filename = url.split('/')[-1]
@@ -75,20 +48,22 @@ def download_file(url, target_dir):
                 if chunk:  # filter out keep-alive new chunks
                     f.write(chunk)
                     # f.flush()
-    return local_filename
+    return Path(local_filename)
 
 
-def save_and_load_model(weights_folder, model_segmentation_name):
+def save_and_load_model(weights_folder: str | Path, model_segmentation_name: str, model_labels: list[str]) -> torch.nn.Module:
     """
     Saves and loads a model.
     
     Parameters
     ----------
-    weights_folder : str
+    weights_folder : str or pathlib.Path
         Directory to save the model to.
     model_segmentation_name : str
         Name of the model file.
-        
+    model_labels : list[str]
+        The label names associated with the model.
+
     Returns
     -------
     torch.nn.Module
@@ -99,53 +74,62 @@ def save_and_load_model(weights_folder, model_segmentation_name):
         url = 'http://db.romi-project.eu/models/' + model_segmentation_name
         download_file(url, weights_folder)
 
-    model_segmentation = torch.load(weights_folder + '/' + model_segmentation_name)
-    try:
-        model_segmentation = model_segmentation[0]
-    except:
-        model_segmentation = model_segmentation
-
-    try:
-        model_segmentation = model_segmentation.module
-    except:
-        model_segmentation = model_segmentation
-
-    return model_segmentation
+    return model_from_file(weights_folder + '/' + model_segmentation_name, model_labels)
 
 
-def model_from_fileset(model_file):
+def model_from_file(model_file: str | Path, model_labels: list[str]) -> torch.nn.Module:
     """
     Loads a machine learning model and its associated label names from a specified file.
 
     Parameters
     ----------
-    model_file : plantd.FSDB.File
-        A `File` object containing the serialized PyTorch model as well as its associated metadata.
+    model_file : str or pathlib.Path
+        A path to the serialized PyTorch model.
+    model_labels : list[str]
+        The label names associated with the model.
 
     Returns
     -------
     torch.nn.Module
         The core part of the loaded PyTorch model after processing.
-    numpy.ndarray
-        A sorted array of label names associated with the model.
+
+    Examples
+    --------
+    >>> from plantdb.commons.test_database import test_database
+    >>> from romiseg.common.io import model_from_file
+    >>> # Set up a test database with an old API model with weights_only=True
+    >>> db = test_database('real_plant', with_models=True, no_auth=True)
+    >>> db.connect()
+    >>> # Get the model fileset and model file
+    >>> model_name = 'Resnet_896_896_epoch50.pt'
+    >>> models_fileset = db.get_scan('models').get_fileset('models')
+    >>> models_file = models_fileset.get_file(model_name.split('.')[0])
+    >>> # Get the label names from the model metadata
+    >>> label_names = models_file.get_metadata('label_names')
+    >>> model_segmentation = model_from_file(models_file.path(), label_names)
+    >>> assert model_segmentation is not None
     """
-    model_segmentation = io.read_torch(model_file)
-    label_names = model_file.get_metadata('label_names')
+    # Ensure the old‑API module alias exists (needed for some old checkpoints)
+    setup_module_alias()
 
-    if not isinstance(model_segmentation, torch.nn.Module):
+    try:
+        # Original behavior: try to read the full checkpoint directly
+        # PyTorch 2.6 => introduce `weights_only=True` by default for a more secure behavior
+        model_segmentation, _ = io.read_torch(model_file, weights_only=True)
+    except Exception as e:
+        logger.warning(f"Direct loading failed:\n{e}.")
+        logger.info("Converting checkpoint to state‑dict...")
+        # Convert the original checkpoint to a state‑dict file
+        state_dict_path = convert_model_to_state_dict(model_file, overwrite=False)
+        if state_dict_path is None or not state_dict_path.exists():
+            logger.error("Conversion to state‑dict failed: cannot load model.")
+            raise Exception
+        logger.info(f"Model loaded from converted state‑dict: {state_dict_path}")
         from romiseg.models.unet import ResNetUNet
-        model_segmentation = ResNetUNet(len(label_names))
-        model_segmentation.load_state_dict(io.read_torch(model_file))
-        return model_segmentation, np.sort(label_names)
+        model_segmentation = ResNetUNet(len(model_labels))
+        # Load the newly created state‑dict
+        model_segmentation.load_state_dict(torch.load(state_dict_path))
+    else:
+        logger.info("Model loaded directly with `io.read_torch`")
 
-    try:
-        model_segmentation = model_segmentation[0]
-    except:
-        model_segmentation = model_segmentation
-
-    try:
-        model_segmentation = model_segmentation.module
-    except:
-        model_segmentation = model_segmentation
-
-    return model_segmentation, np.sort(label_names)
+    return model_segmentation
