@@ -226,7 +226,7 @@ def fine_tune_train(path_train, path_val, weights_folder, label_names, tsboard_n
         'val': DataLoader(val_dataset, batch_size=batch_size, shuffle=True, num_workers=0)
     }
 
-    model = save_and_load_model(weights_folder, model_segmentation_name)
+    model = save_and_load_model(weights_folder, model_segmentation_name, label_names)
 
     writer = SummaryWriter('test')  # tsboard_name)
 
