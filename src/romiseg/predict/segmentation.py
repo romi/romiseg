@@ -18,13 +18,14 @@ from torch.utils.data import DataLoader
 from torchvision import transforms
 from tqdm import tqdm
 
-from romiseg.common.io import model_from_fileset
+from romiseg.common.io import model_from_file
 from romiseg.common.transforms import ResizeCrop, ResizeFit
 from romiseg.predict.datasets import DatasetImId
 from romiseg.predict.evaluation import evaluate
 
-logger = logging.getLogger('romiseg')
+from romiseg.log import get_logger
 
+logger = get_logger(__name__)
 
 def segmentation(Sx, Sy, images_fileset, model_file, device=None):
     """Segments a list of images using a pretrained deep learning model.
@@ -81,7 +82,8 @@ def segmentation(Sx, Sy, images_fileset, model_file, device=None):
 
     # Load the pretrained segmentation model and associated label names
     logger.debug(f"Model name: {model_file.get_metadata('model_id')}")
-    model_segmentation, label_names = model_from_fileset(model_file)
+    label_names = model_file.get_metadata('label_names')
+    model_segmentation = model_from_file(model_file.path(), label_names)
 
     # Move the model to the selected device (GPU/CPU)
     model_segmentation = model_segmentation.to(device)
@@ -209,7 +211,8 @@ def fileset_segmentation(Sx, Sy, images_fileset, model_file, device=None):
 
     # Load the pretrained segmentation model and associated label names
     logger.debug(f"Model name: {model_file.get_metadata('model_id')}")
-    model_segmentation, label_names = model_from_fileset(model_file)
+    label_names = model_file.get_metadata('label_names')
+    model_segmentation = model_from_file(model_file.path(), label_names)
 
     # Move the model to the selected device (GPU/CPU)
     model_segmentation = model_segmentation.to(device)
@@ -271,7 +274,7 @@ def file_segmentation(Sx, Sy, image_path, model, label_names, device):
     >>> from PIL import Image
     >>> from skimage.morphology import binary_dilation, disk
     >>> from romiseg.predict.segmentation import file_segmentation
-    >>> from romiseg.common.io import model_from_fileset
+    >>> from romiseg.common.io import model_from_file
     >>> from plantdb.commons.test_database import test_database
     >>> db = test_database(with_models=True)
     >>> db.connect()
@@ -280,10 +283,11 @@ def file_segmentation(Sx, Sy, image_path, model, label_names, device):
     >>> images_path = [image.path() for image in image_fs.get_files(query={"channel": "rgb"})]
     >>> device = torch.device("cuda:0" if torch.cuda.is_available() else "cpu")
     >>> model_file = db.get_scan('models').get_fileset('models').get_file('Resnet_896_896_epoch50')
-    >>> print(model_file.metadata)
+    >>> label_names = model_file.get_metadata('label_names')
+    >>> print(label_names)
     {'label_names': ['background', 'flower', 'fruit', 'leaf', 'pedicel', 'stem'], 'model_id': 'Resnet_896_896_epoch50'}
-    >>> model_segmentation, label_names = model_from_fileset(model_file)
-    >>> model_segmentation = model.to(device)
+    >>> model_segmentation = model_from_file(model_file.path(), label_names)
+    >>> model_segmentation = model_segmentation.to(device)
     >>> pred_pad = file_segmentation(896, 896, images_path[0], model, label_names, device)
     >>> # Export one predicted label in the given image for visualization
     >>> label_idx = 1  # index of the label to export
