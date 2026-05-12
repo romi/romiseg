@@ -1,3 +1,6 @@
+#!/usr/bin/env python
+# -*- coding: utf-8 -*-
+
 import json
 
 import cv2
@@ -34,7 +37,7 @@ def exgreen(im_BGR, cvtype=False):
     return res
 
 
-def fillNpoints(xy, Np):
+def fill_npoints(xy, Np):
     """Fills a given number of points (Np) based on the input coordinates (xy).
 
     This function takes a set of coordinates (xy) and a specified number of points
@@ -57,7 +60,7 @@ def fillNpoints(xy, Np):
     return np.array([fx, fy])
 
 
-def getEdgeGrad(im, sig):
+def get_edge_grad(im, sig):
     """Calculates the edge gradients of an image using Gaussian smoothing.
 
     This function computes the gradients of an input image by applying Gaussian
@@ -96,7 +99,7 @@ def getEdgeGrad(im, sig):
     return F_norm_xy
 
 
-def closeCont(cont, d):
+def close_cont(cont, d):
     """Closes or terminates the specified container, performing necessary cleanup or finalization as required.
 
     This function ensures that the given container is properly closed or terminated,
@@ -122,14 +125,14 @@ def closeCont(cont, d):
     Ns = Ns / d
 
     k = 0
-    xys = fillNpoints(cont_[:, k:k + 2], Ns[k]).T
+    xys = fill_npoints(cont_[:, k:k + 2], Ns[k]).T
 
     for k in range(1, len(cont_[0]) - 1):
-        xys = np.vstack((xys, fillNpoints(cont_[:, k:k + 2], Ns[k]).T))
+        xys = np.vstack((xys, fill_npoints(cont_[:, k:k + 2], Ns[k]).T))
     return xys
 
 
-def getIntrinsic(alpha, beta, tau, k):
+def get_intrinsic(alpha, beta, tau, k):
     """Calculates the intrinsic value based on given inputs.
 
     This function computes the intrinsic value using the provided parameters
@@ -212,11 +215,11 @@ def refine_anim(f, svgdir, beta=.0001, alpha=.01, tau=10, Nit=10000, ksave=100):
     imG = (255 * (cidx - m) / (M - m)).astype(np.uint8)
 
     sig = 3
-    F_norm_xy = getEdgeGrad(imG, sig)
+    F_norm_xy = get_edge_grad(imG, sig)
 
     cont = np.loadtxt(f + ".txt")
-    xys = closeCont(cont, d)
-    intr = getIntrinsic(alpha, beta, len(xys))
+    xys = close_cont(cont, d)
+    intr = get_intrinsic(alpha, beta, len(xys))
     xs = xys[:, 0].clip(0, w).astype(np.int)
     ys = xys[:, 1].clip(0, h).astype(np.int)
     cont_hist = [[xs, ys]]
@@ -278,9 +281,9 @@ def refine(imname, xys=[], beta=.0001, alpha=.01, tau=10, d=1, Nit=10000, ksave=
     imG = exgreen(im, True)
 
     sig = 3
-    F_norm_xy = getEdgeGrad(imG, sig)
+    F_norm_xy = get_edge_grad(imG, sig)
 
-    intr = getIntrinsic(alpha, beta, tau, len(xys))
+    intr = get_intrinsic(alpha, beta, tau, len(xys))
 
     for i in range(Nit):
         xs = xys[:, 0].clip(0, w - 1).astype(np.int)
@@ -334,7 +337,7 @@ def run_refine(f, beta, alpha, tau, d, Nit, plotit=None, saveit=None):
     #  if plotit: cv2.polylines(im, ps, True, (242,240,218), thickness=10)
     conts = []
     for i, p in enumerate(ps):
-        init_cont = closeCont(p, 1)
+        init_cont = close_cont(p, 1)
         color = label_color[labels[i]]
         print(color)
         xys = refine(f, init_cont, beta, alpha, tau, d, Nit, ksave=1)
@@ -395,7 +398,7 @@ def run_refine_romidata(f, beta, alpha, tau, d, Nit, class_names, plotit=None, s
     #  if plotit: cv2.polylines(im, ps, True, (242,240,218), thickness=10)
     # conts=[]
     for i, p in enumerate(ps):
-        init_cont = closeCont(p, 1)
+        init_cont = close_cont(p, 1)
         print(labels[i])
         xys = refine(f, init_cont, beta, alpha, tau, d, Nit, ksave=1)
         if plotit: cv2.fillPoly(npz[labels[i]], [np.array([xys]).astype(np.int).T], 255)

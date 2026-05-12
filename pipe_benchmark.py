@@ -1,5 +1,6 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
+
 """
 Created on Thu Nov 21 09:18:24 2019
 
@@ -19,12 +20,12 @@ from torch.utils.data import DataLoader
 from torch.utils.tensorboard import SummaryWriter
 from torchvision import transforms
 
-from romiseg.utils import segmentation_model
+from romiseg.common.dataset import init_set
+from romiseg.common.visualization import plot_dataset
+from romiseg.models.unet3d import ResNetUNet_3D
+from romiseg.train.datasets import DatasetImLabel3d
+from romiseg.train.train_3d import train_model_voxels
 from romiseg.utils.generate_volume import generate_volume
-from romiseg.utils.train_3D import Dataset_im_label_3D
-from romiseg.utils.train_3D import init_set
-from romiseg.utils.train_3D import train_model_voxels
-from romiseg.utils.train_from_dataset import plot_dataset
 
 # from torchvision import models
 
@@ -90,8 +91,8 @@ path_train = directory_dataset + '/train/'
 image_train, target_train, voxel_train = init_set('', path_train)
 image_val, target_val, voxel_val = init_set('', path_val)
 
-train_dataset = Dataset_im_label_3D(image_train, target_train, voxel_train, transform=trans)
-val_dataset = Dataset_im_label_3D(image_val, target_val, voxel_val, transform=trans)
+train_dataset = DatasetImLabel3d(image_train, target_train, voxel_train, transform=trans)
+val_dataset = DatasetImLabel3d(image_val, target_val, voxel_val, transform=trans)
 
 train_loader = torch.utils.data.DataLoader(train_dataset, batch_size=batch_size, shuffle=True, num_workers=1)
 
@@ -121,7 +122,7 @@ for child in  a[0].children():
 
 voxels = torch.load(coord_file_loc + '/voxels.pt').to(device)
 
-model = segmentation_model.ResNetUNet_3D(num_classes, coord_file_loc).to(device)
+model = ResNetUNet_3D(num_classes, coord_file_loc).to(device)
 
 # freeze backbone layers
 for l in model.base_layers:

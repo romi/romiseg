@@ -4,14 +4,14 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "romiseg"
-version = "0.2.0"
+version = "0.3.0"
 dependencies = [
     "appdirs",
     "future",
     "Pillow",
     "requests",
-    "torch<2",
-    "torchvision",
+    "torch>=2.0.0",
+    "torchvision>=0.15.0",
     "tqdm",
     "plantdb.commons",
 ]
@@ -46,8 +46,9 @@ classifiers = [
 ]
 
 [project.scripts]
-finetune = "romiseg.finetune:main"
-train_cnn = "romiseg.train_cnn:main"
+finetune = "romiseg.cli.finetune:main"
+train_cnn = "romiseg.cli.train_cnn:main"
+convert_model = "romiseg.cli.convert_model:main"
 
 [project.urls]
 homepage = "https://romi-project.eu/"
@@ -58,6 +59,18 @@ issues = "https://github.com/romi/romiseg/issues"
 [project.optional-dependencies]
 train = [
     "labelme",
+    "matplotlib",
     "pyqt5==5.14",
     "tensorboard",
+]
+
+doc = [
+    "mkdocs",
+    "mkdocs-material",
+    "mkdocstrings[python]",
+    "pymdown-extensions",
+    "markdown-exec[ansi]",
+    "mkdocs-gen-files",
+    "mkdocs-literate-nav",
+    "mkdocs-section-index",
 ]
