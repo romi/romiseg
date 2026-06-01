@@ -10,7 +10,7 @@ dependencies = [
     "future",
     "Pillow",
     "requests",
-    "torch==2.5.1",  # arch list (cuda cc) ranges from 50 to 90
+    "torch==2.8.0",  # arch list (cuda cc) ranges from 50 to 90
     "torchvision==0.20.1",
     "tqdm",
     "plantdb.commons",
