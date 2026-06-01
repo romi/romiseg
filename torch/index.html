@@ -12,28 +12,28 @@
         <meta name="author" content="ROMI Team">
       
       
-        <link rel="canonical" href="https://romi.github.io/romiseg/reference/romiseg/predict/evaluation/">
+        <link rel="canonical" href="https://romi.github.io/romiseg/torch/">
       
       
-        <link rel="prev" href="../datasets/">
+        <link rel="prev" href="../annotation-finetuning/">
       
       
-        <link rel="next" href="../segmentation/">
+        <link rel="next" href="../reference/romiseg/">
       
       
         
       
       
-      <link rel="icon" href="../../../../assets/images/ROMI_logo_green_25.svg">
+      <link rel="icon" href="../assets/images/ROMI_logo_green_25.svg">
       <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.6">
     
     
       
-        <title>evaluation - ROMISeg</title>
+        <title>PyTorch - ROMISeg</title>
       
     
     
-      <link rel="stylesheet" href="../../../../assets/stylesheets/main.484c7ddc.min.css">
+      <link rel="stylesheet" href="../assets/stylesheets/main.484c7ddc.min.css">
       
       
 
@@ -52,15 +52,15 @@
       
     
     
-      <link rel="stylesheet" href="../../../../assets/_markdown_exec_pyodide.css">
+      <link rel="stylesheet" href="../assets/_markdown_exec_pyodide.css">
     
-      <link rel="stylesheet" href="../../../../assets/_markdown_exec_ansi.css">
+      <link rel="stylesheet" href="../assets/_markdown_exec_ansi.css">
     
-      <link rel="stylesheet" href="../../../../assets/_mkdocstrings.css">
+      <link rel="stylesheet" href="../assets/_mkdocstrings.css">
     
-      <link rel="stylesheet" href="../../../../assets/css/extra.css">
+      <link rel="stylesheet" href="../assets/css/extra.css">
     
-    <script>__md_scope=new URL("../../../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    <script>__md_scope=new URL("..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
     
       
 
@@ -78,7 +78,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#romiseg.predict.evaluation" class="md-skip">
+        <a href="#pytorch" class="md-skip">
           Skip to content
         </a>
       
@@ -96,7 +96,7 @@
   <nav class="md-header__inner md-grid" aria-label="Header">
     <a href="https://romi.github.io/romiseg/" title="ROMISeg" class="md-header__button md-logo" aria-label="ROMISeg" data-md-component="logo">
       
-  <img src="../../../../assets/images/ROMI_logo_white.svg" alt="logo">
+  <img src="../assets/images/ROMI_logo_white.svg" alt="logo">
 
     </a>
     <label class="md-header__button md-icon" for="__drawer">
@@ -113,7 +113,7 @@
         <div class="md-header__topic" data-md-component="header-topic">
           <span class="md-ellipsis">
             
-              evaluation
+              PyTorch
             
           </span>
         </div>
@@ -192,7 +192,7 @@
   
   
     <li class="md-tabs__item">
-      <a href="../../../.." class="md-tabs__link">
+      <a href=".." class="md-tabs__link">
         
   
   
@@ -211,7 +211,7 @@
   
   
     <li class="md-tabs__item">
-      <a href="../../../../training/" class="md-tabs__link">
+      <a href="../training/" class="md-tabs__link">
         
   
   
@@ -230,7 +230,7 @@
   
   
     <li class="md-tabs__item">
-      <a href="../../../../segmentation2d/" class="md-tabs__link">
+      <a href="../segmentation2d/" class="md-tabs__link">
         
   
   
@@ -249,7 +249,7 @@
   
   
     <li class="md-tabs__item">
-      <a href="../../../../annotation-finetuning/" class="md-tabs__link">
+      <a href="../annotation-finetuning/" class="md-tabs__link">
         
   
   
@@ -266,9 +266,11 @@
   
   
   
+    
   
-    <li class="md-tabs__item">
-      <a href="../../../../torch/" class="md-tabs__link">
+  
+    <li class="md-tabs__item md-tabs__item--active">
+      <a href="./" class="md-tabs__link">
         
   
   
@@ -285,13 +287,11 @@
   
   
   
-    
-  
   
     
     
-      <li class="md-tabs__item md-tabs__item--active">
-        <a href="../../" class="md-tabs__link">
+      <li class="md-tabs__item">
+        <a href="../reference/romiseg/" class="md-tabs__link">
           
   
   
@@ -333,7 +333,7 @@
   <label class="md-nav__title" for="__drawer">
     <a href="https://romi.github.io/romiseg/" title="ROMISeg" class="md-nav__button md-logo" aria-label="ROMISeg" data-md-component="logo">
       
-  <img src="../../../../assets/images/ROMI_logo_white.svg" alt="logo">
+  <img src="../assets/images/ROMI_logo_white.svg" alt="logo">
 
     </a>
     ROMISeg
@@ -360,7 +360,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../.." class="md-nav__link">
+      <a href=".." class="md-nav__link">
         
   
   
@@ -387,7 +387,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../../training/" class="md-nav__link">
+      <a href="../training/" class="md-nav__link">
         
   
   
@@ -414,7 +414,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../../segmentation2d/" class="md-nav__link">
+      <a href="../segmentation2d/" class="md-nav__link">
         
   
   
@@ -441,7 +441,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../../annotation-finetuning/" class="md-nav__link">
+      <a href="../annotation-finetuning/" class="md-nav__link">
         
   
   
@@ -465,10 +465,37 @@
       
   
   
+    
   
   
-    <li class="md-nav__item">
-      <a href="../../../../torch/" class="md-nav__link">
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    PyTorch
+  
+
+    
+  </span>
+  
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
         
   
   
@@ -484,6 +511,98 @@
   
 
       </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#compatibility-issues" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Compatibility issues
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#manual-installation" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Manual installation
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Manual installation">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#cuda-118" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        CUDA 11.8
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#cuda-121" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        CUDA 12.1
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#cuda-124" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        CUDA 12.4
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#cpu-only" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        CPU only
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
     </li>
   
 
@@ -492,29 +611,24 @@
       
   
   
-    
   
   
-  
     
     
     
     
       
-        
-        
-      
       
     
     
-    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
+    <li class="md-nav__item md-nav__item--nested">
       
         
         
-        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_6" checked>
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_6" >
         
           
-          <label class="md-nav__link" for="__nav_6" id="__nav_6_label" tabindex="">
+          <label class="md-nav__link" for="__nav_6" id="__nav_6_label" tabindex="0">
             
   
   
@@ -532,7 +646,7 @@
             <span class="md-nav__icon md-icon"></span>
           </label>
         
-        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_6_label" aria-expanded="true">
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_6_label" aria-expanded="false">
           <label class="md-nav__title" for="__nav_6">
             <span class="md-nav__icon md-icon"></span>
             
@@ -547,8 +661,6 @@
                 
   
   
-    
-  
   
   
     
@@ -559,15 +671,15 @@
       
     
     
-    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+    <li class="md-nav__item md-nav__item--nested">
       
         
         
-        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_6_1" checked>
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_6_1" >
         
           
           <div class="md-nav__link md-nav__container">
-            <a href="../../" class="md-nav__link ">
+            <a href="../reference/romiseg/" class="md-nav__link ">
               
   
   
@@ -591,7 +703,7 @@
             
           </div>
         
-        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_6_1_label" aria-expanded="true">
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_6_1_label" aria-expanded="false">
           <label class="md-nav__title" for="__nav_6_1">
             <span class="md-nav__icon md-icon"></span>
             
@@ -624,7 +736,7 @@
         
           
           <div class="md-nav__link md-nav__container">
-            <a href="../../cli/" class="md-nav__link ">
+            <a href="../reference/romiseg/cli/" class="md-nav__link ">
               
   
   
@@ -666,7 +778,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../cli/convert_models/" class="md-nav__link">
+      <a href="../reference/romiseg/cli/convert_models/" class="md-nav__link">
         
   
   
@@ -694,7 +806,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../cli/evaluate/" class="md-nav__link">
+      <a href="../reference/romiseg/cli/evaluate/" class="md-nav__link">
         
   
   
@@ -722,7 +834,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../cli/finetune/" class="md-nav__link">
+      <a href="../reference/romiseg/cli/finetune/" class="md-nav__link">
         
   
   
@@ -750,7 +862,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../cli/train_cnn/" class="md-nav__link">
+      <a href="../reference/romiseg/cli/train_cnn/" class="md-nav__link">
         
   
   
@@ -801,7 +913,7 @@
         
           
           <div class="md-nav__link md-nav__container">
-            <a href="../../common/" class="md-nav__link ">
+            <a href="../reference/romiseg/common/" class="md-nav__link ">
               
   
   
@@ -843,7 +955,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../common/dataset/" class="md-nav__link">
+      <a href="../reference/romiseg/common/dataset/" class="md-nav__link">
         
   
   
@@ -871,7 +983,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../common/io/" class="md-nav__link">
+      <a href="../reference/romiseg/common/io/" class="md-nav__link">
         
   
   
@@ -899,7 +1011,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../common/transforms/" class="md-nav__link">
+      <a href="../reference/romiseg/common/transforms/" class="md-nav__link">
         
   
   
@@ -927,7 +1039,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../common/visualization/" class="md-nav__link">
+      <a href="../reference/romiseg/common/visualization/" class="md-nav__link">
         
   
   
@@ -963,7 +1075,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../log/" class="md-nav__link">
+      <a href="../reference/romiseg/log/" class="md-nav__link">
         
   
   
@@ -1006,7 +1118,7 @@
         
           
           <div class="md-nav__link md-nav__container">
-            <a href="../../models/" class="md-nav__link ">
+            <a href="../reference/romiseg/models/" class="md-nav__link ">
               
   
   
@@ -1048,7 +1160,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../models/unet/" class="md-nav__link">
+      <a href="../reference/romiseg/models/unet/" class="md-nav__link">
         
   
   
@@ -1076,7 +1188,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../models/unet3d/" class="md-nav__link">
+      <a href="../reference/romiseg/models/unet3d/" class="md-nav__link">
         
   
   
@@ -1109,8 +1221,6 @@
                 
   
   
-    
-  
   
   
     
@@ -1121,15 +1231,15 @@
       
     
     
-    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+    <li class="md-nav__item md-nav__item--nested">
       
         
         
-        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_6_1_5" checked>
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_6_1_5" >
         
           
           <div class="md-nav__link md-nav__container">
-            <a href="../" class="md-nav__link ">
+            <a href="../reference/romiseg/predict/" class="md-nav__link ">
               
   
   
@@ -1153,7 +1263,7 @@
             
           </div>
         
-        <nav class="md-nav" data-md-level="3" aria-labelledby="__nav_6_1_5_label" aria-expanded="true">
+        <nav class="md-nav" data-md-level="3" aria-labelledby="__nav_6_1_5_label" aria-expanded="false">
           <label class="md-nav__title" for="__nav_6_1_5">
             <span class="md-nav__icon md-icon"></span>
             
@@ -1171,7 +1281,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../datasets/" class="md-nav__link">
+      <a href="../reference/romiseg/predict/datasets/" class="md-nav__link">
         
   
   
@@ -1196,35 +1306,10 @@
                 
   
   
-    
   
   
-  
-    <li class="md-nav__item md-nav__item--active">
-      
-      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
-      
-      
-      
-        <label class="md-nav__link md-nav__link--active" for="__toc">
-          
-  
-  
-  <span class="md-ellipsis">
-    
-  
-    evaluation
-  
-
-    
-  </span>
-  
-  
-
-          <span class="md-nav__icon md-icon"></span>
-        </label>
-      
-      <a href="./" class="md-nav__link md-nav__link--active">
+    <li class="md-nav__item">
+      <a href="../reference/romiseg/predict/evaluation/" class="md-nav__link">
         
   
   
@@ -1240,74 +1325,6 @@
   
 
       </a>
-      
-        
-
-<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
-  
-  
-  
-  
-    <label class="md-nav__title" for="__toc">
-      <span class="md-nav__icon md-icon"></span>
-      Table of contents
-    </label>
-    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
-      
-        <li class="md-nav__item">
-  <a href="#romiseg.predict.evaluation" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        <code class="doc-symbol doc-symbol-toc doc-symbol-module"></code>&nbsp;evaluation
-      
-    </span>
-  </a>
-  
-    <nav class="md-nav" aria-label=" evaluation">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#romiseg.predict.evaluation--evaluation-functions" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Evaluation Functions.
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#romiseg.predict.evaluation.evaluate" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        <code class="doc-symbol doc-symbol-toc doc-symbol-function"></code>&nbsp;evaluate
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#romiseg.predict.evaluation.test" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        <code class="doc-symbol doc-symbol-toc doc-symbol-function"></code>&nbsp;test
-      
-    </span>
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>
-      
-    </ul>
-  
-</nav>
-      
     </li>
   
 
@@ -1320,7 +1337,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../segmentation/" class="md-nav__link">
+      <a href="../reference/romiseg/predict/segmentation/" class="md-nav__link">
         
   
   
@@ -1371,7 +1388,7 @@
         
           
           <div class="md-nav__link md-nav__container">
-            <a href="../../train/" class="md-nav__link ">
+            <a href="../reference/romiseg/train/" class="md-nav__link ">
               
   
   
@@ -1413,7 +1430,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../train/datasets/" class="md-nav__link">
+      <a href="../reference/romiseg/train/datasets/" class="md-nav__link">
         
   
   
@@ -1441,7 +1458,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../train/losses/" class="md-nav__link">
+      <a href="../reference/romiseg/train/losses/" class="md-nav__link">
         
   
   
@@ -1469,7 +1486,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../train/metrics/" class="md-nav__link">
+      <a href="../reference/romiseg/train/metrics/" class="md-nav__link">
         
   
   
@@ -1497,7 +1514,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../train/train_3d/" class="md-nav__link">
+      <a href="../reference/romiseg/train/train_3d/" class="md-nav__link">
         
   
   
@@ -1525,7 +1542,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../train/trainer/" class="md-nav__link">
+      <a href="../reference/romiseg/train/trainer/" class="md-nav__link">
         
   
   
@@ -1576,7 +1593,7 @@
         
           
           <div class="md-nav__link md-nav__container">
-            <a href="../../utils/" class="md-nav__link ">
+            <a href="../reference/romiseg/utils/" class="md-nav__link ">
               
   
   
@@ -1618,7 +1635,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../utils/active_contour/" class="md-nav__link">
+      <a href="../reference/romiseg/utils/active_contour/" class="md-nav__link">
         
   
   
@@ -1646,7 +1663,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../utils/generate_3D_ground_truth/" class="md-nav__link">
+      <a href="../reference/romiseg/utils/generate_3D_ground_truth/" class="md-nav__link">
         
   
   
@@ -1674,7 +1691,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../utils/generate_volume/" class="md-nav__link">
+      <a href="../reference/romiseg/utils/generate_volume/" class="md-nav__link">
         
   
   
@@ -1702,7 +1719,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../utils/ply/" class="md-nav__link">
+      <a href="../reference/romiseg/utils/ply/" class="md-nav__link">
         
   
   
@@ -1730,7 +1747,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../utils/proj_point_cloud/" class="md-nav__link">
+      <a href="../reference/romiseg/utils/proj_point_cloud/" class="md-nav__link">
         
   
   
@@ -1758,7 +1775,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../utils/vox_to_coord/" class="md-nav__link">
+      <a href="../reference/romiseg/utils/vox_to_coord/" class="md-nav__link">
         
   
   
@@ -1819,6 +1836,8 @@
   
   
   
+    
+  
   
     <label class="md-nav__title" for="__toc">
       <span class="md-nav__icon md-icon"></span>
@@ -1827,22 +1846,33 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#romiseg.predict.evaluation" class="md-nav__link">
+  <a href="#compatibility-issues" class="md-nav__link">
     <span class="md-ellipsis">
       
-        <code class="doc-symbol doc-symbol-toc doc-symbol-module"></code>&nbsp;evaluation
+        Compatibility issues
       
     </span>
   </a>
   
-    <nav class="md-nav" aria-label=" evaluation">
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#manual-installation" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Manual installation
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Manual installation">
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#romiseg.predict.evaluation--evaluation-functions" class="md-nav__link">
+  <a href="#cuda-118" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Evaluation Functions.
+        CUDA 11.8
       
     </span>
   </a>
@@ -1850,10 +1880,10 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#romiseg.predict.evaluation.evaluate" class="md-nav__link">
+  <a href="#cuda-121" class="md-nav__link">
     <span class="md-ellipsis">
       
-        <code class="doc-symbol doc-symbol-toc doc-symbol-function"></code>&nbsp;evaluate
+        CUDA 12.1
       
     </span>
   </a>
@@ -1861,10 +1891,21 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#romiseg.predict.evaluation.test" class="md-nav__link">
+  <a href="#cuda-124" class="md-nav__link">
     <span class="md-ellipsis">
       
-        <code class="doc-symbol doc-symbol-toc doc-symbol-function"></code>&nbsp;test
+        CUDA 12.4
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#cpu-only" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        CPU only
       
     </span>
   </a>
@@ -1896,386 +1937,28 @@
   
 
 
-  <h1>evaluation</h1>
-
-<div class="doc doc-object doc-module">
-
-
-
-<h2 id="romiseg.predict.evaluation" class="doc doc-heading">
-            <span class="doc doc-object-name doc-module-name">romiseg.predict.evaluation</span>
-
-
-<a href="#romiseg.predict.evaluation" class="headerlink" title="Permanent link">Link</a></h2>
-
-    <div class="doc doc-contents first">
-
-        <h3 id="romiseg.predict.evaluation--evaluation-functions">Evaluation Functions.<a class="headerlink" href="#romiseg.predict.evaluation--evaluation-functions" title="Permanent link">Link</a></h3>
-<p>This module contains functions for evaluating segmentation models.</p>
-
-
-
-
-
-
-
-
-
-
-  <div class="doc doc-children">
-
-
-
-
-
-
-
-
-
-
-<div class="doc doc-object doc-function">
-
-
-<h3 id="romiseg.predict.evaluation.evaluate" class="doc doc-heading">
-            <span class="doc doc-object-name doc-function-name">evaluate</span>
-
-
-<a href="#romiseg.predict.evaluation.evaluate" class="headerlink" title="Permanent link">Link</a></h3>
-<div class="language-python doc-signature highlight" style="background: #f8f8f8"><pre style="line-height: 125%;"><span></span><code>evaluate(inputs, model)
+<h1 id="pytorch">PyTorch<a class="headerlink" href="#pytorch" title="Permanent link">Link</a></h1>
+<p>The <code>pyproject.toml</code> file specify the fixed following dependencies:</p>
+<ul>
+<li><code>torch==2.5.1</code></li>
+<li><code>torchvision==0.20.1</code></li>
+</ul>
+<p>The reason is that it allows a wide range of CUDA Compute Capability, from <code>5.x</code> to <code>9.x</code>.</p>
+<h2 id="compatibility-issues">Compatibility issues<a class="headerlink" href="#compatibility-issues" title="Permanent link">Link</a></h2>
+<p>If you have compatibility issues and wish to access older or newer packages with a specific CUDA version, go to the official <a href="https://pytorch.org/get-started/previous-versions/">PyTorch</a> webpage.</p>
+<h2 id="manual-installation">Manual installation<a class="headerlink" href="#manual-installation" title="Permanent link">Link</a></h2>
+<h3 id="cuda-118">CUDA 11.8<a class="headerlink" href="#cuda-118" title="Permanent link">Link</a></h3>
+<div class="language-shell highlight" style="background: #f8f8f8"><pre style="line-height: 125%;"><span></span><code>pip<span style="color: #BBB"> </span>install<span style="color: #BBB"> </span><span style="color: #19177C">torch</span><span style="color: #666">==2</span>.5.1<span style="color: #BBB"> </span><span style="color: #19177C">torchvision</span><span style="color: #666">==0</span>.20.1<span style="color: #BBB"> </span>--index-url<span style="color: #BBB"> </span>https://download.pytorch.org/whl/cu118
 </code></pre></div>
-
-    <div class="doc doc-contents ">
-
-        <p>Evaluate a segmentation model on input images.</p>
-
-
-<p><span class="doc-section-title">Parameters:</span></p>
-    <table>
-      <thead>
-        <tr>
-          <th>Name</th>
-          <th>Type</th>
-          <th>Description</th>
-          <th>Default</th>
-        </tr>
-      </thead>
-      <tbody>
-          <tr class="doc-section-item">
-            <td>
-                <code>inputs</code>
-            </td>
-            <td>
-                  <code><a class="autorefs autorefs-external" title="torch.Tensor" href="https://pytorch.org/docs/stable/tensors.html#torch.Tensor">Tensor</a></code>
-            </td>
-            <td>
-              <div class="doc-md-description">
-                <p>Input images.</p>
-              </div>
-            </td>
-            <td>
-                <em>required</em>
-            </td>
-          </tr>
-          <tr class="doc-section-item">
-            <td>
-                <code>model</code>
-            </td>
-            <td>
-                  <code><a class="autorefs autorefs-external" title="torch.nn.Module" href="https://pytorch.org/docs/stable/generated/torch.nn.Module.html#torch.nn.Module">Module</a></code>
-            </td>
-            <td>
-              <div class="doc-md-description">
-                <p>Segmentation model.</p>
-              </div>
-            </td>
-            <td>
-                <em>required</em>
-            </td>
-          </tr>
-      </tbody>
-    </table>
-
-
-    <p><span class="doc-section-title">Returns:</span></p>
-    <table>
-      <thead>
-        <tr>
-          <th>Type</th>
-          <th>Description</th>
-        </tr>
-      </thead>
-      <tbody>
-          <tr class="doc-section-item">
-            <td>
-                  <code><a class="autorefs autorefs-external" title="torch.Tensor" href="https://pytorch.org/docs/stable/tensors.html#torch.Tensor">Tensor</a></code>
-            </td>
-            <td>
-              <div class="doc-md-description">
-                <p>Predicted segmentation masks.</p>
-              </div>
-            </td>
-          </tr>
-      </tbody>
-    </table>
-
-
-            <details class="quote">
-              <summary>Source code in <code>romiseg/predict/evaluation.py</code></summary>
-              <div class="language-python highlight" style="background: #f8f8f8"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span style="color: inherit; background-color: transparent; padding-left: 5px; padding-right: 5px;">17</span>
-<span style="color: inherit; background-color: transparent; padding-left: 5px; padding-right: 5px;">18</span>
-<span style="color: inherit; background-color: transparent; padding-left: 5px; padding-right: 5px;">19</span>
-<span style="color: inherit; background-color: transparent; padding-left: 5px; padding-right: 5px;">20</span>
-<span style="color: inherit; background-color: transparent; padding-left: 5px; padding-right: 5px;">21</span>
-<span style="color: inherit; background-color: transparent; padding-left: 5px; padding-right: 5px;">22</span>
-<span style="color: inherit; background-color: transparent; padding-left: 5px; padding-right: 5px;">23</span>
-<span style="color: inherit; background-color: transparent; padding-left: 5px; padding-right: 5px;">24</span>
-<span style="color: inherit; background-color: transparent; padding-left: 5px; padding-right: 5px;">25</span>
-<span style="color: inherit; background-color: transparent; padding-left: 5px; padding-right: 5px;">26</span>
-<span style="color: inherit; background-color: transparent; padding-left: 5px; padding-right: 5px;">27</span>
-<span style="color: inherit; background-color: transparent; padding-left: 5px; padding-right: 5px;">28</span>
-<span style="color: inherit; background-color: transparent; padding-left: 5px; padding-right: 5px;">29</span>
-<span style="color: inherit; background-color: transparent; padding-left: 5px; padding-right: 5px;">30</span>
-<span style="color: inherit; background-color: transparent; padding-left: 5px; padding-right: 5px;">31</span>
-<span style="color: inherit; background-color: transparent; padding-left: 5px; padding-right: 5px;">32</span>
-<span style="color: inherit; background-color: transparent; padding-left: 5px; padding-right: 5px;">33</span>
-<span style="color: inherit; background-color: transparent; padding-left: 5px; padding-right: 5px;">34</span>
-<span style="color: inherit; background-color: transparent; padding-left: 5px; padding-right: 5px;">35</span>
-<span style="color: inherit; background-color: transparent; padding-left: 5px; padding-right: 5px;">36</span>
-<span style="color: inherit; background-color: transparent; padding-left: 5px; padding-right: 5px;">37</span>
-<span style="color: inherit; background-color: transparent; padding-left: 5px; padding-right: 5px;">38</span>
-<span style="color: inherit; background-color: transparent; padding-left: 5px; padding-right: 5px;">39</span>
-<span style="color: inherit; background-color: transparent; padding-left: 5px; padding-right: 5px;">40</span>
-<span style="color: inherit; background-color: transparent; padding-left: 5px; padding-right: 5px;">41</span>
-<span style="color: inherit; background-color: transparent; padding-left: 5px; padding-right: 5px;">42</span>
-<span style="color: inherit; background-color: transparent; padding-left: 5px; padding-right: 5px;">43</span>
-<span style="color: inherit; background-color: transparent; padding-left: 5px; padding-right: 5px;">44</span>
-<span style="color: inherit; background-color: transparent; padding-left: 5px; padding-right: 5px;">45</span>
-<span style="color: inherit; background-color: transparent; padding-left: 5px; padding-right: 5px;">46</span>
-<span style="color: inherit; background-color: transparent; padding-left: 5px; padding-right: 5px;">47</span></pre></div></td><td class="code"><div><pre style="line-height: 125%;"><span></span><code><span style="color: #008000; font-weight: bold">def</span><span style="color: #BBB"> </span><span style="color: #00F">evaluate</span>(inputs, model):
-<span style="color: #BBB">    </span><span style="color: #BA2121; font-style: italic">&quot;&quot;&quot;</span>
-<span style="color: #BA2121; font-style: italic">    Evaluate a segmentation model on input images.</span>
-
-<span style="color: #BA2121; font-style: italic">    Parameters</span>
-<span style="color: #BA2121; font-style: italic">    ----------</span>
-<span style="color: #BA2121; font-style: italic">    inputs : torch.Tensor</span>
-<span style="color: #BA2121; font-style: italic">        Input images.</span>
-<span style="color: #BA2121; font-style: italic">    model : torch.nn.Module</span>
-<span style="color: #BA2121; font-style: italic">        Segmentation model.</span>
-
-<span style="color: #BA2121; font-style: italic">    Returns</span>
-<span style="color: #BA2121; font-style: italic">    -------</span>
-<span style="color: #BA2121; font-style: italic">    torch.Tensor</span>
-<span style="color: #BA2121; font-style: italic">        Predicted segmentation masks.</span>
-<span style="color: #BA2121; font-style: italic">    &quot;&quot;&quot;</span>
-    <span style="color: #008000; font-weight: bold">with</span> torch<span style="color: #666">.</span>no_grad():
-        inputs<span style="color: #666">.</span>requires_grad <span style="color: #666">=</span> <span style="color: #008000; font-weight: bold">False</span>
-        <span style="color: #3D7B7B; font-style: italic"># Get the first batch - device is determined by inputs tensor</span>
-        device <span style="color: #666">=</span> inputs<span style="color: #666">.</span>device
-        <span style="color: #3D7B7B; font-style: italic"># Ensure model is on the same device as inputs</span>
-        model <span style="color: #666">=</span> model<span style="color: #666">.</span>to(device)
-
-        pred <span style="color: #666">=</span> model(inputs)
-        <span style="color: #3D7B7B; font-style: italic"># The loss functions include the sigmoid function.</span>
-        <span style="color: #3D7B7B; font-style: italic"># for i in range(pred.shape[1]):</span>
-        <span style="color: #3D7B7B; font-style: italic">#    pred[:,1,:,:] = F.sigmoid(pred[:,1,:,:])</span>
-
-        pred <span style="color: #666">=</span> F<span style="color: #666">.</span>sigmoid(pred)
-
-    <span style="color: #008000; font-weight: bold">return</span> pred
-</code></pre></div></td></tr></table></div>
-            </details>
-    </div>
-
-</div>
-
-<div class="doc doc-object doc-function">
-
-
-<h3 id="romiseg.predict.evaluation.test" class="doc doc-heading">
-            <span class="doc doc-object-name doc-function-name">test</span>
-
-
-<a href="#romiseg.predict.evaluation.test" class="headerlink" title="Permanent link">Link</a></h3>
-<div class="language-python doc-signature highlight" style="background: #f8f8f8"><pre style="line-height: 125%;"><span></span><code>test(inputs, labels, model)
+<h3 id="cuda-121">CUDA 12.1<a class="headerlink" href="#cuda-121" title="Permanent link">Link</a></h3>
+<div class="language-shell highlight" style="background: #f8f8f8"><pre style="line-height: 125%;"><span></span><code>pip<span style="color: #BBB"> </span>install<span style="color: #BBB"> </span><span style="color: #19177C">torch</span><span style="color: #666">==2</span>.5.1<span style="color: #BBB"> </span><span style="color: #19177C">torchvision</span><span style="color: #666">==0</span>.20.1<span style="color: #BBB"> </span>--index-url<span style="color: #BBB"> </span>https://download.pytorch.org/whl/cu121
 </code></pre></div>
-
-    <div class="doc doc-contents ">
-
-        <p>Test a segmentation model on input images and labels.</p>
-
-
-<p><span class="doc-section-title">Parameters:</span></p>
-    <table>
-      <thead>
-        <tr>
-          <th>Name</th>
-          <th>Type</th>
-          <th>Description</th>
-          <th>Default</th>
-        </tr>
-      </thead>
-      <tbody>
-          <tr class="doc-section-item">
-            <td>
-                <code>inputs</code>
-            </td>
-            <td>
-                  <code><a class="autorefs autorefs-external" title="torch.Tensor" href="https://pytorch.org/docs/stable/tensors.html#torch.Tensor">Tensor</a></code>
-            </td>
-            <td>
-              <div class="doc-md-description">
-                <p>Input images.</p>
-              </div>
-            </td>
-            <td>
-                <em>required</em>
-            </td>
-          </tr>
-          <tr class="doc-section-item">
-            <td>
-                <code>labels</code>
-            </td>
-            <td>
-                  <code><a class="autorefs autorefs-external" title="torch.Tensor" href="https://pytorch.org/docs/stable/tensors.html#torch.Tensor">Tensor</a></code>
-            </td>
-            <td>
-              <div class="doc-md-description">
-                <p>Ground truth labels.</p>
-              </div>
-            </td>
-            <td>
-                <em>required</em>
-            </td>
-          </tr>
-          <tr class="doc-section-item">
-            <td>
-                <code>model</code>
-            </td>
-            <td>
-                  <code><a class="autorefs autorefs-external" title="torch.nn.Module" href="https://pytorch.org/docs/stable/generated/torch.nn.Module.html#torch.nn.Module">Module</a></code>
-            </td>
-            <td>
-              <div class="doc-md-description">
-                <p>Segmentation model.</p>
-              </div>
-            </td>
-            <td>
-                <em>required</em>
-            </td>
-          </tr>
-      </tbody>
-    </table>
-
-
-    <p><span class="doc-section-title">Returns:</span></p>
-    <table>
-      <thead>
-        <tr>
-          <th>Type</th>
-          <th>Description</th>
-        </tr>
-      </thead>
-      <tbody>
-          <tr class="doc-section-item">
-            <td>
-                  <code><a class="autorefs autorefs-external" href="https://docs.python.org/3/library/stdtypes.html#tuple">tuple</a></code>
-            </td>
-            <td>
-              <div class="doc-md-description">
-                <p>Tuple containing the predicted segmentation masks and a dictionary of metrics.</p>
-              </div>
-            </td>
-          </tr>
-      </tbody>
-    </table>
-
-
-            <details class="quote">
-              <summary>Source code in <code>romiseg/predict/evaluation.py</code></summary>
-              <div class="language-python highlight" style="background: #f8f8f8"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span style="color: inherit; background-color: transparent; padding-left: 5px; padding-right: 5px;">50</span>
-<span style="color: inherit; background-color: transparent; padding-left: 5px; padding-right: 5px;">51</span>
-<span style="color: inherit; background-color: transparent; padding-left: 5px; padding-right: 5px;">52</span>
-<span style="color: inherit; background-color: transparent; padding-left: 5px; padding-right: 5px;">53</span>
-<span style="color: inherit; background-color: transparent; padding-left: 5px; padding-right: 5px;">54</span>
-<span style="color: inherit; background-color: transparent; padding-left: 5px; padding-right: 5px;">55</span>
-<span style="color: inherit; background-color: transparent; padding-left: 5px; padding-right: 5px;">56</span>
-<span style="color: inherit; background-color: transparent; padding-left: 5px; padding-right: 5px;">57</span>
-<span style="color: inherit; background-color: transparent; padding-left: 5px; padding-right: 5px;">58</span>
-<span style="color: inherit; background-color: transparent; padding-left: 5px; padding-right: 5px;">59</span>
-<span style="color: inherit; background-color: transparent; padding-left: 5px; padding-right: 5px;">60</span>
-<span style="color: inherit; background-color: transparent; padding-left: 5px; padding-right: 5px;">61</span>
-<span style="color: inherit; background-color: transparent; padding-left: 5px; padding-right: 5px;">62</span>
-<span style="color: inherit; background-color: transparent; padding-left: 5px; padding-right: 5px;">63</span>
-<span style="color: inherit; background-color: transparent; padding-left: 5px; padding-right: 5px;">64</span>
-<span style="color: inherit; background-color: transparent; padding-left: 5px; padding-right: 5px;">65</span>
-<span style="color: inherit; background-color: transparent; padding-left: 5px; padding-right: 5px;">66</span>
-<span style="color: inherit; background-color: transparent; padding-left: 5px; padding-right: 5px;">67</span>
-<span style="color: inherit; background-color: transparent; padding-left: 5px; padding-right: 5px;">68</span>
-<span style="color: inherit; background-color: transparent; padding-left: 5px; padding-right: 5px;">69</span>
-<span style="color: inherit; background-color: transparent; padding-left: 5px; padding-right: 5px;">70</span>
-<span style="color: inherit; background-color: transparent; padding-left: 5px; padding-right: 5px;">71</span>
-<span style="color: inherit; background-color: transparent; padding-left: 5px; padding-right: 5px;">72</span>
-<span style="color: inherit; background-color: transparent; padding-left: 5px; padding-right: 5px;">73</span>
-<span style="color: inherit; background-color: transparent; padding-left: 5px; padding-right: 5px;">74</span>
-<span style="color: inherit; background-color: transparent; padding-left: 5px; padding-right: 5px;">75</span>
-<span style="color: inherit; background-color: transparent; padding-left: 5px; padding-right: 5px;">76</span>
-<span style="color: inherit; background-color: transparent; padding-left: 5px; padding-right: 5px;">77</span>
-<span style="color: inherit; background-color: transparent; padding-left: 5px; padding-right: 5px;">78</span>
-<span style="color: inherit; background-color: transparent; padding-left: 5px; padding-right: 5px;">79</span>
-<span style="color: inherit; background-color: transparent; padding-left: 5px; padding-right: 5px;">80</span>
-<span style="color: inherit; background-color: transparent; padding-left: 5px; padding-right: 5px;">81</span>
-<span style="color: inherit; background-color: transparent; padding-left: 5px; padding-right: 5px;">82</span>
-<span style="color: inherit; background-color: transparent; padding-left: 5px; padding-right: 5px;">83</span>
-<span style="color: inherit; background-color: transparent; padding-left: 5px; padding-right: 5px;">84</span>
-<span style="color: inherit; background-color: transparent; padding-left: 5px; padding-right: 5px;">85</span></pre></div></td><td class="code"><div><pre style="line-height: 125%;"><span></span><code><span style="color: #008000; font-weight: bold">def</span><span style="color: #BBB"> </span><span style="color: #00F">test</span>(inputs, labels, model):
-<span style="color: #BBB">    </span><span style="color: #BA2121; font-style: italic">&quot;&quot;&quot;</span>
-<span style="color: #BA2121; font-style: italic">    Test a segmentation model on input images and labels.</span>
-
-<span style="color: #BA2121; font-style: italic">    Parameters</span>
-<span style="color: #BA2121; font-style: italic">    ----------</span>
-<span style="color: #BA2121; font-style: italic">    inputs : torch.Tensor</span>
-<span style="color: #BA2121; font-style: italic">        Input images.</span>
-<span style="color: #BA2121; font-style: italic">    labels : torch.Tensor</span>
-<span style="color: #BA2121; font-style: italic">        Ground truth labels.</span>
-<span style="color: #BA2121; font-style: italic">    model : torch.nn.Module</span>
-<span style="color: #BA2121; font-style: italic">        Segmentation model.</span>
-
-<span style="color: #BA2121; font-style: italic">    Returns</span>
-<span style="color: #BA2121; font-style: italic">    -------</span>
-<span style="color: #BA2121; font-style: italic">    tuple</span>
-<span style="color: #BA2121; font-style: italic">        Tuple containing the predicted segmentation masks and a dictionary of metrics.</span>
-<span style="color: #BA2121; font-style: italic">    &quot;&quot;&quot;</span>
-    metrics <span style="color: #666">=</span> defaultdict(<span style="color: #008000">float</span>)
-
-    <span style="color: #008000; font-weight: bold">with</span> torch<span style="color: #666">.</span>no_grad():
-        inputs<span style="color: #666">.</span>requires_grad <span style="color: #666">=</span> <span style="color: #008000; font-weight: bold">False</span>
-        <span style="color: #3D7B7B; font-style: italic"># Get the first batch - device is determined by inputs tensor</span>
-        device <span style="color: #666">=</span> inputs<span style="color: #666">.</span>device
-        <span style="color: #3D7B7B; font-style: italic"># Ensure model is on the same device as inputs</span>
-        model <span style="color: #666">=</span> model<span style="color: #666">.</span>to(device)
-
-        pred <span style="color: #666">=</span> model(inputs)
-        <span style="color: #3D7B7B; font-style: italic"># The loss functions include the sigmoid function.</span>
-        <span style="color: #3D7B7B; font-style: italic"># for i in range(pred.shape[1]):</span>
-        <span style="color: #3D7B7B; font-style: italic">#    pred[:,1,:,:] = F.sigmoid(pred[:,1,:,:])</span>
-        loss <span style="color: #666">=</span> calc_loss(pred, labels, metrics)
-
-        pred <span style="color: #666">=</span> F<span style="color: #666">.</span>sigmoid(pred)
-
-    <span style="color: #008000; font-weight: bold">return</span> pred, metrics
-</code></pre></div></td></tr></table></div>
-            </details>
-    </div>
-
-</div>
-
-
-
-  </div>
-
-    </div>
-
-</div>
+<h3 id="cuda-124">CUDA 12.4<a class="headerlink" href="#cuda-124" title="Permanent link">Link</a></h3>
+<div class="language-shell highlight" style="background: #f8f8f8"><pre style="line-height: 125%;"><span></span><code>pip<span style="color: #BBB"> </span>install<span style="color: #BBB"> </span><span style="color: #19177C">torch</span><span style="color: #666">==2</span>.5.1<span style="color: #BBB"> </span><span style="color: #19177C">torchvision</span><span style="color: #666">==0</span>.20.1<span style="color: #BBB"> </span>--index-url<span style="color: #BBB"> </span>https://download.pytorch.org/whl/cu124
+</code></pre></div>
+<h3 id="cpu-only">CPU only<a class="headerlink" href="#cpu-only" title="Permanent link">Link</a></h3>
+<div class="language-shell highlight" style="background: #f8f8f8"><pre style="line-height: 125%;"><span></span><code>pip<span style="color: #BBB"> </span>install<span style="color: #BBB"> </span><span style="color: #19177C">torch</span><span style="color: #666">==2</span>.5.1<span style="color: #BBB"> </span><span style="color: #19177C">torchvision</span><span style="color: #666">==0</span>.20.1<span style="color: #BBB"> </span>--index-url<span style="color: #BBB"> </span>https://download.pytorch.org/whl/cpu
+</code></pre></div>
 
 
 
@@ -2367,12 +2050,12 @@
     
       
       
-      <script id="__config" type="application/json">{"annotate": null, "base": "../../../..", "features": ["navigation.tabs", "navigation.tabs.sticky", "content.code.copy"], "search": "../../../../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
+      <script id="__config" type="application/json">{"annotate": null, "base": "..", "features": ["navigation.tabs", "navigation.tabs.sticky", "content.code.copy"], "search": "../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
     
     
-      <script src="../../../../assets/javascripts/bundle.79ae519e.min.js"></script>
+      <script src="../assets/javascripts/bundle.79ae519e.min.js"></script>
       
-        <script src="../../../../assets/_markdown_exec_pyodide.js"></script>
+        <script src="../assets/_markdown_exec_pyodide.js"></script>
       
         <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.0/MathJax.js?config=TeX-MML-AM_CHTML"></script>
       
