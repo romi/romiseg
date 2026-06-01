@@ -528,10 +528,10 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#compatibility-issues" class="md-nav__link">
+  <a href="#fixed-dependencies-recommended-for-reproducible-builds" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Compatibility issues
+        Fixed dependencies (recommended for reproducible builds)
       
     </span>
   </a>
@@ -596,6 +596,28 @@
         
       </ul>
     </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#verify-compatibility" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Verify Compatibility
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#when-you-need-a-different-version" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        When you need a different version
+      
+    </span>
+  </a>
   
 </li>
       
@@ -1846,10 +1868,10 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#compatibility-issues" class="md-nav__link">
+  <a href="#fixed-dependencies-recommended-for-reproducible-builds" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Compatibility issues
+        Fixed dependencies (recommended for reproducible builds)
       
     </span>
   </a>
@@ -1917,6 +1939,28 @@
   
 </li>
       
+        <li class="md-nav__item">
+  <a href="#verify-compatibility" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Verify Compatibility
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#when-you-need-a-different-version" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        When you need a different version
+      
+    </span>
+  </a>
+  
+</li>
+      
     </ul>
   
 </nav>
@@ -1938,14 +1982,13 @@
 
 
 <h1 id="pytorch">PyTorch<a class="headerlink" href="#pytorch" title="Permanent link">Link</a></h1>
+<h2 id="fixed-dependencies-recommended-for-reproducible-builds">Fixed dependencies (recommended for reproducible builds)<a class="headerlink" href="#fixed-dependencies-recommended-for-reproducible-builds" title="Permanent link">Link</a></h2>
 <p>The <code>pyproject.toml</code> file specify the fixed following dependencies:</p>
 <ul>
 <li><code>torch==2.5.1</code></li>
 <li><code>torchvision==0.20.1</code></li>
 </ul>
 <p>The reason is that it allows a wide range of CUDA Compute Capability, from <code>5.x</code> to <code>9.x</code>.</p>
-<h2 id="compatibility-issues">Compatibility issues<a class="headerlink" href="#compatibility-issues" title="Permanent link">Link</a></h2>
-<p>If you have compatibility issues and wish to access older or newer packages with a specific CUDA version, go to the official <a href="https://pytorch.org/get-started/previous-versions/">PyTorch</a> webpage.</p>
 <h2 id="manual-installation">Manual installation<a class="headerlink" href="#manual-installation" title="Permanent link">Link</a></h2>
 <h3 id="cuda-118">CUDA 11.8<a class="headerlink" href="#cuda-118" title="Permanent link">Link</a></h3>
 <div class="language-shell highlight" style="background: #f8f8f8"><pre style="line-height: 125%;"><span></span><code>pip<span style="color: #BBB"> </span>install<span style="color: #BBB"> </span><span style="color: #19177C">torch</span><span style="color: #666">==2</span>.5.1<span style="color: #BBB"> </span><span style="color: #19177C">torchvision</span><span style="color: #666">==0</span>.20.1<span style="color: #BBB"> </span>--index-url<span style="color: #BBB"> </span>https://download.pytorch.org/whl/cu118
@@ -1959,6 +2002,53 @@
 <h3 id="cpu-only">CPU only<a class="headerlink" href="#cpu-only" title="Permanent link">Link</a></h3>
 <div class="language-shell highlight" style="background: #f8f8f8"><pre style="line-height: 125%;"><span></span><code>pip<span style="color: #BBB"> </span>install<span style="color: #BBB"> </span><span style="color: #19177C">torch</span><span style="color: #666">==2</span>.5.1<span style="color: #BBB"> </span><span style="color: #19177C">torchvision</span><span style="color: #666">==0</span>.20.1<span style="color: #BBB"> </span>--index-url<span style="color: #BBB"> </span>https://download.pytorch.org/whl/cpu
 </code></pre></div>
+<h2 id="verify-compatibility">Verify Compatibility<a class="headerlink" href="#verify-compatibility" title="Permanent link">Link</a></h2>
+<p>After installation, run the short script below to make sure your GPU is supported and that the installed CUDA toolchain matches your hardware:</p>
+<div class="language-python highlight" style="background: #f8f8f8"><pre style="line-height: 125%;"><span></span><code><span style="color: #008000; font-weight: bold">import</span><span style="color: #BBB"> </span><span style="color: #00F; font-weight: bold">torch</span>
+
+<span style="color: #3D7B7B; font-style: italic"># List of compute capabilities the current wheel supports</span>
+<span style="color: #008000">print</span>(<span style="color: #BA2121">&quot;Supported CUDA architectures:&quot;</span>, torch<span style="color: #666">.</span>cuda<span style="color: #666">.</span>get_arch_list())
+
+<span style="color: #3D7B7B; font-style: italic"># Properties of the first detected GPU (device 0)</span>
+device <span style="color: #666">=</span> torch<span style="color: #666">.</span>cuda<span style="color: #666">.</span>get_device_properties(<span style="color: #666">0</span>)
+<span style="color: #008000">print</span>(<span style="color: #BA2121">f&quot;Detected GPU: </span><span style="color: #A45A77; font-weight: bold">{</span>device<span style="color: #666">.</span>name<span style="color: #A45A77; font-weight: bold">}</span><span style="color: #BA2121"> (sm_</span><span style="color: #A45A77; font-weight: bold">{</span>device<span style="color: #666">.</span>major<span style="color: #A45A77; font-weight: bold">}{</span>device<span style="color: #666">.</span>minor<span style="color: #A45A77; font-weight: bold">}</span><span style="color: #BA2121">)&quot;</span>)
+</code></pre></div>
+<p><strong>How to interpret the output</strong></p>
+<table>
+<thead>
+<tr>
+<th>Situation</th>
+<th>What to do</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>sm_xx</code> <strong>appears</strong> in <code>torch.cuda.get_arch_list()</code></td>
+<td>✅ Your GPU is compatible – you can start training.</td>
+</tr>
+<tr>
+<td><code>sm_xx</code> <strong>does NOT appear</strong></td>
+<td>❌ The wheel you installed does <strong>not</strong> support your GPU. Choose a different CUDA version (<em>e.g.</em>, a lower‑CUDA wheel) or install from source.</td>
+</tr>
+<tr>
+<td>No CUDA device is found (<code>torch.cuda.is_available() == False</code>)</td>
+<td>❌ You may be on a CPU‑only machine or need to install the <strong>CPU‑only</strong> wheel.</td>
+</tr>
+</tbody>
+</table>
+<blockquote>
+<p><strong>Important</strong>: You should match the major version from the supported architecture list to the major or the device architecture.
+For example, if your device is <em>sm_52</em> and the <code>get_arch_list</code> returns
+<code>['sm_50', 'sm_60', 'sm_70', 'sm_75', 'sm_80', 'sm_86', 'sm_90']</code> it will work.
+It will not work if it returns <code>['sm_75', 'sm_80', 'sm_86', 'sm_90']</code>.</p>
+</blockquote>
+<h2 id="when-you-need-a-different-version">When you need a different version<a class="headerlink" href="#when-you-need-a-different-version" title="Permanent link">Link</a></h2>
+<p>If you run into compatibility problems (<em>e.g.</em>, older GPU, newer CUDA toolkit not yet covered), you can:</p>
+<ol>
+<li><strong>Browse the official list</strong> of previous PyTorch versions and their CUDA wheels on the <a href="https://pytorch.org/get-started/previous-versions/">Previous Versions page</a>.</li>
+<li>Pick the exact version you need (<em>e.g.</em>, <code>torch==2.10.0</code> for CUDA 12.6) and adjust the <code>pip</code> command accordingly.</li>
+<li>Optionally, pin the version in <code>pyproject.toml</code>  to guarantee reproducibility.</li>
+</ol>
 
 
 
