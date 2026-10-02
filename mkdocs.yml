@@ -7,6 +7,8 @@ repo_url: https://github.com/romi/romiseg
 
 nav:
   - 'Home': index.md
+  - 'Developers':
+    - 'Release Guide': developers/releases.md
   - 'Training': training.md
   - 'Segmentation2D': segmentation2d.md
   - 'Annotation and Fine‑tuning': annotation-finetuning.md
