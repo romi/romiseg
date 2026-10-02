@@ -1,0 +1,26 @@
+[Directory]
+
+path = '/home/alienor/Documents/training2D/'
+
+directory_weights = "weights"
+model_segmentation_name = "resnet18"
+
+tsboard = "board"
+
+directory_dataset= "data/database/"
+
+[Segmentation2D]
+
+labels ='background,Color_1, Color_2, Color_3' #'background,flower,peduncle,stem,bud,leaf,fruit'
+
+Sx = 256
+Sy = 256 
+
+epochs = 1
+batch = 16
+
+learning_rate = 1e-4
+
+[Reconstruction3D]
+N_vox = 1000000
+coord_file_loc = 'volume/'
