@@ -9,5 +9,5 @@ channels:
 dependencies:
   - python {{ requires-python }}
   - numpy<2
-  - pytorch==1.13.1
-  - torchvision
+  - pytorch==2.13.0
+  - torchvision>=0.28,<0.29
