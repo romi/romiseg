@@ -68,6 +68,7 @@ doc = [
     "mkdocs",
     "mkdocs-material",
     "mkdocstrings[python]",
+    "mkdocstrings-python<2",  # mkdocstrings-python 2.x renames `import` -> `import_` in config, breaking mkdocs.yml
     "pymdown-extensions",
     "markdown-exec[ansi]",
     "mkdocs-gen-files",
