@@ -122,6 +122,12 @@ def segmentation(Sx, Sy, images_fileset, model_file, device=None):
     # Reverse padding applied earlier to match the original image dimensions
     pred_pad[:, :, padding[0]:pred_pad.size(2) - padding[2], padding[1]:pred_pad.size(3) - padding[3]] = pred_tot
 
+    # Free GPU memory: release the model and return cached blocks to the driver so
+    # later tasks in the same process (e.g. voxel backprojection) aren't starved.
+    if device.type == "cuda":
+        del model_segmentation
+        torch.cuda.empty_cache()
+
     return pred_pad, id_list
 
 
@@ -240,6 +246,12 @@ def fileset_segmentation(Sx, Sy, images_fileset, model_file, device=None):
         pred_pad[:, padding[0]:pred_pad.size(1) - padding[2],
         padding[1]:pred_pad.size(2) - padding[3]] = outputs.squeeze(0)
         pred_images.append(pred_pad)
+
+    # Free GPU memory: release the model and return cached blocks to the driver so
+    # later tasks in the same process (e.g. voxel backprojection) aren't starved.
+    if device.type == "cuda":
+        del model_segmentation
+        torch.cuda.empty_cache()
 
     return pred_images
 
