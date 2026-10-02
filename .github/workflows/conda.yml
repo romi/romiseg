@@ -33,4 +33,6 @@ jobs:
           conda config --set anaconda_upload yes
           # Build package from recipe directory and upload to Anaconda.org.
           # Note: use `conda-build` directly, as conda 26+ no longer exposes `conda build`.
-          conda-build conda/recipe/meta.yaml -c conda-forge -c pytorch --user romi-eu --token ${{ secrets.ANACONDA_TOKEN }}
+          # `-c romi-eu` provides `plantdb.commons`. The `pytorch` channel is intentionally
+          # omitted: only CUDA builds are published there, which can't solve on GPU-less runners.
+          conda-build conda/recipe/meta.yaml -c conda-forge -c romi-eu --user romi-eu --token ${{ secrets.ANACONDA_TOKEN }}

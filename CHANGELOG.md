@@ -1,3 +1,7 @@
+# Version 0.3.1 - 2026-10-02
+
+- Fix the Conda build: map pip dependency names to real Conda packages, install the CPU torch stack (`torch`, `torchvision`) from PyPI, add the `romi-eu` channel for `plantdb.commons`, and restrict the Python build matrix to supported versions.
+
 # Version 0.3.0 - 2026-10-02
 
 - Switch dataset backend from `romidata` to `plantdb` and unify the FSDB API across the codebase.
