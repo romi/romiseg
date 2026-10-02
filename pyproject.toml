@@ -10,14 +10,14 @@ dependencies = [
     "future",
     "Pillow",
     "requests",
-    "torch==2.5.1",  # arch list (cuda cc) ranges from 50 to 90
-    "torchvision==0.20.1",
+    "torch==2.13.0",  # arch list (cuda cc) ranges from 50 to 90
+    "torchvision>=0.28,<0.29",
     "tqdm",
     "plantdb.commons",
 ]
 description = "Image multiclass semantic segmentation using CNN models trained on virtual plant images (PyTorch)."
 readme = "README.md"
-requires-python = ">=3.8"
+requires-python = ">=3.10"
 license = { 'text' = "LGPL-3.0-or-later" }   # to replace by "LGPL-3.0-or-later" only in next release, pending deprecation
 authors = [
     { name = "Alienor Lahlou", email = "alienor.lahlou@espci.org" },
@@ -68,6 +68,7 @@ doc = [
     "mkdocs",
     "mkdocs-material",
     "mkdocstrings[python]",
+    "mkdocstrings-python<2",  # mkdocstrings-python 2.x renames `import` -> `import_` in config, breaking mkdocs.yml
     "pymdown-extensions",
     "markdown-exec[ansi]",
     "mkdocs-gen-files",

@@ -1,13 +1,10 @@
-{% set pyproject = load_file_data('../../pyproject.toml', 'toml', from_recipe_dir=True) %}
-{% set requires-python = pyproject.get('project', {}).get('requires-python') %}
-
 name: romiseg
 channels:
   - defaults
   - conda-forge
   - pytorch
 dependencies:
-  - python {{ requires-python }}
+  - python=3.10
   - numpy<2
-  - pytorch==1.13.1
-  - torchvision
+  - pytorch==2.13.0
+  - torchvision>=0.28,<0.29
