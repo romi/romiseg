@@ -1,8 +1,9 @@
-# GitHub workflow that runs the deterministic unit tests in `tests/` on every pull request.
+# GitHub workflow that runs the deterministic unit tests in `tests/unit/` on every pull request.
 #
-# Only fast, self-contained unit tests are run. Model-dependent and integration tests
-# (`test_segmentation`, `test_unet`, `test_unet3d`) are intentionally excluded: they
-# download pretrained weights / test databases and are not suitable for a CI run.
+# Only fast, self-contained unit tests are run. Model and integration tests
+# (`tests/model/`, `tests/integration/`) are intentionally excluded: they run full model
+# forward passes and download pretrained weights / test databases, so they are not
+# suitable for a CI run.
 
 name: Run unit tests
 
