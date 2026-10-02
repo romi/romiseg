@@ -25,7 +25,7 @@
       
       
       <link rel="icon" href="../../../../assets/images/ROMI_logo_green_25.svg">
-      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.6">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.7">
     
     
       
@@ -33,7 +33,7 @@
       
     
     
-      <link rel="stylesheet" href="../../../../assets/stylesheets/main.484c7ddc.min.css">
+      <link rel="stylesheet" href="../../../../assets/stylesheets/main.ec1eaa64.min.css">
       
       
 
@@ -1947,7 +1947,7 @@ model weights can be captured based on validation loss during the process.</p>
                 <code>train_type</code>
             </td>
             <td>
-                  <code><a class="autorefs autorefs-external" href="https://docs.python.org/3/library/stdtypes.html#str">str</a></code>
+                  <code><a class="autorefs autorefs-external" href="https://docs.python.org/3/builtins/stdtypes.html#str">str</a></code>
             </td>
             <td>
               <div class="doc-md-description">
@@ -1963,7 +1963,7 @@ model weights can be captured based on validation loss during the process.</p>
                 <code>dataloaders</code>
             </td>
             <td>
-                  <code><a class="autorefs autorefs-external" href="https://docs.python.org/3/library/stdtypes.html#dict">dict</a></code>
+                  <code><a class="autorefs autorefs-external" href="https://docs.python.org/3/builtins/stdtypes.html#dict">dict</a></code>
             </td>
             <td>
               <div class="doc-md-description">
@@ -2075,7 +2075,7 @@ model weights can be captured based on validation loss during the process.</p>
                 <code>num_epochs</code>
             </td>
             <td>
-                  <code><a class="autorefs autorefs-external" href="https://docs.python.org/3/library/functions.html#int">int</a></code>
+                  <code><a class="autorefs autorefs-external" href="https://docs.python.org/3/builtins/functions.html#int">int</a></code>
             </td>
             <td>
               <div class="doc-md-description">
@@ -2091,7 +2091,7 @@ model weights can be captured based on validation loss during the process.</p>
                 <code>viz</code>
             </td>
             <td>
-                  <code><a class="autorefs autorefs-external" href="https://docs.python.org/3/library/functions.html#bool">bool</a></code>
+                  <code><a class="autorefs autorefs-external" href="https://docs.python.org/3/builtins/functions.html#bool">bool</a></code>
             </td>
             <td>
               <div class="doc-md-description">
@@ -2133,7 +2133,7 @@ model weights can be captured based on validation loss during the process.</p>
       <tbody>
           <tr class="doc-section-item">
             <td>
-                  <code><a class="autorefs autorefs-external" href="https://docs.python.org/3/library/stdtypes.html#tuple">tuple</a></code>
+                  <code><a class="autorefs autorefs-external" href="https://docs.python.org/3/builtins/stdtypes.html#tuple">tuple</a></code>
             </td>
             <td>
               <div class="doc-md-description">
@@ -2351,7 +2351,7 @@ model weights can be captured based on validation loss during the process.</p>
 <span style="color: inherit; background-color: transparent; padding-left: 5px; padding-right: 5px;">226</span>
 <span style="color: inherit; background-color: transparent; padding-left: 5px; padding-right: 5px;">227</span></pre></div></td><td class="code"><div><pre style="line-height: 125%;"><span></span><code><span style="color: #008000; font-weight: bold">def</span><span style="color: #BBB"> </span><span style="color: #00F">train_model_voxels</span>(train_type, dataloaders, model, optimizer, scheduler, writer,
                        voxel_loss, torch_voxels, num_epochs<span style="color: #666">=25</span>, viz<span style="color: #666">=</span><span style="color: #008000; font-weight: bold">False</span>, label_names<span style="color: #666">=</span>[]):
-<span style="color: #BBB">    </span><span style="color: #BA2121; font-style: italic">&quot;&quot;&quot;Trains a voxel-based deep learning model using the provided training and validation data.</span>
+<span style="color: #BBB">    </span><span style="color: #BA2121; font-style: italic">"""Trains a voxel-based deep learning model using the provided training and validation data.</span>
 
 <span style="color: #BA2121; font-style: italic">    The function supports training both a Segmentation model and a Full-pipeline model.</span>
 <span style="color: #BA2121; font-style: italic">    During the training process, metrics are calculated for evaluation, datasets are iteratively</span>
@@ -2361,9 +2361,9 @@ model weights can be captured based on validation loss during the process.</p>
 <span style="color: #BA2121; font-style: italic">    Parameters</span>
 <span style="color: #BA2121; font-style: italic">    ----------</span>
 <span style="color: #BA2121; font-style: italic">    train_type : str</span>
-<span style="color: #BA2121; font-style: italic">        Type of training to perform. Options are &#39;Segmentation&#39; or &#39;Fullpipe&#39;.</span>
+<span style="color: #BA2121; font-style: italic">        Type of training to perform. Options are 'Segmentation' or 'Fullpipe'.</span>
 <span style="color: #BA2121; font-style: italic">    dataloaders : dict</span>
-<span style="color: #BA2121; font-style: italic">        Dictionary containing DataLoader objects for &#39;train&#39; and &#39;val&#39; phases.</span>
+<span style="color: #BA2121; font-style: italic">        Dictionary containing DataLoader objects for 'train' and 'val' phases.</span>
 <span style="color: #BA2121; font-style: italic">    model : torch.nn.Module</span>
 <span style="color: #BA2121; font-style: italic">        The deep learning model to train.</span>
 <span style="color: #BA2121; font-style: italic">    optimizer : torch.optim.Optimizer</span>
@@ -2390,21 +2390,21 @@ model weights can be captured based on validation loss during the process.</p>
 <span style="color: #BA2121; font-style: italic">        - model (torch.nn.Module): Trained model.</span>
 <span style="color: #BA2121; font-style: italic">        - L (list): List of loss values logged at each epoch.</span>
 <span style="color: #BA2121; font-style: italic">        - loss_test (list): List of metrics calculated during validation phases.</span>
-<span style="color: #BA2121; font-style: italic">    &quot;&quot;&quot;</span>
+<span style="color: #BA2121; font-style: italic">    """</span>
     L <span style="color: #666">=</span> []
     <span style="color: #3D7B7B; font-style: italic"># best_model_wts = copy.deepcopy(model.state_dict())</span>
     best_loss <span style="color: #666">=</span> <span style="color: #666">1e10</span>
     loss_test <span style="color: #666">=</span> []
     n_classes <span style="color: #666">=</span> <span style="color: #008000">len</span>(label_names)
     <span style="color: #008000; font-weight: bold">for</span> epoch <span style="color: #A2F; font-weight: bold">in</span> <span style="color: #008000">range</span>(num_epochs):
-        <span style="color: #008000">print</span>(<span style="color: #BA2121">&#39;Running epoch </span><span style="color: #A45A77; font-weight: bold">%d</span><span style="color: #BA2121">/</span><span style="color: #A45A77; font-weight: bold">%d</span><span style="color: #BA2121">&#39;</span> <span style="color: #666">%</span> (epoch, num_epochs), end<span style="color: #666">=</span><span style="color: #BA2121">&quot;</span><span style="color: #AA5D1F; font-weight: bold">\r</span><span style="color: #BA2121">&quot;</span>)
+        <span style="color: #008000">print</span>(<span style="color: #BA2121">'Running epoch </span><span style="color: #A45A77; font-weight: bold">%d</span><span style="color: #BA2121">/</span><span style="color: #A45A77; font-weight: bold">%d</span><span style="color: #BA2121">'</span> <span style="color: #666">%</span> (epoch, num_epochs), end<span style="color: #666">=</span><span style="color: #BA2121">"</span><span style="color: #AA5D1F; font-weight: bold">\r</span><span style="color: #BA2121">"</span>)
 
         <span style="color: #3D7B7B; font-style: italic"># Each epoch has a training and validation phase</span>
-        <span style="color: #008000; font-weight: bold">for</span> phase <span style="color: #A2F; font-weight: bold">in</span> [<span style="color: #BA2121">&#39;train&#39;</span>, <span style="color: #BA2121">&#39;val&#39;</span>]:
-            <span style="color: #008000; font-weight: bold">if</span> phase <span style="color: #666">==</span> <span style="color: #BA2121">&#39;train&#39;</span>:
+        <span style="color: #008000; font-weight: bold">for</span> phase <span style="color: #A2F; font-weight: bold">in</span> [<span style="color: #BA2121">'train'</span>, <span style="color: #BA2121">'val'</span>]:
+            <span style="color: #008000; font-weight: bold">if</span> phase <span style="color: #666">==</span> <span style="color: #BA2121">'train'</span>:
                 scheduler<span style="color: #666">.</span>step()
                 <span style="color: #3D7B7B; font-style: italic"># for param_group in optimizer.param_groups:</span>
-                <span style="color: #3D7B7B; font-style: italic">#    print(&quot;LR&quot;, param_group[&#39;lr&#39;])</span>
+                <span style="color: #3D7B7B; font-style: italic">#    print("LR", param_group['lr'])</span>
 
                 model<span style="color: #666">.</span>train()  <span style="color: #3D7B7B; font-style: italic"># Set model to training mode</span>
             <span style="color: #008000; font-weight: bold">else</span>:
@@ -2423,12 +2423,12 @@ model weights can be captured based on validation loss during the process.</p>
 
                 <span style="color: #3D7B7B; font-style: italic"># forward</span>
                 <span style="color: #3D7B7B; font-style: italic"># track history if only in train</span>
-                <span style="color: #008000; font-weight: bold">with</span> torch<span style="color: #666">.</span>set_grad_enabled(phase <span style="color: #666">==</span> <span style="color: #BA2121">&#39;train&#39;</span>):
+                <span style="color: #008000; font-weight: bold">with</span> torch<span style="color: #666">.</span>set_grad_enabled(phase <span style="color: #666">==</span> <span style="color: #BA2121">'train'</span>):
                     outputs <span style="color: #666">=</span> model(inputs)
                     pred_class <span style="color: #666">=</span> outputs[<span style="color: #666">1</span>]
-                    <span style="color: #008000; font-weight: bold">if</span> train_type <span style="color: #666">==</span> <span style="color: #BA2121">&#39;Segmentation&#39;</span>:
+                    <span style="color: #008000; font-weight: bold">if</span> train_type <span style="color: #666">==</span> <span style="color: #BA2121">'Segmentation'</span>:
                         loss <span style="color: #666">=</span> calc_loss(outputs[<span style="color: #666">0</span>], labels, metrics)
-                    <span style="color: #008000; font-weight: bold">if</span> train_type <span style="color: #666">==</span> <span style="color: #BA2121">&#39;Fullpipe&#39;</span>:
+                    <span style="color: #008000; font-weight: bold">if</span> train_type <span style="color: #666">==</span> <span style="color: #BA2121">'Fullpipe'</span>:
                         <span style="color: #3D7B7B; font-style: italic"># print(outputs[1].shape)</span>
                         <span style="color: #3D7B7B; font-style: italic"># pred_class = pred_class[:,:-1]</span>
                         <span style="color: #3D7B7B; font-style: italic"># pred_class = torch.exp(pred_class)</span>
@@ -2436,10 +2436,10 @@ model weights can be captured based on validation loss during the process.</p>
                         loss <span style="color: #666">=</span> calc_loss(outputs[<span style="color: #666">0</span>], labels, metrics) <span style="color: #666">+</span> voxel_loss(pred_class,
                                                                                    voxels[<span style="color: #666">0</span>, :, n_classes <span style="color: #666">-</span> <span style="color: #666">1</span>])
                         <span style="color: #3D7B7B; font-style: italic"># F.cross_entropy(pred_class, voxels[0, :, 3])</span>
-                        <span style="color: #3D7B7B; font-style: italic"># print(&#39;loss %.15f&#39;%loss)</span>
+                        <span style="color: #3D7B7B; font-style: italic"># print('loss %.15f'%loss)</span>
                     <span style="color: #3D7B7B; font-style: italic"># print(loss)</span>
                     <span style="color: #3D7B7B; font-style: italic"># backward + optimize only if in training phase</span>
-                    <span style="color: #008000; font-weight: bold">if</span> phase <span style="color: #666">==</span> <span style="color: #BA2121">&#39;train&#39;</span>:
+                    <span style="color: #008000; font-weight: bold">if</span> phase <span style="color: #666">==</span> <span style="color: #BA2121">'train'</span>:
                         <span style="color: #008000; font-weight: bold">with</span> autograd<span style="color: #666">.</span>detect_anomaly():
                             loss<span style="color: #666">.</span>backward()
                             optimizer<span style="color: #666">.</span>step()
@@ -2448,11 +2448,11 @@ model weights can be captured based on validation loss during the process.</p>
                 epoch_samples <span style="color: #666">+=</span> inputs<span style="color: #666">.</span>size(<span style="color: #666">0</span>)
 
             <span style="color: #3D7B7B; font-style: italic"># print_metrics(metrics, epoch_samples, phase)</span>
-            epoch_loss <span style="color: #666">=</span> metrics[<span style="color: #BA2121">&#39;loss&#39;</span>] <span style="color: #666">/</span> epoch_samples
+            epoch_loss <span style="color: #666">=</span> metrics[<span style="color: #BA2121">'loss'</span>] <span style="color: #666">/</span> epoch_samples
             L<span style="color: #666">.</span>append(epoch_loss)
-            writer<span style="color: #666">.</span>add_scalar(<span style="color: #BA2121">&#39;train/crossentropy&#39;</span>, epoch_loss, epoch)
+            writer<span style="color: #666">.</span>add_scalar(<span style="color: #BA2121">'train/crossentropy'</span>, epoch_loss, epoch)
 
-            <span style="color: #008000; font-weight: bold">if</span> phase <span style="color: #666">==</span> <span style="color: #BA2121">&#39;val&#39;</span>:
+            <span style="color: #008000; font-weight: bold">if</span> phase <span style="color: #666">==</span> <span style="color: #BA2121">'val'</span>:
                 inputs, labels, voxels <span style="color: #666">=</span> <span style="color: #008000">next</span>(<span style="color: #008000">iter</span>(dataloaders[phase]))
                 inputs <span style="color: #666">=</span> inputs<span style="color: #666">.</span>to(device)
                 labels <span style="color: #666">=</span> labels<span style="color: #666">.</span>to(device)
@@ -2465,8 +2465,8 @@ model weights can be captured based on validation loss during the process.</p>
                 loss_test<span style="color: #666">.</span>append(my_metric(out, lab))
 
             <span style="color: #3D7B7B; font-style: italic"># deep copy the model</span>
-            <span style="color: #008000; font-weight: bold">if</span> phase <span style="color: #666">==</span> <span style="color: #BA2121">&#39;val&#39;</span> <span style="color: #A2F; font-weight: bold">and</span> epoch_loss <span style="color: #666">&lt;</span> best_loss:
-                <span style="color: #3D7B7B; font-style: italic"># print(&quot;saving best model&quot;)</span>
+            <span style="color: #008000; font-weight: bold">if</span> phase <span style="color: #666">==</span> <span style="color: #BA2121">'val'</span> <span style="color: #A2F; font-weight: bold">and</span> epoch_loss <span style="color: #666">&lt;</span> best_loss:
+                <span style="color: #3D7B7B; font-style: italic"># print("saving best model")</span>
                 best_loss <span style="color: #666">=</span> epoch_loss
                 <span style="color: #3D7B7B; font-style: italic"># best_model_wts = copy.deepcopy(model.state_dict())</span>
 
@@ -2479,34 +2479,34 @@ model weights can be captured based on validation loss during the process.</p>
             col <span style="color: #666">=</span> <span style="color: #008000">len</span>(label_names)
             <span style="color: #008000; font-weight: bold">for</span> i <span style="color: #A2F; font-weight: bold">in</span> <span style="color: #008000">range</span>(col):
                 plt<span style="color: #666">.</span>subplot(<span style="color: #666">2</span>, col, <span style="color: #666">2</span> <span style="color: #666">*</span> i <span style="color: #666">+</span> <span style="color: #666">1</span>)
-                plt<span style="color: #666">.</span>axis(<span style="color: #BA2121">&#39;off&#39;</span>)
+                plt<span style="color: #666">.</span>axis(<span style="color: #BA2121">'off'</span>)
                 plt<span style="color: #666">.</span>grid(<span style="color: #008000; font-weight: bold">False</span>)
                 img <span style="color: #666">=</span> inputs[<span style="color: #666">0</span>]
                 img <span style="color: #666">=</span> torchvision<span style="color: #666">.</span>transforms<span style="color: #666">.</span>ToPILImage()(img<span style="color: #666">.</span>detach()<span style="color: #666">.</span>cpu())
                 plt<span style="color: #666">.</span>imshow(img)
-                plt<span style="color: #666">.</span>title(<span style="color: #BA2121">&#39;image&#39;</span>)
+                plt<span style="color: #666">.</span>title(<span style="color: #BA2121">'image'</span>)
                 img <span style="color: #666">=</span> F<span style="color: #666">.</span>sigmoid(outputs[<span style="color: #666">0</span>][<span style="color: #666">0</span>, i, :, :])
                 img <span style="color: #666">=</span> torchvision<span style="color: #666">.</span>transforms<span style="color: #666">.</span>ToPILImage()(img<span style="color: #666">.</span>detach()<span style="color: #666">.</span>cpu())
                 plt<span style="color: #666">.</span>subplot(<span style="color: #666">2</span>, col, <span style="color: #666">2</span> <span style="color: #666">*</span> i <span style="color: #666">+</span> <span style="color: #666">2</span>)
-                plt<span style="color: #666">.</span>axis(<span style="color: #BA2121">&#39;off&#39;</span>)
+                plt<span style="color: #666">.</span>axis(<span style="color: #BA2121">'off'</span>)
                 plt<span style="color: #666">.</span>grid(<span style="color: #008000; font-weight: bold">False</span>)
                 plt<span style="color: #666">.</span>imshow(img)
                 plt<span style="color: #666">.</span>title(label_names[i])
 
-            writer<span style="color: #666">.</span>add_figure(<span style="color: #BA2121">&#39;Segmented images&#39;</span>, fig, epoch)
+            writer<span style="color: #666">.</span>add_figure(<span style="color: #BA2121">'Segmented images'</span>, fig, epoch)
 
-            colors <span style="color: #666">=</span> [<span style="color: #BA2121">&#39;r.&#39;</span>, <span style="color: #BA2121">&#39;k.&#39;</span>, <span style="color: #BA2121">&#39;g.&#39;</span>, <span style="color: #BA2121">&#39;b.&#39;</span>, <span style="color: #BA2121">&#39;o.&#39;</span>, <span style="color: #BA2121">&#39;l.&#39;</span>]
+            colors <span style="color: #666">=</span> [<span style="color: #BA2121">'r.'</span>, <span style="color: #BA2121">'k.'</span>, <span style="color: #BA2121">'g.'</span>, <span style="color: #BA2121">'b.'</span>, <span style="color: #BA2121">'o.'</span>, <span style="color: #BA2121">'l.'</span>]
 
             fig <span style="color: #666">=</span> plt<span style="color: #666">.</span>figure(figsize<span style="color: #666">=</span>(<span style="color: #666">10</span>, <span style="color: #666">10</span>))
-            ax <span style="color: #666">=</span> plt<span style="color: #666">.</span>axes(projection<span style="color: #666">=</span><span style="color: #BA2121">&#39;3d&#39;</span>)
+            ax <span style="color: #666">=</span> plt<span style="color: #666">.</span>axes(projection<span style="color: #666">=</span><span style="color: #BA2121">'3d'</span>)
             ax<span style="color: #666">.</span>set_xlim(<span style="color: #666">-60</span>, <span style="color: #666">60</span>)
             ax<span style="color: #666">.</span>set_ylim(<span style="color: #666">-60</span>, <span style="color: #666">60</span>)
             ax<span style="color: #666">.</span>set_zlim(<span style="color: #666">-60</span>, <span style="color: #666">60</span>)
-            ax<span style="color: #666">.</span>set_xlabel(<span style="color: #BA2121">&#39;x&#39;</span>)
-            ax<span style="color: #666">.</span>set_ylabel(<span style="color: #BA2121">&#39;y&#39;</span>)
-            ax<span style="color: #666">.</span>set_zlabel(<span style="color: #BA2121">&#39;z&#39;</span>)
-            <span style="color: #3D7B7B; font-style: italic"># ax.set_aspect(&#39;equal&#39;)</span>
-            ax<span style="color: #666">.</span>set_title(<span style="color: #BA2121">&#39;Ground truth predictions&#39;</span>)
+            ax<span style="color: #666">.</span>set_xlabel(<span style="color: #BA2121">'x'</span>)
+            ax<span style="color: #666">.</span>set_ylabel(<span style="color: #BA2121">'y'</span>)
+            ax<span style="color: #666">.</span>set_zlabel(<span style="color: #BA2121">'z'</span>)
+            <span style="color: #3D7B7B; font-style: italic"># ax.set_aspect('equal')</span>
+            ax<span style="color: #666">.</span>set_title(<span style="color: #BA2121">'Ground truth predictions'</span>)
             pred_class <span style="color: #666">=</span> outputs[<span style="color: #666">1</span>]  <span style="color: #3D7B7B; font-style: italic"># [:,:-1]</span>
             <span style="color: #3D7B7B; font-style: italic"># pred_class = torch.exp(pred_class)</span>
             <span style="color: #3D7B7B; font-style: italic"># preds_max = torch.max(pred_class, dim = -1).values</span>
@@ -2515,38 +2515,38 @@ model weights can be captured based on validation loss during the process.</p>
                 <span style="color: #008000; font-weight: bold">if</span> i <span style="color: #666">!=</span> <span style="color: #666">0</span>:
                     inds <span style="color: #666">=</span> voxels[<span style="color: #666">0</span>, :, <span style="color: #666">3</span>] <span style="color: #666">==</span> i
                     inds <span style="color: #666">=</span> inds<span style="color: #666">.</span>cpu()
-                    <span style="color: #008000">print</span>(<span style="color: #BA2121">&#39;ground truth &#39;</span>, label, np<span style="color: #666">.</span>count_nonzero(inds))
+                    <span style="color: #008000">print</span>(<span style="color: #BA2121">'ground truth '</span>, label, np<span style="color: #666">.</span>count_nonzero(inds))
                     pred_label_gt <span style="color: #666">=</span> torch_voxels[inds]<span style="color: #666">.</span>detach()<span style="color: #666">.</span>cpu()
                     ax<span style="color: #666">.</span>scatter3D(pred_label_gt[:, <span style="color: #666">0</span>], pred_label_gt[:, <span style="color: #666">1</span>], pred_label_gt[:, <span style="color: #666">2</span>], colors[<span style="color: #666">2</span>], s<span style="color: #666">=10</span>)
 
                     inds <span style="color: #666">=</span> (pred_class <span style="color: #666">==</span> i)
                     inds <span style="color: #666">=</span> inds<span style="color: #666">.</span>cpu()
-                    <span style="color: #008000">print</span>(<span style="color: #BA2121">&#39;prediction &#39;</span>, label, np<span style="color: #666">.</span>count_nonzero(inds))
+                    <span style="color: #008000">print</span>(<span style="color: #BA2121">'prediction '</span>, label, np<span style="color: #666">.</span>count_nonzero(inds))
                     pred_label <span style="color: #666">=</span> torch_voxels[inds]<span style="color: #666">.</span>detach()<span style="color: #666">.</span>cpu()
                     ax<span style="color: #666">.</span>scatter3D(pred_label[:, <span style="color: #666">0</span>], pred_label[:, <span style="color: #666">1</span>], pred_label[:, <span style="color: #666">2</span>], colors[<span style="color: #666">1</span>], s<span style="color: #666">=10</span>)
 
             <span style="color: #3D7B7B; font-style: italic"># print(model.class_layer[0].weight.data, model.class_layer[0].bias.data)</span>
             torch_voxels[:, <span style="color: #666">3</span>] <span style="color: #666">=</span> <span style="color: #666">0</span>
             torch_voxels[:, <span style="color: #666">3</span>] <span style="color: #666">=</span> pred_class
-            writer<span style="color: #666">.</span>add_figure(<span style="color: #BA2121">&#39;Segmented point cloud&#39;</span>, fig, epoch)
+            writer<span style="color: #666">.</span>add_figure(<span style="color: #BA2121">'Segmented point cloud'</span>, fig, epoch)
             voxels_class <span style="color: #666">=</span> torch_voxels[(torch_voxels[:, <span style="color: #666">3</span>] <span style="color: #666">!=</span> <span style="color: #666">0</span>) <span style="color: #666">*</span> (torch_voxels[:, <span style="color: #666">3</span>] <span style="color: #666">!=</span> <span style="color: #008000">len</span>(label_names))]
-            write_ply(<span style="color: #BA2121">&#39;/home/alienor/Documents/training2D/volume/training_epoch_</span><span style="color: #A45A77; font-weight: bold">%d</span><span style="color: #BA2121">&#39;</span> <span style="color: #666">%</span> epoch,
-                      voxels_class<span style="color: #666">.</span>detach()<span style="color: #666">.</span>cpu()<span style="color: #666">.</span>numpy(), [<span style="color: #BA2121">&#39;x&#39;</span>, <span style="color: #BA2121">&#39;y&#39;</span>, <span style="color: #BA2121">&#39;z&#39;</span>, <span style="color: #BA2121">&#39;labels&#39;</span>])
+            write_ply(<span style="color: #BA2121">'/home/alienor/Documents/training2D/volume/training_epoch_</span><span style="color: #A45A77; font-weight: bold">%d</span><span style="color: #BA2121">'</span> <span style="color: #666">%</span> epoch,
+                      voxels_class<span style="color: #666">.</span>detach()<span style="color: #666">.</span>cpu()<span style="color: #666">.</span>numpy(), [<span style="color: #BA2121">'x'</span>, <span style="color: #BA2121">'y'</span>, <span style="color: #BA2121">'z'</span>, <span style="color: #BA2121">'labels'</span>])
 
             <span style="color: #3D7B7B; font-style: italic"># time_elapsed = time.time() - since</span>
-        <span style="color: #3D7B7B; font-style: italic"># print(&#39;{:.0f}m {:.0f}s&#39;.format(time_elapsed // 60, time_elapsed % 60))</span>
+        <span style="color: #3D7B7B; font-style: italic"># print('{:.0f}m {:.0f}s'.format(time_elapsed // 60, time_elapsed % 60))</span>
 
-    <span style="color: #3D7B7B; font-style: italic"># print(&#39;Best val loss: {:4f}&#39;.format(best_loss))</span>
+    <span style="color: #3D7B7B; font-style: italic"># print('Best val loss: {:4f}'.format(best_loss))</span>
 
     <span style="color: #3D7B7B; font-style: italic"># load best model weights</span>
     <span style="color: #3D7B7B; font-style: italic"># model.load_state_dict(best_model_wts)</span>
 
     torch_voxels[:, <span style="color: #666">3</span>] <span style="color: #666">=</span> <span style="color: #666">0</span>
     torch_voxels[:, <span style="color: #666">3</span>] <span style="color: #666">=</span> voxels[<span style="color: #666">0</span>, :, <span style="color: #666">3</span>]
-    writer<span style="color: #666">.</span>add_figure(<span style="color: #BA2121">&#39;Segmented point cloud&#39;</span>, fig, epoch)
+    writer<span style="color: #666">.</span>add_figure(<span style="color: #BA2121">'Segmented point cloud'</span>, fig, epoch)
     voxels_class <span style="color: #666">=</span> torch_voxels[(torch_voxels[:, <span style="color: #666">3</span>] <span style="color: #666">!=</span> <span style="color: #666">0</span>) <span style="color: #666">*</span> (torch_voxels[:, <span style="color: #666">3</span>] <span style="color: #666">!=</span> <span style="color: #008000">len</span>(label_names))]
-    write_ply(<span style="color: #BA2121">&#39;/home/alienor/Documents/training2D/volume/ground_truth&#39;</span>, voxels_class<span style="color: #666">.</span>detach()<span style="color: #666">.</span>cpu()<span style="color: #666">.</span>numpy(),
-              [<span style="color: #BA2121">&#39;x&#39;</span>, <span style="color: #BA2121">&#39;y&#39;</span>, <span style="color: #BA2121">&#39;z&#39;</span>, <span style="color: #BA2121">&#39;labels&#39;</span>])
+    write_ply(<span style="color: #BA2121">'/home/alienor/Documents/training2D/volume/ground_truth'</span>, voxels_class<span style="color: #666">.</span>detach()<span style="color: #666">.</span>cpu()<span style="color: #666">.</span>numpy(),
+              [<span style="color: #BA2121">'x'</span>, <span style="color: #BA2121">'y'</span>, <span style="color: #BA2121">'z'</span>, <span style="color: #BA2121">'labels'</span>])
 
     <span style="color: #008000; font-weight: bold">return</span> model, L, loss_test
 </code></pre></div></td></tr></table></div>
@@ -2656,7 +2656,7 @@ model weights can be captured based on validation loss during the process.</p>
       <script id="__config" type="application/json">{"annotate": null, "base": "../../../..", "features": ["navigation.tabs", "navigation.tabs.sticky", "content.code.copy"], "search": "../../../../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
     
     
-      <script src="../../../../assets/javascripts/bundle.79ae519e.min.js"></script>
+      <script src="../../../../assets/javascripts/bundle.d7400e89.min.js"></script>
       
         <script src="../../../../assets/_markdown_exec_pyodide.js"></script>
       

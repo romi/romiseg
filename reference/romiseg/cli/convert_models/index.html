@@ -25,7 +25,7 @@
       
       
       <link rel="icon" href="../../../../assets/images/ROMI_logo_green_25.svg">
-      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.6">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.7">
     
     
       
@@ -33,7 +33,7 @@
       
     
     
-      <link rel="stylesheet" href="../../../../assets/stylesheets/main.484c7ddc.min.css">
+      <link rel="stylesheet" href="../../../../assets/stylesheets/main.ec1eaa64.min.css">
       
       
 
@@ -2070,14 +2070,14 @@ python<span style="color: #BBB"> </span>convert_models.py<span style="color: #BB
 <span style="color: #666">&gt;&gt;&gt;</span> <span style="color: #008000; font-weight: bold">from</span><span style="color: #BBB"> </span><span style="color: #00F; font-weight: bold">plantdb.commons.test_database</span><span style="color: #BBB"> </span><span style="color: #008000; font-weight: bold">import</span> test_database
 <span style="color: #666">&gt;&gt;&gt;</span> <span style="color: #008000; font-weight: bold">from</span><span style="color: #BBB"> </span><span style="color: #00F; font-weight: bold">romiseg.models.unet</span><span style="color: #BBB"> </span><span style="color: #008000; font-weight: bold">import</span> ResNetUNet
 <span style="color: #666">&gt;&gt;&gt;</span> <span style="color: #3D7B7B; font-style: italic"># Set up a test database with an old API model with weights_only=True</span>
-<span style="color: #666">&gt;&gt;&gt;</span> db <span style="color: #666">=</span> test_database(<span style="color: #BA2121">&#39;real_plant&#39;</span>, with_models<span style="color: #666">=</span><span style="color: #008000; font-weight: bold">True</span>, no_auth<span style="color: #666">=</span><span style="color: #008000; font-weight: bold">True</span>)
+<span style="color: #666">&gt;&gt;&gt;</span> db <span style="color: #666">=</span> test_database(<span style="color: #BA2121">'real_plant'</span>, with_models<span style="color: #666">=</span><span style="color: #008000; font-weight: bold">True</span>, no_auth<span style="color: #666">=</span><span style="color: #008000; font-weight: bold">True</span>)
 <span style="color: #666">&gt;&gt;&gt;</span> db<span style="color: #666">.</span>connect()
 <span style="color: #666">&gt;&gt;&gt;</span> <span style="color: #3D7B7B; font-style: italic"># Get the model fileset and model file</span>
-<span style="color: #666">&gt;&gt;&gt;</span> model_name <span style="color: #666">=</span> <span style="color: #BA2121">&#39;Resnet_896_896_epoch50.pt&#39;</span>
-<span style="color: #666">&gt;&gt;&gt;</span> models_fileset <span style="color: #666">=</span> db<span style="color: #666">.</span>get_scan(<span style="color: #BA2121">&#39;models&#39;</span>)<span style="color: #666">.</span>get_fileset(<span style="color: #BA2121">&#39;models&#39;</span>)
-<span style="color: #666">&gt;&gt;&gt;</span> models_file <span style="color: #666">=</span> models_fileset<span style="color: #666">.</span>get_file(model_name<span style="color: #666">.</span>split(<span style="color: #BA2121">&#39;.&#39;</span>)[<span style="color: #666">0</span>])
+<span style="color: #666">&gt;&gt;&gt;</span> model_name <span style="color: #666">=</span> <span style="color: #BA2121">'Resnet_896_896_epoch50.pt'</span>
+<span style="color: #666">&gt;&gt;&gt;</span> models_fileset <span style="color: #666">=</span> db<span style="color: #666">.</span>get_scan(<span style="color: #BA2121">'models'</span>)<span style="color: #666">.</span>get_fileset(<span style="color: #BA2121">'models'</span>)
+<span style="color: #666">&gt;&gt;&gt;</span> models_file <span style="color: #666">=</span> models_fileset<span style="color: #666">.</span>get_file(model_name<span style="color: #666">.</span>split(<span style="color: #BA2121">'.'</span>)[<span style="color: #666">0</span>])
 <span style="color: #666">&gt;&gt;&gt;</span> <span style="color: #3D7B7B; font-style: italic"># Get the label names from the model metadata</span>
-<span style="color: #666">&gt;&gt;&gt;</span> label_names <span style="color: #666">=</span> models_file<span style="color: #666">.</span>get_metadata(<span style="color: #BA2121">&#39;label_names&#39;</span>)
+<span style="color: #666">&gt;&gt;&gt;</span> label_names <span style="color: #666">=</span> models_file<span style="color: #666">.</span>get_metadata(<span style="color: #BA2121">'label_names'</span>)
 <span style="color: #666">&gt;&gt;&gt;</span> <span style="color: #008000">print</span>(label_names)
 <span style="color: #666">&gt;&gt;&gt;</span> <span style="color: #3D7B7B; font-style: italic"># Set up the module alias and convert the model to state dict</span>
 <span style="color: #666">&gt;&gt;&gt;</span> setup_module_alias()
@@ -2146,7 +2146,7 @@ python<span style="color: #BBB"> </span>convert_models.py<span style="color: #BB
                 <code>input_path</code>
             </td>
             <td>
-                  <code><a class="autorefs autorefs-external" href="https://docs.python.org/3/library/stdtypes.html#str">str</a> or <a class="autorefs autorefs-external" title="pathlib.Path" href="https://docs.python.org/3/library/pathlib.html#pathlib.Path">Path</a></code>
+                  <code><a class="autorefs autorefs-external" href="https://docs.python.org/3/builtins/stdtypes.html#str">str</a> or <a class="autorefs autorefs-external" title="pathlib.Path" href="https://docs.python.org/3/library/pathlib.html#pathlib.Path">Path</a></code>
             </td>
             <td>
               <div class="doc-md-description">
@@ -2162,7 +2162,7 @@ python<span style="color: #BBB"> </span>convert_models.py<span style="color: #BB
                 <code>output_path</code>
             </td>
             <td>
-                  <code><a class="autorefs autorefs-external" href="https://docs.python.org/3/library/stdtypes.html#str">str</a></code>
+                  <code><a class="autorefs autorefs-external" href="https://docs.python.org/3/builtins/stdtypes.html#str">str</a></code>
             </td>
             <td>
               <div class="doc-md-description">
@@ -2178,7 +2178,7 @@ python<span style="color: #BBB"> </span>convert_models.py<span style="color: #BB
                 <code>overwrite</code>
             </td>
             <td>
-                  <code><a class="autorefs autorefs-external" href="https://docs.python.org/3/library/functions.html#bool">bool</a></code>
+                  <code><a class="autorefs autorefs-external" href="https://docs.python.org/3/builtins/functions.html#bool">bool</a></code>
             </td>
             <td>
               <div class="doc-md-description">
@@ -2273,14 +2273,14 @@ python<span style="color: #BBB"> </span>convert_models.py<span style="color: #BB
         output_path: <span style="color: #008000">str</span> <span style="color: #666">|</span> Path <span style="color: #666">|</span> <span style="color: #008000; font-weight: bold">None</span> <span style="color: #666">=</span> <span style="color: #008000; font-weight: bold">None</span>,
         overwrite: <span style="color: #008000">bool</span> <span style="color: #666">=</span> <span style="color: #008000; font-weight: bold">False</span>,
 ) <span style="color: #666">-&gt;</span> Path <span style="color: #666">|</span> <span style="color: #008000; font-weight: bold">None</span>:
-<span style="color: #BBB">    </span><span style="color: #BA2121; font-style: italic">&quot;&quot;&quot;Load a full model file and save just its state dictionary</span>
+<span style="color: #BBB">    </span><span style="color: #BA2121; font-style: italic">"""Load a full model file and save just its state dictionary</span>
 
 <span style="color: #BA2121; font-style: italic">    Parameters</span>
 <span style="color: #BA2121; font-style: italic">    ----------</span>
 <span style="color: #BA2121; font-style: italic">    input_path : str or pathlib.Path</span>
 <span style="color: #BA2121; font-style: italic">        Path to the saved model file</span>
 <span style="color: #BA2121; font-style: italic">    output_path : str, optional</span>
-<span style="color: #BA2121; font-style: italic">        Path to save the state dict. If None, will append &#39;_state_dict&#39; to the input path</span>
+<span style="color: #BA2121; font-style: italic">        Path to save the state dict. If None, will append '_state_dict' to the input path</span>
 <span style="color: #BA2121; font-style: italic">    overwrite : bool, optional</span>
 <span style="color: #BA2121; font-style: italic">        Whether to overwrite existing files</span>
 
@@ -2288,28 +2288,28 @@ python<span style="color: #BBB"> </span>convert_models.py<span style="color: #BB
 <span style="color: #BA2121; font-style: italic">    -------</span>
 <span style="color: #BA2121; font-style: italic">    Path or None</span>
 <span style="color: #BA2121; font-style: italic">        Path to the saved state dict file</span>
-<span style="color: #BA2121; font-style: italic">    &quot;&quot;&quot;</span>
+<span style="color: #BA2121; font-style: italic">    """</span>
     <span style="color: #008000; font-weight: bold">if</span> <span style="color: #A2F; font-weight: bold">not</span> <span style="color: #008000">isinstance</span>(input_path, Path):
         input_path <span style="color: #666">=</span> Path(input_path)
     <span style="color: #3D7B7B; font-style: italic"># Generate output path if not provided</span>
     <span style="color: #008000; font-weight: bold">if</span> output_path <span style="color: #A2F; font-weight: bold">is</span> <span style="color: #008000; font-weight: bold">None</span>:
         stem <span style="color: #666">=</span> input_path<span style="color: #666">.</span>stem
-        output_path <span style="color: #666">=</span> input_path<span style="color: #666">.</span>parent <span style="color: #666">/</span> <span style="color: #BA2121">f&quot;</span><span style="color: #A45A77; font-weight: bold">{</span>stem<span style="color: #A45A77; font-weight: bold">}</span><span style="color: #BA2121">_state_dict</span><span style="color: #A45A77; font-weight: bold">{</span>input_path<span style="color: #666">.</span>suffix<span style="color: #A45A77; font-weight: bold">}</span><span style="color: #BA2121">&quot;</span>
+        output_path <span style="color: #666">=</span> input_path<span style="color: #666">.</span>parent <span style="color: #666">/</span> <span style="color: #BA2121">f"</span><span style="color: #A45A77; font-weight: bold">{</span>stem<span style="color: #A45A77; font-weight: bold">}</span><span style="color: #BA2121">_state_dict</span><span style="color: #A45A77; font-weight: bold">{</span>input_path<span style="color: #666">.</span>suffix<span style="color: #A45A77; font-weight: bold">}</span><span style="color: #BA2121">"</span>
     <span style="color: #008000; font-weight: bold">else</span>:
         output_path <span style="color: #666">=</span> Path(output_path)
 
     <span style="color: #3D7B7B; font-style: italic"># Check if output file already exists</span>
     <span style="color: #008000; font-weight: bold">if</span> output_path<span style="color: #666">.</span>exists() <span style="color: #A2F; font-weight: bold">and</span> <span style="color: #A2F; font-weight: bold">not</span> overwrite:
-        logger<span style="color: #666">.</span>warning(<span style="color: #BA2121">f&quot;Output file </span><span style="color: #A45A77; font-weight: bold">{</span>output_path<span style="color: #A45A77; font-weight: bold">}</span><span style="color: #BA2121"> already exists. Use `overwrite=True` to force re-convertion.&quot;</span>)
+        logger<span style="color: #666">.</span>warning(<span style="color: #BA2121">f"Output file </span><span style="color: #A45A77; font-weight: bold">{</span>output_path<span style="color: #A45A77; font-weight: bold">}</span><span style="color: #BA2121"> already exists. Use `overwrite=True` to force re-convertion."</span>)
         <span style="color: #008000; font-weight: bold">return</span> output_path
 
-    logger<span style="color: #666">.</span>info(<span style="color: #BA2121">f&quot;Loading model from: </span><span style="color: #A45A77; font-weight: bold">{</span>input_path<span style="color: #A45A77; font-weight: bold">}</span><span style="color: #BA2121">&quot;</span>)
+    logger<span style="color: #666">.</span>info(<span style="color: #BA2121">f"Loading model from: </span><span style="color: #A45A77; font-weight: bold">{</span>input_path<span style="color: #A45A77; font-weight: bold">}</span><span style="color: #BA2121">"</span>)
     <span style="color: #008000; font-weight: bold">try</span>:
         <span style="color: #3D7B7B; font-style: italic"># Try loading with weights_only=False (less secure but needed in this case)</span>
         loaded_obj <span style="color: #666">=</span> torch<span style="color: #666">.</span>load(input_path, weights_only<span style="color: #666">=</span><span style="color: #008000; font-weight: bold">False</span>)
-        logger<span style="color: #666">.</span>info(<span style="color: #BA2121">&quot;Model loaded successfully using `weights_only=False`&quot;</span>)
+        logger<span style="color: #666">.</span>info(<span style="color: #BA2121">"Model loaded successfully using `weights_only=False`"</span>)
     <span style="color: #008000; font-weight: bold">except</span> <span style="color: #CB3F38; font-weight: bold">Exception</span> <span style="color: #008000; font-weight: bold">as</span> e:
-        logger<span style="color: #666">.</span>error(<span style="color: #BA2121">f&quot;Error loading model with `weights_only=False`: </span><span style="color: #A45A77; font-weight: bold">{</span>e<span style="color: #A45A77; font-weight: bold">}</span><span style="color: #BA2121">&quot;</span>)
+        logger<span style="color: #666">.</span>error(<span style="color: #BA2121">f"Error loading model with `weights_only=False`: </span><span style="color: #A45A77; font-weight: bold">{</span>e<span style="color: #A45A77; font-weight: bold">}</span><span style="color: #BA2121">"</span>)
         <span style="color: #008000; font-weight: bold">return</span> <span style="color: #008000; font-weight: bold">None</span>
 
     <span style="color: #3D7B7B; font-style: italic"># Extract the state dictionary</span>
@@ -2357,7 +2357,7 @@ python<span style="color: #BBB"> </span>convert_models.py<span style="color: #BB
                 <code>loaded_obj</code>
             </td>
             <td>
-                  <code><a class="autorefs autorefs-external" href="https://docs.python.org/3/library/functions.html#object">object</a></code>
+                  <code><a class="autorefs autorefs-external" href="https://docs.python.org/3/builtins/functions.html#object">object</a></code>
             </td>
             <td>
               <div class="doc-md-description">
@@ -2383,7 +2383,7 @@ python<span style="color: #BBB"> </span>convert_models.py<span style="color: #BB
       <tbody>
           <tr class="doc-section-item">
             <td>
-                  <code><a class="autorefs autorefs-external" href="https://docs.python.org/3/library/stdtypes.html#dict">dict</a> or None</code>
+                  <code><a class="autorefs autorefs-external" href="https://docs.python.org/3/builtins/stdtypes.html#dict">dict</a> or None</code>
             </td>
             <td>
               <div class="doc-md-description">
@@ -2431,7 +2431,7 @@ python<span style="color: #BBB"> </span>convert_models.py<span style="color: #BB
 <span style="color: inherit; background-color: transparent; padding-left: 5px; padding-right: 5px;">116</span>
 <span style="color: inherit; background-color: transparent; padding-left: 5px; padding-right: 5px;">117</span>
 <span style="color: inherit; background-color: transparent; padding-left: 5px; padding-right: 5px;">118</span></pre></div></td><td class="code"><div><pre style="line-height: 125%;"><span></span><code><span style="color: #008000; font-weight: bold">def</span><span style="color: #BBB"> </span><span style="color: #00F">extract_model_state_dict</span>(loaded_obj: Any) <span style="color: #666">-&gt;</span> <span style="color: #008000">dict</span>[<span style="color: #008000">str</span>, Any] <span style="color: #666">|</span> <span style="color: #008000; font-weight: bold">None</span>:
-<span style="color: #BBB">    </span><span style="color: #BA2121; font-style: italic">&quot;&quot;&quot;</span>
+<span style="color: #BBB">    </span><span style="color: #BA2121; font-style: italic">"""</span>
 <span style="color: #BA2121; font-style: italic">    Extract state dictionary from a loaded model object.</span>
 
 <span style="color: #BA2121; font-style: italic">    Parameters</span>
@@ -2443,26 +2443,26 @@ python<span style="color: #BBB"> </span>convert_models.py<span style="color: #BB
 <span style="color: #BA2121; font-style: italic">    -------</span>
 <span style="color: #BA2121; font-style: italic">    dict or None</span>
 <span style="color: #BA2121; font-style: italic">        The state dictionary if successful, None otherwise</span>
-<span style="color: #BA2121; font-style: italic">    &quot;&quot;&quot;</span>
+<span style="color: #BA2121; font-style: italic">    """</span>
     <span style="color: #3D7B7B; font-style: italic"># Determine if the loaded object is a tuple containing the model</span>
-    <span style="color: #008000; font-weight: bold">if</span> <span style="color: #008000">isinstance</span>(loaded_obj, <span style="color: #008000">tuple</span>) <span style="color: #A2F; font-weight: bold">and</span> <span style="color: #008000">hasattr</span>(loaded_obj[<span style="color: #666">0</span>], <span style="color: #BA2121">&#39;state_dict&#39;</span>):
+    <span style="color: #008000; font-weight: bold">if</span> <span style="color: #008000">isinstance</span>(loaded_obj, <span style="color: #008000">tuple</span>) <span style="color: #A2F; font-weight: bold">and</span> <span style="color: #008000">hasattr</span>(loaded_obj[<span style="color: #666">0</span>], <span style="color: #BA2121">'state_dict'</span>):
         model <span style="color: #666">=</span> loaded_obj[<span style="color: #666">0</span>]
-        logger<span style="color: #666">.</span>info(<span style="color: #BA2121">&quot;Extracted model from tuple&quot;</span>)
-    <span style="color: #3D7B7B; font-style: italic"># Or if it&#39;s the model directly</span>
-    <span style="color: #008000; font-weight: bold">elif</span> <span style="color: #008000">hasattr</span>(loaded_obj, <span style="color: #BA2121">&#39;state_dict&#39;</span>):
+        logger<span style="color: #666">.</span>info(<span style="color: #BA2121">"Extracted model from tuple"</span>)
+    <span style="color: #3D7B7B; font-style: italic"># Or if it's the model directly</span>
+    <span style="color: #008000; font-weight: bold">elif</span> <span style="color: #008000">hasattr</span>(loaded_obj, <span style="color: #BA2121">'state_dict'</span>):
         model <span style="color: #666">=</span> loaded_obj
-        logger<span style="color: #666">.</span>info(<span style="color: #BA2121">&quot;Loaded object is the model&quot;</span>)
-    <span style="color: #3D7B7B; font-style: italic"># Or if it&#39;s a dict with a &#39;model&#39; key</span>
-    <span style="color: #008000; font-weight: bold">elif</span> <span style="color: #008000">isinstance</span>(loaded_obj, <span style="color: #008000">dict</span>) <span style="color: #A2F; font-weight: bold">and</span> <span style="color: #BA2121">&#39;model&#39;</span> <span style="color: #A2F; font-weight: bold">in</span> loaded_obj <span style="color: #A2F; font-weight: bold">and</span> <span style="color: #008000">hasattr</span>(loaded_obj[<span style="color: #BA2121">&#39;model&#39;</span>], <span style="color: #BA2121">&#39;state_dict&#39;</span>):
-        model <span style="color: #666">=</span> loaded_obj[<span style="color: #BA2121">&#39;model&#39;</span>]
-        logger<span style="color: #666">.</span>info(<span style="color: #BA2121">&quot;Extracted model from dictionary&quot;</span>)
+        logger<span style="color: #666">.</span>info(<span style="color: #BA2121">"Loaded object is the model"</span>)
+    <span style="color: #3D7B7B; font-style: italic"># Or if it's a dict with a 'model' key</span>
+    <span style="color: #008000; font-weight: bold">elif</span> <span style="color: #008000">isinstance</span>(loaded_obj, <span style="color: #008000">dict</span>) <span style="color: #A2F; font-weight: bold">and</span> <span style="color: #BA2121">'model'</span> <span style="color: #A2F; font-weight: bold">in</span> loaded_obj <span style="color: #A2F; font-weight: bold">and</span> <span style="color: #008000">hasattr</span>(loaded_obj[<span style="color: #BA2121">'model'</span>], <span style="color: #BA2121">'state_dict'</span>):
+        model <span style="color: #666">=</span> loaded_obj[<span style="color: #BA2121">'model'</span>]
+        logger<span style="color: #666">.</span>info(<span style="color: #BA2121">"Extracted model from dictionary"</span>)
     <span style="color: #008000; font-weight: bold">else</span>:
-        logger<span style="color: #666">.</span>error(<span style="color: #BA2121">f&quot;Could not identify model in loaded object of type: </span><span style="color: #A45A77; font-weight: bold">{</span><span style="color: #008000">type</span>(loaded_obj)<span style="color: #A45A77; font-weight: bold">}</span><span style="color: #BA2121">&quot;</span>)
+        logger<span style="color: #666">.</span>error(<span style="color: #BA2121">f"Could not identify model in loaded object of type: </span><span style="color: #A45A77; font-weight: bold">{</span><span style="color: #008000">type</span>(loaded_obj)<span style="color: #A45A77; font-weight: bold">}</span><span style="color: #BA2121">"</span>)
         <span style="color: #008000; font-weight: bold">return</span> <span style="color: #008000; font-weight: bold">None</span>
 
     <span style="color: #3D7B7B; font-style: italic"># Extract state dict</span>
     state_dict <span style="color: #666">=</span> model<span style="color: #666">.</span>state_dict()
-    logger<span style="color: #666">.</span>info(<span style="color: #BA2121">f&quot;Extracted state_dict with </span><span style="color: #A45A77; font-weight: bold">{</span><span style="color: #008000">len</span>(state_dict)<span style="color: #A45A77; font-weight: bold">}</span><span style="color: #BA2121"> entries&quot;</span>)
+    logger<span style="color: #666">.</span>info(<span style="color: #BA2121">f"Extracted state_dict with </span><span style="color: #A45A77; font-weight: bold">{</span><span style="color: #008000">len</span>(state_dict)<span style="color: #A45A77; font-weight: bold">}</span><span style="color: #BA2121"> entries"</span>)
     <span style="color: #008000; font-weight: bold">return</span> state_dict
 </code></pre></div></td></tr></table></div>
             </details>
@@ -2535,27 +2535,27 @@ python<span style="color: #BBB"> </span>convert_models.py<span style="color: #BB
 <span style="color: inherit; background-color: transparent; padding-left: 5px; padding-right: 5px;">281</span>
 <span style="color: inherit; background-color: transparent; padding-left: 5px; padding-right: 5px;">282</span>
 <span style="color: inherit; background-color: transparent; padding-left: 5px; padding-right: 5px;">283</span></pre></div></td><td class="code"><div><pre style="line-height: 125%;"><span></span><code><span style="color: #008000; font-weight: bold">def</span><span style="color: #BBB"> </span><span style="color: #00F">parser</span>() <span style="color: #666">-&gt;</span> argparse<span style="color: #666">.</span>ArgumentParser:
-<span style="color: #BBB">    </span><span style="color: #BA2121; font-style: italic">&quot;&quot;&quot;Parses command-line arguments.</span>
+<span style="color: #BBB">    </span><span style="color: #BA2121; font-style: italic">"""Parses command-line arguments.</span>
 
 <span style="color: #BA2121; font-style: italic">    Returns</span>
 <span style="color: #BA2121; font-style: italic">    -------</span>
 <span style="color: #BA2121; font-style: italic">    argparse.ArgumentParser</span>
 <span style="color: #BA2121; font-style: italic">        A configured argument parser with an option for specifying the configuration directory.</span>
-<span style="color: #BA2121; font-style: italic">    &quot;&quot;&quot;</span>
-    parser <span style="color: #666">=</span> argparse<span style="color: #666">.</span>ArgumentParser(description<span style="color: #666">=</span><span style="color: #BA2121">&quot;Convert PyTorch models to state dictionary format&quot;</span>)
-    parser<span style="color: #666">.</span>add_argument(<span style="color: #BA2121">&quot;input&quot;</span>,
-                        help<span style="color: #666">=</span><span style="color: #BA2121">&quot;Input model file or directory&quot;</span>)
-    parser<span style="color: #666">.</span>add_argument(<span style="color: #BA2121">&quot;--output&quot;</span>,
-                        help<span style="color: #666">=</span><span style="color: #BA2121">&quot;Output file or directory (optional)&quot;</span>)
-    parser<span style="color: #666">.</span>add_argument(<span style="color: #BA2121">&quot;--pattern&quot;</span>, default<span style="color: #666">=</span><span style="color: #BA2121">&quot;*.pt&quot;</span>,
-                        help<span style="color: #666">=</span><span style="color: #BA2121">&quot;File pattern to match when input is a directory (default: *.pt)&quot;</span>)
-    parser<span style="color: #666">.</span>add_argument(<span style="color: #BA2121">&quot;--recursive&quot;</span>, action<span style="color: #666">=</span><span style="color: #BA2121">&quot;store_true&quot;</span>,
-                        help<span style="color: #666">=</span><span style="color: #BA2121">&quot;Search subdirectories recursively&quot;</span>)
-    parser<span style="color: #666">.</span>add_argument(<span style="color: #BA2121">&quot;--overwrite&quot;</span>, action<span style="color: #666">=</span><span style="color: #BA2121">&quot;store_true&quot;</span>,
-                        help<span style="color: #666">=</span><span style="color: #BA2121">&quot;Overwrite existing files&quot;</span>)
-    parser<span style="color: #666">.</span>add_argument(<span style="color: #BA2121">&quot;--log-level&quot;</span>, default<span style="color: #666">=</span><span style="color: #BA2121">&quot;INFO&quot;</span>,
-                        choices<span style="color: #666">=</span>[<span style="color: #BA2121">&quot;DEBUG&quot;</span>, <span style="color: #BA2121">&quot;INFO&quot;</span>, <span style="color: #BA2121">&quot;WARNING&quot;</span>, <span style="color: #BA2121">&quot;ERROR&quot;</span>, <span style="color: #BA2121">&quot;CRITICAL&quot;</span>],
-                        help<span style="color: #666">=</span><span style="color: #BA2121">&quot;Set the logging level&quot;</span>)
+<span style="color: #BA2121; font-style: italic">    """</span>
+    parser <span style="color: #666">=</span> argparse<span style="color: #666">.</span>ArgumentParser(description<span style="color: #666">=</span><span style="color: #BA2121">"Convert PyTorch models to state dictionary format"</span>)
+    parser<span style="color: #666">.</span>add_argument(<span style="color: #BA2121">"input"</span>,
+                        help<span style="color: #666">=</span><span style="color: #BA2121">"Input model file or directory"</span>)
+    parser<span style="color: #666">.</span>add_argument(<span style="color: #BA2121">"--output"</span>,
+                        help<span style="color: #666">=</span><span style="color: #BA2121">"Output file or directory (optional)"</span>)
+    parser<span style="color: #666">.</span>add_argument(<span style="color: #BA2121">"--pattern"</span>, default<span style="color: #666">=</span><span style="color: #BA2121">"*.pt"</span>,
+                        help<span style="color: #666">=</span><span style="color: #BA2121">"File pattern to match when input is a directory (default: *.pt)"</span>)
+    parser<span style="color: #666">.</span>add_argument(<span style="color: #BA2121">"--recursive"</span>, action<span style="color: #666">=</span><span style="color: #BA2121">"store_true"</span>,
+                        help<span style="color: #666">=</span><span style="color: #BA2121">"Search subdirectories recursively"</span>)
+    parser<span style="color: #666">.</span>add_argument(<span style="color: #BA2121">"--overwrite"</span>, action<span style="color: #666">=</span><span style="color: #BA2121">"store_true"</span>,
+                        help<span style="color: #666">=</span><span style="color: #BA2121">"Overwrite existing files"</span>)
+    parser<span style="color: #666">.</span>add_argument(<span style="color: #BA2121">"--log-level"</span>, default<span style="color: #666">=</span><span style="color: #BA2121">"INFO"</span>,
+                        choices<span style="color: #666">=</span>[<span style="color: #BA2121">"DEBUG"</span>, <span style="color: #BA2121">"INFO"</span>, <span style="color: #BA2121">"WARNING"</span>, <span style="color: #BA2121">"ERROR"</span>, <span style="color: #BA2121">"CRITICAL"</span>],
+                        help<span style="color: #666">=</span><span style="color: #BA2121">"Set the logging level"</span>)
 
     <span style="color: #008000; font-weight: bold">return</span> parser
 </code></pre></div></td></tr></table></div>
@@ -2572,7 +2572,7 @@ python<span style="color: #BBB"> </span>convert_models.py<span style="color: #BB
 
 
 <a href="#romiseg.cli.convert_models.process_directory" class="headerlink" title="Permanent link">Link</a></h3>
-<div class="language-python doc-signature highlight" style="background: #f8f8f8"><pre style="line-height: 125%;"><span></span><code>process_directory(directory, output_dir<span style="color: #666">=</span><span style="color: #008000; font-weight: bold">None</span>, pattern<span style="color: #666">=</span><span style="color: #BA2121">&#39;*.pt&#39;</span>, recursive<span style="color: #666">=</span><span style="color: #008000; font-weight: bold">False</span>, overwrite<span style="color: #666">=</span><span style="color: #008000; font-weight: bold">False</span>)
+<div class="language-python doc-signature highlight" style="background: #f8f8f8"><pre style="line-height: 125%;"><span></span><code>process_directory(directory, output_dir<span style="color: #666">=</span><span style="color: #008000; font-weight: bold">None</span>, pattern<span style="color: #666">=</span><span style="color: #BA2121">'*.pt'</span>, recursive<span style="color: #666">=</span><span style="color: #008000; font-weight: bold">False</span>, overwrite<span style="color: #666">=</span><span style="color: #008000; font-weight: bold">False</span>)
 </code></pre></div>
 
     <div class="doc doc-contents ">
@@ -2596,7 +2596,7 @@ python<span style="color: #BBB"> </span>convert_models.py<span style="color: #BB
                 <code>directory</code>
             </td>
             <td>
-                  <code><a class="autorefs autorefs-external" href="https://docs.python.org/3/library/stdtypes.html#str">str</a> or <a class="autorefs autorefs-external" title="pathlib.Path" href="https://docs.python.org/3/library/pathlib.html#pathlib.Path">Path</a></code>
+                  <code><a class="autorefs autorefs-external" href="https://docs.python.org/3/builtins/stdtypes.html#str">str</a> or <a class="autorefs autorefs-external" title="pathlib.Path" href="https://docs.python.org/3/library/pathlib.html#pathlib.Path">Path</a></code>
             </td>
             <td>
               <div class="doc-md-description">
@@ -2612,7 +2612,7 @@ python<span style="color: #BBB"> </span>convert_models.py<span style="color: #BB
                 <code>output_dir</code>
             </td>
             <td>
-                  <code><a class="autorefs autorefs-external" href="https://docs.python.org/3/library/stdtypes.html#str">str</a> or <a class="autorefs autorefs-external" title="pathlib.Path" href="https://docs.python.org/3/library/pathlib.html#pathlib.Path">Path</a> or None</code>
+                  <code><a class="autorefs autorefs-external" href="https://docs.python.org/3/builtins/stdtypes.html#str">str</a> or <a class="autorefs autorefs-external" title="pathlib.Path" href="https://docs.python.org/3/library/pathlib.html#pathlib.Path">Path</a> or None</code>
             </td>
             <td>
               <div class="doc-md-description">
@@ -2628,7 +2628,7 @@ python<span style="color: #BBB"> </span>convert_models.py<span style="color: #BB
                 <code>pattern</code>
             </td>
             <td>
-                  <code><a class="autorefs autorefs-external" href="https://docs.python.org/3/library/stdtypes.html#str">str</a></code>
+                  <code><a class="autorefs autorefs-external" href="https://docs.python.org/3/builtins/stdtypes.html#str">str</a></code>
             </td>
             <td>
               <div class="doc-md-description">
@@ -2644,7 +2644,7 @@ python<span style="color: #BBB"> </span>convert_models.py<span style="color: #BB
                 <code>recursive</code>
             </td>
             <td>
-                  <code><a class="autorefs autorefs-external" href="https://docs.python.org/3/library/functions.html#bool">bool</a></code>
+                  <code><a class="autorefs autorefs-external" href="https://docs.python.org/3/builtins/functions.html#bool">bool</a></code>
             </td>
             <td>
               <div class="doc-md-description">
@@ -2660,7 +2660,7 @@ python<span style="color: #BBB"> </span>convert_models.py<span style="color: #BB
                 <code>overwrite</code>
             </td>
             <td>
-                  <code><a class="autorefs autorefs-external" href="https://docs.python.org/3/library/functions.html#bool">bool</a></code>
+                  <code><a class="autorefs autorefs-external" href="https://docs.python.org/3/builtins/functions.html#bool">bool</a></code>
             </td>
             <td>
               <div class="doc-md-description">
@@ -2742,11 +2742,11 @@ python<span style="color: #BBB"> </span>convert_models.py<span style="color: #BB
 <span style="color: inherit; background-color: transparent; padding-left: 5px; padding-right: 5px;">257</span></pre></div></td><td class="code"><div><pre style="line-height: 125%;"><span></span><code><span style="color: #008000; font-weight: bold">def</span><span style="color: #BBB"> </span><span style="color: #00F">process_directory</span>(
         directory: <span style="color: #008000">str</span> <span style="color: #666">|</span> Path,
         output_dir: <span style="color: #008000">str</span> <span style="color: #666">|</span> Path <span style="color: #666">|</span> <span style="color: #008000; font-weight: bold">None</span> <span style="color: #666">=</span> <span style="color: #008000; font-weight: bold">None</span>,
-        pattern: <span style="color: #008000">str</span> <span style="color: #666">=</span> <span style="color: #BA2121">&quot;*.pt&quot;</span>,
+        pattern: <span style="color: #008000">str</span> <span style="color: #666">=</span> <span style="color: #BA2121">"*.pt"</span>,
         recursive: <span style="color: #008000">bool</span> <span style="color: #666">=</span> <span style="color: #008000; font-weight: bold">False</span>,
         overwrite: <span style="color: #008000">bool</span> <span style="color: #666">=</span> <span style="color: #008000; font-weight: bold">False</span>,
 ) <span style="color: #666">-&gt;</span> <span style="color: #008000; font-weight: bold">None</span>:
-<span style="color: #BBB">    </span><span style="color: #BA2121; font-style: italic">&quot;&quot;&quot;Process all model files in a directory</span>
+<span style="color: #BBB">    </span><span style="color: #BA2121; font-style: italic">"""Process all model files in a directory</span>
 
 <span style="color: #BA2121; font-style: italic">    Parameters</span>
 <span style="color: #BA2121; font-style: italic">    ----------</span>
@@ -2755,36 +2755,36 @@ python<span style="color: #BBB"> </span>convert_models.py<span style="color: #BB
 <span style="color: #BA2121; font-style: italic">    output_dir : str or pathlib.Path or None</span>
 <span style="color: #BA2121; font-style: italic">        Directory to save state dicts. If None, saves in the same directory</span>
 <span style="color: #BA2121; font-style: italic">    pattern : str</span>
-<span style="color: #BA2121; font-style: italic">        File pattern to match (default: &quot;*.pt&quot;)</span>
+<span style="color: #BA2121; font-style: italic">        File pattern to match (default: "*.pt")</span>
 <span style="color: #BA2121; font-style: italic">    recursive : bool</span>
 <span style="color: #BA2121; font-style: italic">        Whether to search subdirectories</span>
 <span style="color: #BA2121; font-style: italic">    overwrite : bool</span>
 <span style="color: #BA2121; font-style: italic">        Whether to overwrite existing files</span>
-<span style="color: #BA2121; font-style: italic">    &quot;&quot;&quot;</span>
+<span style="color: #BA2121; font-style: italic">    """</span>
     directory <span style="color: #666">=</span> Path(directory)
     <span style="color: #008000; font-weight: bold">if</span> output_dir:
         output_dir <span style="color: #666">=</span> Path(output_dir)
         output_dir<span style="color: #666">.</span>mkdir(parents<span style="color: #666">=</span><span style="color: #008000; font-weight: bold">True</span>, exist_ok<span style="color: #666">=</span><span style="color: #008000; font-weight: bold">True</span>)
     <span style="color: #3D7B7B; font-style: italic"># Find all model files</span>
     <span style="color: #008000; font-weight: bold">if</span> recursive:
-        model_files <span style="color: #666">=</span> <span style="color: #008000">list</span>(directory<span style="color: #666">.</span>glob(<span style="color: #BA2121">f&quot;**/</span><span style="color: #A45A77; font-weight: bold">{</span>pattern<span style="color: #A45A77; font-weight: bold">}</span><span style="color: #BA2121">&quot;</span>))
+        model_files <span style="color: #666">=</span> <span style="color: #008000">list</span>(directory<span style="color: #666">.</span>glob(<span style="color: #BA2121">f"**/</span><span style="color: #A45A77; font-weight: bold">{</span>pattern<span style="color: #A45A77; font-weight: bold">}</span><span style="color: #BA2121">"</span>))
     <span style="color: #008000; font-weight: bold">else</span>:
         model_files <span style="color: #666">=</span> <span style="color: #008000">list</span>(directory<span style="color: #666">.</span>glob(pattern))
 
-    logger<span style="color: #666">.</span>info(<span style="color: #BA2121">f&quot;Found </span><span style="color: #A45A77; font-weight: bold">{</span><span style="color: #008000">len</span>(model_files)<span style="color: #A45A77; font-weight: bold">}</span><span style="color: #BA2121"> model files&quot;</span>)
+    logger<span style="color: #666">.</span>info(<span style="color: #BA2121">f"Found </span><span style="color: #A45A77; font-weight: bold">{</span><span style="color: #008000">len</span>(model_files)<span style="color: #A45A77; font-weight: bold">}</span><span style="color: #BA2121"> model files"</span>)
     converted <span style="color: #666">=</span> <span style="color: #666">0</span>
     failed <span style="color: #666">=</span> <span style="color: #666">0</span>
     skipped <span style="color: #666">=</span> <span style="color: #666">0</span>
     <span style="color: #008000; font-weight: bold">for</span> model_file <span style="color: #A2F; font-weight: bold">in</span> model_files:
-        <span style="color: #3D7B7B; font-style: italic"># Skip files that look like they&#39;re already state dicts</span>
-        <span style="color: #008000; font-weight: bold">if</span> <span style="color: #BA2121">&quot;_state_dict&quot;</span> <span style="color: #A2F; font-weight: bold">in</span> model_file<span style="color: #666">.</span>stem:
-            logger<span style="color: #666">.</span>info(<span style="color: #BA2121">f&quot;Skipping </span><span style="color: #A45A77; font-weight: bold">{</span>model_file<span style="color: #A45A77; font-weight: bold">}</span><span style="color: #BA2121"> (appears to be a state dict already)&quot;</span>)
+        <span style="color: #3D7B7B; font-style: italic"># Skip files that look like they're already state dicts</span>
+        <span style="color: #008000; font-weight: bold">if</span> <span style="color: #BA2121">"_state_dict"</span> <span style="color: #A2F; font-weight: bold">in</span> model_file<span style="color: #666">.</span>stem:
+            logger<span style="color: #666">.</span>info(<span style="color: #BA2121">f"Skipping </span><span style="color: #A45A77; font-weight: bold">{</span>model_file<span style="color: #A45A77; font-weight: bold">}</span><span style="color: #BA2121"> (appears to be a state dict already)"</span>)
             skipped <span style="color: #666">+=</span> <span style="color: #666">1</span>
             <span style="color: #008000; font-weight: bold">continue</span>
         <span style="color: #3D7B7B; font-style: italic"># Determine output path</span>
         <span style="color: #008000; font-weight: bold">if</span> output_dir:
             rel_path <span style="color: #666">=</span> model_file<span style="color: #666">.</span>relative_to(directory)
-            output_path <span style="color: #666">=</span> output_dir <span style="color: #666">/</span> rel_path<span style="color: #666">.</span>parent <span style="color: #666">/</span> <span style="color: #BA2121">f&quot;</span><span style="color: #A45A77; font-weight: bold">{</span>rel_path<span style="color: #666">.</span>stem<span style="color: #A45A77; font-weight: bold">}</span><span style="color: #BA2121">_state_dict</span><span style="color: #A45A77; font-weight: bold">{</span>rel_path<span style="color: #666">.</span>suffix<span style="color: #A45A77; font-weight: bold">}</span><span style="color: #BA2121">&quot;</span>
+            output_path <span style="color: #666">=</span> output_dir <span style="color: #666">/</span> rel_path<span style="color: #666">.</span>parent <span style="color: #666">/</span> <span style="color: #BA2121">f"</span><span style="color: #A45A77; font-weight: bold">{</span>rel_path<span style="color: #666">.</span>stem<span style="color: #A45A77; font-weight: bold">}</span><span style="color: #BA2121">_state_dict</span><span style="color: #A45A77; font-weight: bold">{</span>rel_path<span style="color: #666">.</span>suffix<span style="color: #A45A77; font-weight: bold">}</span><span style="color: #BA2121">"</span>
             output_path<span style="color: #666">.</span>parent<span style="color: #666">.</span>mkdir(parents<span style="color: #666">=</span><span style="color: #008000; font-weight: bold">True</span>, exist_ok<span style="color: #666">=</span><span style="color: #008000; font-weight: bold">True</span>)
         <span style="color: #008000; font-weight: bold">else</span>:
             output_path <span style="color: #666">=</span> <span style="color: #008000; font-weight: bold">None</span>  <span style="color: #3D7B7B; font-style: italic"># Will be auto-generated in convert_model_to_state_dict</span>
@@ -2795,13 +2795,13 @@ python<span style="color: #BBB"> </span>convert_models.py<span style="color: #BB
             <span style="color: #008000; font-weight: bold">else</span>:
                 failed <span style="color: #666">+=</span> <span style="color: #666">1</span>
         <span style="color: #008000; font-weight: bold">except</span> <span style="color: #CB3F38; font-weight: bold">Exception</span> <span style="color: #008000; font-weight: bold">as</span> e:
-            logger<span style="color: #666">.</span>error(<span style="color: #BA2121">f&quot;Error converting </span><span style="color: #A45A77; font-weight: bold">{</span>model_file<span style="color: #A45A77; font-weight: bold">}</span><span style="color: #BA2121">: </span><span style="color: #A45A77; font-weight: bold">{</span>e<span style="color: #A45A77; font-weight: bold">}</span><span style="color: #BA2121">&quot;</span>)
+            logger<span style="color: #666">.</span>error(<span style="color: #BA2121">f"Error converting </span><span style="color: #A45A77; font-weight: bold">{</span>model_file<span style="color: #A45A77; font-weight: bold">}</span><span style="color: #BA2121">: </span><span style="color: #A45A77; font-weight: bold">{</span>e<span style="color: #A45A77; font-weight: bold">}</span><span style="color: #BA2121">"</span>)
             failed <span style="color: #666">+=</span> <span style="color: #666">1</span>
 
-    logger<span style="color: #666">.</span>info(<span style="color: #BA2121">f&quot;Conversion summary:&quot;</span>)
-    logger<span style="color: #666">.</span>info(<span style="color: #BA2121">f&quot;- Converted: </span><span style="color: #A45A77; font-weight: bold">{</span>converted<span style="color: #A45A77; font-weight: bold">}</span><span style="color: #BA2121">&quot;</span>)
-    logger<span style="color: #666">.</span>info(<span style="color: #BA2121">f&quot;- Failed: </span><span style="color: #A45A77; font-weight: bold">{</span>failed<span style="color: #A45A77; font-weight: bold">}</span><span style="color: #BA2121">&quot;</span>)
-    logger<span style="color: #666">.</span>info(<span style="color: #BA2121">f&quot;- Skipped: </span><span style="color: #A45A77; font-weight: bold">{</span>skipped<span style="color: #A45A77; font-weight: bold">}</span><span style="color: #BA2121">&quot;</span>)
+    logger<span style="color: #666">.</span>info(<span style="color: #BA2121">f"Conversion summary:"</span>)
+    logger<span style="color: #666">.</span>info(<span style="color: #BA2121">f"- Converted: </span><span style="color: #A45A77; font-weight: bold">{</span>converted<span style="color: #A45A77; font-weight: bold">}</span><span style="color: #BA2121">"</span>)
+    logger<span style="color: #666">.</span>info(<span style="color: #BA2121">f"- Failed: </span><span style="color: #A45A77; font-weight: bold">{</span>failed<span style="color: #A45A77; font-weight: bold">}</span><span style="color: #BA2121">"</span>)
+    logger<span style="color: #666">.</span>info(<span style="color: #BA2121">f"- Skipped: </span><span style="color: #A45A77; font-weight: bold">{</span>skipped<span style="color: #A45A77; font-weight: bold">}</span><span style="color: #BA2121">"</span>)
 </code></pre></div></td></tr></table></div>
             </details>
     </div>
@@ -2840,7 +2840,7 @@ python<span style="color: #BBB"> </span>convert_models.py<span style="color: #BB
                 <code>state_dict</code>
             </td>
             <td>
-                  <code><a class="autorefs autorefs-external" href="https://docs.python.org/3/library/stdtypes.html#dict">dict</a></code>
+                  <code><a class="autorefs autorefs-external" href="https://docs.python.org/3/builtins/stdtypes.html#dict">dict</a></code>
             </td>
             <td>
               <div class="doc-md-description">
@@ -2915,7 +2915,7 @@ python<span style="color: #BBB"> </span>convert_models.py<span style="color: #BB
 <span style="color: inherit; background-color: transparent; padding-left: 5px; padding-right: 5px;">137</span>
 <span style="color: inherit; background-color: transparent; padding-left: 5px; padding-right: 5px;">138</span>
 <span style="color: inherit; background-color: transparent; padding-left: 5px; padding-right: 5px;">139</span></pre></div></td><td class="code"><div><pre style="line-height: 125%;"><span></span><code><span style="color: #008000; font-weight: bold">def</span><span style="color: #BBB"> </span><span style="color: #00F">save_state_dict</span>(state_dict: <span style="color: #008000">dict</span>, output_path: Path) <span style="color: #666">-&gt;</span> Path:
-<span style="color: #BBB">    </span><span style="color: #BA2121; font-style: italic">&quot;&quot;&quot;</span>
+<span style="color: #BBB">    </span><span style="color: #BA2121; font-style: italic">"""</span>
 <span style="color: #BA2121; font-style: italic">    Save a state dictionary to disk.</span>
 
 <span style="color: #BA2121; font-style: italic">    Parameters</span>
@@ -2929,9 +2929,9 @@ python<span style="color: #BBB"> </span>convert_models.py<span style="color: #BB
 <span style="color: #BA2121; font-style: italic">    -------</span>
 <span style="color: #BA2121; font-style: italic">    pathlib.Path</span>
 <span style="color: #BA2121; font-style: italic">        The path where the state dictionary was saved</span>
-<span style="color: #BA2121; font-style: italic">    &quot;&quot;&quot;</span>
+<span style="color: #BA2121; font-style: italic">    """</span>
     torch<span style="color: #666">.</span>save(state_dict, output_path)
-    logger<span style="color: #666">.</span>info(<span style="color: #BA2121">f&quot;Saved state_dict to: </span><span style="color: #A45A77; font-weight: bold">{</span>output_path<span style="color: #A45A77; font-weight: bold">}</span><span style="color: #BA2121">&quot;</span>)
+    logger<span style="color: #666">.</span>info(<span style="color: #BA2121">f"Saved state_dict to: </span><span style="color: #A45A77; font-weight: bold">{</span>output_path<span style="color: #A45A77; font-weight: bold">}</span><span style="color: #BA2121">"</span>)
     <span style="color: #008000; font-weight: bold">return</span> output_path
 </code></pre></div></td></tr></table></div>
             </details>
@@ -2975,21 +2975,21 @@ New API (&gt;= 0.3.0) uses a class named 'ResNetUNet' in the 'models.unet' modul
 <span style="color: inherit; background-color: transparent; padding-left: 5px; padding-right: 5px;">80</span>
 <span style="color: inherit; background-color: transparent; padding-left: 5px; padding-right: 5px;">81</span>
 <span style="color: inherit; background-color: transparent; padding-left: 5px; padding-right: 5px;">82</span></pre></div></td><td class="code"><div><pre style="line-height: 125%;"><span></span><code><span style="color: #008000; font-weight: bold">def</span><span style="color: #BBB"> </span><span style="color: #00F">setup_module_alias</span>() <span style="color: #666">-&gt;</span> <span style="color: #008000; font-weight: bold">None</span>:
-<span style="color: #BBB">    </span><span style="color: #BA2121; font-style: italic">&quot;&quot;&quot;</span>
+<span style="color: #BBB">    </span><span style="color: #BA2121; font-style: italic">"""</span>
 <span style="color: #BA2121; font-style: italic">    Create temporary module alias for backward compatibility.</span>
 
-<span style="color: #BA2121; font-style: italic">    Old API (&lt; 0.3.0) was using a class named &#39;ResNetUNet&#39; in the &#39;utils.segmentation_model&#39; module.</span>
-<span style="color: #BA2121; font-style: italic">    New API (&gt;= 0.3.0) uses a class named &#39;ResNetUNet&#39; in the &#39;models.unet&#39; module.</span>
-<span style="color: #BA2121; font-style: italic">    &quot;&quot;&quot;</span>
+<span style="color: #BA2121; font-style: italic">    Old API (&lt; 0.3.0) was using a class named 'ResNetUNet' in the 'utils.segmentation_model' module.</span>
+<span style="color: #BA2121; font-style: italic">    New API (&gt;= 0.3.0) uses a class named 'ResNetUNet' in the 'models.unet' module.</span>
+<span style="color: #BA2121; font-style: italic">    """</span>
     <span style="color: #3D7B7B; font-style: italic"># Create a dummy module</span>
-    dummy_module <span style="color: #666">=</span> types<span style="color: #666">.</span>ModuleType(<span style="color: #BA2121">&#39;romiseg.utils.segmentation_model&#39;</span>)
+    dummy_module <span style="color: #666">=</span> types<span style="color: #666">.</span>ModuleType(<span style="color: #BA2121">'romiseg.utils.segmentation_model'</span>)
     <span style="color: #3D7B7B; font-style: italic"># Import the actual class from its new location</span>
     <span style="color: #008000; font-weight: bold">from</span><span style="color: #BBB"> </span><span style="color: #00F; font-weight: bold">romiseg.models.unet</span><span style="color: #BBB"> </span><span style="color: #008000; font-weight: bold">import</span> ResNetUNet
     <span style="color: #3D7B7B; font-style: italic"># Add the class to the dummy module</span>
     dummy_module<span style="color: #666">.</span>ResNetUNet <span style="color: #666">=</span> ResNetUNet
     <span style="color: #3D7B7B; font-style: italic"># Add the module to sys.modules</span>
-    sys<span style="color: #666">.</span>modules[<span style="color: #BA2121">&#39;romiseg.utils.segmentation_model&#39;</span>] <span style="color: #666">=</span> dummy_module
-    logger<span style="color: #666">.</span>info(<span style="color: #BA2121">&quot;Module alias created for backward compatibility&quot;</span>)
+    sys<span style="color: #666">.</span>modules[<span style="color: #BA2121">'romiseg.utils.segmentation_model'</span>] <span style="color: #666">=</span> dummy_module
+    logger<span style="color: #666">.</span>info(<span style="color: #BA2121">"Module alias created for backward compatibility"</span>)
 </code></pre></div></td></tr></table></div>
             </details>
     </div>
@@ -3097,7 +3097,7 @@ New API (&gt;= 0.3.0) uses a class named 'ResNetUNet' in the 'models.unet' modul
       <script id="__config" type="application/json">{"annotate": null, "base": "../../../..", "features": ["navigation.tabs", "navigation.tabs.sticky", "content.code.copy"], "search": "../../../../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
     
     
-      <script src="../../../../assets/javascripts/bundle.79ae519e.min.js"></script>
+      <script src="../../../../assets/javascripts/bundle.d7400e89.min.js"></script>
       
         <script src="../../../../assets/_markdown_exec_pyodide.js"></script>
       

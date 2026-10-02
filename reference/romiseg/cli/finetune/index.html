@@ -25,7 +25,7 @@
       
       
       <link rel="icon" href="../../../../assets/images/ROMI_logo_green_25.svg">
-      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.6">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.7">
     
     
       
@@ -33,7 +33,7 @@
       
     
     
-      <link rel="stylesheet" href="../../../../assets/stylesheets/main.484c7ddc.min.css">
+      <link rel="stylesheet" href="../../../../assets/stylesheets/main.ec1eaa64.min.css">
       
       
 
@@ -2072,7 +2072,7 @@ for users to set up, execute, and modify training tasks.</p>
                 <code>directory</code>
             </td>
             <td>
-                  <code><a class="autorefs autorefs-external" href="https://docs.python.org/3/library/stdtypes.html#str">str</a></code>
+                  <code><a class="autorefs autorefs-external" href="https://docs.python.org/3/builtins/stdtypes.html#str">str</a></code>
             </td>
             <td>
               <div class="doc-md-description">
@@ -2100,16 +2100,16 @@ for users to set up, execute, and modify training tasks.</p>
 <span style="color: inherit; background-color: transparent; padding-left: 5px; padding-right: 5px;">53</span>
 <span style="color: inherit; background-color: transparent; padding-left: 5px; padding-right: 5px;">54</span>
 <span style="color: inherit; background-color: transparent; padding-left: 5px; padding-right: 5px;">55</span></pre></div></td><td class="code"><div><pre style="line-height: 125%;"><span></span><code><span style="color: #008000; font-weight: bold">def</span><span style="color: #BBB"> </span><span style="color: #00F">create_folder_if</span>(directory):
-<span style="color: #BBB">    </span><span style="color: #BA2121; font-style: italic">&quot;&quot;&quot;Creates a folder and an empty file if they do not exist.</span>
+<span style="color: #BBB">    </span><span style="color: #BA2121; font-style: italic">"""Creates a folder and an empty file if they do not exist.</span>
 
 <span style="color: #BA2121; font-style: italic">    Parameters</span>
 <span style="color: #BA2121; font-style: italic">    ----------</span>
 <span style="color: #BA2121; font-style: italic">    directory : str</span>
 <span style="color: #BA2121; font-style: italic">        The path of the directory to check and create if it does not exist.</span>
-<span style="color: #BA2121; font-style: italic">    &quot;&quot;&quot;</span>
+<span style="color: #BA2121; font-style: italic">    """</span>
     <span style="color: #008000; font-weight: bold">if</span> <span style="color: #A2F; font-weight: bold">not</span> os<span style="color: #666">.</span>path<span style="color: #666">.</span>exists(directory):
         os<span style="color: #666">.</span>makedirs(directory)
-        <span style="color: #008000">open</span>(<span style="color: #BA2121">&#39;romidb&#39;</span>, <span style="color: #BA2121">&#39;w&#39;</span>)<span style="color: #666">.</span>close()
+        <span style="color: #008000">open</span>(<span style="color: #BA2121">'romidb'</span>, <span style="color: #BA2121">'w'</span>)<span style="color: #666">.</span>close()
 </code></pre></div></td></tr></table></div>
             </details>
     </div>
@@ -2155,7 +2155,7 @@ for users to set up, execute, and modify training tasks.</p>
                 <code>directory_weights</code>
             </td>
             <td>
-                  <code><a class="autorefs autorefs-external" href="https://docs.python.org/3/library/stdtypes.html#str">str</a></code>
+                  <code><a class="autorefs autorefs-external" href="https://docs.python.org/3/builtins/stdtypes.html#str">str</a></code>
             </td>
             <td>
               <div class="doc-md-description">
@@ -2187,7 +2187,7 @@ for users to set up, execute, and modify training tasks.</p>
                 <code>batch_size</code>
             </td>
             <td>
-                  <code><a class="autorefs autorefs-external" href="https://docs.python.org/3/library/functions.html#int">int</a></code>
+                  <code><a class="autorefs autorefs-external" href="https://docs.python.org/3/builtins/functions.html#int">int</a></code>
             </td>
             <td>
               <div class="doc-md-description">
@@ -2203,7 +2203,7 @@ for users to set up, execute, and modify training tasks.</p>
                 <code>user_name</code>
             </td>
             <td>
-                  <code><a class="autorefs autorefs-external" href="https://docs.python.org/3/library/stdtypes.html#str">str</a></code>
+                  <code><a class="autorefs autorefs-external" href="https://docs.python.org/3/builtins/stdtypes.html#str">str</a></code>
             </td>
             <td>
               <div class="doc-md-description">
@@ -2219,7 +2219,7 @@ for users to set up, execute, and modify training tasks.</p>
                 <code>finetune_epochs</code>
             </td>
             <td>
-                  <code><a class="autorefs autorefs-external" href="https://docs.python.org/3/library/functions.html#int">int</a></code>
+                  <code><a class="autorefs autorefs-external" href="https://docs.python.org/3/builtins/functions.html#int">int</a></code>
             </td>
             <td>
               <div class="doc-md-description">
@@ -2235,7 +2235,7 @@ for users to set up, execute, and modify training tasks.</p>
                 <code>Sx</code>
             </td>
             <td>
-                  <code><a class="autorefs autorefs-external" href="https://docs.python.org/3/library/functions.html#int">int</a></code>
+                  <code><a class="autorefs autorefs-external" href="https://docs.python.org/3/builtins/functions.html#int">int</a></code>
             </td>
             <td>
               <div class="doc-md-description">
@@ -2251,7 +2251,7 @@ for users to set up, execute, and modify training tasks.</p>
                 <code>Sy</code>
             </td>
             <td>
-                  <code><a class="autorefs autorefs-external" href="https://docs.python.org/3/library/functions.html#int">int</a></code>
+                  <code><a class="autorefs autorefs-external" href="https://docs.python.org/3/builtins/functions.html#int">int</a></code>
             </td>
             <td>
               <div class="doc-md-description">
@@ -2267,7 +2267,7 @@ for users to set up, execute, and modify training tasks.</p>
                 <code>learning_rate</code>
             </td>
             <td>
-                  <code><a class="autorefs autorefs-external" href="https://docs.python.org/3/library/functions.html#float">float</a></code>
+                  <code><a class="autorefs autorefs-external" href="https://docs.python.org/3/builtins/functions.html#float">float</a></code>
             </td>
             <td>
               <div class="doc-md-description">
@@ -2283,7 +2283,7 @@ for users to set up, execute, and modify training tasks.</p>
                 <code>model_id</code>
             </td>
             <td>
-                  <code><a class="autorefs autorefs-external" href="https://docs.python.org/3/library/stdtypes.html#str">str</a></code>
+                  <code><a class="autorefs autorefs-external" href="https://docs.python.org/3/builtins/stdtypes.html#str">str</a></code>
             </td>
             <td>
               <div class="doc-md-description">
@@ -2309,7 +2309,7 @@ for users to set up, execute, and modify training tasks.</p>
       <tbody>
           <tr class="doc-section-item">
 <td><code>model_name</code></td>            <td>
-                  <code><a class="autorefs autorefs-external" href="https://docs.python.org/3/library/stdtypes.html#str">str</a></code>
+                  <code><a class="autorefs autorefs-external" href="https://docs.python.org/3/builtins/stdtypes.html#str">str</a></code>
             </td>
             <td>
               <div class="doc-md-description">
@@ -2443,7 +2443,7 @@ for users to set up, execute, and modify training tasks.</p>
 <span style="color: inherit; background-color: transparent; padding-left: 5px; padding-right: 5px;">254</span>
 <span style="color: inherit; background-color: transparent; padding-left: 5px; padding-right: 5px;">255</span></pre></div></td><td class="code"><div><pre style="line-height: 125%;"><span></span><code><span style="color: #008000; font-weight: bold">def</span><span style="color: #BBB"> </span><span style="color: #00F">fine_tune_segmentation_model</span>(directory_weights, tsboard, batch_size, user_name, finetune_epochs, Sx, Sy,
                                  learning_rate, model_id):
-<span style="color: #BBB">    </span><span style="color: #BA2121; font-style: italic">&quot;&quot;&quot;Run the pipeline to fine-tune a segmentation model with manually annotated images.</span>
+<span style="color: #BBB">    </span><span style="color: #BA2121; font-style: italic">"""Run the pipeline to fine-tune a segmentation model with manually annotated images.</span>
 
 <span style="color: #BA2121; font-style: italic">    This function performs several key steps in a pipeline:</span>
 <span style="color: #BA2121; font-style: italic">    1. Loads a pre-trained segmentation model and sets it up on the appropriate device (GPU/CPU).</span>
@@ -2478,68 +2478,68 @@ for users to set up, execute, and modify training tasks.</p>
 <span style="color: #BA2121; font-style: italic">    -------</span>
 <span style="color: #BA2121; font-style: italic">    model_name : str</span>
 <span style="color: #BA2121; font-style: italic">        The name of the fine-tuned model, which includes metadata about its configuration.</span>
-<span style="color: #BA2121; font-style: italic">    &quot;&quot;&quot;</span>
-    device <span style="color: #666">=</span> torch<span style="color: #666">.</span>device(<span style="color: #BA2121">&quot;cuda:0&quot;</span> <span style="color: #008000; font-weight: bold">if</span> torch<span style="color: #666">.</span>cuda<span style="color: #666">.</span>is_available() <span style="color: #008000; font-weight: bold">else</span> <span style="color: #BA2121">&quot;cpu&quot;</span>)
+<span style="color: #BA2121; font-style: italic">    """</span>
+    device <span style="color: #666">=</span> torch<span style="color: #666">.</span>device(<span style="color: #BA2121">"cuda:0"</span> <span style="color: #008000; font-weight: bold">if</span> torch<span style="color: #666">.</span>cuda<span style="color: #666">.</span>is_available() <span style="color: #008000; font-weight: bold">else</span> <span style="color: #BA2121">"cpu"</span>)
     <span style="color: #3D7B7B; font-style: italic"># model, label_names = save_and_load_model(directory_weights, model_segmentation_name).to(device)</span>
 
     db_w <span style="color: #666">=</span> FSDB(directory_weights)
     db_w<span style="color: #666">.</span>connect()
-    s_w <span style="color: #666">=</span> db_w<span style="color: #666">.</span>get_scan(<span style="color: #BA2121">&#39;models&#39;</span>)
-    f_weights <span style="color: #666">=</span> s_w<span style="color: #666">.</span>get_fileset(<span style="color: #BA2121">&#39;models&#39;</span>)
+    s_w <span style="color: #666">=</span> db_w<span style="color: #666">.</span>get_scan(<span style="color: #BA2121">'models'</span>)
+    f_weights <span style="color: #666">=</span> s_w<span style="color: #666">.</span>get_fileset(<span style="color: #BA2121">'models'</span>)
     model_file <span style="color: #666">=</span> f_weights<span style="color: #666">.</span>get_file(model_id)
-    label_names <span style="color: #666">=</span> model_file<span style="color: #666">.</span>get_metadata(<span style="color: #BA2121">&#39;label_names&#39;</span>)
+    label_names <span style="color: #666">=</span> model_file<span style="color: #666">.</span>get_metadata(<span style="color: #BA2121">'label_names'</span>)
     model <span style="color: #666">=</span> model_from_file(model_file<span style="color: #666">.</span>path(), label_names)
     model <span style="color: #666">=</span> model<span style="color: #666">.</span>to(device)
 
-    mount_loc <span style="color: #666">=</span> appdirs<span style="color: #666">.</span>user_cache_dir() <span style="color: #666">+</span> <span style="color: #BA2121">&#39;/data_mount/&#39;</span>
+    mount_loc <span style="color: #666">=</span> appdirs<span style="color: #666">.</span>user_cache_dir() <span style="color: #666">+</span> <span style="color: #BA2121">'/data_mount/'</span>
     <span style="color: #008000; font-weight: bold">if</span> <span style="color: #A2F; font-weight: bold">not</span> os<span style="color: #666">.</span>path<span style="color: #666">.</span>exists(mount_loc):
         os<span style="color: #666">.</span>mkdir(mount_loc)
-    txt <span style="color: #666">=</span> subprocess<span style="color: #666">.</span>run([<span style="color: #BA2121">&quot;mountpoint&quot;</span>, mount_loc])
+    txt <span style="color: #666">=</span> subprocess<span style="color: #666">.</span>run([<span style="color: #BA2121">"mountpoint"</span>, mount_loc])
 
-    quest <span style="color: #666">=</span> <span style="color: #008000">input</span>(<span style="color: #BA2121">&quot;Ready to mount romi-project.eu? (y/n) &quot;</span>)
-    <span style="color: #008000; font-weight: bold">if</span> quest <span style="color: #666">==</span> <span style="color: #BA2121">&#39;y&#39;</span>:
-        subprocess<span style="color: #666">.</span>run([<span style="color: #BA2121">&quot;sshfs&quot;</span>, user_name <span style="color: #666">+</span> <span style="color: #BA2121">&#39;@db.romi-project.eu:/data/&#39;</span>, mount_loc])
+    quest <span style="color: #666">=</span> <span style="color: #008000">input</span>(<span style="color: #BA2121">"Ready to mount romi-project.eu? (y/n) "</span>)
+    <span style="color: #008000; font-weight: bold">if</span> quest <span style="color: #666">==</span> <span style="color: #BA2121">'y'</span>:
+        subprocess<span style="color: #666">.</span>run([<span style="color: #BA2121">"sshfs"</span>, user_name <span style="color: #666">+</span> <span style="color: #BA2121">'@db.romi-project.eu:/data/'</span>, mount_loc])
 
-    directory_dataset <span style="color: #666">=</span> mount_loc <span style="color: #666">+</span> <span style="color: #BA2121">&#39;/finetune/&#39;</span>
+    directory_dataset <span style="color: #666">=</span> mount_loc <span style="color: #666">+</span> <span style="color: #BA2121">'/finetune/'</span>
 
-    files <span style="color: #666">=</span> askopenfilenames(initialdir<span style="color: #666">=</span>os<span style="color: #666">.</span>path<span style="color: #666">.</span>split(<span style="color: #BA2121">&quot;/home/&quot;</span>)[<span style="color: #666">0</span>],
-                             title<span style="color: #666">=</span><span style="color: #BA2121">&#39;Select some pictures to annotate&#39;</span>)
+    files <span style="color: #666">=</span> askopenfilenames(initialdir<span style="color: #666">=</span>os<span style="color: #666">.</span>path<span style="color: #666">.</span>split(<span style="color: #BA2121">"/home/"</span>)[<span style="color: #666">0</span>],
+                             title<span style="color: #666">=</span><span style="color: #BA2121">'Select some pictures to annotate'</span>)
     lst <span style="color: #666">=</span> <span style="color: #008000">list</span>(files)
 
     <span style="color: #008000; font-weight: bold">if</span> <span style="color: #008000">len</span>(lst) <span style="color: #666">&gt;</span> <span style="color: #666">0</span>:
-        host_scan <span style="color: #666">=</span> files[<span style="color: #666">0</span>]<span style="color: #666">.</span>split(<span style="color: #BA2121">&#39;/&#39;</span>)[<span style="color: #666">-3</span>]
-        db <span style="color: #666">=</span> FSDB(directory_dataset <span style="color: #666">+</span> <span style="color: #BA2121">&#39;/train/&#39;</span>)
+        host_scan <span style="color: #666">=</span> files[<span style="color: #666">0</span>]<span style="color: #666">.</span>split(<span style="color: #BA2121">'/'</span>)[<span style="color: #666">-3</span>]
+        db <span style="color: #666">=</span> FSDB(directory_dataset <span style="color: #666">+</span> <span style="color: #BA2121">'/train/'</span>)
         db<span style="color: #666">.</span>connect()
 
         scan <span style="color: #666">=</span> db<span style="color: #666">.</span>get_scan(host_scan, create<span style="color: #666">=</span><span style="color: #008000; font-weight: bold">True</span>)
-        fileset <span style="color: #666">=</span> scan<span style="color: #666">.</span>get_fileset(<span style="color: #BA2121">&#39;images&#39;</span>, create<span style="color: #666">=</span><span style="color: #008000; font-weight: bold">True</span>)
+        fileset <span style="color: #666">=</span> scan<span style="color: #666">.</span>get_fileset(<span style="color: #BA2121">'images'</span>, create<span style="color: #666">=</span><span style="color: #008000; font-weight: bold">True</span>)
         imgs <span style="color: #666">=</span> np<span style="color: #666">.</span>sort(files)
         label_names <span style="color: #666">=</span> label_names<span style="color: #666">.</span>tolist()
-        fileset<span style="color: #666">.</span>set_metadata({<span style="color: #BA2121">&#39;channels&#39;</span>: [<span style="color: #BA2121">&#39;rgb&#39;</span>] <span style="color: #666">+</span> label_names})
+        fileset<span style="color: #666">.</span>set_metadata({<span style="color: #BA2121">'channels'</span>: [<span style="color: #BA2121">'rgb'</span>] <span style="color: #666">+</span> label_names})
 
         <span style="color: #008000; font-weight: bold">for</span> i, path <span style="color: #A2F; font-weight: bold">in</span> <span style="color: #008000">enumerate</span>(imgs):
-            im_name <span style="color: #666">=</span> host_scan <span style="color: #666">+</span> <span style="color: #BA2121">&#39;_&#39;</span> <span style="color: #666">+</span> os<span style="color: #666">.</span>path<span style="color: #666">.</span>split(path)[<span style="color: #666">1</span>][:<span style="color: #666">-4</span>]
+            im_name <span style="color: #666">=</span> host_scan <span style="color: #666">+</span> <span style="color: #BA2121">'_'</span> <span style="color: #666">+</span> os<span style="color: #666">.</span>path<span style="color: #666">.</span>split(path)[<span style="color: #666">1</span>][:<span style="color: #666">-4</span>]
 
             im <span style="color: #666">=</span> np<span style="color: #666">.</span>array(Image<span style="color: #666">.</span>open(path))
-            f_im <span style="color: #666">=</span> fileset<span style="color: #666">.</span>create_file(im_name <span style="color: #666">+</span> <span style="color: #BA2121">&#39;_rgb&#39;</span>)
-            f_im<span style="color: #666">.</span>set_metadata(<span style="color: #BA2121">&#39;shot_id&#39;</span>, im_name)
-            f_im<span style="color: #666">.</span>set_metadata(<span style="color: #BA2121">&#39;channel&#39;</span>, <span style="color: #BA2121">&#39;rgb&#39;</span>)
-            io<span style="color: #666">.</span>write_image(f_im, im, ext<span style="color: #666">=</span><span style="color: #BA2121">&#39;png&#39;</span>)
+            f_im <span style="color: #666">=</span> fileset<span style="color: #666">.</span>create_file(im_name <span style="color: #666">+</span> <span style="color: #BA2121">'_rgb'</span>)
+            f_im<span style="color: #666">.</span>set_metadata(<span style="color: #BA2121">'shot_id'</span>, im_name)
+            f_im<span style="color: #666">.</span>set_metadata(<span style="color: #BA2121">'channel'</span>, <span style="color: #BA2121">'rgb'</span>)
+            io<span style="color: #666">.</span>write_image(f_im, im, ext<span style="color: #666">=</span><span style="color: #BA2121">'png'</span>)
 
             im_save <span style="color: #666">=</span> _file_path(f_im)
-            subprocess<span style="color: #666">.</span>run([<span style="color: #BA2121">&#39;labelme&#39;</span>, im_save, <span style="color: #BA2121">&#39;-O&#39;</span>, im_save, <span style="color: #BA2121">&#39;--labels&#39;</span>, <span style="color: #BA2121">&#39;,&#39;</span><span style="color: #666">.</span>join(label_names)])
+            subprocess<span style="color: #666">.</span>run([<span style="color: #BA2121">'labelme'</span>, im_save, <span style="color: #BA2121">'-O'</span>, im_save, <span style="color: #BA2121">'--labels'</span>, <span style="color: #BA2121">','</span><span style="color: #666">.</span>join(label_names)])
 
             npz <span style="color: #666">=</span> run_refine_romidata(im_save, <span style="color: #666">1</span>, <span style="color: #666">1</span>, <span style="color: #666">1</span>, <span style="color: #666">1</span>, <span style="color: #666">1</span>, class_names<span style="color: #666">=</span>label_names,
                                       plotit<span style="color: #666">=</span>im_save)
 
             <span style="color: #008000; font-weight: bold">for</span> channel <span style="color: #A2F; font-weight: bold">in</span> label_names:
-                f_label <span style="color: #666">=</span> fileset<span style="color: #666">.</span>create_file(im_name <span style="color: #666">+</span> <span style="color: #BA2121">&#39;_&#39;</span> <span style="color: #666">+</span> channel)
-                f_label<span style="color: #666">.</span>set_metadata(<span style="color: #BA2121">&#39;shot_id&#39;</span>, im_name)
-                f_label<span style="color: #666">.</span>set_metadata(<span style="color: #BA2121">&#39;channel&#39;</span>, channel)
-                io<span style="color: #666">.</span>write_image(f_label, npz[channel], ext<span style="color: #666">=</span><span style="color: #BA2121">&#39;png&#39;</span>)
+                f_label <span style="color: #666">=</span> fileset<span style="color: #666">.</span>create_file(im_name <span style="color: #666">+</span> <span style="color: #BA2121">'_'</span> <span style="color: #666">+</span> channel)
+                f_label<span style="color: #666">.</span>set_metadata(<span style="color: #BA2121">'shot_id'</span>, im_name)
+                f_label<span style="color: #666">.</span>set_metadata(<span style="color: #BA2121">'channel'</span>, channel)
+                io<span style="color: #666">.</span>write_image(f_label, npz[channel], ext<span style="color: #666">=</span><span style="color: #BA2121">'png'</span>)
         db<span style="color: #666">.</span>disconnect()
 
-    subprocess<span style="color: #666">.</span>run([<span style="color: #BA2121">&quot;rsync&quot;</span>, <span style="color: #BA2121">&quot;-av&quot;</span>, directory_dataset, appdirs<span style="color: #666">.</span>user_cache_dir()])
+    subprocess<span style="color: #666">.</span>run([<span style="color: #BA2121">"rsync"</span>, <span style="color: #BA2121">"-av"</span>, directory_dataset, appdirs<span style="color: #666">.</span>user_cache_dir()])
     directory_dataset <span style="color: #666">=</span> appdirs<span style="color: #666">.</span>user_cache_dir()
 
     <span style="color: #3D7B7B; font-style: italic"># freeze backbone layers</span>
@@ -2550,15 +2550,15 @@ for users to set up, execute, and modify training tasks.</p>
     model <span style="color: #666">=</span> cnn_train(f_weights, directory_dataset, np<span style="color: #666">.</span>array(label_names), tsboard, batch_size, finetune_epochs,
                       model, Sx, Sy, learning_rate<span style="color: #666">=</span>learning_rate, data_augmentation<span style="color: #666">=</span><span style="color: #008000; font-weight: bold">False</span>)
 
-    model_name <span style="color: #666">=</span> model_id <span style="color: #666">+</span> os<span style="color: #666">.</span>path<span style="color: #666">.</span>split(directory_dataset)[<span style="color: #666">1</span>] <span style="color: #666">+</span> <span style="color: #BA2121">&#39;_</span><span style="color: #A45A77; font-weight: bold">%d</span><span style="color: #BA2121">_</span><span style="color: #A45A77; font-weight: bold">%d</span><span style="color: #BA2121">_&#39;</span> <span style="color: #666">%</span> (
-        Sx, Sy) <span style="color: #666">+</span> <span style="color: #BA2121">&#39;finetune_epoch</span><span style="color: #A45A77; font-weight: bold">%d</span><span style="color: #BA2121">&#39;</span> <span style="color: #666">%</span> finetune_epochs
+    model_name <span style="color: #666">=</span> model_id <span style="color: #666">+</span> os<span style="color: #666">.</span>path<span style="color: #666">.</span>split(directory_dataset)[<span style="color: #666">1</span>] <span style="color: #666">+</span> <span style="color: #BA2121">'_</span><span style="color: #A45A77; font-weight: bold">%d</span><span style="color: #BA2121">_</span><span style="color: #A45A77; font-weight: bold">%d</span><span style="color: #BA2121">_'</span> <span style="color: #666">%</span> (
+        Sx, Sy) <span style="color: #666">+</span> <span style="color: #BA2121">'finetune_epoch</span><span style="color: #A45A77; font-weight: bold">%d</span><span style="color: #BA2121">'</span> <span style="color: #666">%</span> finetune_epochs
 
     file <span style="color: #666">=</span> f_weights<span style="color: #666">.</span>create_file(model_name)
     io<span style="color: #666">.</span>write_torch(file, model)
-    file<span style="color: #666">.</span>set_metadata({<span style="color: #BA2121">&#39;model_id&#39;</span>: model_name, <span style="color: #BA2121">&#39;label_names&#39;</span>: label_names<span style="color: #666">.</span>tolist()})
+    file<span style="color: #666">.</span>set_metadata({<span style="color: #BA2121">'model_id'</span>: model_name, <span style="color: #BA2121">'label_names'</span>: label_names<span style="color: #666">.</span>tolist()})
 
-    logger<span style="color: #666">.</span>info(<span style="color: #BA2121">&quot;You have fine-tunned the segmentation network with the images you manually annotated.&quot;</span>)
-    logger<span style="color: #666">.</span>info(<span style="color: #BA2121">&quot;The pipeline should work better on your images now, let&#39;s launch it again&quot;</span>)
+    logger<span style="color: #666">.</span>info(<span style="color: #BA2121">"You have fine-tunned the segmentation network with the images you manually annotated."</span>)
+    logger<span style="color: #666">.</span>info(<span style="color: #BA2121">"The pipeline should work better on your images now, let's launch it again"</span>)
     <span style="color: #008000; font-weight: bold">return</span> model_name
 </code></pre></div></td></tr></table></div>
             </details>
@@ -2598,7 +2598,7 @@ for users to set up, execute, and modify training tasks.</p>
                 <code>config</code>
             </td>
             <td>
-                  <code><a class="autorefs autorefs-external" href="https://docs.python.org/3/library/stdtypes.html#str">str</a></code>
+                  <code><a class="autorefs autorefs-external" href="https://docs.python.org/3/builtins/stdtypes.html#str">str</a></code>
             </td>
             <td>
               <div class="doc-md-description">
@@ -2624,7 +2624,7 @@ for users to set up, execute, and modify training tasks.</p>
       <tbody>
           <tr class="doc-section-item">
             <td>
-                  <code><a class="autorefs autorefs-external" href="https://docs.python.org/3/library/stdtypes.html#str">str</a></code>
+                  <code><a class="autorefs autorefs-external" href="https://docs.python.org/3/builtins/stdtypes.html#str">str</a></code>
             </td>
             <td>
               <div class="doc-md-description">
@@ -2635,7 +2635,7 @@ If not specified in the configuration, a default cache directory is used.</p>
           </tr>
           <tr class="doc-section-item">
             <td>
-                  <code><a class="autorefs autorefs-external" href="https://docs.python.org/3/library/stdtypes.html#str">str</a></code>
+                  <code><a class="autorefs autorefs-external" href="https://docs.python.org/3/builtins/stdtypes.html#str">str</a></code>
             </td>
             <td>
               <div class="doc-md-description">
@@ -2646,7 +2646,7 @@ If not specified, a default cache directory is used.</p>
           </tr>
           <tr class="doc-section-item">
             <td>
-                  <code><a class="autorefs autorefs-external" href="https://docs.python.org/3/library/functions.html#int">int</a></code>
+                  <code><a class="autorefs autorefs-external" href="https://docs.python.org/3/builtins/functions.html#int">int</a></code>
             </td>
             <td>
               <div class="doc-md-description">
@@ -2656,7 +2656,7 @@ If not specified, a default cache directory is used.</p>
           </tr>
           <tr class="doc-section-item">
             <td>
-                  <code><a class="autorefs autorefs-external" href="https://docs.python.org/3/library/stdtypes.html#str">str</a></code>
+                  <code><a class="autorefs autorefs-external" href="https://docs.python.org/3/builtins/stdtypes.html#str">str</a></code>
             </td>
             <td>
               <div class="doc-md-description">
@@ -2667,7 +2667,7 @@ If not provided in the configuration, the system's current username is used.</p>
           </tr>
           <tr class="doc-section-item">
             <td>
-                  <code><a class="autorefs autorefs-external" href="https://docs.python.org/3/library/functions.html#int">int</a></code>
+                  <code><a class="autorefs autorefs-external" href="https://docs.python.org/3/builtins/functions.html#int">int</a></code>
             </td>
             <td>
               <div class="doc-md-description">
@@ -2677,7 +2677,7 @@ If not provided in the configuration, the system's current username is used.</p>
           </tr>
           <tr class="doc-section-item">
             <td>
-                  <code><a class="autorefs autorefs-external" href="https://docs.python.org/3/library/functions.html#int">int</a></code>
+                  <code><a class="autorefs autorefs-external" href="https://docs.python.org/3/builtins/functions.html#int">int</a></code>
             </td>
             <td>
               <div class="doc-md-description">
@@ -2687,7 +2687,7 @@ If not provided in the configuration, the system's current username is used.</p>
           </tr>
           <tr class="doc-section-item">
             <td>
-                  <code><a class="autorefs autorefs-external" href="https://docs.python.org/3/library/functions.html#int">int</a></code>
+                  <code><a class="autorefs autorefs-external" href="https://docs.python.org/3/builtins/functions.html#int">int</a></code>
             </td>
             <td>
               <div class="doc-md-description">
@@ -2697,7 +2697,7 @@ If not provided in the configuration, the system's current username is used.</p>
           </tr>
           <tr class="doc-section-item">
             <td>
-                  <code><a class="autorefs autorefs-external" href="https://docs.python.org/3/library/stdtypes.html#str">str</a></code>
+                  <code><a class="autorefs autorefs-external" href="https://docs.python.org/3/builtins/stdtypes.html#str">str</a></code>
             </td>
             <td>
               <div class="doc-md-description">
@@ -2707,7 +2707,7 @@ If not provided in the configuration, the system's current username is used.</p>
           </tr>
           <tr class="doc-section-item">
             <td>
-                  <code><a class="autorefs autorefs-external" href="https://docs.python.org/3/library/functions.html#float">float</a></code>
+                  <code><a class="autorefs autorefs-external" href="https://docs.python.org/3/builtins/functions.html#float">float</a></code>
             </td>
             <td>
               <div class="doc-md-description">
@@ -2779,7 +2779,7 @@ If not provided in the configuration, the system's current username is used.</p>
 <span style="color: inherit; background-color: transparent; padding-left: 5px; padding-right: 5px;">132</span>
 <span style="color: inherit; background-color: transparent; padding-left: 5px; padding-right: 5px;">133</span>
 <span style="color: inherit; background-color: transparent; padding-left: 5px; padding-right: 5px;">134</span></pre></div></td><td class="code"><div><pre style="line-height: 125%;"><span></span><code><span style="color: #008000; font-weight: bold">def</span><span style="color: #BBB"> </span><span style="color: #00F">parse_config</span>(config):
-<span style="color: #BBB">    </span><span style="color: #BA2121; font-style: italic">&quot;&quot;&quot;Parses the configuration file for the fine-tuning and segmentation processes.</span>
+<span style="color: #BBB">    </span><span style="color: #BA2121; font-style: italic">"""Parses the configuration file for the fine-tuning and segmentation processes.</span>
 
 <span style="color: #BA2121; font-style: italic">    Parameters</span>
 <span style="color: #BA2121; font-style: italic">    ----------</span>
@@ -2798,7 +2798,7 @@ If not provided in the configuration, the system's current username is used.</p>
 <span style="color: #BA2121; font-style: italic">        The batch size for fine-tuning.</span>
 <span style="color: #BA2121; font-style: italic">    str</span>
 <span style="color: #BA2121; font-style: italic">        Username for the system.</span>
-<span style="color: #BA2121; font-style: italic">        If not provided in the configuration, the system&#39;s current username is used.</span>
+<span style="color: #BA2121; font-style: italic">        If not provided in the configuration, the system's current username is used.</span>
 <span style="color: #BA2121; font-style: italic">    int</span>
 <span style="color: #BA2121; font-style: italic">        Number of epochs for the fine-tuning process.</span>
 <span style="color: #BA2121; font-style: italic">    int</span>
@@ -2809,32 +2809,32 @@ If not provided in the configuration, the system's current username is used.</p>
 <span style="color: #BA2121; font-style: italic">        Identifier for the selected model.</span>
 <span style="color: #BA2121; font-style: italic">    float</span>
 <span style="color: #BA2121; font-style: italic">        Learning rate for the training process.</span>
-<span style="color: #BA2121; font-style: italic">    &quot;&quot;&quot;</span>
+<span style="color: #BA2121; font-style: italic">    """</span>
     param_pipe <span style="color: #666">=</span> toml<span style="color: #666">.</span>load(<span style="color: #008000">str</span>(config))
 
-    direc <span style="color: #666">=</span> param_pipe[<span style="color: #BA2121">&#39;Finetune&#39;</span>]
+    direc <span style="color: #666">=</span> param_pipe[<span style="color: #BA2121">'Finetune'</span>]
     <span style="color: #008000; font-weight: bold">try</span>:
-        directory_weights <span style="color: #666">=</span> direc[<span style="color: #BA2121">&#39;directory_weights&#39;</span>]
+        directory_weights <span style="color: #666">=</span> direc[<span style="color: #BA2121">'directory_weights'</span>]
     <span style="color: #008000; font-weight: bold">except</span>:
         directory_weights <span style="color: #666">=</span> appdirs<span style="color: #666">.</span>user_cache_dir()
     <span style="color: #008000; font-weight: bold">try</span>:
-        tsboard <span style="color: #666">=</span> direc[<span style="color: #BA2121">&#39;tsboard&#39;</span>] <span style="color: #666">+</span> <span style="color: #BA2121">&#39;/finetune&#39;</span>
+        tsboard <span style="color: #666">=</span> direc[<span style="color: #BA2121">'tsboard'</span>] <span style="color: #666">+</span> <span style="color: #BA2121">'/finetune'</span>
     <span style="color: #008000; font-weight: bold">except</span>:
         tsboard <span style="color: #666">=</span> appdirs<span style="color: #666">.</span>user_cache_dir()
     <span style="color: #008000; font-weight: bold">try</span>:
-        user_name <span style="color: #666">=</span> direc[<span style="color: #BA2121">&#39;user_name&#39;</span>]
+        user_name <span style="color: #666">=</span> direc[<span style="color: #BA2121">'user_name'</span>]
     <span style="color: #008000; font-weight: bold">except</span>:
         user_name <span style="color: #666">=</span> getpass<span style="color: #666">.</span>getuser()
 
-    param2 <span style="color: #666">=</span> param_pipe[<span style="color: #BA2121">&#39;Segmentation2D&#39;</span>]
-    <span style="color: #3D7B7B; font-style: italic"># labels = param2[&#39;labels&#39;]</span>
-    Sx <span style="color: #666">=</span> param2[<span style="color: #BA2121">&#39;Sx&#39;</span>]
-    Sy <span style="color: #666">=</span> param2[<span style="color: #BA2121">&#39;Sy&#39;</span>]
-    model_id <span style="color: #666">=</span> param2[<span style="color: #BA2121">&#39;model_id&#39;</span>]
-    finetune <span style="color: #666">=</span> param_pipe[<span style="color: #BA2121">&#39;Finetune&#39;</span>]
-    finetune_epochs <span style="color: #666">=</span> finetune[<span style="color: #BA2121">&#39;finetune_epochs&#39;</span>]
-    batch_size <span style="color: #666">=</span> finetune[<span style="color: #BA2121">&#39;batch&#39;</span>]
-    learning_rate <span style="color: #666">=</span> param2[<span style="color: #BA2121">&#39;learning_rate&#39;</span>]
+    param2 <span style="color: #666">=</span> param_pipe[<span style="color: #BA2121">'Segmentation2D'</span>]
+    <span style="color: #3D7B7B; font-style: italic"># labels = param2['labels']</span>
+    Sx <span style="color: #666">=</span> param2[<span style="color: #BA2121">'Sx'</span>]
+    Sy <span style="color: #666">=</span> param2[<span style="color: #BA2121">'Sy'</span>]
+    model_id <span style="color: #666">=</span> param2[<span style="color: #BA2121">'model_id'</span>]
+    finetune <span style="color: #666">=</span> param_pipe[<span style="color: #BA2121">'Finetune'</span>]
+    finetune_epochs <span style="color: #666">=</span> finetune[<span style="color: #BA2121">'finetune_epochs'</span>]
+    batch_size <span style="color: #666">=</span> finetune[<span style="color: #BA2121">'batch'</span>]
+    learning_rate <span style="color: #666">=</span> param2[<span style="color: #BA2121">'learning_rate'</span>]
     <span style="color: #008000; font-weight: bold">return</span> directory_weights, tsboard, batch_size, user_name, finetune_epochs, Sx, Sy, learning_rate, model_id
 </code></pre></div></td></tr></table></div>
             </details>
@@ -2900,20 +2900,20 @@ If not provided in the configuration, the system's current username is used.</p>
 <span style="color: inherit; background-color: transparent; padding-left: 5px; padding-right: 5px;">72</span>
 <span style="color: inherit; background-color: transparent; padding-left: 5px; padding-right: 5px;">73</span>
 <span style="color: inherit; background-color: transparent; padding-left: 5px; padding-right: 5px;">74</span></pre></div></td><td class="code"><div><pre style="line-height: 125%;"><span></span><code><span style="color: #008000; font-weight: bold">def</span><span style="color: #BBB"> </span><span style="color: #00F">parser</span>():
-<span style="color: #BBB">    </span><span style="color: #BA2121; font-style: italic">&quot;&quot;&quot;Parses command-line arguments.</span>
+<span style="color: #BBB">    </span><span style="color: #BA2121; font-style: italic">"""Parses command-line arguments.</span>
 
 <span style="color: #BA2121; font-style: italic">    Returns</span>
 <span style="color: #BA2121; font-style: italic">    -------</span>
 <span style="color: #BA2121; font-style: italic">    argparse.ArgumentParser</span>
 <span style="color: #BA2121; font-style: italic">        A configured argument parser with an option for specifying the configuration directory.</span>
-<span style="color: #BA2121; font-style: italic">    &quot;&quot;&quot;</span>
-    parser <span style="color: #666">=</span> argparse<span style="color: #666">.</span>ArgumentParser(description<span style="color: #666">=</span><span style="color: #BA2121">&#39;Fine-tune a CNN model on a dataset with manually annotated images.&#39;</span>)
+<span style="color: #BA2121; font-style: italic">    """</span>
+    parser <span style="color: #666">=</span> argparse<span style="color: #666">.</span>ArgumentParser(description<span style="color: #666">=</span><span style="color: #BA2121">'Fine-tune a CNN model on a dataset with manually annotated images.'</span>)
 
-    parser<span style="color: #666">.</span>add_argument(<span style="color: #BA2121">&#39;--config&#39;</span>, dest<span style="color: #666">=</span><span style="color: #BA2121">&#39;config&#39;</span>, <span style="color: #008000">type</span><span style="color: #666">=</span><span style="color: #008000">str</span>, default<span style="color: #666">=</span>default_config,
-                        help<span style="color: #666">=</span><span style="color: #BA2121">&#39;config dir, default: </span><span style="color: #A45A77; font-weight: bold">%s</span><span style="color: #BA2121">&#39;</span> <span style="color: #666">%</span> default_config)
-    parser<span style="color: #666">.</span>add_argument(<span style="color: #BA2121">&quot;--log-level&quot;</span>, default<span style="color: #666">=</span><span style="color: #BA2121">&quot;INFO&quot;</span>,
-                        choices<span style="color: #666">=</span>[<span style="color: #BA2121">&quot;DEBUG&quot;</span>, <span style="color: #BA2121">&quot;INFO&quot;</span>, <span style="color: #BA2121">&quot;WARNING&quot;</span>, <span style="color: #BA2121">&quot;ERROR&quot;</span>, <span style="color: #BA2121">&quot;CRITICAL&quot;</span>],
-                        help<span style="color: #666">=</span><span style="color: #BA2121">&quot;Set the logging level&quot;</span>)
+    parser<span style="color: #666">.</span>add_argument(<span style="color: #BA2121">'--config'</span>, dest<span style="color: #666">=</span><span style="color: #BA2121">'config'</span>, <span style="color: #008000">type</span><span style="color: #666">=</span><span style="color: #008000">str</span>, default<span style="color: #666">=</span>default_config,
+                        help<span style="color: #666">=</span><span style="color: #BA2121">'config dir, default: </span><span style="color: #A45A77; font-weight: bold">%s</span><span style="color: #BA2121">'</span> <span style="color: #666">%</span> default_config)
+    parser<span style="color: #666">.</span>add_argument(<span style="color: #BA2121">"--log-level"</span>, default<span style="color: #666">=</span><span style="color: #BA2121">"INFO"</span>,
+                        choices<span style="color: #666">=</span>[<span style="color: #BA2121">"DEBUG"</span>, <span style="color: #BA2121">"INFO"</span>, <span style="color: #BA2121">"WARNING"</span>, <span style="color: #BA2121">"ERROR"</span>, <span style="color: #BA2121">"CRITICAL"</span>],
+                        help<span style="color: #666">=</span><span style="color: #BA2121">"Set the logging level"</span>)
 
     <span style="color: #008000; font-weight: bold">return</span> parser
 </code></pre></div></td></tr></table></div>
@@ -2954,7 +2954,7 @@ If not provided in the configuration, the system's current username is used.</p>
                 <code>config</code>
             </td>
             <td>
-                  <code><a class="autorefs autorefs-external" href="https://docs.python.org/3/library/stdtypes.html#str">str</a></code>
+                  <code><a class="autorefs autorefs-external" href="https://docs.python.org/3/builtins/stdtypes.html#str">str</a></code>
             </td>
             <td>
               <div class="doc-md-description">
@@ -2970,7 +2970,7 @@ If not provided in the configuration, the system's current username is used.</p>
                 <code>model_name</code>
             </td>
             <td>
-                  <code><a class="autorefs autorefs-external" href="https://docs.python.org/3/library/stdtypes.html#str">str</a></code>
+                  <code><a class="autorefs autorefs-external" href="https://docs.python.org/3/builtins/stdtypes.html#str">str</a></code>
             </td>
             <td>
               <div class="doc-md-description">
@@ -3010,7 +3010,7 @@ the TOML configuration file.</p>
 <span style="color: inherit; background-color: transparent; padding-left: 5px; padding-right: 5px;">277</span>
 <span style="color: inherit; background-color: transparent; padding-left: 5px; padding-right: 5px;">278</span>
 <span style="color: inherit; background-color: transparent; padding-left: 5px; padding-right: 5px;">279</span></pre></div></td><td class="code"><div><pre style="line-height: 125%;"><span></span><code><span style="color: #008000; font-weight: bold">def</span><span style="color: #BBB"> </span><span style="color: #00F">update_toml_config</span>(config, model_name):
-<span style="color: #BBB">    </span><span style="color: #BA2121; font-style: italic">&quot;&quot;&quot;Updates a TOML configuration file with a new model ID.</span>
+<span style="color: #BBB">    </span><span style="color: #BA2121; font-style: italic">"""Updates a TOML configuration file with a new model ID.</span>
 
 <span style="color: #BA2121; font-style: italic">    Parameters</span>
 <span style="color: #BA2121; font-style: italic">    ----------</span>
@@ -3020,15 +3020,15 @@ the TOML configuration file.</p>
 <span style="color: #BA2121; font-style: italic">        The model name to set as the `model_id` in the `Segmentation2D` section of</span>
 <span style="color: #BA2121; font-style: italic">        the TOML configuration file.</span>
 
-<span style="color: #BA2121; font-style: italic">    &quot;&quot;&quot;</span>
+<span style="color: #BA2121; font-style: italic">    """</span>
     <span style="color: #3D7B7B; font-style: italic"># Load the existing TOML configuration file into a dictionary</span>
     param_pipe <span style="color: #666">=</span> toml<span style="color: #666">.</span>load(config)
-    <span style="color: #3D7B7B; font-style: italic"># Update the &#39;model_id&#39; in the &#39;Segmentation2D&#39; section with the new model name</span>
-    param_pipe[<span style="color: #BA2121">&#39;Segmentation2D&#39;</span>][<span style="color: #BA2121">&#39;model_id&#39;</span>] <span style="color: #666">=</span> model_name
+    <span style="color: #3D7B7B; font-style: italic"># Update the 'model_id' in the 'Segmentation2D' section with the new model name</span>
+    param_pipe[<span style="color: #BA2121">'Segmentation2D'</span>][<span style="color: #BA2121">'model_id'</span>] <span style="color: #666">=</span> model_name
     <span style="color: #3D7B7B; font-style: italic"># Convert the updated dictionary back to a TOML formatted string</span>
     text <span style="color: #666">=</span> toml<span style="color: #666">.</span>dumps(param_pipe)
     <span style="color: #3D7B7B; font-style: italic"># Write the updated TOML string back to the configuration file</span>
-    <span style="color: #008000; font-weight: bold">with</span> <span style="color: #008000">open</span>(config, <span style="color: #BA2121">&quot;w&quot;</span>) <span style="color: #008000; font-weight: bold">as</span> f:
+    <span style="color: #008000; font-weight: bold">with</span> <span style="color: #008000">open</span>(config, <span style="color: #BA2121">"w"</span>) <span style="color: #008000; font-weight: bold">as</span> f:
         f<span style="color: #666">.</span>write(text)
     <span style="color: #008000; font-weight: bold">return</span>
 </code></pre></div></td></tr></table></div>
@@ -3138,7 +3138,7 @@ the TOML configuration file.</p>
       <script id="__config" type="application/json">{"annotate": null, "base": "../../../..", "features": ["navigation.tabs", "navigation.tabs.sticky", "content.code.copy"], "search": "../../../../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
     
     
-      <script src="../../../../assets/javascripts/bundle.79ae519e.min.js"></script>
+      <script src="../../../../assets/javascripts/bundle.d7400e89.min.js"></script>
       
         <script src="../../../../assets/_markdown_exec_pyodide.js"></script>
       

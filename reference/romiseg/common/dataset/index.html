@@ -25,7 +25,7 @@
       
       
       <link rel="icon" href="../../../../assets/images/ROMI_logo_green_25.svg">
-      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.6">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.7">
     
     
       
@@ -33,7 +33,7 @@
       
     
     
-      <link rel="stylesheet" href="../../../../assets/stylesheets/main.484c7ddc.min.css">
+      <link rel="stylesheet" href="../../../../assets/stylesheets/main.ec1eaa64.min.css">
       
       
 
@@ -1943,7 +1943,7 @@
                 <code>mode</code>
             </td>
             <td>
-                  <code><a class="autorefs autorefs-external" href="https://docs.python.org/3/library/stdtypes.html#str">str</a></code>
+                  <code><a class="autorefs autorefs-external" href="https://docs.python.org/3/builtins/stdtypes.html#str">str</a></code>
             </td>
             <td>
               <div class="doc-md-description">
@@ -1959,7 +1959,7 @@
                 <code>path</code>
             </td>
             <td>
-                  <code><a class="autorefs autorefs-external" href="https://docs.python.org/3/library/stdtypes.html#str">str</a></code>
+                  <code><a class="autorefs autorefs-external" href="https://docs.python.org/3/builtins/stdtypes.html#str">str</a></code>
             </td>
             <td>
               <div class="doc-md-description">
@@ -1985,7 +1985,7 @@
       <tbody>
           <tr class="doc-section-item">
             <td>
-                  <code><a class="autorefs autorefs-external" href="https://docs.python.org/3/library/stdtypes.html#list">list</a></code>
+                  <code><a class="autorefs autorefs-external" href="https://docs.python.org/3/builtins/stdtypes.html#list">list</a></code>
             </td>
             <td>
               <div class="doc-md-description">
@@ -2045,7 +2045,7 @@
 <span style="color: inherit; background-color: transparent; padding-left: 5px; padding-right: 5px;">48</span>
 <span style="color: inherit; background-color: transparent; padding-left: 5px; padding-right: 5px;">49</span>
 <span style="color: inherit; background-color: transparent; padding-left: 5px; padding-right: 5px;">50</span></pre></div></td><td class="code"><div><pre style="line-height: 125%;"><span></span><code><span style="color: #008000; font-weight: bold">def</span><span style="color: #BBB"> </span><span style="color: #00F">init_set</span>(mode, path):
-<span style="color: #BBB">    </span><span style="color: #BA2121; font-style: italic">&quot;&quot;&quot;</span>
+<span style="color: #BBB">    </span><span style="color: #BA2121; font-style: italic">"""</span>
 <span style="color: #BA2121; font-style: italic">    Initialize a dataset from a path.</span>
 
 <span style="color: #BA2121; font-style: italic">    Parameters</span>
@@ -2061,21 +2061,21 @@
 <span style="color: #BA2121; font-style: italic">        List of shots.</span>
 <span style="color: #BA2121; font-style: italic">    numpy.ndarray</span>
 <span style="color: #BA2121; font-style: italic">        Sorted array of channels.</span>
-<span style="color: #BA2121; font-style: italic">    &quot;&quot;&quot;</span>
+<span style="color: #BA2121; font-style: italic">    """</span>
     db <span style="color: #666">=</span> fsdb<span style="color: #666">.</span>FSDB(path)  <span style="color: #3D7B7B; font-style: italic"># Initialize database connection</span>
     db<span style="color: #666">.</span>connect()  <span style="color: #3D7B7B; font-style: italic"># Connect to the database</span>
     scans <span style="color: #666">=</span> db<span style="color: #666">.</span>get_scans()  <span style="color: #3D7B7B; font-style: italic"># Retrieve all scans from the database</span>
     shots <span style="color: #666">=</span> []  <span style="color: #3D7B7B; font-style: italic"># List to hold shot information</span>
 
     <span style="color: #008000; font-weight: bold">for</span> s <span style="color: #A2F; font-weight: bold">in</span> scans:
-        f <span style="color: #666">=</span> s<span style="color: #666">.</span>get_fileset(<span style="color: #BA2121">&#39;images&#39;</span>)  <span style="color: #3D7B7B; font-style: italic"># Get fileset named &#39;images&#39; from scan</span>
-        list_files <span style="color: #666">=</span> f<span style="color: #666">.</span>get_files(query<span style="color: #666">=</span>{<span style="color: #BA2121">&#39;channel&#39;</span>: <span style="color: #BA2121">&#39;rgb&#39;</span>})
+        f <span style="color: #666">=</span> s<span style="color: #666">.</span>get_fileset(<span style="color: #BA2121">'images'</span>)  <span style="color: #3D7B7B; font-style: italic"># Get fileset named 'images' from scan</span>
+        list_files <span style="color: #666">=</span> f<span style="color: #666">.</span>get_files(query<span style="color: #666">=</span>{<span style="color: #BA2121">'channel'</span>: <span style="color: #BA2121">'rgb'</span>})
         <span style="color: #3D7B7B; font-style: italic"># Build a list of shots with scan ID and shot ID metadata</span>
-        shots <span style="color: #666">+=</span> [{<span style="color: #BA2121">&quot;scan&quot;</span>: s<span style="color: #666">.</span>id, <span style="color: #BA2121">&quot;shot_id&quot;</span>: list_files[i]<span style="color: #666">.</span>metadata[<span style="color: #BA2121">&#39;shot_id&#39;</span>]} <span style="color: #008000; font-weight: bold">for</span> i <span style="color: #A2F; font-weight: bold">in</span> <span style="color: #008000">range</span>(<span style="color: #008000">len</span>(list_files))]
+        shots <span style="color: #666">+=</span> [{<span style="color: #BA2121">"scan"</span>: s<span style="color: #666">.</span>id, <span style="color: #BA2121">"shot_id"</span>: list_files[i]<span style="color: #666">.</span>metadata[<span style="color: #BA2121">'shot_id'</span>]} <span style="color: #008000; font-weight: bold">for</span> i <span style="color: #A2F; font-weight: bold">in</span> <span style="color: #008000">range</span>(<span style="color: #008000">len</span>(list_files))]
 
-    channels <span style="color: #666">=</span> f<span style="color: #666">.</span>get_metadata(<span style="color: #BA2121">&#39;channels&#39;</span>)  <span style="color: #3D7B7B; font-style: italic"># Retrieve channel metadata from fileset</span>
+    channels <span style="color: #666">=</span> f<span style="color: #666">.</span>get_metadata(<span style="color: #BA2121">'channels'</span>)  <span style="color: #3D7B7B; font-style: italic"># Retrieve channel metadata from fileset</span>
     channels <span style="color: #666">=</span> copy<span style="color: #666">.</span>copy(channels)  <span style="color: #3D7B7B; font-style: italic"># Create a copy of the channels list</span>
-    channels<span style="color: #666">.</span>remove(<span style="color: #BA2121">&#39;rgb&#39;</span>)  <span style="color: #3D7B7B; font-style: italic"># Remove &#39;rgb&#39; channel from the list</span>
+    channels<span style="color: #666">.</span>remove(<span style="color: #BA2121">'rgb'</span>)  <span style="color: #3D7B7B; font-style: italic"># Remove 'rgb' channel from the list</span>
 
     db<span style="color: #666">.</span>disconnect()  <span style="color: #3D7B7B; font-style: italic"># Disconnect from the database</span>
 
@@ -2187,7 +2187,7 @@
       <script id="__config" type="application/json">{"annotate": null, "base": "../../../..", "features": ["navigation.tabs", "navigation.tabs.sticky", "content.code.copy"], "search": "../../../../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
     
     
-      <script src="../../../../assets/javascripts/bundle.79ae519e.min.js"></script>
+      <script src="../../../../assets/javascripts/bundle.d7400e89.min.js"></script>
       
         <script src="../../../../assets/_markdown_exec_pyodide.js"></script>
       

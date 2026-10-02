@@ -25,7 +25,7 @@
       
       
       <link rel="icon" href="../../../../assets/images/ROMI_logo_green_25.svg">
-      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.6">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.7">
     
     
       
@@ -33,7 +33,7 @@
       
     
     
-      <link rel="stylesheet" href="../../../../assets/stylesheets/main.484c7ddc.min.css">
+      <link rel="stylesheet" href="../../../../assets/stylesheets/main.ec1eaa64.min.css">
       
       
 
@@ -2053,7 +2053,7 @@ indicates perfect correspondence.</p>
 <span style="color: inherit; background-color: transparent; padding-left: 5px; padding-right: 5px;">36</span>
 <span style="color: inherit; background-color: transparent; padding-left: 5px; padding-right: 5px;">37</span>
 <span style="color: inherit; background-color: transparent; padding-left: 5px; padding-right: 5px;">38</span></pre></div></td><td class="code"><div><pre style="line-height: 125%;"><span></span><code><span style="color: #008000; font-weight: bold">def</span><span style="color: #BBB"> </span><span style="color: #00F">my_metric</span>(outputs: torch<span style="color: #666">.</span>Tensor, labels: torch<span style="color: #666">.</span>Tensor):
-<span style="color: #BBB">    </span><span style="color: #BA2121; font-style: italic">&quot;&quot;&quot;</span>
+<span style="color: #BBB">    </span><span style="color: #BA2121; font-style: italic">"""</span>
 <span style="color: #BA2121; font-style: italic">    Computes the average correspondence between predicted and target outputs, excluding</span>
 <span style="color: #BA2121; font-style: italic">    entries where the label is zero. This function effectively calculates a filtered</span>
 <span style="color: #BA2121; font-style: italic">    accuracy metric, considering only valid labels and comparing them against the</span>
@@ -2062,7 +2062,7 @@ indicates perfect correspondence.</p>
 <span style="color: #BA2121; font-style: italic">    Parameters</span>
 <span style="color: #BA2121; font-style: italic">    ----------</span>
 <span style="color: #BA2121; font-style: italic">    outputs : torch.Tensor</span>
-<span style="color: #BA2121; font-style: italic">        The predicted outputs, typically the result of a model&#39;s forward pass.</span>
+<span style="color: #BA2121; font-style: italic">        The predicted outputs, typically the result of a model's forward pass.</span>
 <span style="color: #BA2121; font-style: italic">    labels : torch.Tensor</span>
 <span style="color: #BA2121; font-style: italic">        The ground truth labels against which predictions are compared, with `0`</span>
 <span style="color: #BA2121; font-style: italic">        indicating labels to exclude from evaluation.</span>
@@ -2073,7 +2073,7 @@ indicates perfect correspondence.</p>
 <span style="color: #BA2121; font-style: italic">        A single-element tensor containing the computed average correspondence (mean</span>
 <span style="color: #BA2121; font-style: italic">        accuracy) for non-zero labels. The value lies in the range [0, 1], where 1</span>
 <span style="color: #BA2121; font-style: italic">        indicates perfect correspondence.</span>
-<span style="color: #BA2121; font-style: italic">    &quot;&quot;&quot;</span>
+<span style="color: #BA2121; font-style: italic">    """</span>
     inds <span style="color: #666">=</span> labels <span style="color: #666">!=</span> <span style="color: #666">0</span>
     bools <span style="color: #666">=</span> outputs[inds] <span style="color: #666">==</span> labels[inds]
 
@@ -2119,7 +2119,7 @@ outputs for display.</p>
                 <code>metrics</code>
             </td>
             <td>
-                  <code><a class="autorefs autorefs-external" href="https://docs.python.org/3/library/stdtypes.html#dict">dict</a></code>
+                  <code><a class="autorefs autorefs-external" href="https://docs.python.org/3/builtins/stdtypes.html#dict">dict</a></code>
             </td>
             <td>
               <div class="doc-md-description">
@@ -2135,7 +2135,7 @@ outputs for display.</p>
                 <code>epoch_samples</code>
             </td>
             <td>
-                  <code><a class="autorefs autorefs-external" href="https://docs.python.org/3/library/functions.html#int">int</a></code>
+                  <code><a class="autorefs autorefs-external" href="https://docs.python.org/3/builtins/functions.html#int">int</a></code>
             </td>
             <td>
               <div class="doc-md-description">
@@ -2151,7 +2151,7 @@ outputs for display.</p>
                 <code>phase</code>
             </td>
             <td>
-                  <code><a class="autorefs autorefs-external" href="https://docs.python.org/3/library/stdtypes.html#str">str</a></code>
+                  <code><a class="autorefs autorefs-external" href="https://docs.python.org/3/builtins/stdtypes.html#str">str</a></code>
             </td>
             <td>
               <div class="doc-md-description">
@@ -2220,7 +2220,7 @@ any value.</p>
 <span style="color: inherit; background-color: transparent; padding-left: 5px; padding-right: 5px;">66</span>
 <span style="color: inherit; background-color: transparent; padding-left: 5px; padding-right: 5px;">67</span>
 <span style="color: inherit; background-color: transparent; padding-left: 5px; padding-right: 5px;">68</span></pre></div></td><td class="code"><div><pre style="line-height: 125%;"><span></span><code><span style="color: #008000; font-weight: bold">def</span><span style="color: #BBB"> </span><span style="color: #00F">print_metrics</span>(metrics, epoch_samples, phase):
-<span style="color: #BBB">    </span><span style="color: #BA2121; font-style: italic">&quot;&quot;&quot;</span>
+<span style="color: #BBB">    </span><span style="color: #BA2121; font-style: italic">"""</span>
 <span style="color: #BA2121; font-style: italic">    Logs and prints the evaluation metrics for a specific phase of training.</span>
 
 <span style="color: #BA2121; font-style: italic">    The function computes the average value of each metric over the total number</span>
@@ -2234,19 +2234,19 @@ any value.</p>
 <span style="color: #BA2121; font-style: italic">    epoch_samples : int</span>
 <span style="color: #BA2121; font-style: italic">        The total number of samples processed in the current epoch.</span>
 <span style="color: #BA2121; font-style: italic">    phase : str</span>
-<span style="color: #BA2121; font-style: italic">        The phase of training or evaluation, typically &#39;train&#39; or &#39;val&#39;.</span>
+<span style="color: #BA2121; font-style: italic">        The phase of training or evaluation, typically 'train' or 'val'.</span>
 
 <span style="color: #BA2121; font-style: italic">    Returns</span>
 <span style="color: #BA2121; font-style: italic">    -------</span>
 <span style="color: #BA2121; font-style: italic">    None</span>
 <span style="color: #BA2121; font-style: italic">        The function prints the formatted metrics to the console but does not return</span>
 <span style="color: #BA2121; font-style: italic">        any value.</span>
-<span style="color: #BA2121; font-style: italic">    &quot;&quot;&quot;</span>
+<span style="color: #BA2121; font-style: italic">    """</span>
     outputs <span style="color: #666">=</span> []
     <span style="color: #008000; font-weight: bold">for</span> k <span style="color: #A2F; font-weight: bold">in</span> metrics<span style="color: #666">.</span>keys():
-        outputs<span style="color: #666">.</span>append(<span style="color: #BA2121">&quot;</span><span style="color: #A45A77; font-weight: bold">{}</span><span style="color: #BA2121">: </span><span style="color: #A45A77; font-weight: bold">{:4f}</span><span style="color: #BA2121">&quot;</span><span style="color: #666">.</span>format(k, metrics[k] <span style="color: #666">/</span> epoch_samples))
+        outputs<span style="color: #666">.</span>append(<span style="color: #BA2121">"</span><span style="color: #A45A77; font-weight: bold">{}</span><span style="color: #BA2121">: </span><span style="color: #A45A77; font-weight: bold">{:4f}</span><span style="color: #BA2121">"</span><span style="color: #666">.</span>format(k, metrics[k] <span style="color: #666">/</span> epoch_samples))
 
-    <span style="color: #008000">print</span>(<span style="color: #BA2121">&quot;</span><span style="color: #A45A77; font-weight: bold">{}</span><span style="color: #BA2121">: </span><span style="color: #A45A77; font-weight: bold">{}</span><span style="color: #BA2121">&quot;</span><span style="color: #666">.</span>format(phase, <span style="color: #BA2121">&quot;, &quot;</span><span style="color: #666">.</span>join(outputs)))
+    <span style="color: #008000">print</span>(<span style="color: #BA2121">"</span><span style="color: #A45A77; font-weight: bold">{}</span><span style="color: #BA2121">: </span><span style="color: #A45A77; font-weight: bold">{}</span><span style="color: #BA2121">"</span><span style="color: #666">.</span>format(phase, <span style="color: #BA2121">", "</span><span style="color: #666">.</span>join(outputs)))
 </code></pre></div></td></tr></table></div>
             </details>
     </div>
@@ -2354,7 +2354,7 @@ any value.</p>
       <script id="__config" type="application/json">{"annotate": null, "base": "../../../..", "features": ["navigation.tabs", "navigation.tabs.sticky", "content.code.copy"], "search": "../../../../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
     
     
-      <script src="../../../../assets/javascripts/bundle.79ae519e.min.js"></script>
+      <script src="../../../../assets/javascripts/bundle.d7400e89.min.js"></script>
       
         <script src="../../../../assets/_markdown_exec_pyodide.js"></script>
       

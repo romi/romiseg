@@ -25,7 +25,7 @@
       
       
       <link rel="icon" href="../../../../assets/images/ROMI_logo_green_25.svg">
-      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.6">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.7">
     
     
       
@@ -33,7 +33,7 @@
       
     
     
-      <link rel="stylesheet" href="../../../../assets/stylesheets/main.484c7ddc.min.css">
+      <link rel="stylesheet" href="../../../../assets/stylesheets/main.ec1eaa64.min.css">
       
       
 
@@ -2205,7 +2205,7 @@ depend on the specifics of <code>self.layer</code> processing the input.</p>
 <span style="color: inherit; background-color: transparent; padding-left: 5px; padding-right: 5px;">120</span>
 <span style="color: inherit; background-color: transparent; padding-left: 5px; padding-right: 5px;">121</span>
 <span style="color: inherit; background-color: transparent; padding-left: 5px; padding-right: 5px;">122</span></pre></div></td><td class="code"><div><pre style="line-height: 125%;"><span></span><code><span style="color: #008000; font-weight: bold">def</span><span style="color: #BBB"> </span><span style="color: #00F">forward</span>(<span style="color: #008000">self</span>, x):
-<span style="color: #BBB">    </span><span style="color: #BA2121; font-style: italic">&quot;&quot;&quot;Implements the forward propagation for a neural network layer.</span>
+<span style="color: #BBB">    </span><span style="color: #BA2121; font-style: italic">"""Implements the forward propagation for a neural network layer.</span>
 
 <span style="color: #BA2121; font-style: italic">    This method applies the computations of a neural network layer</span>
 <span style="color: #BA2121; font-style: italic">    using the input tensor `x` and returns the output tensor `out`.</span>
@@ -2220,10 +2220,10 @@ depend on the specifics of <code>self.layer</code> processing the input.</p>
 <span style="color: #BA2121; font-style: italic">    Returns</span>
 <span style="color: #BA2121; font-style: italic">    -------</span>
 <span style="color: #BA2121; font-style: italic">    out : torch.Tensor</span>
-<span style="color: #BA2121; font-style: italic">        Output tensor after applying the layer&#39;s computation logic</span>
+<span style="color: #BA2121; font-style: italic">        Output tensor after applying the layer's computation logic</span>
 <span style="color: #BA2121; font-style: italic">        on the input tensor `x`. The shape and dtype of the output tensor</span>
 <span style="color: #BA2121; font-style: italic">        depend on the specifics of `self.layer` processing the input.</span>
-<span style="color: #BA2121; font-style: italic">    &quot;&quot;&quot;</span>
+<span style="color: #BA2121; font-style: italic">    """</span>
     out <span style="color: #666">=</span> <span style="color: #008000">self</span><span style="color: #666">.</span>layer(x)
     <span style="color: #008000; font-weight: bold">return</span> out
 </code></pre></div></td></tr></table></div>
@@ -2279,7 +2279,7 @@ coordinate-based processing and ensures flexibility in learning-based applicatio
           <tr class="doc-section-item">
             <td><code><span title="romiseg.models.unet3d.ResNetUNet_3D.n_class">n_class</span></code></td>
             <td>
-                  <code><a class="autorefs autorefs-external" href="https://docs.python.org/3/library/functions.html#int">int</a></code>
+                  <code><a class="autorefs autorefs-external" href="https://docs.python.org/3/builtins/functions.html#int">int</a></code>
             </td>
             <td>
               <div class="doc-md-description">
@@ -2301,7 +2301,7 @@ coordinate-based processing and ensures flexibility in learning-based applicatio
           <tr class="doc-section-item">
             <td><code><span title="romiseg.models.unet3d.ResNetUNet_3D.base_layers">base_layers</span></code></td>
             <td>
-                  <code><a class="autorefs autorefs-external" href="https://docs.python.org/3/library/stdtypes.html#list">list</a></code>
+                  <code><a class="autorefs autorefs-external" href="https://docs.python.org/3/builtins/stdtypes.html#list">list</a></code>
             </td>
             <td>
               <div class="doc-md-description">
@@ -2532,7 +2532,7 @@ coordinate-based processing and ensures flexibility in learning-based applicatio
           <tr class="doc-section-item">
             <td><code><span title="romiseg.models.unet3d.ResNetUNet_3D.coord_file_loc">coord_file_loc</span></code></td>
             <td>
-                  <code><a class="autorefs autorefs-external" href="https://docs.python.org/3/library/stdtypes.html#str">str</a></code>
+                  <code><a class="autorefs autorefs-external" href="https://docs.python.org/3/builtins/stdtypes.html#str">str</a></code>
             </td>
             <td>
               <div class="doc-md-description">
@@ -2610,7 +2610,7 @@ coordinate-based processing and ensures flexibility in learning-based applicatio
     <span style="color: #008000">self</span><span style="color: #666">.</span>layer4 <span style="color: #666">=</span> <span style="color: #008000">self</span><span style="color: #666">.</span>base_layers[<span style="color: #666">7</span>]  <span style="color: #3D7B7B; font-style: italic"># size=(N, 2048, x.H/32, x.W/32)</span>
     <span style="color: #008000">self</span><span style="color: #666">.</span>layer4_1x1 <span style="color: #666">=</span> convrelu(<span style="color: #666">2048</span>, <span style="color: #666">1024</span>, <span style="color: #666">1</span>, <span style="color: #666">0</span>)
 
-    <span style="color: #008000">self</span><span style="color: #666">.</span>upsample <span style="color: #666">=</span> nn<span style="color: #666">.</span>Upsample(scale_factor<span style="color: #666">=2</span>, mode<span style="color: #666">=</span><span style="color: #BA2121">&#39;bilinear&#39;</span>, align_corners<span style="color: #666">=</span><span style="color: #008000; font-weight: bold">True</span>)
+    <span style="color: #008000">self</span><span style="color: #666">.</span>upsample <span style="color: #666">=</span> nn<span style="color: #666">.</span>Upsample(scale_factor<span style="color: #666">=2</span>, mode<span style="color: #666">=</span><span style="color: #BA2121">'bilinear'</span>, align_corners<span style="color: #666">=</span><span style="color: #008000; font-weight: bold">True</span>)
 
     <span style="color: #008000">self</span><span style="color: #666">.</span>conv_up3 <span style="color: #666">=</span> convrelu(<span style="color: #666">512</span> <span style="color: #666">+</span> <span style="color: #666">1024</span>, <span style="color: #666">512</span>, <span style="color: #666">3</span>, <span style="color: #666">1</span>)
     <span style="color: #008000">self</span><span style="color: #666">.</span>conv_up2 <span style="color: #666">=</span> convrelu(<span style="color: #666">512</span> <span style="color: #666">+</span> <span style="color: #666">512</span>, <span style="color: #666">512</span>, <span style="color: #666">3</span>, <span style="color: #666">1</span>)
@@ -2711,7 +2711,7 @@ format compatible with the model's expected input dimensions.</p>
       <tbody>
           <tr class="doc-section-item">
             <td>
-                  <code><a class="autorefs autorefs-external" href="https://docs.python.org/3/library/stdtypes.html#list">list</a></code>
+                  <code><a class="autorefs autorefs-external" href="https://docs.python.org/3/builtins/stdtypes.html#list">list</a></code>
             </td>
             <td>
               <div class="doc-md-description">
@@ -2855,7 +2855,7 @@ format compatible with the model's expected input dimensions.</p>
 <span style="color: inherit; background-color: transparent; padding-left: 5px; padding-right: 5px;">357</span>
 <span style="color: inherit; background-color: transparent; padding-left: 5px; padding-right: 5px;">358</span>
 <span style="color: inherit; background-color: transparent; padding-left: 5px; padding-right: 5px;">359</span></pre></div></td><td class="code"><div><pre style="line-height: 125%;"><span></span><code><span style="color: #008000; font-weight: bold">def</span><span style="color: #BBB"> </span><span style="color: #00F">forward</span>(<span style="color: #008000">self</span>, <span style="color: #008000">input</span>):
-<span style="color: #BBB">    </span><span style="color: #BA2121; font-style: italic">&quot;&quot;&quot;Perform the forward pass through the model for generating predictions based on input.</span>
+<span style="color: #BBB">    </span><span style="color: #BA2121; font-style: italic">"""Perform the forward pass through the model for generating predictions based on input.</span>
 
 <span style="color: #BA2121; font-style: italic">    This method takes an input tensor and passes it through multiple layers of the model,</span>
 <span style="color: #BA2121; font-style: italic">    including convolutional operations, upsample layers, concatenations, and final postprocessing</span>
@@ -2867,7 +2867,7 @@ format compatible with the model's expected input dimensions.</p>
 <span style="color: #BA2121; font-style: italic">    ----------</span>
 <span style="color: #BA2121; font-style: italic">    input : torch.Tensor</span>
 <span style="color: #BA2121; font-style: italic">        Input tensor representing the data for the forward pass, typically provided in a</span>
-<span style="color: #BA2121; font-style: italic">        format compatible with the model&#39;s expected input dimensions.</span>
+<span style="color: #BA2121; font-style: italic">        format compatible with the model's expected input dimensions.</span>
 
 <span style="color: #BA2121; font-style: italic">    Returns</span>
 <span style="color: #BA2121; font-style: italic">    -------</span>
@@ -2876,7 +2876,7 @@ format compatible with the model's expected input dimensions.</p>
 <span style="color: #BA2121; font-style: italic">        - The final processed feature tensor after convolutional and upsample operations.</span>
 <span style="color: #BA2121; font-style: italic">        - The adjusted prediction tensor, computed by performing additional operations and</span>
 <span style="color: #BA2121; font-style: italic">          transformations on the predicted outputs.</span>
-<span style="color: #BA2121; font-style: italic">    &quot;&quot;&quot;</span>
+<span style="color: #BA2121; font-style: italic">    """</span>
     x_original <span style="color: #666">=</span> <span style="color: #008000">self</span><span style="color: #666">.</span>conv_original_size0(<span style="color: #008000">input</span>)
     N_frames <span style="color: #666">=</span> x_original<span style="color: #666">.</span>shape[<span style="color: #666">0</span>]
 
@@ -2897,7 +2897,7 @@ format compatible with the model's expected input dimensions.</p>
     layer4 <span style="color: #666">=</span> <span style="color: #008000">self</span><span style="color: #666">.</span>layer4_1x1(layer4)
     <span style="color: #3D7B7B; font-style: italic"># print(layer4.shape)</span>
     <span style="color: #3D7B7B; font-style: italic"># x = self.upsample(layer4)  # old API</span>
-    x <span style="color: #666">=</span> F<span style="color: #666">.</span>interpolate(layer4, scale_factor<span style="color: #666">=2</span>, mode<span style="color: #666">=</span><span style="color: #BA2121">&#39;bilinear&#39;</span>, align_corners<span style="color: #666">=</span><span style="color: #008000; font-weight: bold">False</span>)  <span style="color: #3D7B7B; font-style: italic"># new API</span>
+    x <span style="color: #666">=</span> F<span style="color: #666">.</span>interpolate(layer4, scale_factor<span style="color: #666">=2</span>, mode<span style="color: #666">=</span><span style="color: #BA2121">'bilinear'</span>, align_corners<span style="color: #666">=</span><span style="color: #008000; font-weight: bold">False</span>)  <span style="color: #3D7B7B; font-style: italic"># new API</span>
     <span style="color: #3D7B7B; font-style: italic"># print(x.shape)</span>
     <span style="color: #3D7B7B; font-style: italic"># Create the shortcut from the encoder</span>
     layer3 <span style="color: #666">=</span> <span style="color: #008000">self</span><span style="color: #666">.</span>layer3_1x1(layer3)
@@ -2908,7 +2908,7 @@ format compatible with the model's expected input dimensions.</p>
     <span style="color: #3D7B7B; font-style: italic"># print(x.shape)</span>
 
     <span style="color: #3D7B7B; font-style: italic"># x = self.upsample(x)  # old API</span>
-    x <span style="color: #666">=</span> F<span style="color: #666">.</span>interpolate(x, scale_factor<span style="color: #666">=2</span>, mode<span style="color: #666">=</span><span style="color: #BA2121">&#39;bilinear&#39;</span>, align_corners<span style="color: #666">=</span><span style="color: #008000; font-weight: bold">False</span>)  <span style="color: #3D7B7B; font-style: italic"># new API</span>
+    x <span style="color: #666">=</span> F<span style="color: #666">.</span>interpolate(x, scale_factor<span style="color: #666">=2</span>, mode<span style="color: #666">=</span><span style="color: #BA2121">'bilinear'</span>, align_corners<span style="color: #666">=</span><span style="color: #008000; font-weight: bold">False</span>)  <span style="color: #3D7B7B; font-style: italic"># new API</span>
     <span style="color: #3D7B7B; font-style: italic"># print(x.shape)</span>
 
     layer2 <span style="color: #666">=</span> <span style="color: #008000">self</span><span style="color: #666">.</span>layer2_1x1(layer2)
@@ -2919,7 +2919,7 @@ format compatible with the model's expected input dimensions.</p>
     <span style="color: #3D7B7B; font-style: italic"># print(x.shape)</span>
 
     <span style="color: #3D7B7B; font-style: italic"># x = self.upsample(x)  # old API</span>
-    x <span style="color: #666">=</span> F<span style="color: #666">.</span>interpolate(x, scale_factor<span style="color: #666">=2</span>, mode<span style="color: #666">=</span><span style="color: #BA2121">&#39;bilinear&#39;</span>, align_corners<span style="color: #666">=</span><span style="color: #008000; font-weight: bold">False</span>)  <span style="color: #3D7B7B; font-style: italic"># new API</span>
+    x <span style="color: #666">=</span> F<span style="color: #666">.</span>interpolate(x, scale_factor<span style="color: #666">=2</span>, mode<span style="color: #666">=</span><span style="color: #BA2121">'bilinear'</span>, align_corners<span style="color: #666">=</span><span style="color: #008000; font-weight: bold">False</span>)  <span style="color: #3D7B7B; font-style: italic"># new API</span>
     <span style="color: #3D7B7B; font-style: italic"># print(x.shape)</span>
     layer1 <span style="color: #666">=</span> <span style="color: #008000">self</span><span style="color: #666">.</span>layer1_1x1(layer1)
     x <span style="color: #666">=</span> torch<span style="color: #666">.</span>cat([x, layer1], dim<span style="color: #666">=1</span>)
@@ -2928,7 +2928,7 @@ format compatible with the model's expected input dimensions.</p>
     <span style="color: #3D7B7B; font-style: italic"># print(x.shape)</span>
 
     <span style="color: #3D7B7B; font-style: italic"># x = self.upsample(x)  # old API</span>
-    x <span style="color: #666">=</span> F<span style="color: #666">.</span>interpolate(x, scale_factor<span style="color: #666">=2</span>, mode<span style="color: #666">=</span><span style="color: #BA2121">&#39;bilinear&#39;</span>, align_corners<span style="color: #666">=</span><span style="color: #008000; font-weight: bold">False</span>)  <span style="color: #3D7B7B; font-style: italic"># new API</span>
+    x <span style="color: #666">=</span> F<span style="color: #666">.</span>interpolate(x, scale_factor<span style="color: #666">=2</span>, mode<span style="color: #666">=</span><span style="color: #BA2121">'bilinear'</span>, align_corners<span style="color: #666">=</span><span style="color: #008000; font-weight: bold">False</span>)  <span style="color: #3D7B7B; font-style: italic"># new API</span>
     <span style="color: #3D7B7B; font-style: italic"># print(x.shape)</span>
     layer0 <span style="color: #666">=</span> <span style="color: #008000">self</span><span style="color: #666">.</span>layer0_1x1(layer0)
     x <span style="color: #666">=</span> torch<span style="color: #666">.</span>cat([x, layer0], dim<span style="color: #666">=1</span>)
@@ -2937,7 +2937,7 @@ format compatible with the model's expected input dimensions.</p>
     <span style="color: #3D7B7B; font-style: italic"># print(x.shape)</span>
 
     <span style="color: #3D7B7B; font-style: italic"># x = self.upsample(x)  # old API</span>
-    x <span style="color: #666">=</span> F<span style="color: #666">.</span>interpolate(x, scale_factor<span style="color: #666">=2</span>, mode<span style="color: #666">=</span><span style="color: #BA2121">&#39;bilinear&#39;</span>, align_corners<span style="color: #666">=</span><span style="color: #008000; font-weight: bold">False</span>)  <span style="color: #3D7B7B; font-style: italic"># new API</span>
+    x <span style="color: #666">=</span> F<span style="color: #666">.</span>interpolate(x, scale_factor<span style="color: #666">=2</span>, mode<span style="color: #666">=</span><span style="color: #BA2121">'bilinear'</span>, align_corners<span style="color: #666">=</span><span style="color: #008000; font-weight: bold">False</span>)  <span style="color: #3D7B7B; font-style: italic"># new API</span>
     <span style="color: #3D7B7B; font-style: italic"># print(x.shape)</span>
     x <span style="color: #666">=</span> torch<span style="color: #666">.</span>cat([x, x_original], dim<span style="color: #666">=1</span>)
     <span style="color: #3D7B7B; font-style: italic"># print(x.shape)</span>
@@ -2945,7 +2945,7 @@ format compatible with the model's expected input dimensions.</p>
     <span style="color: #3D7B7B; font-style: italic"># print(x.shape)</span>
     x <span style="color: #666">=</span> <span style="color: #008000">self</span><span style="color: #666">.</span>conv_last(x)
 
-    xy_full_flat <span style="color: #666">=</span> torch<span style="color: #666">.</span>load(<span style="color: #008000">self</span><span style="color: #666">.</span>coord_file_loc <span style="color: #666">+</span> <span style="color: #BA2121">&#39;/coords.pt&#39;</span>)<span style="color: #666">.</span>to(device)
+    xy_full_flat <span style="color: #666">=</span> torch<span style="color: #666">.</span>load(<span style="color: #008000">self</span><span style="color: #666">.</span>coord_file_loc <span style="color: #666">+</span> <span style="color: #BA2121">'/coords.pt'</span>)<span style="color: #666">.</span>to(device)
 
     <span style="color: #3D7B7B; font-style: italic"># haut = torch.empty(N_red, label_num, (xinit-Sx)//2, yinit, requires_grad = True).to(device)</span>
     <span style="color: #3D7B7B; font-style: italic"># bas = torch.empty(N_red, label_num, (xinit-Sx)//2, yinit, requires_grad = True).to(device)</span>
@@ -3033,7 +3033,7 @@ properties.</p>
                 <code>the_shape</code>
             </td>
             <td>
-                  <code><a class="autorefs autorefs-external" href="https://docs.python.org/3/library/stdtypes.html#tuple">tuple</a></code>
+                  <code><a class="autorefs autorefs-external" href="https://docs.python.org/3/builtins/stdtypes.html#tuple">tuple</a></code>
             </td>
             <td>
               <div class="doc-md-description">
@@ -3129,7 +3129,7 @@ properties.</p>
                 <code>Sx</code>
             </td>
             <td>
-                  <code><a class="autorefs autorefs-external" href="https://docs.python.org/3/library/functions.html#int">int</a></code>
+                  <code><a class="autorefs autorefs-external" href="https://docs.python.org/3/builtins/functions.html#int">int</a></code>
             </td>
             <td>
               <div class="doc-md-description">
@@ -3145,7 +3145,7 @@ properties.</p>
                 <code>Sy</code>
             </td>
             <td>
-                  <code><a class="autorefs autorefs-external" href="https://docs.python.org/3/library/functions.html#int">int</a></code>
+                  <code><a class="autorefs autorefs-external" href="https://docs.python.org/3/builtins/functions.html#int">int</a></code>
             </td>
             <td>
               <div class="doc-md-description">
@@ -3161,7 +3161,7 @@ properties.</p>
                 <code>xinit</code>
             </td>
             <td>
-                  <code><a class="autorefs autorefs-external" href="https://docs.python.org/3/library/functions.html#int">int</a></code>
+                  <code><a class="autorefs autorefs-external" href="https://docs.python.org/3/builtins/functions.html#int">int</a></code>
             </td>
             <td>
               <div class="doc-md-description">
@@ -3177,7 +3177,7 @@ properties.</p>
                 <code>yinit</code>
             </td>
             <td>
-                  <code><a class="autorefs autorefs-external" href="https://docs.python.org/3/library/functions.html#int">int</a></code>
+                  <code><a class="autorefs autorefs-external" href="https://docs.python.org/3/builtins/functions.html#int">int</a></code>
             </td>
             <td>
               <div class="doc-md-description">
@@ -3276,7 +3276,7 @@ aggregated predictions.</p>
 <span style="color: inherit; background-color: transparent; padding-left: 5px; padding-right: 5px;">77</span>
 <span style="color: inherit; background-color: transparent; padding-left: 5px; padding-right: 5px;">78</span></pre></div></td><td class="code"><div><pre style="line-height: 125%;"><span></span><code><span style="color: #008000; font-weight: bold">def</span><span style="color: #BBB"> </span><span style="color: #00F">voxel_to_pred_by_project</span>(the_shape, torch_voxels, intrinsics, extrinsics, preds_flat, pred_pad, Sx, Sy, xinit,
                              yinit):
-<span style="color: #BBB">    </span><span style="color: #BA2121; font-style: italic">&quot;&quot;&quot;</span>
+<span style="color: #BBB">    </span><span style="color: #BA2121; font-style: italic">"""</span>
 <span style="color: #BA2121; font-style: italic">    Projects voxel coordinates onto a 2D grid, assigns predictions to the voxels, and updates voxel data</span>
 <span style="color: #BA2121; font-style: italic">    based on aggregated predictions.</span>
 
@@ -3313,7 +3313,7 @@ aggregated predictions.</p>
 <span style="color: #BA2121; font-style: italic">    Tensor</span>
 <span style="color: #BA2121; font-style: italic">        Updated tensor of voxel data where the fourth property of each voxel is updated based on the</span>
 <span style="color: #BA2121; font-style: italic">        aggregated predictions.</span>
-<span style="color: #BA2121; font-style: italic">    &quot;&quot;&quot;</span>
+<span style="color: #BA2121; font-style: italic">    """</span>
     xy_coords <span style="color: #666">=</span> vtc<span style="color: #666">.</span>project_coordinates(torch_voxels, intrinsics, extrinsics, give_prod<span style="color: #666">=</span><span style="color: #008000; font-weight: bold">False</span>)
     <span style="color: #3D7B7B; font-style: italic"># permute x and y coordinates</span>
     xy_coords[:, <span style="color: #666">2</span>, :] <span style="color: #666">=</span> xy_coords[:, <span style="color: #666">0</span>, :]
@@ -3438,7 +3438,7 @@ aggregated predictions.</p>
       <script id="__config" type="application/json">{"annotate": null, "base": "../../../..", "features": ["navigation.tabs", "navigation.tabs.sticky", "content.code.copy"], "search": "../../../../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
     
     
-      <script src="../../../../assets/javascripts/bundle.79ae519e.min.js"></script>
+      <script src="../../../../assets/javascripts/bundle.d7400e89.min.js"></script>
       
         <script src="../../../../assets/_markdown_exec_pyodide.js"></script>
       

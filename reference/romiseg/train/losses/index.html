@@ -25,7 +25,7 @@
       
       
       <link rel="icon" href="../../../../assets/images/ROMI_logo_green_25.svg">
-      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.6">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.7">
     
     
       
@@ -33,7 +33,7 @@
       
     
     
-      <link rel="stylesheet" href="../../../../assets/stylesheets/main.484c7ddc.min.css">
+      <link rel="stylesheet" href="../../../../assets/stylesheets/main.ec1eaa64.min.css">
       
       
 
@@ -2002,7 +2002,7 @@ the cumulative loss values.</p>
                 <code>metrics</code>
             </td>
             <td>
-                  <code><a class="autorefs autorefs-external" href="https://docs.python.org/3/library/stdtypes.html#dict">dict</a></code>
+                  <code><a class="autorefs autorefs-external" href="https://docs.python.org/3/builtins/stdtypes.html#dict">dict</a></code>
             </td>
             <td>
               <div class="doc-md-description">
@@ -2019,7 +2019,7 @@ loss. This dictionary is updated in-place.</p>
                 <code>bce_weight</code>
             </td>
             <td>
-                  <code><a class="autorefs autorefs-external" href="https://docs.python.org/3/library/functions.html#float">float</a></code>
+                  <code><a class="autorefs autorefs-external" href="https://docs.python.org/3/builtins/functions.html#float">float</a></code>
             </td>
             <td>
               <div class="doc-md-description">
@@ -2100,7 +2100,7 @@ emphasis on both losses.</p>
 <span style="color: inherit; background-color: transparent; padding-left: 5px; padding-right: 5px;">84</span>
 <span style="color: inherit; background-color: transparent; padding-left: 5px; padding-right: 5px;">85</span>
 <span style="color: inherit; background-color: transparent; padding-left: 5px; padding-right: 5px;">86</span></pre></div></td><td class="code"><div><pre style="line-height: 125%;"><span></span><code><span style="color: #008000; font-weight: bold">def</span><span style="color: #BBB"> </span><span style="color: #00F">calc_loss</span>(pred, target, metrics, bce_weight<span style="color: #666">=0.5</span>):
-<span style="color: #BBB">    </span><span style="color: #BA2121; font-style: italic">&quot;&quot;&quot;</span>
+<span style="color: #BBB">    </span><span style="color: #BA2121; font-style: italic">"""</span>
 <span style="color: #BA2121; font-style: italic">    Computes a weighted loss combining Binary Cross Entropy (BCE) and Dice loss.</span>
 
 <span style="color: #BA2121; font-style: italic">    This function calculates the BCE loss and the Dice loss, incorporates a</span>
@@ -2126,7 +2126,7 @@ emphasis on both losses.</p>
 <span style="color: #BA2121; font-style: italic">    -------</span>
 <span style="color: #BA2121; font-style: italic">    torch.Tensor</span>
 <span style="color: #BA2121; font-style: italic">        The weighted loss value for the batch, combining BCE and Dice losses.</span>
-<span style="color: #BA2121; font-style: italic">    &quot;&quot;&quot;</span>
+<span style="color: #BA2121; font-style: italic">    """</span>
     bce <span style="color: #666">=</span> F<span style="color: #666">.</span>binary_cross_entropy_with_logits(pred, target)
 
     pred <span style="color: #666">=</span> F<span style="color: #666">.</span>sigmoid(pred)
@@ -2134,9 +2134,9 @@ emphasis on both losses.</p>
 
     loss <span style="color: #666">=</span> bce <span style="color: #666">*</span> bce_weight <span style="color: #666">+</span> dice <span style="color: #666">*</span> (<span style="color: #666">1</span> <span style="color: #666">-</span> bce_weight)
 
-    metrics[<span style="color: #BA2121">&#39;bce&#39;</span>] <span style="color: #666">+=</span> bce<span style="color: #666">.</span>data<span style="color: #666">.</span>cpu()<span style="color: #666">.</span>numpy() <span style="color: #666">*</span> target<span style="color: #666">.</span>size(<span style="color: #666">0</span>)
-    metrics[<span style="color: #BA2121">&#39;dice&#39;</span>] <span style="color: #666">+=</span> dice<span style="color: #666">.</span>data<span style="color: #666">.</span>cpu()<span style="color: #666">.</span>numpy() <span style="color: #666">*</span> target<span style="color: #666">.</span>size(<span style="color: #666">0</span>)
-    metrics[<span style="color: #BA2121">&#39;loss&#39;</span>] <span style="color: #666">+=</span> loss<span style="color: #666">.</span>data<span style="color: #666">.</span>cpu()<span style="color: #666">.</span>numpy() <span style="color: #666">*</span> target<span style="color: #666">.</span>size(<span style="color: #666">0</span>)
+    metrics[<span style="color: #BA2121">'bce'</span>] <span style="color: #666">+=</span> bce<span style="color: #666">.</span>data<span style="color: #666">.</span>cpu()<span style="color: #666">.</span>numpy() <span style="color: #666">*</span> target<span style="color: #666">.</span>size(<span style="color: #666">0</span>)
+    metrics[<span style="color: #BA2121">'dice'</span>] <span style="color: #666">+=</span> dice<span style="color: #666">.</span>data<span style="color: #666">.</span>cpu()<span style="color: #666">.</span>numpy() <span style="color: #666">*</span> target<span style="color: #666">.</span>size(<span style="color: #666">0</span>)
+    metrics[<span style="color: #BA2121">'loss'</span>] <span style="color: #666">+=</span> loss<span style="color: #666">.</span>data<span style="color: #666">.</span>cpu()<span style="color: #666">.</span>numpy() <span style="color: #666">*</span> target<span style="color: #666">.</span>size(<span style="color: #666">0</span>)
 
     <span style="color: #008000; font-weight: bold">return</span> loss
 </code></pre></div></td></tr></table></div>
@@ -2212,7 +2212,7 @@ overlap rather than absolute pixel accuracy.</p>
                 <code>smooth</code>
             </td>
             <td>
-                  <code><a class="autorefs autorefs-external" href="https://docs.python.org/3/library/functions.html#float">float</a></code>
+                  <code><a class="autorefs autorefs-external" href="https://docs.python.org/3/builtins/functions.html#float">float</a></code>
             </td>
             <td>
               <div class="doc-md-description">
@@ -2283,7 +2283,7 @@ overlap rather than absolute pixel accuracy.</p>
 <span style="color: inherit; background-color: transparent; padding-left: 5px; padding-right: 5px;">42</span>
 <span style="color: inherit; background-color: transparent; padding-left: 5px; padding-right: 5px;">43</span>
 <span style="color: inherit; background-color: transparent; padding-left: 5px; padding-right: 5px;">44</span></pre></div></td><td class="code"><div><pre style="line-height: 125%;"><span></span><code><span style="color: #008000; font-weight: bold">def</span><span style="color: #BBB"> </span><span style="color: #00F">dice_loss</span>(pred, target, smooth<span style="color: #666">=1.</span>):
-<span style="color: #BBB">    </span><span style="color: #BA2121; font-style: italic">&quot;&quot;&quot;</span>
+<span style="color: #BBB">    </span><span style="color: #BA2121; font-style: italic">"""</span>
 <span style="color: #BA2121; font-style: italic">    Calculates the Dice loss, a common loss function used for image segmentation tasks, which maximizes the overlap</span>
 <span style="color: #BA2121; font-style: italic">    between predicted and target binary masks. The Dice loss can handle imbalanced datasets by focusing on the</span>
 <span style="color: #BA2121; font-style: italic">    overlap rather than absolute pixel accuracy.</span>
@@ -2291,7 +2291,7 @@ overlap rather than absolute pixel accuracy.</p>
 <span style="color: #BA2121; font-style: italic">    Parameters</span>
 <span style="color: #BA2121; font-style: italic">    ----------</span>
 <span style="color: #BA2121; font-style: italic">    pred : torch.Tensor</span>
-<span style="color: #BA2121; font-style: italic">        Predicted binary mask, typically the model&#39;s output, expected to have the shape</span>
+<span style="color: #BA2121; font-style: italic">        Predicted binary mask, typically the model's output, expected to have the shape</span>
 <span style="color: #BA2121; font-style: italic">        (batch_size, channels, height, width).</span>
 
 <span style="color: #BA2121; font-style: italic">    target : torch.Tensor</span>
@@ -2304,7 +2304,7 @@ overlap rather than absolute pixel accuracy.</p>
 <span style="color: #BA2121; font-style: italic">    -------</span>
 <span style="color: #BA2121; font-style: italic">    torch.Tensor</span>
 <span style="color: #BA2121; font-style: italic">        The scalar value representing the mean Dice loss for all the batches in the input.</span>
-<span style="color: #BA2121; font-style: italic">    &quot;&quot;&quot;</span>
+<span style="color: #BA2121; font-style: italic">    """</span>
     pred <span style="color: #666">=</span> pred<span style="color: #666">.</span>contiguous()
     target <span style="color: #666">=</span> target<span style="color: #666">.</span>contiguous()
 
@@ -2420,7 +2420,7 @@ overlap rather than absolute pixel accuracy.</p>
       <script id="__config" type="application/json">{"annotate": null, "base": "../../../..", "features": ["navigation.tabs", "navigation.tabs.sticky", "content.code.copy"], "search": "../../../../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
     
     
-      <script src="../../../../assets/javascripts/bundle.79ae519e.min.js"></script>
+      <script src="../../../../assets/javascripts/bundle.d7400e89.min.js"></script>
       
         <script src="../../../../assets/_markdown_exec_pyodide.js"></script>
       

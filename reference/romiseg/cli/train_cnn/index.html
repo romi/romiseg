@@ -25,7 +25,7 @@
       
       
       <link rel="icon" href="../../../../assets/images/ROMI_logo_green_25.svg">
-      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.6">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.7">
     
     
       
@@ -33,7 +33,7 @@
       
     
     
-      <link rel="stylesheet" href="../../../../assets/stylesheets/main.484c7ddc.min.css">
+      <link rel="stylesheet" href="../../../../assets/stylesheets/main.ec1eaa64.min.css">
       
       
 
@@ -2052,7 +2052,7 @@ The training progress is logged using TensorBoard, and the trained model can opt
                 <code>f_weights</code>
             </td>
             <td>
-                  <code><a class="autorefs autorefs-external" href="https://docs.python.org/3/library/stdtypes.html#str">str</a></code>
+                  <code><a class="autorefs autorefs-external" href="https://docs.python.org/3/builtins/stdtypes.html#str">str</a></code>
             </td>
             <td>
               <div class="doc-md-description">
@@ -2068,7 +2068,7 @@ The training progress is logged using TensorBoard, and the trained model can opt
                 <code>directory_dataset</code>
             </td>
             <td>
-                  <code><a class="autorefs autorefs-external" href="https://docs.python.org/3/library/stdtypes.html#str">str</a></code>
+                  <code><a class="autorefs autorefs-external" href="https://docs.python.org/3/builtins/stdtypes.html#str">str</a></code>
             </td>
             <td>
               <div class="doc-md-description">
@@ -2100,7 +2100,7 @@ The training progress is logged using TensorBoard, and the trained model can opt
                 <code>tsboard</code>
             </td>
             <td>
-                  <code><a class="autorefs autorefs-external" href="https://docs.python.org/3/library/stdtypes.html#str">str</a></code>
+                  <code><a class="autorefs autorefs-external" href="https://docs.python.org/3/builtins/stdtypes.html#str">str</a></code>
             </td>
             <td>
               <div class="doc-md-description">
@@ -2116,7 +2116,7 @@ The training progress is logged using TensorBoard, and the trained model can opt
                 <code>batch_size</code>
             </td>
             <td>
-                  <code><a class="autorefs autorefs-external" href="https://docs.python.org/3/library/functions.html#int">int</a></code>
+                  <code><a class="autorefs autorefs-external" href="https://docs.python.org/3/builtins/functions.html#int">int</a></code>
             </td>
             <td>
               <div class="doc-md-description">
@@ -2132,7 +2132,7 @@ The training progress is logged using TensorBoard, and the trained model can opt
                 <code>epochs</code>
             </td>
             <td>
-                  <code><a class="autorefs autorefs-external" href="https://docs.python.org/3/library/functions.html#int">int</a></code>
+                  <code><a class="autorefs autorefs-external" href="https://docs.python.org/3/builtins/functions.html#int">int</a></code>
             </td>
             <td>
               <div class="doc-md-description">
@@ -2164,7 +2164,7 @@ The training progress is logged using TensorBoard, and the trained model can opt
                 <code>Sx</code>
             </td>
             <td>
-                  <code><a class="autorefs autorefs-external" href="https://docs.python.org/3/library/functions.html#int">int</a></code>
+                  <code><a class="autorefs autorefs-external" href="https://docs.python.org/3/builtins/functions.html#int">int</a></code>
             </td>
             <td>
               <div class="doc-md-description">
@@ -2180,7 +2180,7 @@ The training progress is logged using TensorBoard, and the trained model can opt
                 <code>Sy</code>
             </td>
             <td>
-                  <code><a class="autorefs autorefs-external" href="https://docs.python.org/3/library/functions.html#int">int</a></code>
+                  <code><a class="autorefs autorefs-external" href="https://docs.python.org/3/builtins/functions.html#int">int</a></code>
             </td>
             <td>
               <div class="doc-md-description">
@@ -2196,7 +2196,7 @@ The training progress is logged using TensorBoard, and the trained model can opt
                 <code>data_augmentation</code>
             </td>
             <td>
-                  <code><a class="autorefs autorefs-external" href="https://docs.python.org/3/library/functions.html#bool">bool</a></code>
+                  <code><a class="autorefs autorefs-external" href="https://docs.python.org/3/builtins/functions.html#bool">bool</a></code>
             </td>
             <td>
               <div class="doc-md-description">
@@ -2314,7 +2314,7 @@ The training progress is logged using TensorBoard, and the trained model can opt
 <span style="color: inherit; background-color: transparent; padding-left: 5px; padding-right: 5px;">181</span>
 <span style="color: inherit; background-color: transparent; padding-left: 5px; padding-right: 5px;">182</span></pre></div></td><td class="code"><div><pre style="line-height: 125%;"><span></span><code><span style="color: #008000; font-weight: bold">def</span><span style="color: #BBB"> </span><span style="color: #00F">cnn_train</span>(f_weights, directory_dataset, label_names, tsboard, batch_size, epochs,
               model, Sx, Sy, learning_rate, data_augmentation<span style="color: #666">=</span><span style="color: #008000; font-weight: bold">True</span>):
-<span style="color: #BBB">    </span><span style="color: #BA2121; font-style: italic">&quot;&quot;&quot;Train a Convolutional Neural Network (CNN) on a given dataset.</span>
+<span style="color: #BBB">    </span><span style="color: #BA2121; font-style: italic">"""Train a Convolutional Neural Network (CNN) on a given dataset.</span>
 
 <span style="color: #BA2121; font-style: italic">    This function allows for the customization of training parameters such as batch size, epochs, and optimizer,</span>
 <span style="color: #BA2121; font-style: italic">    as well as dataset-specific properties like image dimensions and augmentation.</span>
@@ -2347,17 +2347,17 @@ The training progress is logged using TensorBoard, and the trained model can opt
 <span style="color: #BA2121; font-style: italic">    -------</span>
 <span style="color: #BA2121; font-style: italic">    torch.nn.Module</span>
 <span style="color: #BA2121; font-style: italic">        The trained PyTorch model.</span>
-<span style="color: #BA2121; font-style: italic">    &quot;&quot;&quot;</span>
+<span style="color: #BA2121; font-style: italic">    """</span>
     <span style="color: #3D7B7B; font-style: italic"># Training board</span>
     writer <span style="color: #666">=</span> SummaryWriter(tsboard)
 
     <span style="color: #3D7B7B; font-style: italic"># Load images and ground truth</span>
-    path_val <span style="color: #666">=</span> directory_dataset <span style="color: #666">+</span> <span style="color: #BA2121">&#39;/val/&#39;</span>
-    path_train <span style="color: #666">=</span> directory_dataset <span style="color: #666">+</span> <span style="color: #BA2121">&#39;/train/&#39;</span>
-    path_test <span style="color: #666">=</span> directory_dataset <span style="color: #666">+</span> <span style="color: #BA2121">&#39;/test/&#39;</span>
-    image_train, channels <span style="color: #666">=</span> init_set(<span style="color: #BA2121">&#39;&#39;</span>, path_train)
-    image_val, channels <span style="color: #666">=</span> init_set(<span style="color: #BA2121">&#39;&#39;</span>, path_val)
-    image_test, channels <span style="color: #666">=</span> init_set(<span style="color: #BA2121">&#39;&#39;</span>, path_test)
+    path_val <span style="color: #666">=</span> directory_dataset <span style="color: #666">+</span> <span style="color: #BA2121">'/val/'</span>
+    path_train <span style="color: #666">=</span> directory_dataset <span style="color: #666">+</span> <span style="color: #BA2121">'/train/'</span>
+    path_test <span style="color: #666">=</span> directory_dataset <span style="color: #666">+</span> <span style="color: #BA2121">'/test/'</span>
+    image_train, channels <span style="color: #666">=</span> init_set(<span style="color: #BA2121">''</span>, path_train)
+    image_val, channels <span style="color: #666">=</span> init_set(<span style="color: #BA2121">''</span>, path_val)
+    image_test, channels <span style="color: #666">=</span> init_set(<span style="color: #BA2121">''</span>, path_test)
 
     train_dataset <span style="color: #666">=</span> DatasetImLabel(image_train, channels, size<span style="color: #666">=</span>(Sx, Sy), path<span style="color: #666">=</span>path_train,
                                    data_augmentation<span style="color: #666">=</span>data_augmentation)
@@ -2370,12 +2370,12 @@ The training progress is logged using TensorBoard, and the trained model can opt
 
     <span style="color: #3D7B7B; font-style: italic"># Show input images</span>
     fig <span style="color: #666">=</span> plot_dataset(train_loader, label_names, batch_size, showit<span style="color: #666">=</span><span style="color: #008000; font-weight: bold">True</span>)  <span style="color: #3D7B7B; font-style: italic"># display training set</span>
-    writer<span style="color: #666">.</span>add_figure(<span style="color: #BA2121">&#39;Dataset images&#39;</span>, fig, <span style="color: #666">0</span>)
+    writer<span style="color: #666">.</span>add_figure(<span style="color: #BA2121">'Dataset images'</span>, fig, <span style="color: #666">0</span>)
 
     dataloaders <span style="color: #666">=</span> {
-        <span style="color: #BA2121">&#39;train&#39;</span>: DataLoader(train_dataset, batch_size<span style="color: #666">=</span>batch_size, shuffle<span style="color: #666">=</span><span style="color: #008000; font-weight: bold">True</span>, num_workers<span style="color: #666">=0</span>),
-        <span style="color: #BA2121">&#39;val&#39;</span>: DataLoader(val_dataset, batch_size<span style="color: #666">=</span>batch_size, shuffle<span style="color: #666">=</span><span style="color: #008000; font-weight: bold">True</span>, num_workers<span style="color: #666">=0</span>),
-        <span style="color: #BA2121">&#39;test&#39;</span>: DataLoader(test_dataset, batch_size<span style="color: #666">=</span>batch_size, shuffle<span style="color: #666">=</span><span style="color: #008000; font-weight: bold">True</span>, num_workers<span style="color: #666">=0</span>),
+        <span style="color: #BA2121">'train'</span>: DataLoader(train_dataset, batch_size<span style="color: #666">=</span>batch_size, shuffle<span style="color: #666">=</span><span style="color: #008000; font-weight: bold">True</span>, num_workers<span style="color: #666">=0</span>),
+        <span style="color: #BA2121">'val'</span>: DataLoader(val_dataset, batch_size<span style="color: #666">=</span>batch_size, shuffle<span style="color: #666">=</span><span style="color: #008000; font-weight: bold">True</span>, num_workers<span style="color: #666">=0</span>),
+        <span style="color: #BA2121">'test'</span>: DataLoader(test_dataset, batch_size<span style="color: #666">=</span>batch_size, shuffle<span style="color: #666">=</span><span style="color: #008000; font-weight: bold">True</span>, num_workers<span style="color: #666">=0</span>),
     }
 
     <span style="color: #3D7B7B; font-style: italic"># Choice of optimizer, can be changed</span>
@@ -2427,7 +2427,7 @@ The training progress is logged using TensorBoard, and the trained model can opt
                 <code>config</code>
             </td>
             <td>
-                  <code><a class="autorefs autorefs-external" href="https://docs.python.org/3/library/stdtypes.html#str">str</a></code>
+                  <code><a class="autorefs autorefs-external" href="https://docs.python.org/3/builtins/stdtypes.html#str">str</a></code>
             </td>
             <td>
               <div class="doc-md-description">
@@ -2453,7 +2453,7 @@ The training progress is logged using TensorBoard, and the trained model can opt
       <tbody>
           <tr class="doc-section-item">
             <td>
-                  <code><a class="autorefs autorefs-external" href="https://docs.python.org/3/library/stdtypes.html#str">str</a></code>
+                  <code><a class="autorefs autorefs-external" href="https://docs.python.org/3/builtins/stdtypes.html#str">str</a></code>
             </td>
             <td>
               <div class="doc-md-description">
@@ -2463,7 +2463,7 @@ The training progress is logged using TensorBoard, and the trained model can opt
           </tr>
           <tr class="doc-section-item">
             <td>
-                  <code><a class="autorefs autorefs-external" href="https://docs.python.org/3/library/stdtypes.html#str">str</a></code>
+                  <code><a class="autorefs autorefs-external" href="https://docs.python.org/3/builtins/stdtypes.html#str">str</a></code>
             </td>
             <td>
               <div class="doc-md-description">
@@ -2473,7 +2473,7 @@ The training progress is logged using TensorBoard, and the trained model can opt
           </tr>
           <tr class="doc-section-item">
             <td>
-                  <code><a class="autorefs autorefs-external" href="https://docs.python.org/3/library/stdtypes.html#str">str</a></code>
+                  <code><a class="autorefs autorefs-external" href="https://docs.python.org/3/builtins/stdtypes.html#str">str</a></code>
             </td>
             <td>
               <div class="doc-md-description">
@@ -2483,7 +2483,7 @@ The training progress is logged using TensorBoard, and the trained model can opt
           </tr>
           <tr class="doc-section-item">
             <td>
-                  <code><a class="autorefs autorefs-external" href="https://docs.python.org/3/library/functions.html#int">int</a></code>
+                  <code><a class="autorefs autorefs-external" href="https://docs.python.org/3/builtins/functions.html#int">int</a></code>
             </td>
             <td>
               <div class="doc-md-description">
@@ -2493,7 +2493,7 @@ The training progress is logged using TensorBoard, and the trained model can opt
           </tr>
           <tr class="doc-section-item">
             <td>
-                  <code><a class="autorefs autorefs-external" href="https://docs.python.org/3/library/functions.html#int">int</a></code>
+                  <code><a class="autorefs autorefs-external" href="https://docs.python.org/3/builtins/functions.html#int">int</a></code>
             </td>
             <td>
               <div class="doc-md-description">
@@ -2503,7 +2503,7 @@ The training progress is logged using TensorBoard, and the trained model can opt
           </tr>
           <tr class="doc-section-item">
             <td>
-                  <code><a class="autorefs autorefs-external" href="https://docs.python.org/3/library/functions.html#int">int</a></code>
+                  <code><a class="autorefs autorefs-external" href="https://docs.python.org/3/builtins/functions.html#int">int</a></code>
             </td>
             <td>
               <div class="doc-md-description">
@@ -2513,7 +2513,7 @@ The training progress is logged using TensorBoard, and the trained model can opt
           </tr>
           <tr class="doc-section-item">
             <td>
-                  <code><a class="autorefs autorefs-external" href="https://docs.python.org/3/library/functions.html#int">int</a></code>
+                  <code><a class="autorefs autorefs-external" href="https://docs.python.org/3/builtins/functions.html#int">int</a></code>
             </td>
             <td>
               <div class="doc-md-description">
@@ -2523,7 +2523,7 @@ The training progress is logged using TensorBoard, and the trained model can opt
           </tr>
           <tr class="doc-section-item">
             <td>
-                  <code><a class="autorefs autorefs-external" href="https://docs.python.org/3/library/stdtypes.html#str">str</a></code>
+                  <code><a class="autorefs autorefs-external" href="https://docs.python.org/3/builtins/stdtypes.html#str">str</a></code>
             </td>
             <td>
               <div class="doc-md-description">
@@ -2533,7 +2533,7 @@ The training progress is logged using TensorBoard, and the trained model can opt
           </tr>
           <tr class="doc-section-item">
             <td>
-                  <code><a class="autorefs autorefs-external" href="https://docs.python.org/3/library/functions.html#float">float</a></code>
+                  <code><a class="autorefs autorefs-external" href="https://docs.python.org/3/builtins/functions.html#float">float</a></code>
             </td>
             <td>
               <div class="doc-md-description">
@@ -2591,7 +2591,7 @@ The training progress is logged using TensorBoard, and the trained model can opt
 <span style="color: inherit; background-color: transparent; padding-left: 5px; padding-right: 5px;">101</span>
 <span style="color: inherit; background-color: transparent; padding-left: 5px; padding-right: 5px;">102</span>
 <span style="color: inherit; background-color: transparent; padding-left: 5px; padding-right: 5px;">103</span></pre></div></td><td class="code"><div><pre style="line-height: 125%;"><span></span><code><span style="color: #008000; font-weight: bold">def</span><span style="color: #BBB"> </span><span style="color: #00F">parse_config</span>(config):
-<span style="color: #BBB">    </span><span style="color: #BA2121; font-style: italic">&quot;&quot;&quot;Parses a configuration file for a 2D segmentation task and retrieves relevant parameters.</span>
+<span style="color: #BBB">    </span><span style="color: #BA2121; font-style: italic">"""Parses a configuration file for a 2D segmentation task and retrieves relevant parameters.</span>
 
 <span style="color: #BA2121; font-style: italic">    Parameters</span>
 <span style="color: #BA2121; font-style: italic">    ----------</span>
@@ -2618,21 +2618,21 @@ The training progress is logged using TensorBoard, and the trained model can opt
 <span style="color: #BA2121; font-style: italic">        Name of the segmentation model being used.</span>
 <span style="color: #BA2121; font-style: italic">    float</span>
 <span style="color: #BA2121; font-style: italic">        Learning rate for the optimization process.</span>
-<span style="color: #BA2121; font-style: italic">    &quot;&quot;&quot;</span>
+<span style="color: #BA2121; font-style: italic">    """</span>
     param_pipe <span style="color: #666">=</span> toml<span style="color: #666">.</span>load(config)
-    direc <span style="color: #666">=</span> param_pipe[<span style="color: #BA2121">&#39;TrainingDirectory&#39;</span>]
-    path <span style="color: #666">=</span> direc[<span style="color: #BA2121">&#39;path&#39;</span>]
-    directory_weights <span style="color: #666">=</span> path <span style="color: #666">+</span> direc[<span style="color: #BA2121">&#39;directory_weights&#39;</span>]
-    tsboard <span style="color: #666">=</span> path <span style="color: #666">+</span> direc[<span style="color: #BA2121">&#39;tsboard&#39;</span>] <span style="color: #666">+</span> <span style="color: #BA2121">&#39;/2D_segmentation&#39;</span>
-    directory_dataset <span style="color: #666">=</span> path <span style="color: #666">+</span> direc[<span style="color: #BA2121">&#39;directory_dataset&#39;</span>]
-    param2 <span style="color: #666">=</span> param_pipe[<span style="color: #BA2121">&#39;Segmentation2D&#39;</span>]
-    model_name <span style="color: #666">=</span> param2[<span style="color: #BA2121">&quot;model_name&quot;</span>]
-    <span style="color: #3D7B7B; font-style: italic"># label_names = param2[&#39;labels&#39;].split(&#39;,&#39;)</span>
-    Sx <span style="color: #666">=</span> param2[<span style="color: #BA2121">&#39;Sx&#39;</span>]
-    Sy <span style="color: #666">=</span> param2[<span style="color: #BA2121">&#39;Sy&#39;</span>]
-    epochs <span style="color: #666">=</span> param2[<span style="color: #BA2121">&#39;epochs&#39;</span>]
-    batch_size <span style="color: #666">=</span> param2[<span style="color: #BA2121">&#39;batch&#39;</span>]
-    learning_rate <span style="color: #666">=</span> param2[<span style="color: #BA2121">&#39;learning_rate&#39;</span>]
+    direc <span style="color: #666">=</span> param_pipe[<span style="color: #BA2121">'TrainingDirectory'</span>]
+    path <span style="color: #666">=</span> direc[<span style="color: #BA2121">'path'</span>]
+    directory_weights <span style="color: #666">=</span> path <span style="color: #666">+</span> direc[<span style="color: #BA2121">'directory_weights'</span>]
+    tsboard <span style="color: #666">=</span> path <span style="color: #666">+</span> direc[<span style="color: #BA2121">'tsboard'</span>] <span style="color: #666">+</span> <span style="color: #BA2121">'/2D_segmentation'</span>
+    directory_dataset <span style="color: #666">=</span> path <span style="color: #666">+</span> direc[<span style="color: #BA2121">'directory_dataset'</span>]
+    param2 <span style="color: #666">=</span> param_pipe[<span style="color: #BA2121">'Segmentation2D'</span>]
+    model_name <span style="color: #666">=</span> param2[<span style="color: #BA2121">"model_name"</span>]
+    <span style="color: #3D7B7B; font-style: italic"># label_names = param2['labels'].split(',')</span>
+    Sx <span style="color: #666">=</span> param2[<span style="color: #BA2121">'Sx'</span>]
+    Sy <span style="color: #666">=</span> param2[<span style="color: #BA2121">'Sy'</span>]
+    epochs <span style="color: #666">=</span> param2[<span style="color: #BA2121">'epochs'</span>]
+    batch_size <span style="color: #666">=</span> param2[<span style="color: #BA2121">'batch'</span>]
+    learning_rate <span style="color: #666">=</span> param2[<span style="color: #BA2121">'learning_rate'</span>]
     <span style="color: #008000; font-weight: bold">return</span> directory_dataset, directory_weights, tsboard, batch_size, epochs, Sx, Sy, model_name, learning_rate
 </code></pre></div></td></tr></table></div>
             </details>
@@ -2695,17 +2695,17 @@ The training progress is logged using TensorBoard, and the trained model can opt
 <span style="color: inherit; background-color: transparent; padding-left: 5px; padding-right: 5px;">55</span>
 <span style="color: inherit; background-color: transparent; padding-left: 5px; padding-right: 5px;">56</span>
 <span style="color: inherit; background-color: transparent; padding-left: 5px; padding-right: 5px;">57</span></pre></div></td><td class="code"><div><pre style="line-height: 125%;"><span></span><code><span style="color: #008000; font-weight: bold">def</span><span style="color: #BBB"> </span><span style="color: #00F">parser</span>():
-<span style="color: #BBB">    </span><span style="color: #BA2121; font-style: italic">&quot;&quot;&quot;Parses command-line arguments.</span>
+<span style="color: #BBB">    </span><span style="color: #BA2121; font-style: italic">"""Parses command-line arguments.</span>
 
 <span style="color: #BA2121; font-style: italic">    Returns</span>
 <span style="color: #BA2121; font-style: italic">    -------</span>
 <span style="color: #BA2121; font-style: italic">    argparse.ArgumentParser</span>
 <span style="color: #BA2121; font-style: italic">        A configured argument parser with an option for specifying the configuration directory.</span>
-<span style="color: #BA2121; font-style: italic">    &quot;&quot;&quot;</span>
-    parser <span style="color: #666">=</span> argparse<span style="color: #666">.</span>ArgumentParser(description<span style="color: #666">=</span><span style="color: #BA2121">&#39;Train a CNN model on a dataset.&#39;</span>)
+<span style="color: #BA2121; font-style: italic">    """</span>
+    parser <span style="color: #666">=</span> argparse<span style="color: #666">.</span>ArgumentParser(description<span style="color: #666">=</span><span style="color: #BA2121">'Train a CNN model on a dataset.'</span>)
 
-    parser<span style="color: #666">.</span>add_argument(<span style="color: #BA2121">&#39;--config&#39;</span>, dest<span style="color: #666">=</span><span style="color: #BA2121">&#39;config&#39;</span>, <span style="color: #008000">type</span><span style="color: #666">=</span><span style="color: #008000">str</span>, default<span style="color: #666">=</span>default_config,
-                        help<span style="color: #666">=</span><span style="color: #BA2121">&#39;config dir, default: </span><span style="color: #A45A77; font-weight: bold">%s</span><span style="color: #BA2121">&#39;</span> <span style="color: #666">%</span> default_config)
+    parser<span style="color: #666">.</span>add_argument(<span style="color: #BA2121">'--config'</span>, dest<span style="color: #666">=</span><span style="color: #BA2121">'config'</span>, <span style="color: #008000">type</span><span style="color: #666">=</span><span style="color: #008000">str</span>, default<span style="color: #666">=</span>default_config,
+                        help<span style="color: #666">=</span><span style="color: #BA2121">'config dir, default: </span><span style="color: #A45A77; font-weight: bold">%s</span><span style="color: #BA2121">'</span> <span style="color: #666">%</span> default_config)
 
     <span style="color: #008000; font-weight: bold">return</span> parser
 </code></pre></div></td></tr></table></div>
@@ -2755,7 +2755,7 @@ The training progress is logged using TensorBoard, and the trained model can opt
                 <code>directory_dataset</code>
             </td>
             <td>
-                  <code><a class="autorefs autorefs-external" href="https://docs.python.org/3/library/stdtypes.html#str">str</a></code>
+                  <code><a class="autorefs autorefs-external" href="https://docs.python.org/3/builtins/stdtypes.html#str">str</a></code>
             </td>
             <td>
               <div class="doc-md-description">
@@ -2771,7 +2771,7 @@ The training progress is logged using TensorBoard, and the trained model can opt
                 <code>directory_weights</code>
             </td>
             <td>
-                  <code><a class="autorefs autorefs-external" href="https://docs.python.org/3/library/stdtypes.html#str">str</a></code>
+                  <code><a class="autorefs autorefs-external" href="https://docs.python.org/3/builtins/stdtypes.html#str">str</a></code>
             </td>
             <td>
               <div class="doc-md-description">
@@ -2787,7 +2787,7 @@ The training progress is logged using TensorBoard, and the trained model can opt
                 <code>tsboard</code>
             </td>
             <td>
-                  <code><a class="autorefs autorefs-external" href="https://docs.python.org/3/library/stdtypes.html#str">str</a></code>
+                  <code><a class="autorefs autorefs-external" href="https://docs.python.org/3/builtins/stdtypes.html#str">str</a></code>
             </td>
             <td>
               <div class="doc-md-description">
@@ -2803,7 +2803,7 @@ The training progress is logged using TensorBoard, and the trained model can opt
                 <code>batch_size</code>
             </td>
             <td>
-                  <code><a class="autorefs autorefs-external" href="https://docs.python.org/3/library/functions.html#int">int</a></code>
+                  <code><a class="autorefs autorefs-external" href="https://docs.python.org/3/builtins/functions.html#int">int</a></code>
             </td>
             <td>
               <div class="doc-md-description">
@@ -2819,7 +2819,7 @@ The training progress is logged using TensorBoard, and the trained model can opt
                 <code>epochs</code>
             </td>
             <td>
-                  <code><a class="autorefs autorefs-external" href="https://docs.python.org/3/library/functions.html#int">int</a></code>
+                  <code><a class="autorefs autorefs-external" href="https://docs.python.org/3/builtins/functions.html#int">int</a></code>
             </td>
             <td>
               <div class="doc-md-description">
@@ -2835,7 +2835,7 @@ The training progress is logged using TensorBoard, and the trained model can opt
                 <code>Sx</code>
             </td>
             <td>
-                  <code><a class="autorefs autorefs-external" href="https://docs.python.org/3/library/functions.html#int">int</a></code>
+                  <code><a class="autorefs autorefs-external" href="https://docs.python.org/3/builtins/functions.html#int">int</a></code>
             </td>
             <td>
               <div class="doc-md-description">
@@ -2851,7 +2851,7 @@ The training progress is logged using TensorBoard, and the trained model can opt
                 <code>Sy</code>
             </td>
             <td>
-                  <code><a class="autorefs autorefs-external" href="https://docs.python.org/3/library/functions.html#int">int</a></code>
+                  <code><a class="autorefs autorefs-external" href="https://docs.python.org/3/builtins/functions.html#int">int</a></code>
             </td>
             <td>
               <div class="doc-md-description">
@@ -2867,7 +2867,7 @@ The training progress is logged using TensorBoard, and the trained model can opt
                 <code>model_name</code>
             </td>
             <td>
-                  <code><a class="autorefs autorefs-external" href="https://docs.python.org/3/library/stdtypes.html#str">str</a></code>
+                  <code><a class="autorefs autorefs-external" href="https://docs.python.org/3/builtins/stdtypes.html#str">str</a></code>
             </td>
             <td>
               <div class="doc-md-description">
@@ -2883,7 +2883,7 @@ The training progress is logged using TensorBoard, and the trained model can opt
                 <code>learning_rate</code>
             </td>
             <td>
-                  <code><a class="autorefs autorefs-external" href="https://docs.python.org/3/library/functions.html#float">float</a></code>
+                  <code><a class="autorefs autorefs-external" href="https://docs.python.org/3/builtins/functions.html#float">float</a></code>
             </td>
             <td>
               <div class="doc-md-description">
@@ -2998,7 +2998,7 @@ The training progress is logged using TensorBoard, and the trained model can opt
 <span style="color: inherit; background-color: transparent; padding-left: 5px; padding-right: 5px;">280</span>
 <span style="color: inherit; background-color: transparent; padding-left: 5px; padding-right: 5px;">281</span></pre></div></td><td class="code"><div><pre style="line-height: 125%;"><span></span><code><span style="color: #008000; font-weight: bold">def</span><span style="color: #BBB"> </span><span style="color: #00F">train_and_save_model</span>(directory_dataset, directory_weights, tsboard, batch_size, epochs, Sx, Sy, model_name,
                          learning_rate):
-<span style="color: #BBB">    </span><span style="color: #BA2121; font-style: italic">&quot;&quot;&quot;Trains a segmentation model using provided dataset and configurations.</span>
+<span style="color: #BBB">    </span><span style="color: #BA2121; font-style: italic">"""Trains a segmentation model using provided dataset and configurations.</span>
 
 <span style="color: #BA2121; font-style: italic">    This function performs the following steps:</span>
 <span style="color: #BA2121; font-style: italic">    1. Initializes the dataset and retrieves available channels.</span>
@@ -3030,15 +3030,15 @@ The training progress is logged using TensorBoard, and the trained model can opt
 <span style="color: #BA2121; font-style: italic">        Base name for saving the trained model file.</span>
 <span style="color: #BA2121; font-style: italic">    learning_rate : float</span>
 <span style="color: #BA2121; font-style: italic">        Learning rate used for updating model weights during training.</span>
-<span style="color: #BA2121; font-style: italic">    &quot;&quot;&quot;</span>
+<span style="color: #BA2121; font-style: italic">    """</span>
     <span style="color: #3D7B7B; font-style: italic"># Define the path to the training dataset</span>
-    path_train <span style="color: #666">=</span> <span style="color: #BA2121">f&quot;</span><span style="color: #A45A77; font-weight: bold">{</span>directory_dataset<span style="color: #A45A77; font-weight: bold">}</span><span style="color: #BA2121">/train/&quot;</span>
+    path_train <span style="color: #666">=</span> <span style="color: #BA2121">f"</span><span style="color: #A45A77; font-weight: bold">{</span>directory_dataset<span style="color: #A45A77; font-weight: bold">}</span><span style="color: #BA2121">/train/"</span>
 
     <span style="color: #3D7B7B; font-style: italic"># Initialize the dataset and retrieve available channels</span>
-    image_train, channels <span style="color: #666">=</span> init_set(<span style="color: #BA2121">&#39;&#39;</span>, path_train)
+    image_train, channels <span style="color: #666">=</span> init_set(<span style="color: #BA2121">''</span>, path_train)
 
     <span style="color: #3D7B7B; font-style: italic"># Check if a GPU is available, otherwise default to CPU</span>
-    device <span style="color: #666">=</span> torch<span style="color: #666">.</span>device(<span style="color: #BA2121">&quot;cuda:0&quot;</span> <span style="color: #008000; font-weight: bold">if</span> torch<span style="color: #666">.</span>cuda<span style="color: #666">.</span>is_available() <span style="color: #008000; font-weight: bold">else</span> <span style="color: #BA2121">&quot;cpu&quot;</span>)
+    device <span style="color: #666">=</span> torch<span style="color: #666">.</span>device(<span style="color: #BA2121">"cuda:0"</span> <span style="color: #008000; font-weight: bold">if</span> torch<span style="color: #666">.</span>cuda<span style="color: #666">.</span>is_available() <span style="color: #008000; font-weight: bold">else</span> <span style="color: #BA2121">"cpu"</span>)
 
     <span style="color: #3D7B7B; font-style: italic"># Initialize the segmentation model (ResNetUNet) with the total channels and move it to the selected device</span>
     model <span style="color: #666">=</span> ResNetUNet(<span style="color: #008000">len</span>(channels))<span style="color: #666">.</span>to(device)
@@ -3054,18 +3054,18 @@ The training progress is logged using TensorBoard, and the trained model can opt
     <span style="color: #3D7B7B; font-style: italic"># Initialize the file system database (FSDB) for model weights management</span>
     db <span style="color: #666">=</span> fsdb<span style="color: #666">.</span>FSDB(directory_weights)
 
-    <span style="color: #3D7B7B; font-style: italic"># Retrieve a scan object (allows metadata tracking) and create it if it doesn&#39;t exist</span>
-    s <span style="color: #666">=</span> db<span style="color: #666">.</span>get_scan(<span style="color: #BA2121">&#39;models&#39;</span>, create<span style="color: #666">=</span><span style="color: #008000; font-weight: bold">True</span>)
+    <span style="color: #3D7B7B; font-style: italic"># Retrieve a scan object (allows metadata tracking) and create it if it doesn't exist</span>
+    s <span style="color: #666">=</span> db<span style="color: #666">.</span>get_scan(<span style="color: #BA2121">'models'</span>, create<span style="color: #666">=</span><span style="color: #008000; font-weight: bold">True</span>)
 
     <span style="color: #3D7B7B; font-style: italic"># Create or retrieve a fileset for storing model weights in the scan</span>
-    f_weights <span style="color: #666">=</span> s<span style="color: #666">.</span>get_fileset(<span style="color: #BA2121">&#39;models&#39;</span>, create<span style="color: #666">=</span><span style="color: #008000; font-weight: bold">True</span>)
+    f_weights <span style="color: #666">=</span> s<span style="color: #666">.</span>get_fileset(<span style="color: #BA2121">'models'</span>, create<span style="color: #666">=</span><span style="color: #008000; font-weight: bold">True</span>)
 
     <span style="color: #3D7B7B; font-style: italic"># Train the CNN model using the provided dataset, channels, and training parameters</span>
     model <span style="color: #666">=</span> cnn_train(
         f_weights,  <span style="color: #3D7B7B; font-style: italic"># Fileset for saving model weights</span>
         directory_dataset,  <span style="color: #3D7B7B; font-style: italic"># Dataset directory</span>
         channels,  <span style="color: #3D7B7B; font-style: italic"># Channel information (e.g., input image channels)</span>
-        <span style="color: #BA2121">f&quot;</span><span style="color: #A45A77; font-weight: bold">{</span>tsboard<span style="color: #A45A77; font-weight: bold">}</span><span style="color: #BA2121">_</span><span style="color: #A45A77; font-weight: bold">{</span>Sx<span style="color: #A45A77; font-weight: bold">}</span><span style="color: #BA2121">_</span><span style="color: #A45A77; font-weight: bold">{</span>Sy<span style="color: #A45A77; font-weight: bold">}{</span>directory_dataset<span style="color: #A45A77; font-weight: bold">}</span><span style="color: #BA2121">&quot;</span>,  <span style="color: #3D7B7B; font-style: italic"># TensorBoard log identifier</span>
+        <span style="color: #BA2121">f"</span><span style="color: #A45A77; font-weight: bold">{</span>tsboard<span style="color: #A45A77; font-weight: bold">}</span><span style="color: #BA2121">_</span><span style="color: #A45A77; font-weight: bold">{</span>Sx<span style="color: #A45A77; font-weight: bold">}</span><span style="color: #BA2121">_</span><span style="color: #A45A77; font-weight: bold">{</span>Sy<span style="color: #A45A77; font-weight: bold">}{</span>directory_dataset<span style="color: #A45A77; font-weight: bold">}</span><span style="color: #BA2121">"</span>,  <span style="color: #3D7B7B; font-style: italic"># TensorBoard log identifier</span>
         batch_size,  <span style="color: #3D7B7B; font-style: italic"># Training batch size</span>
         epochs,  <span style="color: #3D7B7B; font-style: italic"># Number of training epochs</span>
         model,  <span style="color: #3D7B7B; font-style: italic"># The initialized model</span>
@@ -3075,7 +3075,7 @@ The training progress is logged using TensorBoard, and the trained model can opt
     )
 
     <span style="color: #3D7B7B; font-style: italic"># Generate a unique model name for saving based on dataset, input size, and epochs</span>
-    model_name <span style="color: #666">=</span> <span style="color: #BA2121">f&quot;</span><span style="color: #A45A77; font-weight: bold">{</span>model_name<span style="color: #A45A77; font-weight: bold">}{</span>os<span style="color: #666">.</span>path<span style="color: #666">.</span>split(directory_dataset)[<span style="color: #666">1</span>]<span style="color: #A45A77; font-weight: bold">}</span><span style="color: #BA2121">_</span><span style="color: #A45A77; font-weight: bold">{</span>Sx<span style="color: #A45A77; font-weight: bold">}</span><span style="color: #BA2121">_</span><span style="color: #A45A77; font-weight: bold">{</span>Sy<span style="color: #A45A77; font-weight: bold">}</span><span style="color: #BA2121">_epoch</span><span style="color: #A45A77; font-weight: bold">{</span>epochs<span style="color: #A45A77; font-weight: bold">}</span><span style="color: #BA2121">&quot;</span>
+    model_name <span style="color: #666">=</span> <span style="color: #BA2121">f"</span><span style="color: #A45A77; font-weight: bold">{</span>model_name<span style="color: #A45A77; font-weight: bold">}{</span>os<span style="color: #666">.</span>path<span style="color: #666">.</span>split(directory_dataset)[<span style="color: #666">1</span>]<span style="color: #A45A77; font-weight: bold">}</span><span style="color: #BA2121">_</span><span style="color: #A45A77; font-weight: bold">{</span>Sx<span style="color: #A45A77; font-weight: bold">}</span><span style="color: #BA2121">_</span><span style="color: #A45A77; font-weight: bold">{</span>Sy<span style="color: #A45A77; font-weight: bold">}</span><span style="color: #BA2121">_epoch</span><span style="color: #A45A77; font-weight: bold">{</span>epochs<span style="color: #A45A77; font-weight: bold">}</span><span style="color: #BA2121">"</span>
 
     <span style="color: #3D7B7B; font-style: italic"># Create a file for saving the model weights</span>
     file <span style="color: #666">=</span> f_weights<span style="color: #666">.</span>create_file(model_name)
@@ -3085,13 +3085,13 @@ The training progress is logged using TensorBoard, and the trained model can opt
 
     <span style="color: #3D7B7B; font-style: italic"># Attach metadata to the file for tracking purposes (e.g., model ID and label names)</span>
     file<span style="color: #666">.</span>set_metadata({
-        <span style="color: #BA2121">&#39;model_id&#39;</span>: model_name,  <span style="color: #3D7B7B; font-style: italic"># Unique identifier for the trained model</span>
-        <span style="color: #BA2121">&#39;label_names&#39;</span>: channels<span style="color: #666">.</span>tolist(),  <span style="color: #3D7B7B; font-style: italic"># List of channel names used in training</span>
-        <span style="color: #BA2121">&#39;batch_size&#39;</span>: batch_size,  <span style="color: #3D7B7B; font-style: italic"># Training batch size</span>
-        <span style="color: #BA2121">&#39;epochs&#39;</span>: epochs,  <span style="color: #3D7B7B; font-style: italic"># Number of training epochs</span>
-        <span style="color: #BA2121">&#39;Sx&#39;</span>: Sx,  <span style="color: #3D7B7B; font-style: italic"># Horizontal input dimension</span>
-        <span style="color: #BA2121">&#39;Sy&#39;</span>: Sy,  <span style="color: #3D7B7B; font-style: italic"># Vertical input dimension</span>
-        <span style="color: #BA2121">&#39;learning_rate&#39;</span>: learning_rate,  <span style="color: #3D7B7B; font-style: italic"># Learning rate for the optimizer</span>
+        <span style="color: #BA2121">'model_id'</span>: model_name,  <span style="color: #3D7B7B; font-style: italic"># Unique identifier for the trained model</span>
+        <span style="color: #BA2121">'label_names'</span>: channels<span style="color: #666">.</span>tolist(),  <span style="color: #3D7B7B; font-style: italic"># List of channel names used in training</span>
+        <span style="color: #BA2121">'batch_size'</span>: batch_size,  <span style="color: #3D7B7B; font-style: italic"># Training batch size</span>
+        <span style="color: #BA2121">'epochs'</span>: epochs,  <span style="color: #3D7B7B; font-style: italic"># Number of training epochs</span>
+        <span style="color: #BA2121">'Sx'</span>: Sx,  <span style="color: #3D7B7B; font-style: italic"># Horizontal input dimension</span>
+        <span style="color: #BA2121">'Sy'</span>: Sy,  <span style="color: #3D7B7B; font-style: italic"># Vertical input dimension</span>
+        <span style="color: #BA2121">'learning_rate'</span>: learning_rate,  <span style="color: #3D7B7B; font-style: italic"># Learning rate for the optimizer</span>
     })
 </code></pre></div></td></tr></table></div>
             </details>
@@ -3200,7 +3200,7 @@ The training progress is logged using TensorBoard, and the trained model can opt
       <script id="__config" type="application/json">{"annotate": null, "base": "../../../..", "features": ["navigation.tabs", "navigation.tabs.sticky", "content.code.copy"], "search": "../../../../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
     
     
-      <script src="../../../../assets/javascripts/bundle.79ae519e.min.js"></script>
+      <script src="../../../../assets/javascripts/bundle.d7400e89.min.js"></script>
       
         <script src="../../../../assets/_markdown_exec_pyodide.js"></script>
       

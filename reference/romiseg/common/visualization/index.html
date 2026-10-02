@@ -25,7 +25,7 @@
       
       
       <link rel="icon" href="../../../../assets/images/ROMI_logo_green_25.svg">
-      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.6">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.7">
     
     
       
@@ -33,7 +33,7 @@
       
     
     
-      <link rel="stylesheet" href="../../../../assets/stylesheets/main.484c7ddc.min.css">
+      <link rel="stylesheet" href="../../../../assets/stylesheets/main.ec1eaa64.min.css">
       
       
 
@@ -1968,7 +1968,7 @@
 
     <div class="doc doc-contents ">
             <p class="doc doc-class-bases">
-              Bases: <code><a class="autorefs autorefs-external" href="https://docs.python.org/3/library/functions.html#object">object</a></code></p>
+              Bases: <code><a class="autorefs autorefs-external" href="https://docs.python.org/3/builtins/functions.html#object">object</a></code></p>
 
 
         <p>This class contains functions that can plot graphs and several curves on a graph (and save the plot).</p>
@@ -2079,23 +2079,23 @@
     <span style="color: #3D7B7B; font-style: italic"># plot parameters</span>
     <span style="color: #008000">self</span><span style="color: #666">.</span>figsize <span style="color: #666">=</span> (<span style="color: #666">9</span>, <span style="color: #666">6</span>)
     <span style="color: #008000">self</span><span style="color: #666">.</span>fontsize <span style="color: #666">=</span> <span style="color: #666">13</span>
-    <span style="color: #008000">self</span><span style="color: #666">.</span>color <span style="color: #666">=</span> <span style="color: #BA2121">&#39;steelblue&#39;</span>
-    <span style="color: #008000">self</span><span style="color: #666">.</span>marker <span style="color: #666">=</span> <span style="color: #BA2121">&#39;o-&#39;</span>
+    <span style="color: #008000">self</span><span style="color: #666">.</span>color <span style="color: #666">=</span> <span style="color: #BA2121">'steelblue'</span>
+    <span style="color: #008000">self</span><span style="color: #666">.</span>marker <span style="color: #666">=</span> <span style="color: #BA2121">'o-'</span>
     <span style="color: #008000">self</span><span style="color: #666">.</span>linewidth <span style="color: #666">=</span> <span style="color: #666">2</span>
-    <span style="color: #008000">self</span><span style="color: #666">.</span>title <span style="color: #666">=</span> <span style="color: #BA2121">&#39;My Title&#39;</span>
-    <span style="color: #008000">self</span><span style="color: #666">.</span>xlabel <span style="color: #666">=</span> <span style="color: #BA2121">&#39;x label (unit)&#39;</span>
-    <span style="color: #008000">self</span><span style="color: #666">.</span>ylabel <span style="color: #666">=</span> <span style="color: #BA2121">&#39;y label (unit)&#39;</span>
+    <span style="color: #008000">self</span><span style="color: #666">.</span>title <span style="color: #666">=</span> <span style="color: #BA2121">'My Title'</span>
+    <span style="color: #008000">self</span><span style="color: #666">.</span>xlabel <span style="color: #666">=</span> <span style="color: #BA2121">'x label (unit)'</span>
+    <span style="color: #008000">self</span><span style="color: #666">.</span>ylabel <span style="color: #666">=</span> <span style="color: #BA2121">'y label (unit)'</span>
 
     <span style="color: #3D7B7B; font-style: italic"># saving parameters</span>
     <span style="color: #008000">self</span><span style="color: #666">.</span>date <span style="color: #666">=</span> <span style="color: #008000; font-weight: bold">True</span>
-    <span style="color: #008000">self</span><span style="color: #666">.</span>save_name <span style="color: #666">=</span> <span style="color: #BA2121">&#39;Figure&#39;</span>
-    <span style="color: #008000">self</span><span style="color: #666">.</span>extension <span style="color: #666">=</span> <span style="color: #BA2121">&#39;.tiff&#39;</span>
+    <span style="color: #008000">self</span><span style="color: #666">.</span>save_name <span style="color: #666">=</span> <span style="color: #BA2121">'Figure'</span>
+    <span style="color: #008000">self</span><span style="color: #666">.</span>extension <span style="color: #666">=</span> <span style="color: #BA2121">'.tiff'</span>
 
     <span style="color: #3D7B7B; font-style: italic"># multiplot parameters</span>
-    <span style="color: #008000">self</span><span style="color: #666">.</span>label_item <span style="color: #666">=</span> [<span style="color: #BA2121">&#39;MyLabel&#39;</span>]
+    <span style="color: #008000">self</span><span style="color: #666">.</span>label_item <span style="color: #666">=</span> [<span style="color: #BA2121">'MyLabel'</span>]
     <span style="color: #008000">self</span><span style="color: #666">.</span>label_list <span style="color: #666">=</span> <span style="color: #008000">self</span><span style="color: #666">.</span>label_item <span style="color: #666">*</span> <span style="color: #666">100</span>
-    <span style="color: #008000">self</span><span style="color: #666">.</span>color_list <span style="color: #666">=</span> [<span style="color: #008000">self</span><span style="color: #666">.</span>color] <span style="color: #666">+</span> [<span style="color: #BA2121">&#39;indianred&#39;</span>, <span style="color: #BA2121">&#39;seagreen&#39;</span>, <span style="color: #BA2121">&#39;mediumslateblue&#39;</span>, <span style="color: #BA2121">&#39;maroon&#39;</span>, <span style="color: #BA2121">&#39;palevioletred&#39;</span>
-                      <span style="color: #BA2121">&#39;orange&#39;</span>, <span style="color: #BA2121">&#39;lightseagreen&#39;</span>, <span style="color: #BA2121">&#39;dimgrey&#39;</span>, <span style="color: #BA2121">&#39;slateblue&#39;</span>]
+    <span style="color: #008000">self</span><span style="color: #666">.</span>color_list <span style="color: #666">=</span> [<span style="color: #008000">self</span><span style="color: #666">.</span>color] <span style="color: #666">+</span> [<span style="color: #BA2121">'indianred'</span>, <span style="color: #BA2121">'seagreen'</span>, <span style="color: #BA2121">'mediumslateblue'</span>, <span style="color: #BA2121">'maroon'</span>, <span style="color: #BA2121">'palevioletred'</span>
+                      <span style="color: #BA2121">'orange'</span>, <span style="color: #BA2121">'lightseagreen'</span>, <span style="color: #BA2121">'dimgrey'</span>, <span style="color: #BA2121">'slateblue'</span>]
 
     <span style="color: #008000">self</span><span style="color: #666">.</span>xval <span style="color: #666">=</span> xval
     <span style="color: #008000">self</span><span style="color: #666">.</span>yval <span style="color: #666">=</span> yval
@@ -2137,7 +2137,7 @@
 
     <div class="doc doc-contents ">
             <p class="doc doc-class-bases">
-              Bases: <code><a class="autorefs autorefs-external" href="https://docs.python.org/3/library/functions.html#object">object</a></code></p>
+              Bases: <code><a class="autorefs autorefs-external" href="https://docs.python.org/3/builtins/functions.html#object">object</a></code></p>
 
 
         <p>This class contains functions that can show images and subplot several images (and save the plot).</p>
@@ -2226,19 +2226,19 @@
     <span style="color: #3D7B7B; font-style: italic"># imshow parameters</span>
     <span style="color: #008000">self</span><span style="color: #666">.</span>figsize <span style="color: #666">=</span> (<span style="color: #666">9</span>, <span style="color: #666">6</span>)  <span style="color: #3D7B7B; font-style: italic"># figure size</span>
     <span style="color: #008000">self</span><span style="color: #666">.</span>fontsize <span style="color: #666">=</span> <span style="color: #666">13</span>  <span style="color: #3D7B7B; font-style: italic"># font size</span>
-    <span style="color: #008000">self</span><span style="color: #666">.</span>title <span style="color: #666">=</span> <span style="color: #BA2121">&#39;My Title&#39;</span>  <span style="color: #3D7B7B; font-style: italic"># figure title</span>
-    <span style="color: #008000">self</span><span style="color: #666">.</span>cmap <span style="color: #666">=</span> <span style="color: #BA2121">&#39;inferno&#39;</span>
+    <span style="color: #008000">self</span><span style="color: #666">.</span>title <span style="color: #666">=</span> <span style="color: #BA2121">'My Title'</span>  <span style="color: #3D7B7B; font-style: italic"># figure title</span>
+    <span style="color: #008000">self</span><span style="color: #666">.</span>cmap <span style="color: #666">=</span> <span style="color: #BA2121">'inferno'</span>
 
     <span style="color: #3D7B7B; font-style: italic"># multiple image imshow        </span>
-    <span style="color: #008000">self</span><span style="color: #666">.</span>title_item <span style="color: #666">=</span> [<span style="color: #BA2121">&#39;MyLabel&#39;</span>]
+    <span style="color: #008000">self</span><span style="color: #666">.</span>title_item <span style="color: #666">=</span> [<span style="color: #BA2121">'MyLabel'</span>]
     <span style="color: #008000">self</span><span style="color: #666">.</span>title_list <span style="color: #666">=</span> <span style="color: #008000">self</span><span style="color: #666">.</span>title_item <span style="color: #666">*</span> <span style="color: #666">100</span>
     <span style="color: #008000">self</span><span style="color: #666">.</span>col_num <span style="color: #666">=</span> <span style="color: #666">3</span>
 
     <span style="color: #3D7B7B; font-style: italic"># figure save parameters</span>
     <span style="color: #008000">self</span><span style="color: #666">.</span>date <span style="color: #666">=</span> <span style="color: #008000; font-weight: bold">True</span>  <span style="color: #3D7B7B; font-style: italic"># write date and time before figure name</span>
-    <span style="color: #008000">self</span><span style="color: #666">.</span>save_name <span style="color: #666">=</span> <span style="color: #BA2121">&#39;Figure&#39;</span>  <span style="color: #3D7B7B; font-style: italic"># setting the format!</span>
-    <span style="color: #008000">self</span><span style="color: #666">.</span>save_folder <span style="color: #666">=</span> <span style="color: #BA2121">&#39;alienlab_images/&#39;</span>
-    <span style="color: #008000">self</span><span style="color: #666">.</span>extension <span style="color: #666">=</span> <span style="color: #BA2121">&#39;.tiff&#39;</span>
+    <span style="color: #008000">self</span><span style="color: #666">.</span>save_name <span style="color: #666">=</span> <span style="color: #BA2121">'Figure'</span>  <span style="color: #3D7B7B; font-style: italic"># setting the format!</span>
+    <span style="color: #008000">self</span><span style="color: #666">.</span>save_folder <span style="color: #666">=</span> <span style="color: #BA2121">'alienlab_images/'</span>
+    <span style="color: #008000">self</span><span style="color: #666">.</span>extension <span style="color: #666">=</span> <span style="color: #BA2121">'.tiff'</span>
     <span style="color: #008000">self</span><span style="color: #666">.</span>save_im <span style="color: #666">=</span> <span style="color: #008000; font-weight: bold">True</span>
     <span style="color: #008000">self</span><span style="color: #666">.</span>spacing <span style="color: #666">=</span> <span style="color: #666">0.2</span>
 </code></pre></div></td></tr></table></div>
@@ -2314,7 +2314,7 @@
                 <code>label_names</code>
             </td>
             <td>
-                  <code><a class="autorefs autorefs-external" href="https://docs.python.org/3/library/stdtypes.html#list">list</a></code>
+                  <code><a class="autorefs autorefs-external" href="https://docs.python.org/3/builtins/stdtypes.html#list">list</a></code>
             </td>
             <td>
               <div class="doc-md-description">
@@ -2330,7 +2330,7 @@
                 <code>batch_size</code>
             </td>
             <td>
-                  <code><a class="autorefs autorefs-external" href="https://docs.python.org/3/library/functions.html#int">int</a></code>
+                  <code><a class="autorefs autorefs-external" href="https://docs.python.org/3/builtins/functions.html#int">int</a></code>
             </td>
             <td>
               <div class="doc-md-description">
@@ -2346,7 +2346,7 @@
                 <code>showit</code>
             </td>
             <td>
-                  <code><a class="autorefs autorefs-external" href="https://docs.python.org/3/library/functions.html#bool">bool</a></code>
+                  <code><a class="autorefs autorefs-external" href="https://docs.python.org/3/builtins/functions.html#bool">bool</a></code>
             </td>
             <td>
               <div class="doc-md-description">
@@ -2435,7 +2435,7 @@
 <span style="color: inherit; background-color: transparent; padding-left: 5px; padding-right: 5px;">215</span>
 <span style="color: inherit; background-color: transparent; padding-left: 5px; padding-right: 5px;">216</span>
 <span style="color: inherit; background-color: transparent; padding-left: 5px; padding-right: 5px;">217</span></pre></div></td><td class="code"><div><pre style="line-height: 125%;"><span></span><code><span style="color: #008000; font-weight: bold">def</span><span style="color: #BBB"> </span><span style="color: #00F">plot_dataset</span>(train_loader, label_names, batch_size, showit<span style="color: #666">=</span><span style="color: #008000; font-weight: bold">False</span>):
-<span style="color: #BBB">    </span><span style="color: #BA2121; font-style: italic">&quot;&quot;&quot;</span>
+<span style="color: #BBB">    </span><span style="color: #BA2121; font-style: italic">"""</span>
 <span style="color: #BA2121; font-style: italic">    Plot a batch of images and their labels from a data loader.</span>
 
 <span style="color: #BA2121; font-style: italic">    Parameters</span>
@@ -2453,7 +2453,7 @@
 <span style="color: #BA2121; font-style: italic">    -------</span>
 <span style="color: #BA2121; font-style: italic">    matplotlib.figure.Figure</span>
 <span style="color: #BA2121; font-style: italic">        Figure containing the plotted images and labels.</span>
-<span style="color: #BA2121; font-style: italic">    &quot;&quot;&quot;</span>
+<span style="color: #BA2121; font-style: italic">    """</span>
     all_data <span style="color: #666">=</span> <span style="color: #008000">next</span>(<span style="color: #008000">iter</span>(train_loader))
     images <span style="color: #666">=</span> all_data[<span style="color: #666">0</span>]
     label <span style="color: #666">=</span> all_data[<span style="color: #666">1</span>]
@@ -2466,7 +2466,7 @@
         img <span style="color: #666">=</span> images[j]
         img <span style="color: #666">=</span> img<span style="color: #666">.</span>permute(<span style="color: #666">1</span>, <span style="color: #666">2</span>, <span style="color: #666">0</span>)
         images_tot<span style="color: #666">.</span>append(img)
-        titles_tot<span style="color: #666">.</span>append(<span style="color: #BA2121">&#39;image&#39;</span>)
+        titles_tot<span style="color: #666">.</span>append(<span style="color: #BA2121">'image'</span>)
         <span style="color: #008000; font-weight: bold">for</span> i <span style="color: #A2F; font-weight: bold">in</span> <span style="color: #008000">range</span>(<span style="color: #008000">len</span>(label_names)):
             img <span style="color: #666">=</span> label[j, i, :, :] <span style="color: #666">*</span> <span style="color: #666">255</span>  <span style="color: #3D7B7B; font-style: italic"># .int()</span>
             images_tot<span style="color: #666">.</span>append(img)
@@ -2590,7 +2590,7 @@
       <script id="__config" type="application/json">{"annotate": null, "base": "../../../..", "features": ["navigation.tabs", "navigation.tabs.sticky", "content.code.copy"], "search": "../../../../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
     
     
-      <script src="../../../../assets/javascripts/bundle.79ae519e.min.js"></script>
+      <script src="../../../../assets/javascripts/bundle.d7400e89.min.js"></script>
       
         <script src="../../../../assets/_markdown_exec_pyodide.js"></script>
       

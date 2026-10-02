@@ -25,7 +25,7 @@
       
       
       <link rel="icon" href="../../../../assets/images/ROMI_logo_green_25.svg">
-      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.6">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.7">
     
     
       
@@ -33,7 +33,7 @@
       
     
     
-      <link rel="stylesheet" href="../../../../assets/stylesheets/main.484c7ddc.min.css">
+      <link rel="stylesheet" href="../../../../assets/stylesheets/main.ec1eaa64.min.css">
       
       
 
@@ -1987,7 +1987,7 @@
                 <code>Sx</code>
             </td>
             <td>
-                  <code><a class="autorefs autorefs-external" href="https://docs.python.org/3/library/functions.html#int">int</a></code>
+                  <code><a class="autorefs autorefs-external" href="https://docs.python.org/3/builtins/functions.html#int">int</a></code>
             </td>
             <td>
               <div class="doc-md-description">
@@ -2003,7 +2003,7 @@
                 <code>Sy</code>
             </td>
             <td>
-                  <code><a class="autorefs autorefs-external" href="https://docs.python.org/3/library/functions.html#int">int</a></code>
+                  <code><a class="autorefs autorefs-external" href="https://docs.python.org/3/builtins/functions.html#int">int</a></code>
             </td>
             <td>
               <div class="doc-md-description">
@@ -2019,7 +2019,7 @@
                 <code>image_path</code>
             </td>
             <td>
-                  <code><a class="autorefs autorefs-external" href="https://docs.python.org/3/library/stdtypes.html#str">str</a></code>
+                  <code><a class="autorefs autorefs-external" href="https://docs.python.org/3/builtins/stdtypes.html#str">str</a></code>
             </td>
             <td>
               <div class="doc-md-description">
@@ -2051,7 +2051,7 @@
                 <code>label_names</code>
             </td>
             <td>
-                  <code><a class="autorefs autorefs-external" href="https://docs.python.org/3/library/stdtypes.html#list">list</a></code>
+                  <code><a class="autorefs autorefs-external" href="https://docs.python.org/3/builtins/stdtypes.html#list">list</a></code>
             </td>
             <td>
               <div class="doc-md-description">
@@ -2067,7 +2067,7 @@
                 <code>device</code>
             </td>
             <td>
-                  <code><a class="autorefs autorefs-external" href="https://docs.python.org/3/library/stdtypes.html#str">str</a> or <a class="autorefs autorefs-external" title="torch.device" href="https://pytorch.org/docs/stable/tensor_attributes.html#torch.device">device</a></code>
+                  <code><a class="autorefs autorefs-external" href="https://docs.python.org/3/builtins/stdtypes.html#str">str</a> or <a class="autorefs autorefs-external" title="torch.device" href="https://pytorch.org/docs/stable/tensor_attributes.html#torch.device">device</a></code>
             </td>
             <td>
               <div class="doc-md-description">
@@ -2115,14 +2115,14 @@
 <span style="color: #000080; font-weight: bold">&gt;&gt;&gt; </span><span style="color: #008000; font-weight: bold">from</span><span style="color: #BBB"> </span><span style="color: #00F; font-weight: bold">plantdb.commons.test_database</span><span style="color: #BBB"> </span><span style="color: #008000; font-weight: bold">import</span> test_database
 <span style="color: #000080; font-weight: bold">&gt;&gt;&gt; </span>db <span style="color: #666">=</span> test_database(with_models<span style="color: #666">=</span><span style="color: #008000; font-weight: bold">True</span>)
 <span style="color: #000080; font-weight: bold">&gt;&gt;&gt; </span>db<span style="color: #666">.</span>connect()
-<span style="color: #000080; font-weight: bold">&gt;&gt;&gt; </span>scan <span style="color: #666">=</span> db<span style="color: #666">.</span>get_scan(<span style="color: #BA2121">&quot;real_plant_analyzed&quot;</span>)
-<span style="color: #000080; font-weight: bold">&gt;&gt;&gt; </span>image_fs <span style="color: #666">=</span> scan<span style="color: #666">.</span>get_fileset(<span style="color: #BA2121">&#39;images&#39;</span>)
-<span style="color: #000080; font-weight: bold">&gt;&gt;&gt; </span>images_path <span style="color: #666">=</span> [image<span style="color: #666">.</span>path() <span style="color: #008000; font-weight: bold">for</span> image <span style="color: #A2F; font-weight: bold">in</span> image_fs<span style="color: #666">.</span>get_files(query<span style="color: #666">=</span>{<span style="color: #BA2121">&quot;channel&quot;</span>: <span style="color: #BA2121">&quot;rgb&quot;</span>})]
-<span style="color: #000080; font-weight: bold">&gt;&gt;&gt; </span>device <span style="color: #666">=</span> torch<span style="color: #666">.</span>device(<span style="color: #BA2121">&quot;cuda:0&quot;</span> <span style="color: #008000; font-weight: bold">if</span> torch<span style="color: #666">.</span>cuda<span style="color: #666">.</span>is_available() <span style="color: #008000; font-weight: bold">else</span> <span style="color: #BA2121">&quot;cpu&quot;</span>)
-<span style="color: #000080; font-weight: bold">&gt;&gt;&gt; </span>model_file <span style="color: #666">=</span> db<span style="color: #666">.</span>get_scan(<span style="color: #BA2121">&#39;models&#39;</span>)<span style="color: #666">.</span>get_fileset(<span style="color: #BA2121">&#39;models&#39;</span>)<span style="color: #666">.</span>get_file(<span style="color: #BA2121">&#39;Resnet_896_896_epoch50&#39;</span>)
-<span style="color: #000080; font-weight: bold">&gt;&gt;&gt; </span>label_names <span style="color: #666">=</span> model_file<span style="color: #666">.</span>get_metadata(<span style="color: #BA2121">&#39;label_names&#39;</span>)
+<span style="color: #000080; font-weight: bold">&gt;&gt;&gt; </span>scan <span style="color: #666">=</span> db<span style="color: #666">.</span>get_scan(<span style="color: #BA2121">"real_plant_analyzed"</span>)
+<span style="color: #000080; font-weight: bold">&gt;&gt;&gt; </span>image_fs <span style="color: #666">=</span> scan<span style="color: #666">.</span>get_fileset(<span style="color: #BA2121">'images'</span>)
+<span style="color: #000080; font-weight: bold">&gt;&gt;&gt; </span>images_path <span style="color: #666">=</span> [image<span style="color: #666">.</span>path() <span style="color: #008000; font-weight: bold">for</span> image <span style="color: #A2F; font-weight: bold">in</span> image_fs<span style="color: #666">.</span>get_files(query<span style="color: #666">=</span>{<span style="color: #BA2121">"channel"</span>: <span style="color: #BA2121">"rgb"</span>})]
+<span style="color: #000080; font-weight: bold">&gt;&gt;&gt; </span>device <span style="color: #666">=</span> torch<span style="color: #666">.</span>device(<span style="color: #BA2121">"cuda:0"</span> <span style="color: #008000; font-weight: bold">if</span> torch<span style="color: #666">.</span>cuda<span style="color: #666">.</span>is_available() <span style="color: #008000; font-weight: bold">else</span> <span style="color: #BA2121">"cpu"</span>)
+<span style="color: #000080; font-weight: bold">&gt;&gt;&gt; </span>model_file <span style="color: #666">=</span> db<span style="color: #666">.</span>get_scan(<span style="color: #BA2121">'models'</span>)<span style="color: #666">.</span>get_fileset(<span style="color: #BA2121">'models'</span>)<span style="color: #666">.</span>get_file(<span style="color: #BA2121">'Resnet_896_896_epoch50'</span>)
+<span style="color: #000080; font-weight: bold">&gt;&gt;&gt; </span>label_names <span style="color: #666">=</span> model_file<span style="color: #666">.</span>get_metadata(<span style="color: #BA2121">'label_names'</span>)
 <span style="color: #000080; font-weight: bold">&gt;&gt;&gt; </span><span style="color: #008000">print</span>(label_names)
-<span style="color: #717171">{&#39;label_names&#39;: [&#39;background&#39;, &#39;flower&#39;, &#39;fruit&#39;, &#39;leaf&#39;, &#39;pedicel&#39;, &#39;stem&#39;], &#39;model_id&#39;: &#39;Resnet_896_896_epoch50&#39;}</span>
+<span style="color: #717171">{'label_names': ['background', 'flower', 'fruit', 'leaf', 'pedicel', 'stem'], 'model_id': 'Resnet_896_896_epoch50'}</span>
 <span style="color: #000080; font-weight: bold">&gt;&gt;&gt; </span>model_segmentation <span style="color: #666">=</span> model_from_file(model_file<span style="color: #666">.</span>path(), label_names)
 <span style="color: #000080; font-weight: bold">&gt;&gt;&gt; </span>model_segmentation <span style="color: #666">=</span> model_segmentation<span style="color: #666">.</span>to(device)
 <span style="color: #000080; font-weight: bold">&gt;&gt;&gt; </span>pred_pad <span style="color: #666">=</span> file_segmentation(<span style="color: #666">896</span>, <span style="color: #666">896</span>, images_path[<span style="color: #666">0</span>], model, label_names, device)
@@ -2132,28 +2132,16 @@
 <span style="color: #000080; font-weight: bold">&gt;&gt;&gt; </span>im <span style="color: #666">=</span> im <span style="color: #666">&gt;</span> <span style="color: #666">0.01</span>  <span style="color: #3D7B7B; font-style: italic"># threshold the segmentation mask</span>
 <span style="color: #000080; font-weight: bold">&gt;&gt;&gt; </span>im <span style="color: #666">=</span> binary_dilation(im, footprint<span style="color: #666">=</span>disk(<span style="color: #666">1</span>))  <span style="color: #3D7B7B; font-style: italic"># dilate the segmentation mask</span>
 <span style="color: #000080; font-weight: bold">&gt;&gt;&gt; </span>im <span style="color: #666">=</span> (im <span style="color: #666">*</span> <span style="color: #666">255</span>)<span style="color: #666">.</span>astype(np<span style="color: #666">.</span>uint8)  <span style="color: #3D7B7B; font-style: italic"># convert the segmentation mask to an image</span>
-<span style="color: #000080; font-weight: bold">&gt;&gt;&gt; </span>im <span style="color: #666">=</span> <span style="color: #666">255</span> <span style="color: #666">-</span> im <span style="color: #008000; font-weight: bold">if</span> label_names[label_idx] <span style="color: #666">==</span> <span style="color: #BA2121">&#39;background&#39;</span> <span style="color: #008000; font-weight: bold">else</span> im  <span style="color: #3D7B7B; font-style: italic"># invert the background color</span>
+<span style="color: #000080; font-weight: bold">&gt;&gt;&gt; </span>im <span style="color: #666">=</span> <span style="color: #666">255</span> <span style="color: #666">-</span> im <span style="color: #008000; font-weight: bold">if</span> label_names[label_idx] <span style="color: #666">==</span> <span style="color: #BA2121">'background'</span> <span style="color: #008000; font-weight: bold">else</span> im  <span style="color: #3D7B7B; font-style: italic"># invert the background color</span>
 <span style="color: #000080; font-weight: bold">&gt;&gt;&gt; </span>img <span style="color: #666">=</span> Image<span style="color: #666">.</span>fromarray(im)  <span style="color: #3D7B7B; font-style: italic"># create a PIL image from the segmentation mask</span>
-<span style="color: #000080; font-weight: bold">&gt;&gt;&gt; </span>img<span style="color: #666">.</span>save(<span style="color: #BA2121">f&#39;predicted_</span><span style="color: #A45A77; font-weight: bold">{</span>label_names[label_idx]<span style="color: #A45A77; font-weight: bold">}</span><span style="color: #BA2121">.png&#39;</span>)  <span style="color: #3D7B7B; font-style: italic"># save the segmentation mask as an image</span>
+<span style="color: #000080; font-weight: bold">&gt;&gt;&gt; </span>img<span style="color: #666">.</span>save(<span style="color: #BA2121">f'predicted_</span><span style="color: #A45A77; font-weight: bold">{</span>label_names[label_idx]<span style="color: #A45A77; font-weight: bold">}</span><span style="color: #BA2121">.png'</span>)  <span style="color: #3D7B7B; font-style: italic"># save the segmentation mask as an image</span>
 <span style="color: #000080; font-weight: bold">&gt;&gt;&gt; </span>db<span style="color: #666">.</span>disconnect()
 </code></pre></div>
 
 
             <details class="quote">
               <summary>Source code in <code>romiseg/predict/segmentation.py</code></summary>
-              <div class="language-python highlight" style="background: #f8f8f8"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span style="color: inherit; background-color: transparent; padding-left: 5px; padding-right: 5px;">247</span>
-<span style="color: inherit; background-color: transparent; padding-left: 5px; padding-right: 5px;">248</span>
-<span style="color: inherit; background-color: transparent; padding-left: 5px; padding-right: 5px;">249</span>
-<span style="color: inherit; background-color: transparent; padding-left: 5px; padding-right: 5px;">250</span>
-<span style="color: inherit; background-color: transparent; padding-left: 5px; padding-right: 5px;">251</span>
-<span style="color: inherit; background-color: transparent; padding-left: 5px; padding-right: 5px;">252</span>
-<span style="color: inherit; background-color: transparent; padding-left: 5px; padding-right: 5px;">253</span>
-<span style="color: inherit; background-color: transparent; padding-left: 5px; padding-right: 5px;">254</span>
-<span style="color: inherit; background-color: transparent; padding-left: 5px; padding-right: 5px;">255</span>
-<span style="color: inherit; background-color: transparent; padding-left: 5px; padding-right: 5px;">256</span>
-<span style="color: inherit; background-color: transparent; padding-left: 5px; padding-right: 5px;">257</span>
-<span style="color: inherit; background-color: transparent; padding-left: 5px; padding-right: 5px;">258</span>
-<span style="color: inherit; background-color: transparent; padding-left: 5px; padding-right: 5px;">259</span>
+              <div class="language-python highlight" style="background: #f8f8f8"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span style="color: inherit; background-color: transparent; padding-left: 5px; padding-right: 5px;">259</span>
 <span style="color: inherit; background-color: transparent; padding-left: 5px; padding-right: 5px;">260</span>
 <span style="color: inherit; background-color: transparent; padding-left: 5px; padding-right: 5px;">261</span>
 <span style="color: inherit; background-color: transparent; padding-left: 5px; padding-right: 5px;">262</span>
@@ -2230,8 +2218,20 @@
 <span style="color: inherit; background-color: transparent; padding-left: 5px; padding-right: 5px;">333</span>
 <span style="color: inherit; background-color: transparent; padding-left: 5px; padding-right: 5px;">334</span>
 <span style="color: inherit; background-color: transparent; padding-left: 5px; padding-right: 5px;">335</span>
-<span style="color: inherit; background-color: transparent; padding-left: 5px; padding-right: 5px;">336</span></pre></div></td><td class="code"><div><pre style="line-height: 125%;"><span></span><code><span style="color: #008000; font-weight: bold">def</span><span style="color: #BBB"> </span><span style="color: #00F">file_segmentation</span>(Sx, Sy, image_path, model, label_names, device):
-<span style="color: #BBB">    </span><span style="color: #BA2121; font-style: italic">&quot;&quot;&quot;Segments a single image using a pretrained deep learning model.</span>
+<span style="color: inherit; background-color: transparent; padding-left: 5px; padding-right: 5px;">336</span>
+<span style="color: inherit; background-color: transparent; padding-left: 5px; padding-right: 5px;">337</span>
+<span style="color: inherit; background-color: transparent; padding-left: 5px; padding-right: 5px;">338</span>
+<span style="color: inherit; background-color: transparent; padding-left: 5px; padding-right: 5px;">339</span>
+<span style="color: inherit; background-color: transparent; padding-left: 5px; padding-right: 5px;">340</span>
+<span style="color: inherit; background-color: transparent; padding-left: 5px; padding-right: 5px;">341</span>
+<span style="color: inherit; background-color: transparent; padding-left: 5px; padding-right: 5px;">342</span>
+<span style="color: inherit; background-color: transparent; padding-left: 5px; padding-right: 5px;">343</span>
+<span style="color: inherit; background-color: transparent; padding-left: 5px; padding-right: 5px;">344</span>
+<span style="color: inherit; background-color: transparent; padding-left: 5px; padding-right: 5px;">345</span>
+<span style="color: inherit; background-color: transparent; padding-left: 5px; padding-right: 5px;">346</span>
+<span style="color: inherit; background-color: transparent; padding-left: 5px; padding-right: 5px;">347</span>
+<span style="color: inherit; background-color: transparent; padding-left: 5px; padding-right: 5px;">348</span></pre></div></td><td class="code"><div><pre style="line-height: 125%;"><span></span><code><span style="color: #008000; font-weight: bold">def</span><span style="color: #BBB"> </span><span style="color: #00F">file_segmentation</span>(Sx, Sy, image_path, model, label_names, device):
+<span style="color: #BBB">    </span><span style="color: #BA2121; font-style: italic">"""Segments a single image using a pretrained deep learning model.</span>
 
 <span style="color: #BA2121; font-style: italic">    Parameters</span>
 <span style="color: #BA2121; font-style: italic">    ----------</span>
@@ -2244,7 +2244,7 @@
 <span style="color: #BA2121; font-style: italic">    model : torch.nn.Module</span>
 <span style="color: #BA2121; font-style: italic">        A trained deep learning model to be used for segmentation.</span>
 <span style="color: #BA2121; font-style: italic">    label_names : list</span>
-<span style="color: #BA2121; font-style: italic">        A list of label names corresponding to the model&#39;s output.&#39;</span>
+<span style="color: #BA2121; font-style: italic">        A list of label names corresponding to the model's output.'</span>
 <span style="color: #BA2121; font-style: italic">    device : str or torch.device, optional</span>
 <span style="color: #BA2121; font-style: italic">        The target device for processing. If not provided, it will be selected based on availability.</span>
 
@@ -2264,14 +2264,14 @@
 <span style="color: #BA2121; font-style: italic">    &gt;&gt;&gt; from plantdb.commons.test_database import test_database</span>
 <span style="color: #BA2121; font-style: italic">    &gt;&gt;&gt; db = test_database(with_models=True)</span>
 <span style="color: #BA2121; font-style: italic">    &gt;&gt;&gt; db.connect()</span>
-<span style="color: #BA2121; font-style: italic">    &gt;&gt;&gt; scan = db.get_scan(&quot;real_plant_analyzed&quot;)</span>
-<span style="color: #BA2121; font-style: italic">    &gt;&gt;&gt; image_fs = scan.get_fileset(&#39;images&#39;)</span>
-<span style="color: #BA2121; font-style: italic">    &gt;&gt;&gt; images_path = [image.path() for image in image_fs.get_files(query={&quot;channel&quot;: &quot;rgb&quot;})]</span>
-<span style="color: #BA2121; font-style: italic">    &gt;&gt;&gt; device = torch.device(&quot;cuda:0&quot; if torch.cuda.is_available() else &quot;cpu&quot;)</span>
-<span style="color: #BA2121; font-style: italic">    &gt;&gt;&gt; model_file = db.get_scan(&#39;models&#39;).get_fileset(&#39;models&#39;).get_file(&#39;Resnet_896_896_epoch50&#39;)</span>
-<span style="color: #BA2121; font-style: italic">    &gt;&gt;&gt; label_names = model_file.get_metadata(&#39;label_names&#39;)</span>
+<span style="color: #BA2121; font-style: italic">    &gt;&gt;&gt; scan = db.get_scan("real_plant_analyzed")</span>
+<span style="color: #BA2121; font-style: italic">    &gt;&gt;&gt; image_fs = scan.get_fileset('images')</span>
+<span style="color: #BA2121; font-style: italic">    &gt;&gt;&gt; images_path = [image.path() for image in image_fs.get_files(query={"channel": "rgb"})]</span>
+<span style="color: #BA2121; font-style: italic">    &gt;&gt;&gt; device = torch.device("cuda:0" if torch.cuda.is_available() else "cpu")</span>
+<span style="color: #BA2121; font-style: italic">    &gt;&gt;&gt; model_file = db.get_scan('models').get_fileset('models').get_file('Resnet_896_896_epoch50')</span>
+<span style="color: #BA2121; font-style: italic">    &gt;&gt;&gt; label_names = model_file.get_metadata('label_names')</span>
 <span style="color: #BA2121; font-style: italic">    &gt;&gt;&gt; print(label_names)</span>
-<span style="color: #BA2121; font-style: italic">    {&#39;label_names&#39;: [&#39;background&#39;, &#39;flower&#39;, &#39;fruit&#39;, &#39;leaf&#39;, &#39;pedicel&#39;, &#39;stem&#39;], &#39;model_id&#39;: &#39;Resnet_896_896_epoch50&#39;}</span>
+<span style="color: #BA2121; font-style: italic">    {'label_names': ['background', 'flower', 'fruit', 'leaf', 'pedicel', 'stem'], 'model_id': 'Resnet_896_896_epoch50'}</span>
 <span style="color: #BA2121; font-style: italic">    &gt;&gt;&gt; model_segmentation = model_from_file(model_file.path(), label_names)</span>
 <span style="color: #BA2121; font-style: italic">    &gt;&gt;&gt; model_segmentation = model_segmentation.to(device)</span>
 <span style="color: #BA2121; font-style: italic">    &gt;&gt;&gt; pred_pad = file_segmentation(896, 896, images_path[0], model, label_names, device)</span>
@@ -2281,11 +2281,11 @@
 <span style="color: #BA2121; font-style: italic">    &gt;&gt;&gt; im = im &gt; 0.01  # threshold the segmentation mask</span>
 <span style="color: #BA2121; font-style: italic">    &gt;&gt;&gt; im = binary_dilation(im, footprint=disk(1))  # dilate the segmentation mask</span>
 <span style="color: #BA2121; font-style: italic">    &gt;&gt;&gt; im = (im * 255).astype(np.uint8)  # convert the segmentation mask to an image</span>
-<span style="color: #BA2121; font-style: italic">    &gt;&gt;&gt; im = 255 - im if label_names[label_idx] == &#39;background&#39; else im  # invert the background color</span>
+<span style="color: #BA2121; font-style: italic">    &gt;&gt;&gt; im = 255 - im if label_names[label_idx] == 'background' else im  # invert the background color</span>
 <span style="color: #BA2121; font-style: italic">    &gt;&gt;&gt; img = Image.fromarray(im)  # create a PIL image from the segmentation mask</span>
-<span style="color: #BA2121; font-style: italic">    &gt;&gt;&gt; img.save(f&#39;predicted_{label_names[label_idx]}.png&#39;)  # save the segmentation mask as an image</span>
+<span style="color: #BA2121; font-style: italic">    &gt;&gt;&gt; img.save(f'predicted_{label_names[label_idx]}.png')  # save the segmentation mask as an image</span>
 <span style="color: #BA2121; font-style: italic">    &gt;&gt;&gt; db.disconnect()</span>
-<span style="color: #BA2121; font-style: italic">    &quot;&quot;&quot;</span>
+<span style="color: #BA2121; font-style: italic">    """</span>
     <span style="color: #3D7B7B; font-style: italic"># Set up the preprocessing pipeline: resizing, tensor conversion, and normalization</span>
     trans <span style="color: #666">=</span> transforms<span style="color: #666">.</span>Compose([
         ResizeCrop((Sx, Sy)),  <span style="color: #3D7B7B; font-style: italic"># Custom resizing for input dimensions</span>
@@ -2300,18 +2300,18 @@
     xinit, yinit <span style="color: #666">=</span> original_size[<span style="color: #666">1</span>], original_size[<span style="color: #666">0</span>]  <span style="color: #3D7B7B; font-style: italic"># Original height and width</span>
 
     <span style="color: #3D7B7B; font-style: italic"># Placeholder RGB image to determine padding needed for resizing</span>
-    temp_image <span style="color: #666">=</span> Image<span style="color: #666">.</span>new(<span style="color: #BA2121">&quot;RGB&quot;</span>, (Sx, Sy))
+    temp_image <span style="color: #666">=</span> Image<span style="color: #666">.</span>new(<span style="color: #BA2121">"RGB"</span>, (Sx, Sy))
     new_size, padding <span style="color: #666">=</span> ResizeFit((xinit, yinit))<span style="color: #666">.</span>padding(temp_image)  <span style="color: #3D7B7B; font-style: italic"># Calculate new size and padding</span>
 
     <span style="color: #3D7B7B; font-style: italic"># Transform the input image</span>
     input_image <span style="color: #666">=</span> trans(image)<span style="color: #666">.</span>unsqueeze(<span style="color: #666">0</span>)<span style="color: #666">.</span>to(device)  <span style="color: #3D7B7B; font-style: italic"># Add batch dimension</span>
 
     <span style="color: #008000; font-weight: bold">with</span> torch<span style="color: #666">.</span>no_grad():  <span style="color: #3D7B7B; font-style: italic"># Disable gradient computation for inference</span>
-        logger<span style="color: #666">.</span>debug(<span style="color: #BA2121">&quot;Starting single image segmentation using the CNN.&quot;</span>)
+        logger<span style="color: #666">.</span>debug(<span style="color: #BA2121">"Starting single image segmentation using the CNN."</span>)
         <span style="color: #3D7B7B; font-style: italic"># Perform inference using the segmentation model</span>
         outputs <span style="color: #666">=</span> evaluate(input_image, model)
         <span style="color: #3D7B7B; font-style: italic"># Resize outputs to include padding using bilinear interpolation</span>
-        outputs <span style="color: #666">=</span> F<span style="color: #666">.</span>interpolate(outputs, new_size, mode<span style="color: #666">=</span><span style="color: #BA2121">&#39;bilinear&#39;</span>)
+        outputs <span style="color: #666">=</span> F<span style="color: #666">.</span>interpolate(outputs, new_size, mode<span style="color: #666">=</span><span style="color: #BA2121">'bilinear'</span>)
 
     <span style="color: #3D7B7B; font-style: italic"># Initialize an empty tensor to contain predictions with padding reversed</span>
     pred_pad <span style="color: #666">=</span> torch<span style="color: #666">.</span>zeros((<span style="color: #008000">len</span>(label_names), xinit, yinit))
@@ -2362,7 +2362,7 @@ available, falling back to CPU otherwise.</p>
                 <code>Sx</code>
             </td>
             <td>
-                  <code><a class="autorefs autorefs-external" href="https://docs.python.org/3/library/functions.html#int">int</a></code>
+                  <code><a class="autorefs autorefs-external" href="https://docs.python.org/3/builtins/functions.html#int">int</a></code>
             </td>
             <td>
               <div class="doc-md-description">
@@ -2378,7 +2378,7 @@ available, falling back to CPU otherwise.</p>
                 <code>Sy</code>
             </td>
             <td>
-                  <code><a class="autorefs autorefs-external" href="https://docs.python.org/3/library/functions.html#int">int</a></code>
+                  <code><a class="autorefs autorefs-external" href="https://docs.python.org/3/builtins/functions.html#int">int</a></code>
             </td>
             <td>
               <div class="doc-md-description">
@@ -2394,7 +2394,7 @@ available, falling back to CPU otherwise.</p>
                 <code>images_fileset</code>
             </td>
             <td>
-                  <code><a class="autorefs autorefs-external" href="https://docs.python.org/3/library/stdtypes.html#list">list</a>[<a class="autorefs autorefs-external" href="https://docs.python.org/3/library/stdtypes.html#str">str</a> or <a class="autorefs autorefs-external" title="pathlib.Path" href="https://docs.python.org/3/library/pathlib.html#pathlib.Path">Path</a>]</code>
+                  <code><a class="autorefs autorefs-external" href="https://docs.python.org/3/builtins/stdtypes.html#list">list</a>[<a class="autorefs autorefs-external" href="https://docs.python.org/3/builtins/stdtypes.html#str">str</a> or <a class="autorefs autorefs-external" title="pathlib.Path" href="https://docs.python.org/3/library/pathlib.html#pathlib.Path">Path</a>]</code>
             </td>
             <td>
               <div class="doc-md-description">
@@ -2426,7 +2426,7 @@ available, falling back to CPU otherwise.</p>
                 <code>device</code>
             </td>
             <td>
-                  <code><a class="autorefs autorefs-external" href="https://docs.python.org/3/library/stdtypes.html#str">str</a> or <a class="autorefs autorefs-external" title="torch.device" href="https://pytorch.org/docs/stable/tensor_attributes.html#torch.device">device</a></code>
+                  <code><a class="autorefs autorefs-external" href="https://docs.python.org/3/builtins/stdtypes.html#str">str</a> or <a class="autorefs autorefs-external" title="torch.device" href="https://pytorch.org/docs/stable/tensor_attributes.html#torch.device">device</a></code>
             </td>
             <td>
               <div class="doc-md-description">
@@ -2452,7 +2452,7 @@ available, falling back to CPU otherwise.</p>
       <tbody>
           <tr class="doc-section-item">
 <td><code>pred_images</code></td>            <td>
-                  <code><a class="autorefs autorefs-external" href="https://docs.python.org/3/library/stdtypes.html#list">list</a>[<a class="autorefs autorefs-external" title="torch.Tensor" href="https://pytorch.org/docs/stable/tensors.html#torch.Tensor">Tensor</a>]</code>
+                  <code><a class="autorefs autorefs-external" href="https://docs.python.org/3/builtins/stdtypes.html#list">list</a>[<a class="autorefs autorefs-external" title="torch.Tensor" href="https://pytorch.org/docs/stable/tensors.html#torch.Tensor">Tensor</a>]</code>
             </td>
             <td>
               <div class="doc-md-description">
@@ -2474,12 +2474,12 @@ Dimensions of each tensor match the original input image dimensions.</p>
 <span style="color: #000080; font-weight: bold">&gt;&gt;&gt; </span><span style="color: #008000; font-weight: bold">from</span><span style="color: #BBB"> </span><span style="color: #00F; font-weight: bold">plantdb.commons.test_database</span><span style="color: #BBB"> </span><span style="color: #008000; font-weight: bold">import</span> test_database
 <span style="color: #000080; font-weight: bold">&gt;&gt;&gt; </span>db <span style="color: #666">=</span> test_database(with_models<span style="color: #666">=</span><span style="color: #008000; font-weight: bold">True</span>)
 <span style="color: #000080; font-weight: bold">&gt;&gt;&gt; </span>db<span style="color: #666">.</span>connect()
-<span style="color: #000080; font-weight: bold">&gt;&gt;&gt; </span>scan <span style="color: #666">=</span> db<span style="color: #666">.</span>get_scan(<span style="color: #BA2121">&quot;real_plant_analyzed&quot;</span>)
-<span style="color: #000080; font-weight: bold">&gt;&gt;&gt; </span>image_fs <span style="color: #666">=</span> [im_f<span style="color: #666">.</span>path() <span style="color: #008000; font-weight: bold">for</span> im_f <span style="color: #A2F; font-weight: bold">in</span> scan<span style="color: #666">.</span>get_fileset(<span style="color: #BA2121">&#39;images&#39;</span>)<span style="color: #666">.</span>get_files(query<span style="color: #666">=</span>{<span style="color: #BA2121">&quot;channel&quot;</span>: <span style="color: #BA2121">&quot;rgb&quot;</span>})]
-<span style="color: #000080; font-weight: bold">&gt;&gt;&gt; </span>model_file <span style="color: #666">=</span> db<span style="color: #666">.</span>get_scan(<span style="color: #BA2121">&#39;models&#39;</span>)<span style="color: #666">.</span>get_fileset(<span style="color: #BA2121">&#39;models&#39;</span>)<span style="color: #666">.</span>get_file(<span style="color: #BA2121">&#39;Resnet_896_896_epoch50&#39;</span>)
-<span style="color: #000080; font-weight: bold">&gt;&gt;&gt; </span>label_names <span style="color: #666">=</span> model_file<span style="color: #666">.</span>get_metadata(<span style="color: #BA2121">&#39;label_names&#39;</span>)
+<span style="color: #000080; font-weight: bold">&gt;&gt;&gt; </span>scan <span style="color: #666">=</span> db<span style="color: #666">.</span>get_scan(<span style="color: #BA2121">"real_plant_analyzed"</span>)
+<span style="color: #000080; font-weight: bold">&gt;&gt;&gt; </span>image_fs <span style="color: #666">=</span> [im_f<span style="color: #666">.</span>path() <span style="color: #008000; font-weight: bold">for</span> im_f <span style="color: #A2F; font-weight: bold">in</span> scan<span style="color: #666">.</span>get_fileset(<span style="color: #BA2121">'images'</span>)<span style="color: #666">.</span>get_files(query<span style="color: #666">=</span>{<span style="color: #BA2121">"channel"</span>: <span style="color: #BA2121">"rgb"</span>})]
+<span style="color: #000080; font-weight: bold">&gt;&gt;&gt; </span>model_file <span style="color: #666">=</span> db<span style="color: #666">.</span>get_scan(<span style="color: #BA2121">'models'</span>)<span style="color: #666">.</span>get_fileset(<span style="color: #BA2121">'models'</span>)<span style="color: #666">.</span>get_file(<span style="color: #BA2121">'Resnet_896_896_epoch50'</span>)
+<span style="color: #000080; font-weight: bold">&gt;&gt;&gt; </span>label_names <span style="color: #666">=</span> model_file<span style="color: #666">.</span>get_metadata(<span style="color: #BA2121">'label_names'</span>)
 <span style="color: #000080; font-weight: bold">&gt;&gt;&gt; </span><span style="color: #008000">print</span>(label_names)
-<span style="color: #717171">[&#39;background&#39;, &#39;flower&#39;, &#39;fruit&#39;, &#39;leaf&#39;, &#39;pedicel&#39;, &#39;stem&#39;]</span>
+<span style="color: #717171">['background', 'flower', 'fruit', 'leaf', 'pedicel', 'stem']</span>
 <span style="color: #000080; font-weight: bold">&gt;&gt;&gt; </span>pred_pads, im_ids <span style="color: #666">=</span> fileset_segmentation(<span style="color: #666">896</span>, <span style="color: #666">896</span>, image_fs, model_file)
 <span style="color: #000080; font-weight: bold">&gt;&gt;&gt; </span><span style="color: #3D7B7B; font-style: italic"># Export one predicted label in one image for visualization</span>
 <span style="color: #000080; font-weight: bold">&gt;&gt;&gt; </span>img_idx <span style="color: #666">=</span> <span style="color: #666">0</span>  <span style="color: #3D7B7B; font-style: italic"># index of the image to export</span>
@@ -2488,22 +2488,16 @@ Dimensions of each tensor match the original input image dimensions.</p>
 <span style="color: #000080; font-weight: bold">&gt;&gt;&gt; </span>im <span style="color: #666">=</span> im <span style="color: #666">&gt;</span> <span style="color: #666">0.01</span>  <span style="color: #3D7B7B; font-style: italic"># threshold the segmentation mask</span>
 <span style="color: #000080; font-weight: bold">&gt;&gt;&gt; </span>im <span style="color: #666">=</span> binary_dilation(im, footprint<span style="color: #666">=</span>disk(<span style="color: #666">1</span>))  <span style="color: #3D7B7B; font-style: italic"># dilate the segmentation mask</span>
 <span style="color: #000080; font-weight: bold">&gt;&gt;&gt; </span>im <span style="color: #666">=</span> (im <span style="color: #666">*</span> <span style="color: #666">255</span>)<span style="color: #666">.</span>astype(np<span style="color: #666">.</span>uint8)  <span style="color: #3D7B7B; font-style: italic"># convert the segmentation mask to an image</span>
-<span style="color: #000080; font-weight: bold">&gt;&gt;&gt; </span>im <span style="color: #666">=</span> <span style="color: #666">255</span> <span style="color: #666">-</span> im <span style="color: #008000; font-weight: bold">if</span> label_names[label_idx] <span style="color: #666">==</span> <span style="color: #BA2121">&#39;background&#39;</span> <span style="color: #008000; font-weight: bold">else</span> im  <span style="color: #3D7B7B; font-style: italic"># invert the background color</span>
+<span style="color: #000080; font-weight: bold">&gt;&gt;&gt; </span>im <span style="color: #666">=</span> <span style="color: #666">255</span> <span style="color: #666">-</span> im <span style="color: #008000; font-weight: bold">if</span> label_names[label_idx] <span style="color: #666">==</span> <span style="color: #BA2121">'background'</span> <span style="color: #008000; font-weight: bold">else</span> im  <span style="color: #3D7B7B; font-style: italic"># invert the background color</span>
 <span style="color: #000080; font-weight: bold">&gt;&gt;&gt; </span>img <span style="color: #666">=</span> Image<span style="color: #666">.</span>fromarray(im)  <span style="color: #3D7B7B; font-style: italic"># create a PIL image from the segmentation mask</span>
-<span style="color: #000080; font-weight: bold">&gt;&gt;&gt; </span>img<span style="color: #666">.</span>save(<span style="color: #BA2121">f&#39;predicted_</span><span style="color: #A45A77; font-weight: bold">{</span>label_names[label_idx]<span style="color: #A45A77; font-weight: bold">}</span><span style="color: #BA2121">.png&#39;</span>)  <span style="color: #3D7B7B; font-style: italic"># save the segmentation mask as an image</span>
+<span style="color: #000080; font-weight: bold">&gt;&gt;&gt; </span>img<span style="color: #666">.</span>save(<span style="color: #BA2121">f'predicted_</span><span style="color: #A45A77; font-weight: bold">{</span>label_names[label_idx]<span style="color: #A45A77; font-weight: bold">}</span><span style="color: #BA2121">.png'</span>)  <span style="color: #3D7B7B; font-style: italic"># save the segmentation mask as an image</span>
 <span style="color: #000080; font-weight: bold">&gt;&gt;&gt; </span>db<span style="color: #666">.</span>disconnect()
 </code></pre></div>
 
 
             <details class="quote">
               <summary>Source code in <code>romiseg/predict/segmentation.py</code></summary>
-              <div class="language-python highlight" style="background: #f8f8f8"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span style="color: inherit; background-color: transparent; padding-left: 5px; padding-right: 5px;">128</span>
-<span style="color: inherit; background-color: transparent; padding-left: 5px; padding-right: 5px;">129</span>
-<span style="color: inherit; background-color: transparent; padding-left: 5px; padding-right: 5px;">130</span>
-<span style="color: inherit; background-color: transparent; padding-left: 5px; padding-right: 5px;">131</span>
-<span style="color: inherit; background-color: transparent; padding-left: 5px; padding-right: 5px;">132</span>
-<span style="color: inherit; background-color: transparent; padding-left: 5px; padding-right: 5px;">133</span>
-<span style="color: inherit; background-color: transparent; padding-left: 5px; padding-right: 5px;">134</span>
+              <div class="language-python highlight" style="background: #f8f8f8"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span style="color: inherit; background-color: transparent; padding-left: 5px; padding-right: 5px;">134</span>
 <span style="color: inherit; background-color: transparent; padding-left: 5px; padding-right: 5px;">135</span>
 <span style="color: inherit; background-color: transparent; padding-left: 5px; padding-right: 5px;">136</span>
 <span style="color: inherit; background-color: transparent; padding-left: 5px; padding-right: 5px;">137</span>
@@ -2613,8 +2607,20 @@ Dimensions of each tensor match the original input image dimensions.</p>
 <span style="color: inherit; background-color: transparent; padding-left: 5px; padding-right: 5px;">241</span>
 <span style="color: inherit; background-color: transparent; padding-left: 5px; padding-right: 5px;">242</span>
 <span style="color: inherit; background-color: transparent; padding-left: 5px; padding-right: 5px;">243</span>
-<span style="color: inherit; background-color: transparent; padding-left: 5px; padding-right: 5px;">244</span></pre></div></td><td class="code"><div><pre style="line-height: 125%;"><span></span><code><span style="color: #008000; font-weight: bold">def</span><span style="color: #BBB"> </span><span style="color: #00F">fileset_segmentation</span>(Sx, Sy, images_fileset, model_file, device<span style="color: #666">=</span><span style="color: #008000; font-weight: bold">None</span>):
-<span style="color: #BBB">    </span><span style="color: #BA2121; font-style: italic">&quot;&quot;&quot;Segment images within a provided dataset using a pre-trained model.</span>
+<span style="color: inherit; background-color: transparent; padding-left: 5px; padding-right: 5px;">244</span>
+<span style="color: inherit; background-color: transparent; padding-left: 5px; padding-right: 5px;">245</span>
+<span style="color: inherit; background-color: transparent; padding-left: 5px; padding-right: 5px;">246</span>
+<span style="color: inherit; background-color: transparent; padding-left: 5px; padding-right: 5px;">247</span>
+<span style="color: inherit; background-color: transparent; padding-left: 5px; padding-right: 5px;">248</span>
+<span style="color: inherit; background-color: transparent; padding-left: 5px; padding-right: 5px;">249</span>
+<span style="color: inherit; background-color: transparent; padding-left: 5px; padding-right: 5px;">250</span>
+<span style="color: inherit; background-color: transparent; padding-left: 5px; padding-right: 5px;">251</span>
+<span style="color: inherit; background-color: transparent; padding-left: 5px; padding-right: 5px;">252</span>
+<span style="color: inherit; background-color: transparent; padding-left: 5px; padding-right: 5px;">253</span>
+<span style="color: inherit; background-color: transparent; padding-left: 5px; padding-right: 5px;">254</span>
+<span style="color: inherit; background-color: transparent; padding-left: 5px; padding-right: 5px;">255</span>
+<span style="color: inherit; background-color: transparent; padding-left: 5px; padding-right: 5px;">256</span></pre></div></td><td class="code"><div><pre style="line-height: 125%;"><span></span><code><span style="color: #008000; font-weight: bold">def</span><span style="color: #BBB"> </span><span style="color: #00F">fileset_segmentation</span>(Sx, Sy, images_fileset, model_file, device<span style="color: #666">=</span><span style="color: #008000; font-weight: bold">None</span>):
+<span style="color: #BBB">    </span><span style="color: #BA2121; font-style: italic">"""Segment images within a provided dataset using a pre-trained model.</span>
 
 <span style="color: #BA2121; font-style: italic">    This function processes a set of input images, applies pre-processing transformations,</span>
 <span style="color: #BA2121; font-style: italic">    performs segmentation using a pre-trained deep learning model, and adjusts the output</span>
@@ -2650,12 +2656,12 @@ Dimensions of each tensor match the original input image dimensions.</p>
 <span style="color: #BA2121; font-style: italic">    &gt;&gt;&gt; from plantdb.commons.test_database import test_database</span>
 <span style="color: #BA2121; font-style: italic">    &gt;&gt;&gt; db = test_database(with_models=True)</span>
 <span style="color: #BA2121; font-style: italic">    &gt;&gt;&gt; db.connect()</span>
-<span style="color: #BA2121; font-style: italic">    &gt;&gt;&gt; scan = db.get_scan(&quot;real_plant_analyzed&quot;)</span>
-<span style="color: #BA2121; font-style: italic">    &gt;&gt;&gt; image_fs = [im_f.path() for im_f in scan.get_fileset(&#39;images&#39;).get_files(query={&quot;channel&quot;: &quot;rgb&quot;})]</span>
-<span style="color: #BA2121; font-style: italic">    &gt;&gt;&gt; model_file = db.get_scan(&#39;models&#39;).get_fileset(&#39;models&#39;).get_file(&#39;Resnet_896_896_epoch50&#39;)</span>
-<span style="color: #BA2121; font-style: italic">    &gt;&gt;&gt; label_names = model_file.get_metadata(&#39;label_names&#39;)</span>
+<span style="color: #BA2121; font-style: italic">    &gt;&gt;&gt; scan = db.get_scan("real_plant_analyzed")</span>
+<span style="color: #BA2121; font-style: italic">    &gt;&gt;&gt; image_fs = [im_f.path() for im_f in scan.get_fileset('images').get_files(query={"channel": "rgb"})]</span>
+<span style="color: #BA2121; font-style: italic">    &gt;&gt;&gt; model_file = db.get_scan('models').get_fileset('models').get_file('Resnet_896_896_epoch50')</span>
+<span style="color: #BA2121; font-style: italic">    &gt;&gt;&gt; label_names = model_file.get_metadata('label_names')</span>
 <span style="color: #BA2121; font-style: italic">    &gt;&gt;&gt; print(label_names)</span>
-<span style="color: #BA2121; font-style: italic">    [&#39;background&#39;, &#39;flower&#39;, &#39;fruit&#39;, &#39;leaf&#39;, &#39;pedicel&#39;, &#39;stem&#39;]</span>
+<span style="color: #BA2121; font-style: italic">    ['background', 'flower', 'fruit', 'leaf', 'pedicel', 'stem']</span>
 <span style="color: #BA2121; font-style: italic">    &gt;&gt;&gt; pred_pads, im_ids = fileset_segmentation(896, 896, image_fs, model_file)</span>
 <span style="color: #BA2121; font-style: italic">    &gt;&gt;&gt; # Export one predicted label in one image for visualization</span>
 <span style="color: #BA2121; font-style: italic">    &gt;&gt;&gt; img_idx = 0  # index of the image to export</span>
@@ -2664,23 +2670,23 @@ Dimensions of each tensor match the original input image dimensions.</p>
 <span style="color: #BA2121; font-style: italic">    &gt;&gt;&gt; im = im &gt; 0.01  # threshold the segmentation mask</span>
 <span style="color: #BA2121; font-style: italic">    &gt;&gt;&gt; im = binary_dilation(im, footprint=disk(1))  # dilate the segmentation mask</span>
 <span style="color: #BA2121; font-style: italic">    &gt;&gt;&gt; im = (im * 255).astype(np.uint8)  # convert the segmentation mask to an image</span>
-<span style="color: #BA2121; font-style: italic">    &gt;&gt;&gt; im = 255 - im if label_names[label_idx] == &#39;background&#39; else im  # invert the background color</span>
+<span style="color: #BA2121; font-style: italic">    &gt;&gt;&gt; im = 255 - im if label_names[label_idx] == 'background' else im  # invert the background color</span>
 <span style="color: #BA2121; font-style: italic">    &gt;&gt;&gt; img = Image.fromarray(im)  # create a PIL image from the segmentation mask</span>
-<span style="color: #BA2121; font-style: italic">    &gt;&gt;&gt; img.save(f&#39;predicted_{label_names[label_idx]}.png&#39;)  # save the segmentation mask as an image</span>
+<span style="color: #BA2121; font-style: italic">    &gt;&gt;&gt; img.save(f'predicted_{label_names[label_idx]}.png')  # save the segmentation mask as an image</span>
 <span style="color: #BA2121; font-style: italic">    &gt;&gt;&gt; db.disconnect()</span>
-<span style="color: #BA2121; font-style: italic">    &quot;&quot;&quot;</span>
+<span style="color: #BA2121; font-style: italic">    """</span>
     <span style="color: #008000; font-weight: bold">if</span> device <span style="color: #A2F; font-weight: bold">is</span> <span style="color: #008000; font-weight: bold">None</span>:
         <span style="color: #3D7B7B; font-style: italic"># Determine if a GPU is available; use CPU otherwise</span>
-        device <span style="color: #666">=</span> torch<span style="color: #666">.</span>device(<span style="color: #BA2121">&quot;cuda:0&quot;</span> <span style="color: #008000; font-weight: bold">if</span> torch<span style="color: #666">.</span>cuda<span style="color: #666">.</span>is_available() <span style="color: #008000; font-weight: bold">else</span> <span style="color: #BA2121">&quot;cpu&quot;</span>)
+        device <span style="color: #666">=</span> torch<span style="color: #666">.</span>device(<span style="color: #BA2121">"cuda:0"</span> <span style="color: #008000; font-weight: bold">if</span> torch<span style="color: #666">.</span>cuda<span style="color: #666">.</span>is_available() <span style="color: #008000; font-weight: bold">else</span> <span style="color: #BA2121">"cpu"</span>)
     <span style="color: #008000; font-weight: bold">elif</span> <span style="color: #008000">isinstance</span>(device, <span style="color: #008000">str</span>):
         device <span style="color: #666">=</span> torch<span style="color: #666">.</span>device(device)
     <span style="color: #008000; font-weight: bold">else</span>:
         <span style="color: #008000; font-weight: bold">try</span>:
             <span style="color: #008000; font-weight: bold">assert</span> <span style="color: #008000">isinstance</span>(device, torch<span style="color: #666">.</span>device)
         <span style="color: #008000; font-weight: bold">except</span> <span style="color: #CB3F38; font-weight: bold">AssertionError</span>:
-            <span style="color: #008000; font-weight: bold">raise</span> <span style="color: #CB3F38; font-weight: bold">ValueError</span>(<span style="color: #BA2121">f&quot;Invalid device type: </span><span style="color: #A45A77; font-weight: bold">{</span><span style="color: #008000">type</span>(device)<span style="color: #A45A77; font-weight: bold">}</span><span style="color: #BA2121">. Expected str or torch.device.&quot;</span>)
+            <span style="color: #008000; font-weight: bold">raise</span> <span style="color: #CB3F38; font-weight: bold">ValueError</span>(<span style="color: #BA2121">f"Invalid device type: </span><span style="color: #A45A77; font-weight: bold">{</span><span style="color: #008000">type</span>(device)<span style="color: #A45A77; font-weight: bold">}</span><span style="color: #BA2121">. Expected str or torch.device."</span>)
 
-    logger<span style="color: #666">.</span>info(<span style="color: #BA2121">f&#39;Using </span><span style="color: #A45A77; font-weight: bold">{</span>device<span style="color: #A45A77; font-weight: bold">}</span><span style="color: #BA2121"> for images segmentation.&#39;</span>)
+    logger<span style="color: #666">.</span>info(<span style="color: #BA2121">f'Using </span><span style="color: #A45A77; font-weight: bold">{</span>device<span style="color: #A45A77; font-weight: bold">}</span><span style="color: #BA2121"> for images segmentation.'</span>)
 
     <span style="color: #3D7B7B; font-style: italic"># Set up the preprocessing pipeline: resizing, tensor conversion, and normalization</span>
     trans <span style="color: #666">=</span> transforms<span style="color: #666">.</span>Compose([
@@ -2698,8 +2704,8 @@ Dimensions of each tensor match the original input image dimensions.</p>
     loader <span style="color: #666">=</span> DataLoader(image_set, batch_size<span style="color: #666">=</span>batch_size, shuffle<span style="color: #666">=</span><span style="color: #008000; font-weight: bold">False</span>, num_workers<span style="color: #666">=0</span>)
 
     <span style="color: #3D7B7B; font-style: italic"># Load the pretrained segmentation model and associated label names</span>
-    logger<span style="color: #666">.</span>debug(<span style="color: #BA2121">f&quot;Model name: </span><span style="color: #A45A77; font-weight: bold">{</span>model_file<span style="color: #666">.</span>get_metadata(<span style="color: #BA2121">&#39;model_id&#39;</span>)<span style="color: #A45A77; font-weight: bold">}</span><span style="color: #BA2121">&quot;</span>)
-    label_names <span style="color: #666">=</span> model_file<span style="color: #666">.</span>get_metadata(<span style="color: #BA2121">&#39;label_names&#39;</span>)
+    logger<span style="color: #666">.</span>debug(<span style="color: #BA2121">f"Model name: </span><span style="color: #A45A77; font-weight: bold">{</span>model_file<span style="color: #666">.</span>get_metadata(<span style="color: #BA2121">'model_id'</span>)<span style="color: #A45A77; font-weight: bold">}</span><span style="color: #BA2121">"</span>)
+    label_names <span style="color: #666">=</span> model_file<span style="color: #666">.</span>get_metadata(<span style="color: #BA2121">'label_names'</span>)
     model_segmentation <span style="color: #666">=</span> model_from_file(model_file<span style="color: #666">.</span>path(), label_names)
 
     <span style="color: #3D7B7B; font-style: italic"># Move the model to the selected device (GPU/CPU)</span>
@@ -2713,7 +2719,7 @@ Dimensions of each tensor match the original input image dimensions.</p>
     <span style="color: #3D7B7B; font-style: italic"># Process each image in the dataloader</span>
     <span style="color: #008000; font-weight: bold">for</span> inputs, _ <span style="color: #A2F; font-weight: bold">in</span> tqdm(loader):
         <span style="color: #3D7B7B; font-style: italic"># Placeholder RGB image to determine padding needed for resizing</span>
-        im <span style="color: #666">=</span> Image<span style="color: #666">.</span>new(<span style="color: #BA2121">&quot;RGB&quot;</span>, (Sx, Sy))
+        im <span style="color: #666">=</span> Image<span style="color: #666">.</span>new(<span style="color: #BA2121">"RGB"</span>, (Sx, Sy))
         new_size, padding <span style="color: #666">=</span> ResizeFit((xinit, yinit))<span style="color: #666">.</span>padding(im)  <span style="color: #3D7B7B; font-style: italic"># Calculate new size and padding</span>
         <span style="color: #3D7B7B; font-style: italic"># Move input image to the same device as the model</span>
         inputs <span style="color: #666">=</span> inputs<span style="color: #666">.</span>to(device)
@@ -2721,13 +2727,19 @@ Dimensions of each tensor match the original input image dimensions.</p>
             <span style="color: #3D7B7B; font-style: italic"># Perform inference using the segmentation model</span>
             outputs <span style="color: #666">=</span> evaluate(inputs, model_segmentation)
             <span style="color: #3D7B7B; font-style: italic"># Resize outputs to include padding using bilinear interpolation</span>
-            outputs <span style="color: #666">=</span> F<span style="color: #666">.</span>interpolate(outputs, new_size, mode<span style="color: #666">=</span><span style="color: #BA2121">&#39;bilinear&#39;</span>)
+            outputs <span style="color: #666">=</span> F<span style="color: #666">.</span>interpolate(outputs, new_size, mode<span style="color: #666">=</span><span style="color: #BA2121">'bilinear'</span>)
         <span style="color: #3D7B7B; font-style: italic"># Initialize an empty tensor to contain predictions with padding reversed</span>
         pred_pad <span style="color: #666">=</span> torch<span style="color: #666">.</span>zeros((<span style="color: #008000">len</span>(label_names), xinit, yinit))
         <span style="color: #3D7B7B; font-style: italic"># Reverse padding applied earlier to match the original image dimensions</span>
         pred_pad[:, padding[<span style="color: #666">0</span>]:pred_pad<span style="color: #666">.</span>size(<span style="color: #666">1</span>) <span style="color: #666">-</span> padding[<span style="color: #666">2</span>],
         padding[<span style="color: #666">1</span>]:pred_pad<span style="color: #666">.</span>size(<span style="color: #666">2</span>) <span style="color: #666">-</span> padding[<span style="color: #666">3</span>]] <span style="color: #666">=</span> outputs<span style="color: #666">.</span>squeeze(<span style="color: #666">0</span>)
         pred_images<span style="color: #666">.</span>append(pred_pad)
+
+    <span style="color: #3D7B7B; font-style: italic"># Free GPU memory: release the model and return cached blocks to the driver so</span>
+    <span style="color: #3D7B7B; font-style: italic"># later tasks in the same process (e.g. voxel backprojection) aren't starved.</span>
+    <span style="color: #008000; font-weight: bold">if</span> device<span style="color: #666">.</span>type <span style="color: #666">==</span> <span style="color: #BA2121">"cuda"</span>:
+        <span style="color: #008000; font-weight: bold">del</span> model_segmentation
+        torch<span style="color: #666">.</span>cuda<span style="color: #666">.</span>empty_cache()
 
     <span style="color: #008000; font-weight: bold">return</span> pred_images
 </code></pre></div></td></tr></table></div>
@@ -2770,7 +2782,7 @@ a model to generate output segmentations.</p>
                 <code>Sx</code>
             </td>
             <td>
-                  <code><a class="autorefs autorefs-external" href="https://docs.python.org/3/library/functions.html#int">int</a></code>
+                  <code><a class="autorefs autorefs-external" href="https://docs.python.org/3/builtins/functions.html#int">int</a></code>
             </td>
             <td>
               <div class="doc-md-description">
@@ -2786,7 +2798,7 @@ a model to generate output segmentations.</p>
                 <code>Sy</code>
             </td>
             <td>
-                  <code><a class="autorefs autorefs-external" href="https://docs.python.org/3/library/functions.html#int">int</a></code>
+                  <code><a class="autorefs autorefs-external" href="https://docs.python.org/3/builtins/functions.html#int">int</a></code>
             </td>
             <td>
               <div class="doc-md-description">
@@ -2802,7 +2814,7 @@ a model to generate output segmentations.</p>
                 <code>images_fileset</code>
             </td>
             <td>
-                  <code><a class="autorefs autorefs-external" href="https://docs.python.org/3/library/stdtypes.html#list">list</a></code>
+                  <code><a class="autorefs autorefs-external" href="https://docs.python.org/3/builtins/stdtypes.html#list">list</a></code>
             </td>
             <td>
               <div class="doc-md-description">
@@ -2834,7 +2846,7 @@ a model to generate output segmentations.</p>
                 <code>device</code>
             </td>
             <td>
-                  <code><a class="autorefs autorefs-external" href="https://docs.python.org/3/library/stdtypes.html#str">str</a> or <a class="autorefs autorefs-external" title="torch.device" href="https://pytorch.org/docs/stable/tensor_attributes.html#torch.device">device</a></code>
+                  <code><a class="autorefs autorefs-external" href="https://docs.python.org/3/builtins/stdtypes.html#str">str</a> or <a class="autorefs autorefs-external" title="torch.device" href="https://pytorch.org/docs/stable/tensor_attributes.html#torch.device">device</a></code>
             </td>
             <td>
               <div class="doc-md-description">
@@ -2870,7 +2882,7 @@ a model to generate output segmentations.</p>
           </tr>
           <tr class="doc-section-item">
             <td>
-                  <code><a class="autorefs autorefs-external" href="https://docs.python.org/3/library/stdtypes.html#list">list</a></code>
+                  <code><a class="autorefs autorefs-external" href="https://docs.python.org/3/builtins/stdtypes.html#list">list</a></code>
             </td>
             <td>
               <div class="doc-md-description">
@@ -2979,8 +2991,14 @@ a model to generate output segmentations.</p>
 <span style="color: inherit; background-color: transparent; padding-left: 5px; padding-right: 5px;">122</span>
 <span style="color: inherit; background-color: transparent; padding-left: 5px; padding-right: 5px;">123</span>
 <span style="color: inherit; background-color: transparent; padding-left: 5px; padding-right: 5px;">124</span>
-<span style="color: inherit; background-color: transparent; padding-left: 5px; padding-right: 5px;">125</span></pre></div></td><td class="code"><div><pre style="line-height: 125%;"><span></span><code><span style="color: #008000; font-weight: bold">def</span><span style="color: #BBB"> </span><span style="color: #00F">segmentation</span>(Sx, Sy, images_fileset, model_file, device<span style="color: #666">=</span><span style="color: #008000; font-weight: bold">None</span>):
-<span style="color: #BBB">    </span><span style="color: #BA2121; font-style: italic">&quot;&quot;&quot;Segments a list of images using a pretrained deep learning model.</span>
+<span style="color: inherit; background-color: transparent; padding-left: 5px; padding-right: 5px;">125</span>
+<span style="color: inherit; background-color: transparent; padding-left: 5px; padding-right: 5px;">126</span>
+<span style="color: inherit; background-color: transparent; padding-left: 5px; padding-right: 5px;">127</span>
+<span style="color: inherit; background-color: transparent; padding-left: 5px; padding-right: 5px;">128</span>
+<span style="color: inherit; background-color: transparent; padding-left: 5px; padding-right: 5px;">129</span>
+<span style="color: inherit; background-color: transparent; padding-left: 5px; padding-right: 5px;">130</span>
+<span style="color: inherit; background-color: transparent; padding-left: 5px; padding-right: 5px;">131</span></pre></div></td><td class="code"><div><pre style="line-height: 125%;"><span></span><code><span style="color: #008000; font-weight: bold">def</span><span style="color: #BBB"> </span><span style="color: #00F">segmentation</span>(Sx, Sy, images_fileset, model_file, device<span style="color: #666">=</span><span style="color: #008000; font-weight: bold">None</span>):
+<span style="color: #BBB">    </span><span style="color: #BA2121; font-style: italic">"""Segments a list of images using a pretrained deep learning model.</span>
 
 <span style="color: #BA2121; font-style: italic">    This function processes images with resizing, normalization, and forwards them through</span>
 <span style="color: #BA2121; font-style: italic">    a model to generate output segmentations.</span>
@@ -3004,18 +3022,18 @@ a model to generate output segmentations.</p>
 <span style="color: #BA2121; font-style: italic">        The segmented output with dimensions adjusted for padding.</span>
 <span style="color: #BA2121; font-style: italic">    list</span>
 <span style="color: #BA2121; font-style: italic">        The list of image IDs corresponding to the order of the input files.</span>
-<span style="color: #BA2121; font-style: italic">    &quot;&quot;&quot;</span>
+<span style="color: #BA2121; font-style: italic">    """</span>
     <span style="color: #008000; font-weight: bold">if</span> device <span style="color: #A2F; font-weight: bold">is</span> <span style="color: #008000; font-weight: bold">None</span>:
         <span style="color: #3D7B7B; font-style: italic"># Determine if a GPU is available; use CPU otherwise</span>
-        device <span style="color: #666">=</span> torch<span style="color: #666">.</span>device(<span style="color: #BA2121">&quot;cuda:0&quot;</span> <span style="color: #008000; font-weight: bold">if</span> torch<span style="color: #666">.</span>cuda<span style="color: #666">.</span>is_available() <span style="color: #008000; font-weight: bold">else</span> <span style="color: #BA2121">&quot;cpu&quot;</span>)
+        device <span style="color: #666">=</span> torch<span style="color: #666">.</span>device(<span style="color: #BA2121">"cuda:0"</span> <span style="color: #008000; font-weight: bold">if</span> torch<span style="color: #666">.</span>cuda<span style="color: #666">.</span>is_available() <span style="color: #008000; font-weight: bold">else</span> <span style="color: #BA2121">"cpu"</span>)
     <span style="color: #008000; font-weight: bold">elif</span> <span style="color: #008000">isinstance</span>(device, <span style="color: #008000">str</span>):
         device <span style="color: #666">=</span> torch<span style="color: #666">.</span>device(device)
     <span style="color: #008000; font-weight: bold">else</span>:
         <span style="color: #008000; font-weight: bold">try</span>:
             <span style="color: #008000; font-weight: bold">assert</span> <span style="color: #008000">isinstance</span>(device, torch<span style="color: #666">.</span>device)
         <span style="color: #008000; font-weight: bold">except</span> <span style="color: #CB3F38; font-weight: bold">AssertionError</span>:
-            <span style="color: #008000; font-weight: bold">raise</span> <span style="color: #CB3F38; font-weight: bold">ValueError</span>(<span style="color: #BA2121">f&quot;Invalid device type: </span><span style="color: #A45A77; font-weight: bold">{</span><span style="color: #008000">type</span>(device)<span style="color: #A45A77; font-weight: bold">}</span><span style="color: #BA2121">. Expected str or torch.device.&quot;</span>)
-    logger<span style="color: #666">.</span>info(<span style="color: #BA2121">f&#39;Using </span><span style="color: #A45A77; font-weight: bold">{</span>device<span style="color: #A45A77; font-weight: bold">}</span><span style="color: #BA2121"> for images segmentation.&#39;</span>)
+            <span style="color: #008000; font-weight: bold">raise</span> <span style="color: #CB3F38; font-weight: bold">ValueError</span>(<span style="color: #BA2121">f"Invalid device type: </span><span style="color: #A45A77; font-weight: bold">{</span><span style="color: #008000">type</span>(device)<span style="color: #A45A77; font-weight: bold">}</span><span style="color: #BA2121">. Expected str or torch.device."</span>)
+    logger<span style="color: #666">.</span>info(<span style="color: #BA2121">f'Using </span><span style="color: #A45A77; font-weight: bold">{</span>device<span style="color: #A45A77; font-weight: bold">}</span><span style="color: #BA2121"> for images segmentation.'</span>)
 
     <span style="color: #3D7B7B; font-style: italic"># Set up the preprocessing pipeline: resizing, tensor conversion, and normalization</span>
     trans <span style="color: #666">=</span> transforms<span style="color: #666">.</span>Compose([
@@ -3033,8 +3051,8 @@ a model to generate output segmentations.</p>
     loader <span style="color: #666">=</span> DataLoader(image_set, batch_size<span style="color: #666">=</span>batch_size, shuffle<span style="color: #666">=</span><span style="color: #008000; font-weight: bold">False</span>, num_workers<span style="color: #666">=0</span>)
 
     <span style="color: #3D7B7B; font-style: italic"># Load the pretrained segmentation model and associated label names</span>
-    logger<span style="color: #666">.</span>debug(<span style="color: #BA2121">f&quot;Model name: </span><span style="color: #A45A77; font-weight: bold">{</span>model_file<span style="color: #666">.</span>get_metadata(<span style="color: #BA2121">&#39;model_id&#39;</span>)<span style="color: #A45A77; font-weight: bold">}</span><span style="color: #BA2121">&quot;</span>)
-    label_names <span style="color: #666">=</span> model_file<span style="color: #666">.</span>get_metadata(<span style="color: #BA2121">&#39;label_names&#39;</span>)
+    logger<span style="color: #666">.</span>debug(<span style="color: #BA2121">f"Model name: </span><span style="color: #A45A77; font-weight: bold">{</span>model_file<span style="color: #666">.</span>get_metadata(<span style="color: #BA2121">'model_id'</span>)<span style="color: #A45A77; font-weight: bold">}</span><span style="color: #BA2121">"</span>)
+    label_names <span style="color: #666">=</span> model_file<span style="color: #666">.</span>get_metadata(<span style="color: #BA2121">'label_names'</span>)
     model_segmentation <span style="color: #666">=</span> model_from_file(model_file<span style="color: #666">.</span>path(), label_names)
 
     <span style="color: #3D7B7B; font-style: italic"># Move the model to the selected device (GPU/CPU)</span>
@@ -3050,9 +3068,9 @@ a model to generate output segmentations.</p>
         pred_tot <span style="color: #666">=</span> []  <span style="color: #3D7B7B; font-style: italic"># List to store predictions/segmentations</span>
         id_list <span style="color: #666">=</span> []  <span style="color: #3D7B7B; font-style: italic"># List to store IDs of processed images</span>
         count <span style="color: #666">=</span> <span style="color: #666">0</span>  <span style="color: #3D7B7B; font-style: italic"># Counter to track the number of processed images</span>
-        logger<span style="color: #666">.</span>debug(<span style="color: #BA2121">&quot;Starting image segmentation using the CNN.&quot;</span>)
+        logger<span style="color: #666">.</span>debug(<span style="color: #BA2121">"Starting image segmentation using the CNN."</span>)
         <span style="color: #3D7B7B; font-style: italic"># Placeholder RGB image to determine padding needed for resizing</span>
-        im <span style="color: #666">=</span> Image<span style="color: #666">.</span>new(<span style="color: #BA2121">&quot;RGB&quot;</span>, (Sx, Sy))
+        im <span style="color: #666">=</span> Image<span style="color: #666">.</span>new(<span style="color: #BA2121">"RGB"</span>, (Sx, Sy))
         new_size, padding <span style="color: #666">=</span> ResizeFit((xinit, yinit))<span style="color: #666">.</span>padding(im)  <span style="color: #3D7B7B; font-style: italic"># Calculate new size and padding</span>
         <span style="color: #3D7B7B; font-style: italic"># Process each image in the dataloader</span>
         <span style="color: #008000; font-weight: bold">for</span> inputs, id_im <span style="color: #A2F; font-weight: bold">in</span> tqdm(loader):
@@ -3061,8 +3079,8 @@ a model to generate output segmentations.</p>
             <span style="color: #3D7B7B; font-style: italic"># Perform inference using the segmentation model</span>
             outputs <span style="color: #666">=</span> evaluate(inputs, model_segmentation)
             <span style="color: #3D7B7B; font-style: italic"># Resize outputs to include padding using bilinear interpolation</span>
-            outputs <span style="color: #666">=</span> F<span style="color: #666">.</span>interpolate(outputs, new_size, mode<span style="color: #666">=</span><span style="color: #BA2121">&#39;bilinear&#39;</span>)
-            <span style="color: #3D7B7B; font-style: italic"># Store the model&#39;s outputs and corresponding image ID</span>
+            outputs <span style="color: #666">=</span> F<span style="color: #666">.</span>interpolate(outputs, new_size, mode<span style="color: #666">=</span><span style="color: #BA2121">'bilinear'</span>)
+            <span style="color: #3D7B7B; font-style: italic"># Store the model's outputs and corresponding image ID</span>
             pred_tot<span style="color: #666">.</span>append(outputs)
             id_list<span style="color: #666">.</span>append(id_im)
             count <span style="color: #666">+=</span> <span style="color: #666">1</span>
@@ -3073,6 +3091,12 @@ a model to generate output segmentations.</p>
     pred_pad <span style="color: #666">=</span> torch<span style="color: #666">.</span>zeros((N_cam, <span style="color: #008000">len</span>(label_names), xinit, yinit))
     <span style="color: #3D7B7B; font-style: italic"># Reverse padding applied earlier to match the original image dimensions</span>
     pred_pad[:, :, padding[<span style="color: #666">0</span>]:pred_pad<span style="color: #666">.</span>size(<span style="color: #666">2</span>) <span style="color: #666">-</span> padding[<span style="color: #666">2</span>], padding[<span style="color: #666">1</span>]:pred_pad<span style="color: #666">.</span>size(<span style="color: #666">3</span>) <span style="color: #666">-</span> padding[<span style="color: #666">3</span>]] <span style="color: #666">=</span> pred_tot
+
+    <span style="color: #3D7B7B; font-style: italic"># Free GPU memory: release the model and return cached blocks to the driver so</span>
+    <span style="color: #3D7B7B; font-style: italic"># later tasks in the same process (e.g. voxel backprojection) aren't starved.</span>
+    <span style="color: #008000; font-weight: bold">if</span> device<span style="color: #666">.</span>type <span style="color: #666">==</span> <span style="color: #BA2121">"cuda"</span>:
+        <span style="color: #008000; font-weight: bold">del</span> model_segmentation
+        torch<span style="color: #666">.</span>cuda<span style="color: #666">.</span>empty_cache()
 
     <span style="color: #008000; font-weight: bold">return</span> pred_pad, id_list
 </code></pre></div></td></tr></table></div>
@@ -3182,7 +3206,7 @@ a model to generate output segmentations.</p>
       <script id="__config" type="application/json">{"annotate": null, "base": "../../../..", "features": ["navigation.tabs", "navigation.tabs.sticky", "content.code.copy"], "search": "../../../../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
     
     
-      <script src="../../../../assets/javascripts/bundle.79ae519e.min.js"></script>
+      <script src="../../../../assets/javascripts/bundle.d7400e89.min.js"></script>
       
         <script src="../../../../assets/_markdown_exec_pyodide.js"></script>
       

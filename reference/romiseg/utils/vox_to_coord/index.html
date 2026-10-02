@@ -23,7 +23,7 @@
       
       
       <link rel="icon" href="../../../../assets/images/ROMI_logo_green_25.svg">
-      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.6">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.7">
     
     
       
@@ -31,7 +31,7 @@
       
     
     
-      <link rel="stylesheet" href="../../../../assets/stylesheets/main.484c7ddc.min.css">
+      <link rel="stylesheet" href="../../../../assets/stylesheets/main.ec1eaa64.min.css">
       
       
 
@@ -2192,7 +2192,7 @@ voxels projected outside the image.</p>
 <span style="color: inherit; background-color: transparent; padding-left: 5px; padding-right: 5px;">445</span>
 <span style="color: inherit; background-color: transparent; padding-left: 5px; padding-right: 5px;">446</span>
 <span style="color: inherit; background-color: transparent; padding-left: 5px; padding-right: 5px;">447</span></pre></div></td><td class="code"><div><pre style="line-height: 125%;"><span></span><code><span style="color: #008000; font-weight: bold">def</span><span style="color: #BBB"> </span><span style="color: #00F">adjust_predictions</span>(preds):
-<span style="color: #BBB">    </span><span style="color: #BA2121; font-style: italic">&quot;&quot;&quot;</span>
+<span style="color: #BBB">    </span><span style="color: #BA2121; font-style: italic">"""</span>
 <span style="color: #BA2121; font-style: italic">    Adjusts a 4D tensor of predictions by adding a label class for voxels projected</span>
 <span style="color: #BA2121; font-style: italic">    outside the image boundary and ensures that the tensor is properly flattened</span>
 <span style="color: #BA2121; font-style: italic">    with an additional label for outside voxels.</span>
@@ -2209,7 +2209,7 @@ voxels projected outside the image.</p>
 <span style="color: #BA2121; font-style: italic">        A 2D tensor where the predictions are flattened along all dimensions</span>
 <span style="color: #BA2121; font-style: italic">        except the batch dimension, with an additional row corresponding to</span>
 <span style="color: #BA2121; font-style: italic">        voxels projected outside the image.</span>
-<span style="color: #BA2121; font-style: italic">    &quot;&quot;&quot;</span>
+<span style="color: #BA2121; font-style: italic">    """</span>
     outside_proj_label <span style="color: #666">=</span> (preds[:, :, :, <span style="color: #666">0</span>] <span style="color: #666">*</span> <span style="color: #666">0</span>)<span style="color: #666">.</span>unsqueeze(<span style="color: #666">-1</span>)
     preds <span style="color: #666">=</span> torch<span style="color: #666">.</span>cat([preds, outside_proj_label], dim<span style="color: #666">=3</span>)  <span style="color: #3D7B7B; font-style: italic"># Add a label class: voxel projects outside image</span>
     preds_flat <span style="color: #666">=</span> torch<span style="color: #666">.</span>flatten(preds, end_dim<span style="color: #666">=-2</span>)  <span style="color: #3D7B7B; font-style: italic"># Flatten the predictions</span>
@@ -2280,7 +2280,7 @@ in place by the function.</p>
                 <code>eps</code>
             </td>
             <td>
-                  <code><a class="autorefs autorefs-external" href="https://docs.python.org/3/library/functions.html#float">float</a></code>
+                  <code><a class="autorefs autorefs-external" href="https://docs.python.org/3/builtins/functions.html#float">float</a></code>
             </td>
             <td>
               <div class="doc-md-description">
@@ -2347,7 +2347,7 @@ than the epsilon have been set to zero.</p>
 <span style="color: inherit; background-color: transparent; padding-left: 5px; padding-right: 5px;">39</span>
 <span style="color: inherit; background-color: transparent; padding-left: 5px; padding-right: 5px;">40</span>
 <span style="color: inherit; background-color: transparent; padding-left: 5px; padding-right: 5px;">41</span></pre></div></td><td class="code"><div><pre style="line-height: 125%;"><span></span><code><span style="color: #008000; font-weight: bold">def</span><span style="color: #BBB"> </span><span style="color: #00F">avoid_eps</span>(a, eps):
-<span style="color: #BBB">    </span><span style="color: #BA2121; font-style: italic">&quot;&quot;&quot;Sets array elements to zero within a specified epsilon threshold.</span>
+<span style="color: #BBB">    </span><span style="color: #BA2121; font-style: italic">"""Sets array elements to zero within a specified epsilon threshold.</span>
 
 <span style="color: #BA2121; font-style: italic">    This function modifies the input tensor in place. It evaluates the absolute</span>
 <span style="color: #BA2121; font-style: italic">    values of the elements and sets those which are below the epsilon value to</span>
@@ -2368,7 +2368,7 @@ than the epsilon have been set to zero.</p>
 <span style="color: #BA2121; font-style: italic">    torch.Tensor</span>
 <span style="color: #BA2121; font-style: italic">        The modified input tensor `a`, where elements with absolute values smaller</span>
 <span style="color: #BA2121; font-style: italic">        than the epsilon have been set to zero.</span>
-<span style="color: #BA2121; font-style: italic">    &quot;&quot;&quot;</span>
+<span style="color: #BA2121; font-style: italic">    """</span>
     a[torch<span style="color: #666">.</span>abs(a) <span style="color: #666">&lt;</span> eps] <span style="color: #666">=</span> <span style="color: #666">0</span>
     <span style="color: #008000; font-weight: bold">return</span> a
 </code></pre></div></td></tr></table></div>
@@ -2429,7 +2429,7 @@ coordinates and an additional empty fourth column.</p>
                 <code>w</code>
             </td>
             <td>
-                  <code><a class="autorefs autorefs-external" href="https://docs.python.org/3/library/functions.html#int">int</a></code>
+                  <code><a class="autorefs autorefs-external" href="https://docs.python.org/3/builtins/functions.html#int">int</a></code>
             </td>
             <td>
               <div class="doc-md-description">
@@ -2445,7 +2445,7 @@ coordinates and an additional empty fourth column.</p>
                 <code>h</code>
             </td>
             <td>
-                  <code><a class="autorefs autorefs-external" href="https://docs.python.org/3/library/functions.html#int">int</a></code>
+                  <code><a class="autorefs autorefs-external" href="https://docs.python.org/3/builtins/functions.html#int">int</a></code>
             </td>
             <td>
               <div class="doc-md-description">
@@ -2461,7 +2461,7 @@ coordinates and an additional empty fourth column.</p>
                 <code>l</code>
             </td>
             <td>
-                  <code><a class="autorefs autorefs-external" href="https://docs.python.org/3/library/functions.html#int">int</a></code>
+                  <code><a class="autorefs autorefs-external" href="https://docs.python.org/3/builtins/functions.html#int">int</a></code>
             </td>
             <td>
               <div class="doc-md-description">
@@ -2549,7 +2549,7 @@ voxel coordinates in 3D space followed by a placeholder value.</p>
 <span style="color: inherit; background-color: transparent; padding-left: 5px; padding-right: 5px;">88</span>
 <span style="color: inherit; background-color: transparent; padding-left: 5px; padding-right: 5px;">89</span>
 <span style="color: inherit; background-color: transparent; padding-left: 5px; padding-right: 5px;">90</span></pre></div></td><td class="code"><div><pre style="line-height: 125%;"><span></span><code><span style="color: #008000; font-weight: bold">def</span><span style="color: #BBB"> </span><span style="color: #00F">basis_vox</span>(min_vec, w, h, l):
-<span style="color: #BBB">    </span><span style="color: #BA2121; font-style: italic">&quot;&quot;&quot;Generates a grid of voxels with specified dimensions and starting position.</span>
+<span style="color: #BBB">    </span><span style="color: #BA2121; font-style: italic">"""Generates a grid of voxels with specified dimensions and starting position.</span>
 
 <span style="color: #BA2121; font-style: italic">    This function creates a grid of 3D points (voxels) with predefined width, height,</span>
 <span style="color: #BA2121; font-style: italic">    and length originating from a specific minimum position in 3D space. The</span>
@@ -2572,7 +2572,7 @@ voxel coordinates in 3D space followed by a placeholder value.</p>
 <span style="color: #BA2121; font-style: italic">    numpy.ndarray</span>
 <span style="color: #BA2121; font-style: italic">        A (w*h*l, 4) array where each row consists of [X, Y, Z, 0], representing</span>
 <span style="color: #BA2121; font-style: italic">        voxel coordinates in 3D space followed by a placeholder value.</span>
-<span style="color: #BA2121; font-style: italic">    &quot;&quot;&quot;</span>
+<span style="color: #BA2121; font-style: italic">    """</span>
     <span style="color: #3D7B7B; font-style: italic"># Unpack minimum coordinates for the voxel grid.</span>
     minx, miny, minz <span style="color: #666">=</span> min_vec
 
@@ -2638,7 +2638,7 @@ coordinates is returned.</p>
                 <code>min_vec</code>
             </td>
             <td>
-                  <code><span title="Tuple">Tuple</span>[<a class="autorefs autorefs-external" href="https://docs.python.org/3/library/functions.html#float">float</a>, <a class="autorefs autorefs-external" href="https://docs.python.org/3/library/functions.html#float">float</a>, <a class="autorefs autorefs-external" href="https://docs.python.org/3/library/functions.html#float">float</a>]</code>
+                  <code><span title="Tuple">Tuple</span>[<a class="autorefs autorefs-external" href="https://docs.python.org/3/builtins/functions.html#float">float</a>, <a class="autorefs autorefs-external" href="https://docs.python.org/3/builtins/functions.html#float">float</a>, <a class="autorefs autorefs-external" href="https://docs.python.org/3/builtins/functions.html#float">float</a>]</code>
             </td>
             <td>
               <div class="doc-md-description">
@@ -2654,7 +2654,7 @@ coordinates is returned.</p>
                 <code>max_vec</code>
             </td>
             <td>
-                  <code><span title="Tuple">Tuple</span>[<a class="autorefs autorefs-external" href="https://docs.python.org/3/library/functions.html#float">float</a>, <a class="autorefs autorefs-external" href="https://docs.python.org/3/library/functions.html#float">float</a>, <a class="autorefs autorefs-external" href="https://docs.python.org/3/library/functions.html#float">float</a>]</code>
+                  <code><span title="Tuple">Tuple</span>[<a class="autorefs autorefs-external" href="https://docs.python.org/3/builtins/functions.html#float">float</a>, <a class="autorefs autorefs-external" href="https://docs.python.org/3/builtins/functions.html#float">float</a>, <a class="autorefs autorefs-external" href="https://docs.python.org/3/builtins/functions.html#float">float</a>]</code>
             </td>
             <td>
               <div class="doc-md-description">
@@ -2670,7 +2670,7 @@ coordinates is returned.</p>
                 <code>w</code>
             </td>
             <td>
-                  <code><a class="autorefs autorefs-external" href="https://docs.python.org/3/library/functions.html#int">int</a></code>
+                  <code><a class="autorefs autorefs-external" href="https://docs.python.org/3/builtins/functions.html#int">int</a></code>
             </td>
             <td>
               <div class="doc-md-description">
@@ -2686,7 +2686,7 @@ coordinates is returned.</p>
                 <code>h</code>
             </td>
             <td>
-                  <code><a class="autorefs autorefs-external" href="https://docs.python.org/3/library/functions.html#int">int</a></code>
+                  <code><a class="autorefs autorefs-external" href="https://docs.python.org/3/builtins/functions.html#int">int</a></code>
             </td>
             <td>
               <div class="doc-md-description">
@@ -2702,7 +2702,7 @@ coordinates is returned.</p>
                 <code>l</code>
             </td>
             <td>
-                  <code><a class="autorefs autorefs-external" href="https://docs.python.org/3/library/functions.html#int">int</a></code>
+                  <code><a class="autorefs autorefs-external" href="https://docs.python.org/3/builtins/functions.html#int">int</a></code>
             </td>
             <td>
               <div class="doc-md-description">
@@ -2795,7 +2795,7 @@ voxel, while the fourth column remains initialized to zero.</p>
 <span style="color: inherit; background-color: transparent; padding-left: 5px; padding-right: 5px;">141</span>
 <span style="color: inherit; background-color: transparent; padding-left: 5px; padding-right: 5px;">142</span>
 <span style="color: inherit; background-color: transparent; padding-left: 5px; padding-right: 5px;">143</span></pre></div></td><td class="code"><div><pre style="line-height: 125%;"><span></span><code><span style="color: #008000; font-weight: bold">def</span><span style="color: #BBB"> </span><span style="color: #00F">basis_vox_pipeline</span>(min_vec, max_vec, w, h, l):
-<span style="color: #BBB">    </span><span style="color: #BA2121; font-style: italic">&quot;&quot;&quot;Generate a voxel representation within the specified 3D bounding box.</span>
+<span style="color: #BBB">    </span><span style="color: #BA2121; font-style: italic">"""Generate a voxel representation within the specified 3D bounding box.</span>
 
 <span style="color: #BA2121; font-style: italic">    This function creates a voxel grid based on specified dimensions (width,</span>
 <span style="color: #BA2121; font-style: italic">    height, depth) within a 3-dimensional bounding box defined by the minimum</span>
@@ -2822,7 +2822,7 @@ voxel, while the fourth column remains initialized to zero.</p>
 <span style="color: #BA2121; font-style: italic">        A 2D array of shape `(w * h * l, 4)` where each row represents a single voxel.</span>
 <span style="color: #BA2121; font-style: italic">        The first three columns contain the (x, y, z) coordinates of the</span>
 <span style="color: #BA2121; font-style: italic">        voxel, while the fourth column remains initialized to zero.</span>
-<span style="color: #BA2121; font-style: italic">    &quot;&quot;&quot;</span>
+<span style="color: #BA2121; font-style: italic">    """</span>
     <span style="color: #3D7B7B; font-style: italic"># Unpack bounding box boundaries (min and max values for each axis)</span>
     minx, miny, minz <span style="color: #666">=</span> min_vec
     maxx, maxy, maxz <span style="color: #666">=</span> max_vec
@@ -2906,7 +2906,7 @@ and the third dimension represents other features.</p>
                 <code>Sx</code>
             </td>
             <td>
-                  <code><a class="autorefs autorefs-external" href="https://docs.python.org/3/library/functions.html#float">float</a></code>
+                  <code><a class="autorefs autorefs-external" href="https://docs.python.org/3/builtins/functions.html#float">float</a></code>
             </td>
             <td>
               <div class="doc-md-description">
@@ -2922,7 +2922,7 @@ and the third dimension represents other features.</p>
                 <code>Sy</code>
             </td>
             <td>
-                  <code><a class="autorefs autorefs-external" href="https://docs.python.org/3/library/functions.html#float">float</a></code>
+                  <code><a class="autorefs autorefs-external" href="https://docs.python.org/3/builtins/functions.html#float">float</a></code>
             </td>
             <td>
               <div class="doc-md-description">
@@ -2938,7 +2938,7 @@ and the third dimension represents other features.</p>
                 <code>xinit</code>
             </td>
             <td>
-                  <code><a class="autorefs autorefs-external" href="https://docs.python.org/3/library/functions.html#float">float</a></code>
+                  <code><a class="autorefs autorefs-external" href="https://docs.python.org/3/builtins/functions.html#float">float</a></code>
             </td>
             <td>
               <div class="doc-md-description">
@@ -2954,7 +2954,7 @@ and the third dimension represents other features.</p>
                 <code>yinit</code>
             </td>
             <td>
-                  <code><a class="autorefs autorefs-external" href="https://docs.python.org/3/library/functions.html#float">float</a></code>
+                  <code><a class="autorefs autorefs-external" href="https://docs.python.org/3/builtins/functions.html#float">float</a></code>
             </td>
             <td>
               <div class="doc-md-description">
@@ -2970,7 +2970,7 @@ and the third dimension represents other features.</p>
                 <code>val</code>
             </td>
             <td>
-                  <code><a class="autorefs autorefs-external" href="https://docs.python.org/3/library/functions.html#float">float</a></code>
+                  <code><a class="autorefs autorefs-external" href="https://docs.python.org/3/builtins/functions.html#float">float</a></code>
             </td>
             <td>
               <div class="doc-md-description">
@@ -3065,7 +3065,7 @@ coordinates. Values outside the bounds are replaced by the specified <code>val</
 <span style="color: inherit; background-color: transparent; padding-left: 5px; padding-right: 5px;">413</span>
 <span style="color: inherit; background-color: transparent; padding-left: 5px; padding-right: 5px;">414</span>
 <span style="color: inherit; background-color: transparent; padding-left: 5px; padding-right: 5px;">415</span></pre></div></td><td class="code"><div><pre style="line-height: 125%;"><span></span><code><span style="color: #008000; font-weight: bold">def</span><span style="color: #BBB"> </span><span style="color: #00F">correct_coords_outside</span>(coordinates, Sx, Sy, xinit, yinit, val):
-<span style="color: #BBB">    </span><span style="color: #BA2121; font-style: italic">&quot;&quot;&quot;Corrects coordinates that are outside specific bounds by assigning them a fixed value.</span>
+<span style="color: #BBB">    </span><span style="color: #BA2121; font-style: italic">"""Corrects coordinates that are outside specific bounds by assigning them a fixed value.</span>
 
 <span style="color: #BA2121; font-style: italic">    This function modifies coordinate values that fall outside the defined</span>
 <span style="color: #BA2121; font-style: italic">    rectangular bounds determined by the given parameters. The adjustment</span>
@@ -3096,7 +3096,7 @@ coordinates. Values outside the bounds are replaced by the specified <code>val</
 <span style="color: #BA2121; font-style: italic">    torch.Tensor</span>
 <span style="color: #BA2121; font-style: italic">        A tensor of integers with the same shape as the input containing corrected</span>
 <span style="color: #BA2121; font-style: italic">        coordinates. Values outside the bounds are replaced by the specified `val`.</span>
-<span style="color: #BA2121; font-style: italic">    &quot;&quot;&quot;</span>
+<span style="color: #BA2121; font-style: italic">    """</span>
 
     coords <span style="color: #666">=</span> coordinates<span style="color: #666">.</span>clone()
 
@@ -3258,7 +3258,7 @@ invalid input are set to -1.</p>
 <span style="color: inherit; background-color: transparent; padding-left: 5px; padding-right: 5px;">485</span>
 <span style="color: inherit; background-color: transparent; padding-left: 5px; padding-right: 5px;">486</span>
 <span style="color: inherit; background-color: transparent; padding-left: 5px; padding-right: 5px;">487</span></pre></div></td><td class="code"><div><pre style="line-height: 125%;"><span></span><code><span style="color: #008000; font-weight: bold">def</span><span style="color: #BBB"> </span><span style="color: #00F">flatten_coordinates</span>(coords, shape_predictions):
-<span style="color: #BBB">    </span><span style="color: #BA2121; font-style: italic">&quot;&quot;&quot;Flatten coordinates based on provided shape predictions.</span>
+<span style="color: #BBB">    </span><span style="color: #BA2121; font-style: italic">"""Flatten coordinates based on provided shape predictions.</span>
 
 <span style="color: #BA2121; font-style: italic">    This function processes the coordinates by mapping them to flattened indices</span>
 <span style="color: #BA2121; font-style: italic">    using the shape_predictions parameters. It effectively performs a manual</span>
@@ -3281,7 +3281,7 @@ invalid input are set to -1.</p>
 <span style="color: #BA2121; font-style: italic">        A 1D tensor containing flattened indices created from the input</span>
 <span style="color: #BA2121; font-style: italic">        coordinates and predictions. Flattened indices that correspond to</span>
 <span style="color: #BA2121; font-style: italic">        invalid input are set to -1.</span>
-<span style="color: #BA2121; font-style: italic">    &quot;&quot;&quot;</span>
+<span style="color: #BA2121; font-style: italic">    """</span>
     xx <span style="color: #666">=</span> coords[:, <span style="color: #666">0</span>]
     yy <span style="color: #666">=</span> coords[:, <span style="color: #666">1</span>]
     xy <span style="color: #666">=</span> torch<span style="color: #666">.</span>mul(xx, shape_predictions[<span style="color: #666">2</span>]) <span style="color: #666">+</span> yy  <span style="color: #3D7B7B; font-style: italic"># manually perform ravel_multi_index from numpy, along X and Y</span>
@@ -3339,7 +3339,7 @@ rotation to form the final extrinsic matrix.</p>
                 <code>rx</code>
             </td>
             <td>
-                  <code><a class="autorefs autorefs-external" href="https://docs.python.org/3/library/functions.html#float">float</a></code>
+                  <code><a class="autorefs autorefs-external" href="https://docs.python.org/3/builtins/functions.html#float">float</a></code>
             </td>
             <td>
               <div class="doc-md-description">
@@ -3355,7 +3355,7 @@ rotation to form the final extrinsic matrix.</p>
                 <code>ry</code>
             </td>
             <td>
-                  <code><a class="autorefs autorefs-external" href="https://docs.python.org/3/library/functions.html#float">float</a></code>
+                  <code><a class="autorefs autorefs-external" href="https://docs.python.org/3/builtins/functions.html#float">float</a></code>
             </td>
             <td>
               <div class="doc-md-description">
@@ -3371,7 +3371,7 @@ rotation to form the final extrinsic matrix.</p>
                 <code>rz</code>
             </td>
             <td>
-                  <code><a class="autorefs autorefs-external" href="https://docs.python.org/3/library/functions.html#float">float</a></code>
+                  <code><a class="autorefs autorefs-external" href="https://docs.python.org/3/builtins/functions.html#float">float</a></code>
             </td>
             <td>
               <div class="doc-md-description">
@@ -3387,7 +3387,7 @@ rotation to form the final extrinsic matrix.</p>
                 <code>x</code>
             </td>
             <td>
-                  <code><a class="autorefs autorefs-external" href="https://docs.python.org/3/library/functions.html#float">float</a></code>
+                  <code><a class="autorefs autorefs-external" href="https://docs.python.org/3/builtins/functions.html#float">float</a></code>
             </td>
             <td>
               <div class="doc-md-description">
@@ -3403,7 +3403,7 @@ rotation to form the final extrinsic matrix.</p>
                 <code>y</code>
             </td>
             <td>
-                  <code><a class="autorefs autorefs-external" href="https://docs.python.org/3/library/functions.html#float">float</a></code>
+                  <code><a class="autorefs autorefs-external" href="https://docs.python.org/3/builtins/functions.html#float">float</a></code>
             </td>
             <td>
               <div class="doc-md-description">
@@ -3419,7 +3419,7 @@ rotation to form the final extrinsic matrix.</p>
                 <code>z</code>
             </td>
             <td>
-                  <code><a class="autorefs autorefs-external" href="https://docs.python.org/3/library/functions.html#float">float</a></code>
+                  <code><a class="autorefs autorefs-external" href="https://docs.python.org/3/builtins/functions.html#float">float</a></code>
             </td>
             <td>
               <div class="doc-md-description">
@@ -3548,7 +3548,7 @@ rotation to form the final extrinsic matrix.</p>
 <span style="color: inherit; background-color: transparent; padding-left: 5px; padding-right: 5px;">264</span>
 <span style="color: inherit; background-color: transparent; padding-left: 5px; padding-right: 5px;">265</span>
 <span style="color: inherit; background-color: transparent; padding-left: 5px; padding-right: 5px;">266</span></pre></div></td><td class="code"><div><pre style="line-height: 125%;"><span></span><code><span style="color: #008000; font-weight: bold">def</span><span style="color: #BBB"> </span><span style="color: #00F">get_extr</span>(rx, ry, rz, x, y, z):
-<span style="color: #BBB">    </span><span style="color: #BA2121; font-style: italic">&quot;&quot;&quot;Computes the extrinsic camera matrix based on given rotation angles and translation coordinates.</span>
+<span style="color: #BBB">    </span><span style="color: #BA2121; font-style: italic">"""Computes the extrinsic camera matrix based on given rotation angles and translation coordinates.</span>
 
 <span style="color: #BA2121; font-style: italic">    The function forms a 3x4 matrix that represents the combined rotation and translation in 3D space.</span>
 
@@ -3577,7 +3577,7 @@ rotation to form the final extrinsic matrix.</p>
 <span style="color: #BA2121; font-style: italic">    -------</span>
 <span style="color: #BA2121; font-style: italic">    torch.Tensor</span>
 <span style="color: #BA2121; font-style: italic">        A 3x4 extrinsic matrix representing the rotation and translation in 3D space.</span>
-<span style="color: #BA2121; font-style: italic">    &quot;&quot;&quot;</span>
+<span style="color: #BA2121; font-style: italic">    """</span>
     <span style="color: #3D7B7B; font-style: italic"># Initialize a 3x4 matrix to store the rotation and translation components</span>
     rt <span style="color: #666">=</span> torch<span style="color: #666">.</span>zeros((<span style="color: #666">3</span>, <span style="color: #666">4</span>))
 
@@ -3618,9 +3618,9 @@ rotation to form the final extrinsic matrix.</p>
     rotx <span style="color: #666">=</span> avoid_eps(rotx, eps)
 
     <span style="color: #3D7B7B; font-style: italic"># Debugging: Display intermediate rotation matrices</span>
-    logger<span style="color: #666">.</span>debug(<span style="color: #BA2121">f&quot;Rotation matrix for x-axis (rotx):</span><span style="color: #AA5D1F; font-weight: bold">\n</span><span style="color: #A45A77; font-weight: bold">{</span>rotx<span style="color: #A45A77; font-weight: bold">}</span><span style="color: #BA2121">&quot;</span>)
-    logger<span style="color: #666">.</span>debug(<span style="color: #BA2121">f&quot;Rotation matrix for y-axis (roty):</span><span style="color: #AA5D1F; font-weight: bold">\n</span><span style="color: #A45A77; font-weight: bold">{</span>roty<span style="color: #A45A77; font-weight: bold">}</span><span style="color: #BA2121">&quot;</span>)
-    logger<span style="color: #666">.</span>debug(<span style="color: #BA2121">f&quot;Rotation matrix for z-axis (rotz):</span><span style="color: #AA5D1F; font-weight: bold">\n</span><span style="color: #A45A77; font-weight: bold">{</span>rotz<span style="color: #A45A77; font-weight: bold">}</span><span style="color: #BA2121">&quot;</span>)
+    logger<span style="color: #666">.</span>debug(<span style="color: #BA2121">f"Rotation matrix for x-axis (rotx):</span><span style="color: #AA5D1F; font-weight: bold">\n</span><span style="color: #A45A77; font-weight: bold">{</span>rotx<span style="color: #A45A77; font-weight: bold">}</span><span style="color: #BA2121">"</span>)
+    logger<span style="color: #666">.</span>debug(<span style="color: #BA2121">f"Rotation matrix for y-axis (roty):</span><span style="color: #AA5D1F; font-weight: bold">\n</span><span style="color: #A45A77; font-weight: bold">{</span>roty<span style="color: #A45A77; font-weight: bold">}</span><span style="color: #BA2121">"</span>)
+    logger<span style="color: #666">.</span>debug(<span style="color: #BA2121">f"Rotation matrix for z-axis (rotz):</span><span style="color: #AA5D1F; font-weight: bold">\n</span><span style="color: #A45A77; font-weight: bold">{</span>rotz<span style="color: #A45A77; font-weight: bold">}</span><span style="color: #BA2121">"</span>)
 
     <span style="color: #3D7B7B; font-style: italic"># Combined rotation matrix by multiplying rotations in x, y, and z order</span>
     rot <span style="color: #666">=</span> torch<span style="color: #666">.</span>mm(torch<span style="color: #666">.</span>mm(rotx, roty), rotz)
@@ -3682,7 +3682,7 @@ The intrinsic matrix takes the form:</p>
                 <code>fx</code>
             </td>
             <td>
-                  <code><a class="autorefs autorefs-external" href="https://docs.python.org/3/library/functions.html#float">float</a></code>
+                  <code><a class="autorefs autorefs-external" href="https://docs.python.org/3/builtins/functions.html#float">float</a></code>
             </td>
             <td>
               <div class="doc-md-description">
@@ -3698,7 +3698,7 @@ The intrinsic matrix takes the form:</p>
                 <code>fy</code>
             </td>
             <td>
-                  <code><a class="autorefs autorefs-external" href="https://docs.python.org/3/library/functions.html#float">float</a></code>
+                  <code><a class="autorefs autorefs-external" href="https://docs.python.org/3/builtins/functions.html#float">float</a></code>
             </td>
             <td>
               <div class="doc-md-description">
@@ -3714,7 +3714,7 @@ The intrinsic matrix takes the form:</p>
                 <code>cx</code>
             </td>
             <td>
-                  <code><a class="autorefs autorefs-external" href="https://docs.python.org/3/library/functions.html#float">float</a></code>
+                  <code><a class="autorefs autorefs-external" href="https://docs.python.org/3/builtins/functions.html#float">float</a></code>
             </td>
             <td>
               <div class="doc-md-description">
@@ -3730,7 +3730,7 @@ The intrinsic matrix takes the form:</p>
                 <code>cy</code>
             </td>
             <td>
-                  <code><a class="autorefs autorefs-external" href="https://docs.python.org/3/library/functions.html#float">float</a></code>
+                  <code><a class="autorefs autorefs-external" href="https://docs.python.org/3/builtins/functions.html#float">float</a></code>
             </td>
             <td>
               <div class="doc-md-description">
@@ -3800,7 +3800,7 @@ The intrinsic matrix takes the form:</p>
 <span style="color: inherit; background-color: transparent; padding-left: 5px; padding-right: 5px;">173</span>
 <span style="color: inherit; background-color: transparent; padding-left: 5px; padding-right: 5px;">174</span>
 <span style="color: inherit; background-color: transparent; padding-left: 5px; padding-right: 5px;">175</span></pre></div></td><td class="code"><div><pre style="line-height: 125%;"><span></span><code><span style="color: #008000; font-weight: bold">def</span><span style="color: #BBB"> </span><span style="color: #00F">get_int</span>(fx, fy, cx, cy):
-<span style="color: #BBB">    </span><span style="color: #BA2121; font-style: italic">&quot;&quot;&quot;Constructs a camera intrinsic matrix based on the provided focal lengths and principal point coordinates.</span>
+<span style="color: #BBB">    </span><span style="color: #BA2121; font-style: italic">"""Constructs a camera intrinsic matrix based on the provided focal lengths and principal point coordinates.</span>
 
 <span style="color: #BA2121; font-style: italic">    The function generates a 3x3 tensor representing the intrinsic</span>
 <span style="color: #BA2121; font-style: italic">    parameter matrix. This representation is commonly used in computer</span>
@@ -3825,8 +3825,8 @@ The intrinsic matrix takes the form:</p>
 <span style="color: #BA2121; font-style: italic">    Returns</span>
 <span style="color: #BA2121; font-style: italic">    -------</span>
 <span style="color: #BA2121; font-style: italic">    Tensor</span>
-<span style="color: #BA2121; font-style: italic">        A 3x3 tensor representing the camera&#39;s intrinsic matrix.</span>
-<span style="color: #BA2121; font-style: italic">    &quot;&quot;&quot;</span>
+<span style="color: #BA2121; font-style: italic">        A 3x3 tensor representing the camera's intrinsic matrix.</span>
+<span style="color: #BA2121; font-style: italic">    """</span>
     intri <span style="color: #666">=</span> torch<span style="color: #666">.</span>tensor([[fx, <span style="color: #666">0</span>, cx], [<span style="color: #666">0</span>, fy, cy], [<span style="color: #666">0</span>, <span style="color: #666">0</span>, <span style="color: #666">1</span>]])
     <span style="color: #008000; font-weight: bold">return</span> intri
 </code></pre></div></td></tr></table></div>
@@ -3872,7 +3872,7 @@ translation in 3D space.</p>
                 <code>N_cam</code>
             </td>
             <td>
-                  <code><a class="autorefs autorefs-external" href="https://docs.python.org/3/library/functions.html#int">int</a></code>
+                  <code><a class="autorefs autorefs-external" href="https://docs.python.org/3/builtins/functions.html#int">int</a></code>
             </td>
             <td>
               <div class="doc-md-description">
@@ -3888,7 +3888,7 @@ translation in 3D space.</p>
                 <code>x0</code>
             </td>
             <td>
-                  <code><a class="autorefs autorefs-external" href="https://docs.python.org/3/library/functions.html#float">float</a></code>
+                  <code><a class="autorefs autorefs-external" href="https://docs.python.org/3/builtins/functions.html#float">float</a></code>
             </td>
             <td>
               <div class="doc-md-description">
@@ -3905,7 +3905,7 @@ positioned.</p>
                 <code>y0</code>
             </td>
             <td>
-                  <code><a class="autorefs autorefs-external" href="https://docs.python.org/3/library/functions.html#float">float</a></code>
+                  <code><a class="autorefs autorefs-external" href="https://docs.python.org/3/builtins/functions.html#float">float</a></code>
             </td>
             <td>
               <div class="doc-md-description">
@@ -3922,7 +3922,7 @@ path.</p>
                 <code>z0</code>
             </td>
             <td>
-                  <code><a class="autorefs autorefs-external" href="https://docs.python.org/3/library/functions.html#float">float</a></code>
+                  <code><a class="autorefs autorefs-external" href="https://docs.python.org/3/builtins/functions.html#float">float</a></code>
             </td>
             <td>
               <div class="doc-md-description">
@@ -3938,7 +3938,7 @@ path.</p>
                 <code>rx</code>
             </td>
             <td>
-                  <code><a class="autorefs autorefs-external" href="https://docs.python.org/3/library/functions.html#float">float</a></code>
+                  <code><a class="autorefs autorefs-external" href="https://docs.python.org/3/builtins/functions.html#float">float</a></code>
             </td>
             <td>
               <div class="doc-md-description">
@@ -3954,7 +3954,7 @@ path.</p>
                 <code>ry</code>
             </td>
             <td>
-                  <code><a class="autorefs autorefs-external" href="https://docs.python.org/3/library/functions.html#float">float</a></code>
+                  <code><a class="autorefs autorefs-external" href="https://docs.python.org/3/builtins/functions.html#float">float</a></code>
             </td>
             <td>
               <div class="doc-md-description">
@@ -4040,13 +4040,13 @@ camera in 3D space.</p>
 <span style="color: inherit; background-color: transparent; padding-left: 5px; padding-right: 5px;">310</span>
 <span style="color: inherit; background-color: transparent; padding-left: 5px; padding-right: 5px;">311</span>
 <span style="color: inherit; background-color: transparent; padding-left: 5px; padding-right: 5px;">312</span></pre></div></td><td class="code"><div><pre style="line-height: 125%;"><span></span><code><span style="color: #008000; font-weight: bold">def</span><span style="color: #BBB"> </span><span style="color: #00F">get_trajectory</span>(N_cam, x0, y0, z0, rx, ry):
-<span style="color: #BBB">    </span><span style="color: #BA2121; font-style: italic">&quot;&quot;&quot;</span>
+<span style="color: #BBB">    </span><span style="color: #BA2121; font-style: italic">"""</span>
 <span style="color: #BA2121; font-style: italic">    Calculates the trajectory of cameras based on specified parameters and returns</span>
 <span style="color: #BA2121; font-style: italic">    a tensor of extrinsic camera matrices for 3D transformations.</span>
 
 <span style="color: #BA2121; font-style: italic">    Each camera position, derived from the provided parameters, is calculated along</span>
 <span style="color: #BA2121; font-style: italic">    a circular trajectory. The extrinsic matrix for each position is then computed</span>
-<span style="color: #BA2121; font-style: italic">    using the `get_extr` method which specifies the camera&#39;s rotation and</span>
+<span style="color: #BA2121; font-style: italic">    using the `get_extr` method which specifies the camera's rotation and</span>
 <span style="color: #BA2121; font-style: italic">    translation in 3D space.</span>
 
 <span style="color: #BA2121; font-style: italic">    Parameters</span>
@@ -4073,7 +4073,7 @@ camera in 3D space.</p>
 <span style="color: #BA2121; font-style: italic">        cameras. Each extrinsic matrix describes the position and rotation of a</span>
 <span style="color: #BA2121; font-style: italic">        camera in 3D space.</span>
 
-<span style="color: #BA2121; font-style: italic">    &quot;&quot;&quot;</span>
+<span style="color: #BA2121; font-style: italic">    """</span>
     d_theta <span style="color: #666">=</span> <span style="color: #666">-2</span> <span style="color: #666">*</span> np<span style="color: #666">.</span>pi <span style="color: #666">/</span> N_cam
     extrinsics <span style="color: #666">=</span> torch<span style="color: #666">.</span>zeros(N_cam, <span style="color: #666">3</span>, <span style="color: #666">4</span>)
     <span style="color: #008000; font-weight: bold">for</span> i <span style="color: #A2F; font-weight: bold">in</span> <span style="color: #008000">range</span>(N_cam):
@@ -4172,7 +4172,7 @@ coordinate system.</p>
                 <code>give_prod</code>
             </td>
             <td>
-                  <code><a class="autorefs autorefs-external" href="https://docs.python.org/3/library/functions.html#bool">bool</a></code>
+                  <code><a class="autorefs autorefs-external" href="https://docs.python.org/3/builtins/functions.html#bool">bool</a></code>
             </td>
             <td>
               <div class="doc-md-description">
@@ -4262,7 +4262,7 @@ containing the pre-projection 3D coordinates (prod1) and the projected
 <span style="color: inherit; background-color: transparent; padding-left: 5px; padding-right: 5px;">358</span>
 <span style="color: inherit; background-color: transparent; padding-left: 5px; padding-right: 5px;">359</span>
 <span style="color: inherit; background-color: transparent; padding-left: 5px; padding-right: 5px;">360</span></pre></div></td><td class="code"><div><pre style="line-height: 125%;"><span></span><code><span style="color: #008000; font-weight: bold">def</span><span style="color: #BBB"> </span><span style="color: #00F">project_coordinates</span>(torch_voxels, intrinsics, extrinsics, give_prod):
-<span style="color: #BBB">    </span><span style="color: #BA2121; font-style: italic">&quot;&quot;&quot;Projects 3D voxel coordinates into a 2D camera image plane using the given camera intrinsics and extrinsics.</span>
+<span style="color: #BBB">    </span><span style="color: #BA2121; font-style: italic">"""Projects 3D voxel coordinates into a 2D camera image plane using the given camera intrinsics and extrinsics.</span>
 
 <span style="color: #BA2121; font-style: italic">    Additionally, returns pre-projection coordinates if specified.</span>
 
@@ -4274,10 +4274,10 @@ containing the pre-projection 3D coordinates (prod1) and the projected
 <span style="color: #BA2121; font-style: italic">        Intrinsic matrix of the camera.</span>
 <span style="color: #BA2121; font-style: italic">    extrinsics : torch.Tensor</span>
 <span style="color: #BA2121; font-style: italic">        Extrinsic matrix of the camera, containing rotation and translation</span>
-<span style="color: #BA2121; font-style: italic">        parameters for transforming the 3D coordinates into the camera&#39;s</span>
+<span style="color: #BA2121; font-style: italic">        parameters for transforming the 3D coordinates into the camera's</span>
 <span style="color: #BA2121; font-style: italic">        coordinate system.</span>
 <span style="color: #BA2121; font-style: italic">    give_prod : bool</span>
-<span style="color: #BA2121; font-style: italic">        If True, returns the intermediate 3D coordinates in the camera&#39;s</span>
+<span style="color: #BA2121; font-style: italic">        If True, returns the intermediate 3D coordinates in the camera's</span>
 <span style="color: #BA2121; font-style: italic">        coordinate frame before applying projection to the 2D image plane.</span>
 
 <span style="color: #BA2121; font-style: italic">    Returns</span>
@@ -4287,7 +4287,7 @@ containing the pre-projection 3D coordinates (prod1) and the projected
 <span style="color: #BA2121; font-style: italic">        (xy_coords) as a tensor. If `give_prod` is True, returns a tuple</span>
 <span style="color: #BA2121; font-style: italic">        containing the pre-projection 3D coordinates (prod1) and the projected</span>
 <span style="color: #BA2121; font-style: italic">        2D coordinates (xy_coords).</span>
-<span style="color: #BA2121; font-style: italic">    &quot;&quot;&quot;</span>
+<span style="color: #BA2121; font-style: italic">    """</span>
     torch_voxels <span style="color: #666">=</span> torch_voxels<span style="color: #666">.</span>unsqueeze(<span style="color: #666">0</span>)  <span style="color: #3D7B7B; font-style: italic"># homogeneous coordinates</span>
     t <span style="color: #666">=</span> torch_voxels<span style="color: #666">.</span>clone()
     <span style="color: #3D7B7B; font-style: italic"># t = t-torch.mean(t, dim = 1)</span>
@@ -4414,7 +4414,7 @@ containing the pre-projection 3D coordinates (prod1) and the projected
       <script id="__config" type="application/json">{"annotate": null, "base": "../../../..", "features": ["navigation.tabs", "navigation.tabs.sticky", "content.code.copy"], "search": "../../../../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
     
     
-      <script src="../../../../assets/javascripts/bundle.79ae519e.min.js"></script>
+      <script src="../../../../assets/javascripts/bundle.d7400e89.min.js"></script>
       
         <script src="../../../../assets/_markdown_exec_pyodide.js"></script>
       

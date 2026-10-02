@@ -25,7 +25,7 @@
       
       
       <link rel="icon" href="../assets/images/ROMI_logo_green_25.svg">
-      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.6">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.7">
     
     
       
@@ -33,7 +33,7 @@
       
     
     
-      <link rel="stylesheet" href="../assets/stylesheets/main.484c7ddc.min.css">
+      <link rel="stylesheet" href="../assets/stylesheets/main.ec1eaa64.min.css">
       
       
 
@@ -1923,17 +1923,17 @@
 </code></pre></div></p>
 <p>Reference these directories in your config:
 <div class="language-toml highlight" style="background: #f8f8f8"><pre style="line-height: 125%;"><span></span><code><span style="color: #008000; font-weight: bold">[TrainingDirectory]</span>
-path<span style="color: #BBB"> </span><span style="color: #666">=</span><span style="color: #BBB"> </span><span style="color: #BA2121">&quot;/home/you/shared/&quot;</span>
-directory_weights<span style="color: #BBB"> </span><span style="color: #666">=</span><span style="color: #BBB"> </span><span style="color: #BA2121">&quot;weights/&quot;</span>
-tsboard<span style="color: #BBB"> </span><span style="color: #666">=</span><span style="color: #BBB"> </span><span style="color: #BA2121">&quot;board/&quot;</span>
-directory_dataset<span style="color: #BBB"> </span><span style="color: #666">=</span><span style="color: #BBB"> </span><span style="color: #BA2121">&quot;dataset_stem_green&quot;</span>
+path<span style="color: #BBB"> </span><span style="color: #666">=</span><span style="color: #BBB"> </span><span style="color: #BA2121">"/home/you/shared/"</span>
+directory_weights<span style="color: #BBB"> </span><span style="color: #666">=</span><span style="color: #BBB"> </span><span style="color: #BA2121">"weights/"</span>
+tsboard<span style="color: #BBB"> </span><span style="color: #666">=</span><span style="color: #BBB"> </span><span style="color: #BA2121">"board/"</span>
+directory_dataset<span style="color: #BBB"> </span><span style="color: #666">=</span><span style="color: #BBB"> </span><span style="color: #BA2121">"dataset_stem_green"</span>
 
 <span style="color: #008000; font-weight: bold">[Segmentation2D]</span>
-upstream_task<span style="color: #BBB"> </span><span style="color: #666">=</span><span style="color: #BBB"> </span><span style="color: #BA2121">&quot;Scan&quot;</span>
-query<span style="color: #BBB"> </span><span style="color: #666">=</span><span style="color: #BBB"> </span><span style="color: #BA2121">&quot;{</span><span style="color: #AA5D1F; font-weight: bold">\&quot;</span><span style="color: #BA2121">channel</span><span style="color: #AA5D1F; font-weight: bold">\&quot;</span><span style="color: #BA2121">:</span><span style="color: #AA5D1F; font-weight: bold">\&quot;</span><span style="color: #BA2121">rgb</span><span style="color: #AA5D1F; font-weight: bold">\&quot;</span><span style="color: #BA2121">}&quot;</span>
-labels<span style="color: #BBB"> </span><span style="color: #666">=</span><span style="color: #BBB"> </span><span style="color: #BA2121">&quot;background,flower,peduncle,stem,bud,leaf,fruit&quot;</span>
-model_name<span style="color: #BBB"> </span><span style="color: #666">=</span><span style="color: #BBB"> </span><span style="color: #BA2121">&quot;Resnet101&quot;</span>
-model_segmentation_name<span style="color: #BBB"> </span><span style="color: #666">=</span><span style="color: #BBB"> </span><span style="color: #BA2121">&quot;Resnet101_896_896_epoch51.pt&quot;</span>
+upstream_task<span style="color: #BBB"> </span><span style="color: #666">=</span><span style="color: #BBB"> </span><span style="color: #BA2121">"Scan"</span>
+query<span style="color: #BBB"> </span><span style="color: #666">=</span><span style="color: #BBB"> </span><span style="color: #BA2121">"{</span><span style="color: #AA5D1F; font-weight: bold">\"</span><span style="color: #BA2121">channel</span><span style="color: #AA5D1F; font-weight: bold">\"</span><span style="color: #BA2121">:</span><span style="color: #AA5D1F; font-weight: bold">\"</span><span style="color: #BA2121">rgb</span><span style="color: #AA5D1F; font-weight: bold">\"</span><span style="color: #BA2121">}"</span>
+labels<span style="color: #BBB"> </span><span style="color: #666">=</span><span style="color: #BBB"> </span><span style="color: #BA2121">"background,flower,peduncle,stem,bud,leaf,fruit"</span>
+model_name<span style="color: #BBB"> </span><span style="color: #666">=</span><span style="color: #BBB"> </span><span style="color: #BA2121">"Resnet101"</span>
+model_segmentation_name<span style="color: #BBB"> </span><span style="color: #666">=</span><span style="color: #BBB"> </span><span style="color: #BA2121">"Resnet101_896_896_epoch51.pt"</span>
 Sx<span style="color: #BBB"> </span><span style="color: #666">=</span><span style="color: #BBB"> </span><span style="color: #666">896</span>
 Sy<span style="color: #BBB"> </span><span style="color: #666">=</span><span style="color: #BBB"> </span><span style="color: #666">896</span>
 epochs<span style="color: #BBB"> </span><span style="color: #666">=</span><span style="color: #BBB"> </span><span style="color: #666">5</span>
@@ -2056,7 +2056,7 @@ Or import the training function in Python for experiments.</p>
       <script id="__config" type="application/json">{"annotate": null, "base": "..", "features": ["navigation.tabs", "navigation.tabs.sticky", "content.code.copy"], "search": "../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
     
     
-      <script src="../assets/javascripts/bundle.79ae519e.min.js"></script>
+      <script src="../assets/javascripts/bundle.d7400e89.min.js"></script>
       
         <script src="../assets/_markdown_exec_pyodide.js"></script>
       

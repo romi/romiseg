@@ -25,7 +25,7 @@
       
       
       <link rel="icon" href="../../../../assets/images/ROMI_logo_green_25.svg">
-      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.6">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.7">
     
     
       
@@ -33,7 +33,7 @@
       
     
     
-      <link rel="stylesheet" href="../../../../assets/stylesheets/main.484c7ddc.min.css">
+      <link rel="stylesheet" href="../../../../assets/stylesheets/main.ec1eaa64.min.css">
       
       
 
@@ -1987,7 +1987,7 @@
                 <code>url</code>
             </td>
             <td>
-                  <code><a class="autorefs autorefs-external" href="https://docs.python.org/3/library/stdtypes.html#str">str</a> or <a class="autorefs autorefs-external" title="pathlib.Path" href="https://docs.python.org/3/library/pathlib.html#pathlib.Path">Path</a></code>
+                  <code><a class="autorefs autorefs-external" href="https://docs.python.org/3/builtins/stdtypes.html#str">str</a> or <a class="autorefs autorefs-external" title="pathlib.Path" href="https://docs.python.org/3/library/pathlib.html#pathlib.Path">Path</a></code>
             </td>
             <td>
               <div class="doc-md-description">
@@ -2003,7 +2003,7 @@
                 <code>target_dir</code>
             </td>
             <td>
-                  <code><a class="autorefs autorefs-external" href="https://docs.python.org/3/library/stdtypes.html#str">str</a> or <a class="autorefs autorefs-external" title="pathlib.Path" href="https://docs.python.org/3/library/pathlib.html#pathlib.Path">Path</a></code>
+                  <code><a class="autorefs autorefs-external" href="https://docs.python.org/3/builtins/stdtypes.html#str">str</a> or <a class="autorefs autorefs-external" title="pathlib.Path" href="https://docs.python.org/3/library/pathlib.html#pathlib.Path">Path</a></code>
             </td>
             <td>
               <div class="doc-md-description">
@@ -2069,7 +2069,7 @@
 <span style="color: inherit; background-color: transparent; padding-left: 5px; padding-right: 5px;">49</span>
 <span style="color: inherit; background-color: transparent; padding-left: 5px; padding-right: 5px;">50</span>
 <span style="color: inherit; background-color: transparent; padding-left: 5px; padding-right: 5px;">51</span></pre></div></td><td class="code"><div><pre style="line-height: 125%;"><span></span><code><span style="color: #008000; font-weight: bold">def</span><span style="color: #BBB"> </span><span style="color: #00F">download_file</span>(url: <span style="color: #008000">str</span> <span style="color: #666">|</span> Path, target_dir: <span style="color: #008000">str</span> <span style="color: #666">|</span> Path) <span style="color: #666">-&gt;</span> Path:
-<span style="color: #BBB">    </span><span style="color: #BA2121; font-style: italic">&quot;&quot;&quot;</span>
+<span style="color: #BBB">    </span><span style="color: #BA2121; font-style: italic">"""</span>
 <span style="color: #BA2121; font-style: italic">    Downloads a file from a URL to a target directory.</span>
 
 <span style="color: #BA2121; font-style: italic">    Parameters</span>
@@ -2083,12 +2083,12 @@
 <span style="color: #BA2121; font-style: italic">    -------</span>
 <span style="color: #BA2121; font-style: italic">    pathlib.Path</span>
 <span style="color: #BA2121; font-style: italic">        Name of the downloaded file.</span>
-<span style="color: #BA2121; font-style: italic">    &quot;&quot;&quot;</span>
-    local_filename <span style="color: #666">=</span> url<span style="color: #666">.</span>split(<span style="color: #BA2121">&#39;/&#39;</span>)[<span style="color: #666">-1</span>]
+<span style="color: #BA2121; font-style: italic">    """</span>
+    local_filename <span style="color: #666">=</span> url<span style="color: #666">.</span>split(<span style="color: #BA2121">'/'</span>)[<span style="color: #666">-1</span>]
     <span style="color: #3D7B7B; font-style: italic"># NOTE the stream=True parameter below</span>
     <span style="color: #008000; font-weight: bold">with</span> requests<span style="color: #666">.</span>get(url, stream<span style="color: #666">=</span><span style="color: #008000; font-weight: bold">True</span>) <span style="color: #008000; font-weight: bold">as</span> r:
         r<span style="color: #666">.</span>raise_for_status()
-        <span style="color: #008000; font-weight: bold">with</span> <span style="color: #008000">open</span>(target_dir <span style="color: #666">+</span> <span style="color: #BA2121">&#39;/&#39;</span> <span style="color: #666">+</span> local_filename, <span style="color: #BA2121">&#39;wb&#39;</span>) <span style="color: #008000; font-weight: bold">as</span> f:
+        <span style="color: #008000; font-weight: bold">with</span> <span style="color: #008000">open</span>(target_dir <span style="color: #666">+</span> <span style="color: #BA2121">'/'</span> <span style="color: #666">+</span> local_filename, <span style="color: #BA2121">'wb'</span>) <span style="color: #008000; font-weight: bold">as</span> f:
             <span style="color: #008000; font-weight: bold">for</span> chunk <span style="color: #A2F; font-weight: bold">in</span> r<span style="color: #666">.</span>iter_content(chunk_size<span style="color: #666">=8192</span>):
                 <span style="color: #008000; font-weight: bold">if</span> chunk:  <span style="color: #3D7B7B; font-style: italic"># filter out keep-alive new chunks</span>
                     f<span style="color: #666">.</span>write(chunk)
@@ -2132,7 +2132,7 @@
                 <code>model_file</code>
             </td>
             <td>
-                  <code><a class="autorefs autorefs-external" href="https://docs.python.org/3/library/stdtypes.html#str">str</a> or <a class="autorefs autorefs-external" title="pathlib.Path" href="https://docs.python.org/3/library/pathlib.html#pathlib.Path">Path</a></code>
+                  <code><a class="autorefs autorefs-external" href="https://docs.python.org/3/builtins/stdtypes.html#str">str</a> or <a class="autorefs autorefs-external" title="pathlib.Path" href="https://docs.python.org/3/library/pathlib.html#pathlib.Path">Path</a></code>
             </td>
             <td>
               <div class="doc-md-description">
@@ -2148,7 +2148,7 @@
                 <code>model_labels</code>
             </td>
             <td>
-                  <code><a class="autorefs autorefs-external" href="https://docs.python.org/3/library/stdtypes.html#list">list</a>[<a class="autorefs autorefs-external" href="https://docs.python.org/3/library/stdtypes.html#str">str</a>]</code>
+                  <code><a class="autorefs autorefs-external" href="https://docs.python.org/3/builtins/stdtypes.html#list">list</a>[<a class="autorefs autorefs-external" href="https://docs.python.org/3/builtins/stdtypes.html#str">str</a>]</code>
             </td>
             <td>
               <div class="doc-md-description">
@@ -2190,14 +2190,14 @@
     <div class="language-pycon highlight" style="background: #f8f8f8"><pre style="line-height: 125%;"><span></span><code><span style="color: #000080; font-weight: bold">&gt;&gt;&gt; </span><span style="color: #008000; font-weight: bold">from</span><span style="color: #BBB"> </span><span style="color: #00F; font-weight: bold">plantdb.commons.test_database</span><span style="color: #BBB"> </span><span style="color: #008000; font-weight: bold">import</span> test_database
 <span style="color: #000080; font-weight: bold">&gt;&gt;&gt; </span><span style="color: #008000; font-weight: bold">from</span><span style="color: #BBB"> </span><span style="color: #00F; font-weight: bold">romiseg.common.io</span><span style="color: #BBB"> </span><span style="color: #008000; font-weight: bold">import</span> model_from_file
 <span style="color: #000080; font-weight: bold">&gt;&gt;&gt; </span><span style="color: #3D7B7B; font-style: italic"># Set up a test database with an old API model with weights_only=True</span>
-<span style="color: #000080; font-weight: bold">&gt;&gt;&gt; </span>db <span style="color: #666">=</span> test_database(<span style="color: #BA2121">&#39;real_plant&#39;</span>, with_models<span style="color: #666">=</span><span style="color: #008000; font-weight: bold">True</span>, no_auth<span style="color: #666">=</span><span style="color: #008000; font-weight: bold">True</span>)
+<span style="color: #000080; font-weight: bold">&gt;&gt;&gt; </span>db <span style="color: #666">=</span> test_database(<span style="color: #BA2121">'real_plant'</span>, with_models<span style="color: #666">=</span><span style="color: #008000; font-weight: bold">True</span>, no_auth<span style="color: #666">=</span><span style="color: #008000; font-weight: bold">True</span>)
 <span style="color: #000080; font-weight: bold">&gt;&gt;&gt; </span>db<span style="color: #666">.</span>connect()
 <span style="color: #000080; font-weight: bold">&gt;&gt;&gt; </span><span style="color: #3D7B7B; font-style: italic"># Get the model fileset and model file</span>
-<span style="color: #000080; font-weight: bold">&gt;&gt;&gt; </span>model_name <span style="color: #666">=</span> <span style="color: #BA2121">&#39;Resnet_896_896_epoch50.pt&#39;</span>
-<span style="color: #000080; font-weight: bold">&gt;&gt;&gt; </span>models_fileset <span style="color: #666">=</span> db<span style="color: #666">.</span>get_scan(<span style="color: #BA2121">&#39;models&#39;</span>)<span style="color: #666">.</span>get_fileset(<span style="color: #BA2121">&#39;models&#39;</span>)
-<span style="color: #000080; font-weight: bold">&gt;&gt;&gt; </span>models_file <span style="color: #666">=</span> models_fileset<span style="color: #666">.</span>get_file(model_name<span style="color: #666">.</span>split(<span style="color: #BA2121">&#39;.&#39;</span>)[<span style="color: #666">0</span>])
+<span style="color: #000080; font-weight: bold">&gt;&gt;&gt; </span>model_name <span style="color: #666">=</span> <span style="color: #BA2121">'Resnet_896_896_epoch50.pt'</span>
+<span style="color: #000080; font-weight: bold">&gt;&gt;&gt; </span>models_fileset <span style="color: #666">=</span> db<span style="color: #666">.</span>get_scan(<span style="color: #BA2121">'models'</span>)<span style="color: #666">.</span>get_fileset(<span style="color: #BA2121">'models'</span>)
+<span style="color: #000080; font-weight: bold">&gt;&gt;&gt; </span>models_file <span style="color: #666">=</span> models_fileset<span style="color: #666">.</span>get_file(model_name<span style="color: #666">.</span>split(<span style="color: #BA2121">'.'</span>)[<span style="color: #666">0</span>])
 <span style="color: #000080; font-weight: bold">&gt;&gt;&gt; </span><span style="color: #3D7B7B; font-style: italic"># Get the label names from the model metadata</span>
-<span style="color: #000080; font-weight: bold">&gt;&gt;&gt; </span>label_names <span style="color: #666">=</span> models_file<span style="color: #666">.</span>get_metadata(<span style="color: #BA2121">&#39;label_names&#39;</span>)
+<span style="color: #000080; font-weight: bold">&gt;&gt;&gt; </span>label_names <span style="color: #666">=</span> models_file<span style="color: #666">.</span>get_metadata(<span style="color: #BA2121">'label_names'</span>)
 <span style="color: #000080; font-weight: bold">&gt;&gt;&gt; </span>model_segmentation <span style="color: #666">=</span> model_from_file(models_file<span style="color: #666">.</span>path(), label_names)
 <span style="color: #000080; font-weight: bold">&gt;&gt;&gt; </span><span style="color: #008000; font-weight: bold">assert</span> model_segmentation <span style="color: #A2F; font-weight: bold">is</span> <span style="color: #A2F; font-weight: bold">not</span> <span style="color: #008000; font-weight: bold">None</span>
 </code></pre></div>
@@ -2261,7 +2261,7 @@
 <span style="color: inherit; background-color: transparent; padding-left: 5px; padding-right: 5px;">133</span>
 <span style="color: inherit; background-color: transparent; padding-left: 5px; padding-right: 5px;">134</span>
 <span style="color: inherit; background-color: transparent; padding-left: 5px; padding-right: 5px;">135</span></pre></div></td><td class="code"><div><pre style="line-height: 125%;"><span></span><code><span style="color: #008000; font-weight: bold">def</span><span style="color: #BBB"> </span><span style="color: #00F">model_from_file</span>(model_file: <span style="color: #008000">str</span> <span style="color: #666">|</span> Path, model_labels: <span style="color: #008000">list</span>[<span style="color: #008000">str</span>]) <span style="color: #666">-&gt;</span> torch<span style="color: #666">.</span>nn<span style="color: #666">.</span>Module:
-<span style="color: #BBB">    </span><span style="color: #BA2121; font-style: italic">&quot;&quot;&quot;</span>
+<span style="color: #BBB">    </span><span style="color: #BA2121; font-style: italic">"""</span>
 <span style="color: #BA2121; font-style: italic">    Loads a machine learning model and its associated label names from a specified file.</span>
 
 <span style="color: #BA2121; font-style: italic">    Parameters</span>
@@ -2281,17 +2281,17 @@
 <span style="color: #BA2121; font-style: italic">    &gt;&gt;&gt; from plantdb.commons.test_database import test_database</span>
 <span style="color: #BA2121; font-style: italic">    &gt;&gt;&gt; from romiseg.common.io import model_from_file</span>
 <span style="color: #BA2121; font-style: italic">    &gt;&gt;&gt; # Set up a test database with an old API model with weights_only=True</span>
-<span style="color: #BA2121; font-style: italic">    &gt;&gt;&gt; db = test_database(&#39;real_plant&#39;, with_models=True, no_auth=True)</span>
+<span style="color: #BA2121; font-style: italic">    &gt;&gt;&gt; db = test_database('real_plant', with_models=True, no_auth=True)</span>
 <span style="color: #BA2121; font-style: italic">    &gt;&gt;&gt; db.connect()</span>
 <span style="color: #BA2121; font-style: italic">    &gt;&gt;&gt; # Get the model fileset and model file</span>
-<span style="color: #BA2121; font-style: italic">    &gt;&gt;&gt; model_name = &#39;Resnet_896_896_epoch50.pt&#39;</span>
-<span style="color: #BA2121; font-style: italic">    &gt;&gt;&gt; models_fileset = db.get_scan(&#39;models&#39;).get_fileset(&#39;models&#39;)</span>
-<span style="color: #BA2121; font-style: italic">    &gt;&gt;&gt; models_file = models_fileset.get_file(model_name.split(&#39;.&#39;)[0])</span>
+<span style="color: #BA2121; font-style: italic">    &gt;&gt;&gt; model_name = 'Resnet_896_896_epoch50.pt'</span>
+<span style="color: #BA2121; font-style: italic">    &gt;&gt;&gt; models_fileset = db.get_scan('models').get_fileset('models')</span>
+<span style="color: #BA2121; font-style: italic">    &gt;&gt;&gt; models_file = models_fileset.get_file(model_name.split('.')[0])</span>
 <span style="color: #BA2121; font-style: italic">    &gt;&gt;&gt; # Get the label names from the model metadata</span>
-<span style="color: #BA2121; font-style: italic">    &gt;&gt;&gt; label_names = models_file.get_metadata(&#39;label_names&#39;)</span>
+<span style="color: #BA2121; font-style: italic">    &gt;&gt;&gt; label_names = models_file.get_metadata('label_names')</span>
 <span style="color: #BA2121; font-style: italic">    &gt;&gt;&gt; model_segmentation = model_from_file(models_file.path(), label_names)</span>
 <span style="color: #BA2121; font-style: italic">    &gt;&gt;&gt; assert model_segmentation is not None</span>
-<span style="color: #BA2121; font-style: italic">    &quot;&quot;&quot;</span>
+<span style="color: #BA2121; font-style: italic">    """</span>
     <span style="color: #3D7B7B; font-style: italic"># Ensure the old‑API module alias exists (needed for some old checkpoints)</span>
     setup_module_alias()
 
@@ -2300,20 +2300,20 @@
         <span style="color: #3D7B7B; font-style: italic"># PyTorch 2.6 =&gt; introduce `weights_only=True` by default for a more secure behavior</span>
         model_segmentation, _ <span style="color: #666">=</span> io<span style="color: #666">.</span>read_torch(model_file, weights_only<span style="color: #666">=</span><span style="color: #008000; font-weight: bold">True</span>)
     <span style="color: #008000; font-weight: bold">except</span> <span style="color: #CB3F38; font-weight: bold">Exception</span> <span style="color: #008000; font-weight: bold">as</span> e:
-        logger<span style="color: #666">.</span>warning(<span style="color: #BA2121">f&quot;Direct loading failed:</span><span style="color: #AA5D1F; font-weight: bold">\n</span><span style="color: #A45A77; font-weight: bold">{</span>e<span style="color: #A45A77; font-weight: bold">}</span><span style="color: #BA2121">.&quot;</span>)
-        logger<span style="color: #666">.</span>info(<span style="color: #BA2121">&quot;Converting checkpoint to state‑dict...&quot;</span>)
+        logger<span style="color: #666">.</span>warning(<span style="color: #BA2121">f"Direct loading failed:</span><span style="color: #AA5D1F; font-weight: bold">\n</span><span style="color: #A45A77; font-weight: bold">{</span>e<span style="color: #A45A77; font-weight: bold">}</span><span style="color: #BA2121">."</span>)
+        logger<span style="color: #666">.</span>info(<span style="color: #BA2121">"Converting checkpoint to state‑dict..."</span>)
         <span style="color: #3D7B7B; font-style: italic"># Convert the original checkpoint to a state‑dict file</span>
         state_dict_path <span style="color: #666">=</span> convert_model_to_state_dict(model_file, overwrite<span style="color: #666">=</span><span style="color: #008000; font-weight: bold">False</span>)
         <span style="color: #008000; font-weight: bold">if</span> state_dict_path <span style="color: #A2F; font-weight: bold">is</span> <span style="color: #008000; font-weight: bold">None</span> <span style="color: #A2F; font-weight: bold">or</span> <span style="color: #A2F; font-weight: bold">not</span> state_dict_path<span style="color: #666">.</span>exists():
-            logger<span style="color: #666">.</span>error(<span style="color: #BA2121">&quot;Conversion to state‑dict failed: cannot load model.&quot;</span>)
+            logger<span style="color: #666">.</span>error(<span style="color: #BA2121">"Conversion to state‑dict failed: cannot load model."</span>)
             <span style="color: #008000; font-weight: bold">raise</span> <span style="color: #CB3F38; font-weight: bold">Exception</span>
-        logger<span style="color: #666">.</span>info(<span style="color: #BA2121">f&quot;Model loaded from converted state‑dict: </span><span style="color: #A45A77; font-weight: bold">{</span>state_dict_path<span style="color: #A45A77; font-weight: bold">}</span><span style="color: #BA2121">&quot;</span>)
+        logger<span style="color: #666">.</span>info(<span style="color: #BA2121">f"Model loaded from converted state‑dict: </span><span style="color: #A45A77; font-weight: bold">{</span>state_dict_path<span style="color: #A45A77; font-weight: bold">}</span><span style="color: #BA2121">"</span>)
         <span style="color: #008000; font-weight: bold">from</span><span style="color: #BBB"> </span><span style="color: #00F; font-weight: bold">romiseg.models.unet</span><span style="color: #BBB"> </span><span style="color: #008000; font-weight: bold">import</span> ResNetUNet
         model_segmentation <span style="color: #666">=</span> ResNetUNet(<span style="color: #008000">len</span>(model_labels))
         <span style="color: #3D7B7B; font-style: italic"># Load the newly created state‑dict</span>
         model_segmentation<span style="color: #666">.</span>load_state_dict(torch<span style="color: #666">.</span>load(state_dict_path))
     <span style="color: #008000; font-weight: bold">else</span>:
-        logger<span style="color: #666">.</span>info(<span style="color: #BA2121">&quot;Model loaded directly with `io.read_torch`&quot;</span>)
+        logger<span style="color: #666">.</span>info(<span style="color: #BA2121">"Model loaded directly with `io.read_torch`"</span>)
 
     <span style="color: #008000; font-weight: bold">return</span> model_segmentation
 </code></pre></div></td></tr></table></div>
@@ -2354,7 +2354,7 @@
                 <code>weights_folder</code>
             </td>
             <td>
-                  <code><a class="autorefs autorefs-external" href="https://docs.python.org/3/library/stdtypes.html#str">str</a> or <a class="autorefs autorefs-external" title="pathlib.Path" href="https://docs.python.org/3/library/pathlib.html#pathlib.Path">Path</a></code>
+                  <code><a class="autorefs autorefs-external" href="https://docs.python.org/3/builtins/stdtypes.html#str">str</a> or <a class="autorefs autorefs-external" title="pathlib.Path" href="https://docs.python.org/3/library/pathlib.html#pathlib.Path">Path</a></code>
             </td>
             <td>
               <div class="doc-md-description">
@@ -2370,7 +2370,7 @@
                 <code>model_segmentation_name</code>
             </td>
             <td>
-                  <code><a class="autorefs autorefs-external" href="https://docs.python.org/3/library/stdtypes.html#str">str</a></code>
+                  <code><a class="autorefs autorefs-external" href="https://docs.python.org/3/builtins/stdtypes.html#str">str</a></code>
             </td>
             <td>
               <div class="doc-md-description">
@@ -2386,7 +2386,7 @@
                 <code>model_labels</code>
             </td>
             <td>
-                  <code><a class="autorefs autorefs-external" href="https://docs.python.org/3/library/stdtypes.html#list">list</a>[<a class="autorefs autorefs-external" href="https://docs.python.org/3/library/stdtypes.html#str">str</a>]</code>
+                  <code><a class="autorefs autorefs-external" href="https://docs.python.org/3/builtins/stdtypes.html#list">list</a>[<a class="autorefs autorefs-external" href="https://docs.python.org/3/builtins/stdtypes.html#str">str</a>]</code>
             </td>
             <td>
               <div class="doc-md-description">
@@ -2450,7 +2450,7 @@
 <span style="color: inherit; background-color: transparent; padding-left: 5px; padding-right: 5px;">75</span>
 <span style="color: inherit; background-color: transparent; padding-left: 5px; padding-right: 5px;">76</span>
 <span style="color: inherit; background-color: transparent; padding-left: 5px; padding-right: 5px;">77</span></pre></div></td><td class="code"><div><pre style="line-height: 125%;"><span></span><code><span style="color: #008000; font-weight: bold">def</span><span style="color: #BBB"> </span><span style="color: #00F">save_and_load_model</span>(weights_folder: <span style="color: #008000">str</span> <span style="color: #666">|</span> Path, model_segmentation_name: <span style="color: #008000">str</span>, model_labels: <span style="color: #008000">list</span>[<span style="color: #008000">str</span>]) <span style="color: #666">-&gt;</span> torch<span style="color: #666">.</span>nn<span style="color: #666">.</span>Module:
-<span style="color: #BBB">    </span><span style="color: #BA2121; font-style: italic">&quot;&quot;&quot;</span>
+<span style="color: #BBB">    </span><span style="color: #BA2121; font-style: italic">"""</span>
 <span style="color: #BA2121; font-style: italic">    Saves and loads a model.</span>
 
 <span style="color: #BA2121; font-style: italic">    Parameters</span>
@@ -2466,13 +2466,13 @@
 <span style="color: #BA2121; font-style: italic">    -------</span>
 <span style="color: #BA2121; font-style: italic">    torch.nn.Module</span>
 <span style="color: #BA2121; font-style: italic">        The loaded model.</span>
-<span style="color: #BA2121; font-style: italic">    &quot;&quot;&quot;</span>
+<span style="color: #BA2121; font-style: italic">    """</span>
     <span style="color: #3D7B7B; font-style: italic"># if not already saved, download from database</span>
     <span style="color: #008000; font-weight: bold">if</span> model_segmentation_name <span style="color: #A2F; font-weight: bold">not</span> <span style="color: #A2F; font-weight: bold">in</span> os<span style="color: #666">.</span>listdir(weights_folder):
-        url <span style="color: #666">=</span> <span style="color: #BA2121">&#39;http://db.romi-project.eu/models/&#39;</span> <span style="color: #666">+</span> model_segmentation_name
+        url <span style="color: #666">=</span> <span style="color: #BA2121">'http://db.romi-project.eu/models/'</span> <span style="color: #666">+</span> model_segmentation_name
         download_file(url, weights_folder)
 
-    <span style="color: #008000; font-weight: bold">return</span> model_from_file(weights_folder <span style="color: #666">+</span> <span style="color: #BA2121">&#39;/&#39;</span> <span style="color: #666">+</span> model_segmentation_name, model_labels)
+    <span style="color: #008000; font-weight: bold">return</span> model_from_file(weights_folder <span style="color: #666">+</span> <span style="color: #BA2121">'/'</span> <span style="color: #666">+</span> model_segmentation_name, model_labels)
 </code></pre></div></td></tr></table></div>
             </details>
     </div>
@@ -2580,7 +2580,7 @@
       <script id="__config" type="application/json">{"annotate": null, "base": "../../../..", "features": ["navigation.tabs", "navigation.tabs.sticky", "content.code.copy"], "search": "../../../../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
     
     
-      <script src="../../../../assets/javascripts/bundle.79ae519e.min.js"></script>
+      <script src="../../../../assets/javascripts/bundle.d7400e89.min.js"></script>
       
         <script src="../../../../assets/_markdown_exec_pyodide.js"></script>
       

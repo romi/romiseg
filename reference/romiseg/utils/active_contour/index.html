@@ -25,7 +25,7 @@
       
       
       <link rel="icon" href="../../../../assets/images/ROMI_logo_green_25.svg">
-      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.6">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.7">
     
     
       
@@ -33,7 +33,7 @@
       
     
     
-      <link rel="stylesheet" href="../../../../assets/stylesheets/main.484c7ddc.min.css">
+      <link rel="stylesheet" href="../../../../assets/stylesheets/main.ec1eaa64.min.css">
       
       
 
@@ -2186,7 +2186,7 @@ depend on the function's implementation.</p>
 <span style="color: inherit; background-color: transparent; padding-left: 5px; padding-right: 5px;">130</span>
 <span style="color: inherit; background-color: transparent; padding-left: 5px; padding-right: 5px;">131</span>
 <span style="color: inherit; background-color: transparent; padding-left: 5px; padding-right: 5px;">132</span></pre></div></td><td class="code"><div><pre style="line-height: 125%;"><span></span><code><span style="color: #008000; font-weight: bold">def</span><span style="color: #BBB"> </span><span style="color: #00F">close_cont</span>(cont, d):
-<span style="color: #BBB">    </span><span style="color: #BA2121; font-style: italic">&quot;&quot;&quot;Closes or terminates the specified container, performing necessary cleanup or finalization as required.</span>
+<span style="color: #BBB">    </span><span style="color: #BA2121; font-style: italic">"""Closes or terminates the specified container, performing necessary cleanup or finalization as required.</span>
 
 <span style="color: #BA2121; font-style: italic">    This function ensures that the given container is properly closed or terminated,</span>
 <span style="color: #BA2121; font-style: italic">    handling the specified parameter to perform the necessary operations.</span>
@@ -2199,13 +2199,13 @@ depend on the function's implementation.</p>
 <span style="color: #BA2121; font-style: italic">    d : Any</span>
 <span style="color: #BA2121; font-style: italic">        Additional data or parameter required to perform the close or termination</span>
 <span style="color: #BA2121; font-style: italic">        operation on the container. The exact purpose and use of this parameter</span>
-<span style="color: #BA2121; font-style: italic">        depend on the function&#39;s implementation.</span>
+<span style="color: #BA2121; font-style: italic">        depend on the function's implementation.</span>
 
 <span style="color: #BA2121; font-style: italic">    Returns</span>
 <span style="color: #BA2121; font-style: italic">    -------</span>
 <span style="color: #BA2121; font-style: italic">    None</span>
 <span style="color: #BA2121; font-style: italic">        This function does not return any value.</span>
-<span style="color: #BA2121; font-style: italic">    &quot;&quot;&quot;</span>
+<span style="color: #BA2121; font-style: italic">    """</span>
     cont_ <span style="color: #666">=</span> np<span style="color: #666">.</span>vstack([cont, cont[<span style="color: #666">0</span>]])<span style="color: #666">.</span>T
     Ns <span style="color: #666">=</span> np<span style="color: #666">.</span>sqrt(np<span style="color: #666">.</span>sum(np<span style="color: #666">.</span>diff(cont_, axis<span style="color: #666">=1</span>) <span style="color: #666">**</span> <span style="color: #666">2</span>, axis<span style="color: #666">=0</span>))<span style="color: #666">.</span>astype(np<span style="color: #666">.</span>int)
     Ns <span style="color: #666">=</span> Ns <span style="color: #666">/</span> d
@@ -2270,7 +2270,7 @@ depend on the function's implementation.</p>
                 <code>cvtype</code>
             </td>
             <td>
-                  <code><a class="autorefs autorefs-external" href="https://docs.python.org/3/library/functions.html#bool">bool</a></code>
+                  <code><a class="autorefs autorefs-external" href="https://docs.python.org/3/builtins/functions.html#bool">bool</a></code>
             </td>
             <td>
               <div class="doc-md-description">
@@ -2340,7 +2340,7 @@ optionally converted to grayscale if <code>cvtype</code> is True.</p>
 <span style="color: inherit; background-color: transparent; padding-left: 5px; padding-right: 5px;">35</span>
 <span style="color: inherit; background-color: transparent; padding-left: 5px; padding-right: 5px;">36</span>
 <span style="color: inherit; background-color: transparent; padding-left: 5px; padding-right: 5px;">37</span></pre></div></td><td class="code"><div><pre style="line-height: 125%;"><span></span><code><span style="color: #008000; font-weight: bold">def</span><span style="color: #BBB"> </span><span style="color: #00F">exgreen</span>(im_BGR, cvtype<span style="color: #666">=</span><span style="color: #008000; font-weight: bold">False</span>):
-<span style="color: #BBB">    </span><span style="color: #BA2121; font-style: italic">&quot;&quot;&quot;Extracts the green channel from a BGR image and optionally converts the output to grayscale.</span>
+<span style="color: #BBB">    </span><span style="color: #BA2121; font-style: italic">"""Extracts the green channel from a BGR image and optionally converts the output to grayscale.</span>
 
 <span style="color: #BA2121; font-style: italic">    Parameters</span>
 <span style="color: #BA2121; font-style: italic">    ----------</span>
@@ -2356,7 +2356,7 @@ optionally converted to grayscale if <code>cvtype</code> is True.</p>
 <span style="color: #BA2121; font-style: italic">    numpy.ndarray</span>
 <span style="color: #BA2121; font-style: italic">        A 2D NumPy array representing the green channel of the input image,</span>
 <span style="color: #BA2121; font-style: italic">        optionally converted to grayscale if `cvtype` is True.</span>
-<span style="color: #BA2121; font-style: italic">    &quot;&quot;&quot;</span>
+<span style="color: #BA2121; font-style: italic">    """</span>
     Ms <span style="color: #666">=</span> np<span style="color: #666">.</span>max(im_BGR, axis<span style="color: #666">=</span>(<span style="color: #666">0</span>, <span style="color: #666">1</span>))<span style="color: #666">.</span>astype(np<span style="color: #666">.</span>float)
     im_Norm <span style="color: #666">=</span> im_BGR <span style="color: #666">/</span> Ms
     L <span style="color: #666">=</span> im_Norm<span style="color: #666">.</span>sum(axis<span style="color: #666">=2</span>)
@@ -2425,7 +2425,7 @@ or list containing x and y values.</p>
                 <code>Np</code>
             </td>
             <td>
-                  <code><a class="autorefs autorefs-external" href="https://docs.python.org/3/library/functions.html#int">int</a></code>
+                  <code><a class="autorefs autorefs-external" href="https://docs.python.org/3/builtins/functions.html#int">int</a></code>
             </td>
             <td>
               <div class="doc-md-description">
@@ -2463,11 +2463,11 @@ or list containing x and y values.</p>
 <span style="color: inherit; background-color: transparent; padding-left: 5px; padding-right: 5px;">58</span>
 <span style="color: inherit; background-color: transparent; padding-left: 5px; padding-right: 5px;">59</span>
 <span style="color: inherit; background-color: transparent; padding-left: 5px; padding-right: 5px;">60</span></pre></div></td><td class="code"><div><pre style="line-height: 125%;"><span></span><code><span style="color: #008000; font-weight: bold">def</span><span style="color: #BBB"> </span><span style="color: #00F">fill_npoints</span>(xy, Np):
-<span style="color: #BBB">    </span><span style="color: #BA2121; font-style: italic">&quot;&quot;&quot;Fills a given number of points (Np) based on the input coordinates (xy).</span>
+<span style="color: #BBB">    </span><span style="color: #BA2121; font-style: italic">"""Fills a given number of points (Np) based on the input coordinates (xy).</span>
 
 <span style="color: #BA2121; font-style: italic">    This function takes a set of coordinates (xy) and a specified number of points</span>
 <span style="color: #BA2121; font-style: italic">    (Np), and processes or maps the points accordingly. The exact behavior on how</span>
-<span style="color: #BA2121; font-style: italic">    the points are filled depends on the function&#39;s implementation details, which</span>
+<span style="color: #BA2121; font-style: italic">    the points are filled depends on the function's implementation details, which</span>
 <span style="color: #BA2121; font-style: italic">    are not outlined here.</span>
 
 <span style="color: #BA2121; font-style: italic">    Parameters</span>
@@ -2477,7 +2477,7 @@ or list containing x and y values.</p>
 <span style="color: #BA2121; font-style: italic">        or list containing x and y values.</span>
 <span style="color: #BA2121; font-style: italic">    Np : int</span>
 <span style="color: #BA2121; font-style: italic">        The total number of points to be filled or processed.</span>
-<span style="color: #BA2121; font-style: italic">    &quot;&quot;&quot;</span>
+<span style="color: #BA2121; font-style: italic">    """</span>
     ts <span style="color: #666">=</span> np<span style="color: #666">.</span>linspace(<span style="color: #666">0</span>, <span style="color: #008000">len</span>(xy[<span style="color: #666">0</span>]), num<span style="color: #666">=</span><span style="color: #008000">len</span>(xy[<span style="color: #666">0</span>]), endpoint<span style="color: #666">=</span><span style="color: #008000; font-weight: bold">True</span>)
     nts <span style="color: #666">=</span> np<span style="color: #666">.</span>linspace(<span style="color: #666">0</span>, <span style="color: #008000">len</span>(xy[<span style="color: #666">0</span>]), num<span style="color: #666">=</span>Np, endpoint<span style="color: #666">=</span><span style="color: #008000; font-weight: bold">True</span>)
     fx <span style="color: #666">=</span> np<span style="color: #666">.</span>interp(nts, ts, xy[<span style="color: #666">0</span>])
@@ -2542,7 +2542,7 @@ be calculated.</p>
                 <code>sig</code>
             </td>
             <td>
-                  <code><a class="autorefs autorefs-external" href="https://docs.python.org/3/library/functions.html#float">float</a></code>
+                  <code><a class="autorefs autorefs-external" href="https://docs.python.org/3/builtins/functions.html#float">float</a></code>
             </td>
             <td>
               <div class="doc-md-description">
@@ -2602,7 +2602,7 @@ before calculating gradients.</p>
       <tbody>
           <tr class="doc-section-item">
             <td>
-                  <code><a class="autorefs autorefs-external" href="https://docs.python.org/3/library/exceptions.html#ValueError">ValueError</a></code>
+                  <code><a class="autorefs autorefs-external" href="https://docs.python.org/3/builtins/exceptions.html#ValueError">ValueError</a></code>
             </td>
             <td>
               <div class="doc-md-description">
@@ -2654,7 +2654,7 @@ positive number.</p>
 <span style="color: inherit; background-color: transparent; padding-left: 5px; padding-right: 5px;">97</span>
 <span style="color: inherit; background-color: transparent; padding-left: 5px; padding-right: 5px;">98</span>
 <span style="color: inherit; background-color: transparent; padding-left: 5px; padding-right: 5px;">99</span></pre></div></td><td class="code"><div><pre style="line-height: 125%;"><span></span><code><span style="color: #008000; font-weight: bold">def</span><span style="color: #BBB"> </span><span style="color: #00F">get_edge_grad</span>(im, sig):
-<span style="color: #BBB">    </span><span style="color: #BA2121; font-style: italic">&quot;&quot;&quot;Calculates the edge gradients of an image using Gaussian smoothing.</span>
+<span style="color: #BBB">    </span><span style="color: #BA2121; font-style: italic">"""Calculates the edge gradients of an image using Gaussian smoothing.</span>
 
 <span style="color: #BA2121; font-style: italic">    This function computes the gradients of an input image by applying Gaussian</span>
 <span style="color: #BA2121; font-style: italic">    smoothing. The first gradient of the image is computed after convolving</span>
@@ -2682,7 +2682,7 @@ positive number.</p>
 <span style="color: #BA2121; font-style: italic">    ValueError</span>
 <span style="color: #BA2121; font-style: italic">        If the input image `im` is not a 2D array or if `sig` is not a</span>
 <span style="color: #BA2121; font-style: italic">        positive number.</span>
-<span style="color: #BA2121; font-style: italic">    &quot;&quot;&quot;</span>
+<span style="color: #BA2121; font-style: italic">    """</span>
     im <span style="color: #666">=</span> cv2<span style="color: #666">.</span>GaussianBlur(im, (<span style="color: #666">17</span>, <span style="color: #666">17</span>), sig)
     sc_x <span style="color: #666">=</span> cv2<span style="color: #666">.</span>Scharr(im, cv2<span style="color: #666">.</span>CV_64F, <span style="color: #666">1</span>, <span style="color: #666">0</span>)
     sc_y <span style="color: #666">=</span> cv2<span style="color: #666">.</span>Scharr(im, cv2<span style="color: #666">.</span>CV_64F, <span style="color: #666">0</span>, <span style="color: #666">1</span>)
@@ -2733,7 +2733,7 @@ in the function's behavior.</p>
                 <code>alpha</code>
             </td>
             <td>
-                  <code><a class="autorefs autorefs-external" href="https://docs.python.org/3/library/functions.html#float">float</a></code>
+                  <code><a class="autorefs autorefs-external" href="https://docs.python.org/3/builtins/functions.html#float">float</a></code>
             </td>
             <td>
               <div class="doc-md-description">
@@ -2750,7 +2750,7 @@ of the intrinsic value calculation.</p>
                 <code>beta</code>
             </td>
             <td>
-                  <code><a class="autorefs autorefs-external" href="https://docs.python.org/3/library/functions.html#float">float</a></code>
+                  <code><a class="autorefs autorefs-external" href="https://docs.python.org/3/builtins/functions.html#float">float</a></code>
             </td>
             <td>
               <div class="doc-md-description">
@@ -2767,7 +2767,7 @@ value computation. It may relate to <code>alpha</code> or modify the outcome.</p
                 <code>tau</code>
             </td>
             <td>
-                  <code><a class="autorefs autorefs-external" href="https://docs.python.org/3/library/functions.html#float">float</a></code>
+                  <code><a class="autorefs autorefs-external" href="https://docs.python.org/3/builtins/functions.html#float">float</a></code>
             </td>
             <td>
               <div class="doc-md-description">
@@ -2784,7 +2784,7 @@ The exact role depends on the detailed implementation.</p>
                 <code>k</code>
             </td>
             <td>
-                  <code><a class="autorefs autorefs-external" href="https://docs.python.org/3/library/functions.html#float">float</a></code>
+                  <code><a class="autorefs autorefs-external" href="https://docs.python.org/3/builtins/functions.html#float">float</a></code>
             </td>
             <td>
               <div class="doc-md-description">
@@ -2811,7 +2811,7 @@ to adjust or scale the intrinsic value.</p>
       <tbody>
           <tr class="doc-section-item">
             <td>
-                  <code><a class="autorefs autorefs-external" href="https://docs.python.org/3/library/functions.html#float">float</a></code>
+                  <code><a class="autorefs autorefs-external" href="https://docs.python.org/3/builtins/functions.html#float">float</a></code>
             </td>
             <td>
               <div class="doc-md-description">
@@ -2864,13 +2864,13 @@ the parameters <code>alpha</code>, <code>beta</code>, <code>tau</code>, and <cod
 <span style="color: inherit; background-color: transparent; padding-left: 5px; padding-right: 5px;">170</span>
 <span style="color: inherit; background-color: transparent; padding-left: 5px; padding-right: 5px;">171</span>
 <span style="color: inherit; background-color: transparent; padding-left: 5px; padding-right: 5px;">172</span></pre></div></td><td class="code"><div><pre style="line-height: 125%;"><span></span><code><span style="color: #008000; font-weight: bold">def</span><span style="color: #BBB"> </span><span style="color: #00F">get_intrinsic</span>(alpha, beta, tau, k):
-<span style="color: #BBB">    </span><span style="color: #BA2121; font-style: italic">&quot;&quot;&quot;Calculates the intrinsic value based on given inputs.</span>
+<span style="color: #BBB">    </span><span style="color: #BA2121; font-style: italic">"""Calculates the intrinsic value based on given inputs.</span>
 
 <span style="color: #BA2121; font-style: italic">    This function computes the intrinsic value using the provided parameters</span>
 <span style="color: #BA2121; font-style: italic">    `alpha`, `beta`, `tau`, and `k`. The formula or logic for the computation</span>
 <span style="color: #BA2121; font-style: italic">    is implicitly defined within the function implementation. Ensure that the</span>
 <span style="color: #BA2121; font-style: italic">    supplied arguments are valid and conform to any constraints specified</span>
-<span style="color: #BA2121; font-style: italic">    in the function&#39;s behavior.</span>
+<span style="color: #BA2121; font-style: italic">    in the function's behavior.</span>
 
 <span style="color: #BA2121; font-style: italic">    Parameters</span>
 <span style="color: #BA2121; font-style: italic">    ----------</span>
@@ -2892,7 +2892,7 @@ the parameters <code>alpha</code>, <code>beta</code>, <code>tau</code>, and <cod
 <span style="color: #BA2121; font-style: italic">    float</span>
 <span style="color: #BA2121; font-style: italic">        The computed intrinsic value resulting from the combination of</span>
 <span style="color: #BA2121; font-style: italic">        the parameters `alpha`, `beta`, `tau`, and `k`.</span>
-<span style="color: #BA2121; font-style: italic">    &quot;&quot;&quot;</span>
+<span style="color: #BA2121; font-style: italic">    """</span>
     Ac <span style="color: #666">=</span> np<span style="color: #666">.</span>hstack([[beta, <span style="color: #666">-</span>alpha <span style="color: #666">-</span> <span style="color: #666">4</span> <span style="color: #666">*</span> beta, <span style="color: #666">2</span> <span style="color: #666">*</span> alpha <span style="color: #666">+</span> <span style="color: #666">6</span> <span style="color: #666">*</span> beta, <span style="color: #666">-</span>alpha <span style="color: #666">-</span> <span style="color: #666">4</span> <span style="color: #666">*</span> beta, beta], np<span style="color: #666">.</span>zeros(k <span style="color: #666">-</span> <span style="color: #666">5</span>)])
 
     A <span style="color: #666">=</span> np<span style="color: #666">.</span>zeros([k, k])
@@ -2943,7 +2943,7 @@ It also supports optional input of spatial parameters (<code>xys</code>) for ini
                 <code>imname</code>
             </td>
             <td>
-                  <code><a class="autorefs autorefs-external" href="https://docs.python.org/3/library/stdtypes.html#str">str</a></code>
+                  <code><a class="autorefs autorefs-external" href="https://docs.python.org/3/builtins/stdtypes.html#str">str</a></code>
             </td>
             <td>
               <div class="doc-md-description">
@@ -2959,7 +2959,7 @@ It also supports optional input of spatial parameters (<code>xys</code>) for ini
                 <code>xys</code>
             </td>
             <td>
-                  <code><a class="autorefs autorefs-external" href="https://docs.python.org/3/library/stdtypes.html#list">list</a></code>
+                  <code><a class="autorefs autorefs-external" href="https://docs.python.org/3/builtins/stdtypes.html#list">list</a></code>
             </td>
             <td>
               <div class="doc-md-description">
@@ -2975,7 +2975,7 @@ It also supports optional input of spatial parameters (<code>xys</code>) for ini
                 <code>beta</code>
             </td>
             <td>
-                  <code><a class="autorefs autorefs-external" href="https://docs.python.org/3/library/functions.html#float">float</a></code>
+                  <code><a class="autorefs autorefs-external" href="https://docs.python.org/3/builtins/functions.html#float">float</a></code>
             </td>
             <td>
               <div class="doc-md-description">
@@ -2991,7 +2991,7 @@ It also supports optional input of spatial parameters (<code>xys</code>) for ini
                 <code>alpha</code>
             </td>
             <td>
-                  <code><a class="autorefs autorefs-external" href="https://docs.python.org/3/library/functions.html#float">float</a></code>
+                  <code><a class="autorefs autorefs-external" href="https://docs.python.org/3/builtins/functions.html#float">float</a></code>
             </td>
             <td>
               <div class="doc-md-description">
@@ -3007,7 +3007,7 @@ It also supports optional input of spatial parameters (<code>xys</code>) for ini
                 <code>tau</code>
             </td>
             <td>
-                  <code><a class="autorefs autorefs-external" href="https://docs.python.org/3/library/functions.html#int">int</a> or <a class="autorefs autorefs-external" href="https://docs.python.org/3/library/functions.html#float">float</a></code>
+                  <code><a class="autorefs autorefs-external" href="https://docs.python.org/3/builtins/functions.html#int">int</a> or <a class="autorefs autorefs-external" href="https://docs.python.org/3/builtins/functions.html#float">float</a></code>
             </td>
             <td>
               <div class="doc-md-description">
@@ -3023,7 +3023,7 @@ It also supports optional input of spatial parameters (<code>xys</code>) for ini
                 <code>d</code>
             </td>
             <td>
-                  <code><a class="autorefs autorefs-external" href="https://docs.python.org/3/library/functions.html#int">int</a></code>
+                  <code><a class="autorefs autorefs-external" href="https://docs.python.org/3/builtins/functions.html#int">int</a></code>
             </td>
             <td>
               <div class="doc-md-description">
@@ -3039,7 +3039,7 @@ It also supports optional input of spatial parameters (<code>xys</code>) for ini
                 <code>Nit</code>
             </td>
             <td>
-                  <code><a class="autorefs autorefs-external" href="https://docs.python.org/3/library/functions.html#int">int</a></code>
+                  <code><a class="autorefs autorefs-external" href="https://docs.python.org/3/builtins/functions.html#int">int</a></code>
             </td>
             <td>
               <div class="doc-md-description">
@@ -3055,7 +3055,7 @@ It also supports optional input of spatial parameters (<code>xys</code>) for ini
                 <code>ksave</code>
             </td>
             <td>
-                  <code><a class="autorefs autorefs-external" href="https://docs.python.org/3/library/functions.html#int">int</a></code>
+                  <code><a class="autorefs autorefs-external" href="https://docs.python.org/3/builtins/functions.html#int">int</a></code>
             </td>
             <td>
               <div class="doc-md-description">
@@ -3146,7 +3146,7 @@ internally, such as writing to a file or updating a dataset.</p>
 <span style="color: inherit; background-color: transparent; padding-left: 5px; padding-right: 5px;">292</span>
 <span style="color: inherit; background-color: transparent; padding-left: 5px; padding-right: 5px;">293</span>
 <span style="color: inherit; background-color: transparent; padding-left: 5px; padding-right: 5px;">294</span></pre></div></td><td class="code"><div><pre style="line-height: 125%;"><span></span><code><span style="color: #008000; font-weight: bold">def</span><span style="color: #BBB"> </span><span style="color: #00F">refine</span>(imname, xys<span style="color: #666">=</span>[], beta<span style="color: #666">=.0001</span>, alpha<span style="color: #666">=.01</span>, tau<span style="color: #666">=10</span>, d<span style="color: #666">=1</span>, Nit<span style="color: #666">=10000</span>, ksave<span style="color: #666">=100</span>):
-<span style="color: #BBB">    </span><span style="color: #BA2121; font-style: italic">&quot;&quot;&quot;Refines the optimization of a given dataset according to the provided parameters.</span>
+<span style="color: #BBB">    </span><span style="color: #BA2121; font-style: italic">"""Refines the optimization of a given dataset according to the provided parameters.</span>
 
 <span style="color: #BA2121; font-style: italic">    This function operates on an image dataset. It iteratively refines the data using</span>
 <span style="color: #BA2121; font-style: italic">    optimization parameters such as beta, alpha, and tau. The refinement process is</span>
@@ -3178,7 +3178,7 @@ internally, such as writing to a file or updating a dataset.</p>
 <span style="color: #BA2121; font-style: italic">        This function does not return a value. The results are stored or managed</span>
 <span style="color: #BA2121; font-style: italic">        internally, such as writing to a file or updating a dataset.</span>
 
-<span style="color: #BA2121; font-style: italic">    &quot;&quot;&quot;</span>
+<span style="color: #BA2121; font-style: italic">    """</span>
     im <span style="color: #666">=</span> cv2<span style="color: #666">.</span>imread(imname)<span style="color: #666">.</span>astype(np<span style="color: #666">.</span>float)
     h, w <span style="color: #666">=</span> im<span style="color: #666">.</span>shape[:<span style="color: #666">2</span>]
     imG <span style="color: #666">=</span> exgreen(im, <span style="color: #008000; font-weight: bold">True</span>)
@@ -3253,7 +3253,7 @@ a scalar value representing the cost.</p>
                 <code>svgdir</code>
             </td>
             <td>
-                  <code><a class="autorefs autorefs-external" href="https://docs.python.org/3/library/stdtypes.html#str">str</a></code>
+                  <code><a class="autorefs autorefs-external" href="https://docs.python.org/3/builtins/stdtypes.html#str">str</a></code>
             </td>
             <td>
               <div class="doc-md-description">
@@ -3270,7 +3270,7 @@ Must be a valid and accessible path.</p>
                 <code>beta</code>
             </td>
             <td>
-                  <code><a class="autorefs autorefs-external" href="https://docs.python.org/3/library/functions.html#float">float</a></code>
+                  <code><a class="autorefs autorefs-external" href="https://docs.python.org/3/builtins/functions.html#float">float</a></code>
             </td>
             <td>
               <div class="doc-md-description">
@@ -3287,7 +3287,7 @@ optimization process. Default is 0.0001.</p>
                 <code>alpha</code>
             </td>
             <td>
-                  <code><a class="autorefs autorefs-external" href="https://docs.python.org/3/library/functions.html#float">float</a></code>
+                  <code><a class="autorefs autorefs-external" href="https://docs.python.org/3/builtins/functions.html#float">float</a></code>
             </td>
             <td>
               <div class="doc-md-description">
@@ -3303,7 +3303,7 @@ optimization process. Default is 0.0001.</p>
                 <code>tau</code>
             </td>
             <td>
-                  <code><a class="autorefs autorefs-external" href="https://docs.python.org/3/library/functions.html#int">int</a></code>
+                  <code><a class="autorefs autorefs-external" href="https://docs.python.org/3/builtins/functions.html#int">int</a></code>
             </td>
             <td>
               <div class="doc-md-description">
@@ -3320,7 +3320,7 @@ process. Default is 10.</p>
                 <code>Nit</code>
             </td>
             <td>
-                  <code><a class="autorefs autorefs-external" href="https://docs.python.org/3/library/functions.html#int">int</a></code>
+                  <code><a class="autorefs autorefs-external" href="https://docs.python.org/3/builtins/functions.html#int">int</a></code>
             </td>
             <td>
               <div class="doc-md-description">
@@ -3337,7 +3337,7 @@ is 10000.</p>
                 <code>ksave</code>
             </td>
             <td>
-                  <code><a class="autorefs autorefs-external" href="https://docs.python.org/3/library/functions.html#int">int</a></code>
+                  <code><a class="autorefs autorefs-external" href="https://docs.python.org/3/builtins/functions.html#int">int</a></code>
             </td>
             <td>
               <div class="doc-md-description">
@@ -3446,7 +3446,7 @@ are saved every <code>ksave</code> iterations. Default is 100.</p>
 <span style="color: inherit; background-color: transparent; padding-left: 5px; padding-right: 5px;">240</span>
 <span style="color: inherit; background-color: transparent; padding-left: 5px; padding-right: 5px;">241</span>
 <span style="color: inherit; background-color: transparent; padding-left: 5px; padding-right: 5px;">242</span></pre></div></td><td class="code"><div><pre style="line-height: 125%;"><span></span><code><span style="color: #008000; font-weight: bold">def</span><span style="color: #BBB"> </span><span style="color: #00F">refine_anim</span>(f, svgdir, beta<span style="color: #666">=.0001</span>, alpha<span style="color: #666">=.01</span>, tau<span style="color: #666">=10</span>, Nit<span style="color: #666">=10000</span>, ksave<span style="color: #666">=100</span>):
-<span style="color: #BBB">    </span><span style="color: #BA2121; font-style: italic">&quot;&quot;&quot;Performs refinement optimization of an animation by iteratively minimizing a given cost function.</span>
+<span style="color: #BBB">    </span><span style="color: #BA2121; font-style: italic">"""Performs refinement optimization of an animation by iteratively minimizing a given cost function.</span>
 
 <span style="color: #BA2121; font-style: italic">    This function refines an animation according to a provided cost function</span>
 <span style="color: #BA2121; font-style: italic">    using iterative optimization techniques. It adjusts parameters to minimize</span>
@@ -3478,8 +3478,8 @@ are saved every <code>ksave</code> iterations. Default is 100.</p>
 <span style="color: #BA2121; font-style: italic">    Returns</span>
 <span style="color: #BA2121; font-style: italic">    -------</span>
 <span style="color: #BA2121; font-style: italic">    None</span>
-<span style="color: #BA2121; font-style: italic">    &quot;&quot;&quot;</span>
-    im <span style="color: #666">=</span> cv2<span style="color: #666">.</span>imread(f <span style="color: #666">+</span> <span style="color: #BA2121">&quot;.png&quot;</span>)<span style="color: #666">.</span>astype(np<span style="color: #666">.</span>float)
+<span style="color: #BA2121; font-style: italic">    """</span>
+    im <span style="color: #666">=</span> cv2<span style="color: #666">.</span>imread(f <span style="color: #666">+</span> <span style="color: #BA2121">".png"</span>)<span style="color: #666">.</span>astype(np<span style="color: #666">.</span>float)
     h <span style="color: #666">=</span> im<span style="color: #666">.</span>shape[<span style="color: #666">0</span>]
     w <span style="color: #666">=</span> im<span style="color: #666">.</span>shape[<span style="color: #666">1</span>]
     cidx <span style="color: #666">=</span> exgreen(im)
@@ -3490,7 +3490,7 @@ are saved every <code>ksave</code> iterations. Default is 100.</p>
     sig <span style="color: #666">=</span> <span style="color: #666">3</span>
     F_norm_xy <span style="color: #666">=</span> get_edge_grad(imG, sig)
 
-    cont <span style="color: #666">=</span> np<span style="color: #666">.</span>loadtxt(f <span style="color: #666">+</span> <span style="color: #BA2121">&quot;.txt&quot;</span>)
+    cont <span style="color: #666">=</span> np<span style="color: #666">.</span>loadtxt(f <span style="color: #666">+</span> <span style="color: #BA2121">".txt"</span>)
     xys <span style="color: #666">=</span> close_cont(cont, d)
     intr <span style="color: #666">=</span> get_intrinsic(alpha, beta, <span style="color: #008000">len</span>(xys))
     xs <span style="color: #666">=</span> xys[:, <span style="color: #666">0</span>]<span style="color: #666">.</span>clip(<span style="color: #666">0</span>, w)<span style="color: #666">.</span>astype(np<span style="color: #666">.</span>int)
@@ -3498,7 +3498,7 @@ are saved every <code>ksave</code> iterations. Default is 100.</p>
     cont_hist <span style="color: #666">=</span> [[xs, ys]]
 
     plt<span style="color: #666">.</span>imshow(cv2<span style="color: #666">.</span>cvtColor(im<span style="color: #666">.</span>astype(np<span style="color: #666">.</span>uint8), cv2<span style="color: #666">.</span>COLOR_BGR2RGB))
-    plt<span style="color: #666">.</span>plot(xs, ys, <span style="color: #BA2121">&quot;b&quot;</span>)
+    plt<span style="color: #666">.</span>plot(xs, ys, <span style="color: #BA2121">"b"</span>)
 
     <span style="color: #008000; font-weight: bold">for</span> i <span style="color: #A2F; font-weight: bold">in</span> <span style="color: #008000">range</span>(Nit):
         F <span style="color: #666">=</span> np<span style="color: #666">.</span>array([F_norm_xy[<span style="color: #666">1</span>, ys, xs], F_norm_xy[<span style="color: #666">0</span>, ys, xs]])<span style="color: #666">.</span>T
@@ -3508,10 +3508,10 @@ are saved every <code>ksave</code> iterations. Default is 100.</p>
         <span style="color: #008000; font-weight: bold">if</span> <span style="color: #A2F; font-weight: bold">not</span> (i <span style="color: #666">%</span> ksave):
             <span style="color: #008000">print</span>(i)
             cont_hist<span style="color: #666">.</span>append([xs, ys])
-    np<span style="color: #666">.</span>save(svgdir <span style="color: #666">+</span> <span style="color: #BA2121">&#39;/&#39;</span> <span style="color: #666">+</span> f<span style="color: #666">.</span>strip(<span style="color: #BA2121">&quot;data/annotations/&quot;</span>) <span style="color: #666">+</span> <span style="color: #BA2121">&quot;_cont&quot;</span>, cont_hist)
+    np<span style="color: #666">.</span>save(svgdir <span style="color: #666">+</span> <span style="color: #BA2121">'/'</span> <span style="color: #666">+</span> f<span style="color: #666">.</span>strip(<span style="color: #BA2121">"data/annotations/"</span>) <span style="color: #666">+</span> <span style="color: #BA2121">"_cont"</span>, cont_hist)
 
-    plt<span style="color: #666">.</span>plot(xs, ys, <span style="color: #BA2121">&quot;r&quot;</span>)
-    plt<span style="color: #666">.</span>savefig(svgdir <span style="color: #666">+</span> <span style="color: #BA2121">&#39;/&#39;</span> <span style="color: #666">+</span> f<span style="color: #666">.</span>strip(<span style="color: #BA2121">&quot;data/annotations/&quot;</span>) <span style="color: #666">+</span> <span style="color: #BA2121">&quot;_cont.jpg&quot;</span>)
+    plt<span style="color: #666">.</span>plot(xs, ys, <span style="color: #BA2121">"r"</span>)
+    plt<span style="color: #666">.</span>savefig(svgdir <span style="color: #666">+</span> <span style="color: #BA2121">'/'</span> <span style="color: #666">+</span> f<span style="color: #666">.</span>strip(<span style="color: #BA2121">"data/annotations/"</span>) <span style="color: #666">+</span> <span style="color: #BA2121">"_cont.jpg"</span>)
     plt<span style="color: #666">.</span>clf()
 </code></pre></div></td></tr></table></div>
             </details>
@@ -3553,7 +3553,7 @@ their contours, and refines them iteratively. It optionally visualizes and saves
                 <code>f</code>
             </td>
             <td>
-                  <code><a class="autorefs autorefs-external" href="https://docs.python.org/3/library/stdtypes.html#str">str</a></code>
+                  <code><a class="autorefs autorefs-external" href="https://docs.python.org/3/builtins/stdtypes.html#str">str</a></code>
             </td>
             <td>
               <div class="doc-md-description">
@@ -3570,7 +3570,7 @@ containing polygonal shapes and labels is required.</p>
                 <code>beta</code>
             </td>
             <td>
-                  <code><a class="autorefs autorefs-external" href="https://docs.python.org/3/library/functions.html#float">float</a></code>
+                  <code><a class="autorefs autorefs-external" href="https://docs.python.org/3/builtins/functions.html#float">float</a></code>
             </td>
             <td>
               <div class="doc-md-description">
@@ -3586,7 +3586,7 @@ containing polygonal shapes and labels is required.</p>
                 <code>alpha</code>
             </td>
             <td>
-                  <code><a class="autorefs autorefs-external" href="https://docs.python.org/3/library/functions.html#float">float</a></code>
+                  <code><a class="autorefs autorefs-external" href="https://docs.python.org/3/builtins/functions.html#float">float</a></code>
             </td>
             <td>
               <div class="doc-md-description">
@@ -3602,7 +3602,7 @@ containing polygonal shapes and labels is required.</p>
                 <code>tau</code>
             </td>
             <td>
-                  <code><a class="autorefs autorefs-external" href="https://docs.python.org/3/library/functions.html#float">float</a></code>
+                  <code><a class="autorefs autorefs-external" href="https://docs.python.org/3/builtins/functions.html#float">float</a></code>
             </td>
             <td>
               <div class="doc-md-description">
@@ -3618,7 +3618,7 @@ containing polygonal shapes and labels is required.</p>
                 <code>d</code>
             </td>
             <td>
-                  <code><a class="autorefs autorefs-external" href="https://docs.python.org/3/library/functions.html#int">int</a></code>
+                  <code><a class="autorefs autorefs-external" href="https://docs.python.org/3/builtins/functions.html#int">int</a></code>
             </td>
             <td>
               <div class="doc-md-description">
@@ -3634,7 +3634,7 @@ containing polygonal shapes and labels is required.</p>
                 <code>Nit</code>
             </td>
             <td>
-                  <code><a class="autorefs autorefs-external" href="https://docs.python.org/3/library/functions.html#int">int</a></code>
+                  <code><a class="autorefs autorefs-external" href="https://docs.python.org/3/builtins/functions.html#int">int</a></code>
             </td>
             <td>
               <div class="doc-md-description">
@@ -3650,7 +3650,7 @@ containing polygonal shapes and labels is required.</p>
                 <code>plotit</code>
             </td>
             <td>
-                  <code><a class="autorefs autorefs-external" href="https://docs.python.org/3/library/stdtypes.html#str">str</a> or None</code>
+                  <code><a class="autorefs autorefs-external" href="https://docs.python.org/3/builtins/stdtypes.html#str">str</a> or None</code>
             </td>
             <td>
               <div class="doc-md-description">
@@ -3666,7 +3666,7 @@ containing polygonal shapes and labels is required.</p>
                 <code>saveit</code>
             </td>
             <td>
-                  <code><a class="autorefs autorefs-external" href="https://docs.python.org/3/library/stdtypes.html#str">str</a> or None</code>
+                  <code><a class="autorefs autorefs-external" href="https://docs.python.org/3/builtins/stdtypes.html#str">str</a> or None</code>
             </td>
             <td>
               <div class="doc-md-description">
@@ -3762,7 +3762,7 @@ NumPy array containing the coordinates of the contour points.</p>
 <span style="color: inherit; background-color: transparent; padding-left: 5px; padding-right: 5px;">348</span>
 <span style="color: inherit; background-color: transparent; padding-left: 5px; padding-right: 5px;">349</span>
 <span style="color: inherit; background-color: transparent; padding-left: 5px; padding-right: 5px;">350</span></pre></div></td><td class="code"><div><pre style="line-height: 125%;"><span></span><code><span style="color: #008000; font-weight: bold">def</span><span style="color: #BBB"> </span><span style="color: #00F">run_refine</span>(f, beta, alpha, tau, d, Nit, plotit<span style="color: #666">=</span><span style="color: #008000; font-weight: bold">None</span>, saveit<span style="color: #666">=</span><span style="color: #008000; font-weight: bold">None</span>):
-<span style="color: #BBB">    </span><span style="color: #BA2121; font-style: italic">&quot;&quot;&quot;Refines contour points for annotated regions in an image using active contour models.</span>
+<span style="color: #BBB">    </span><span style="color: #BA2121; font-style: italic">"""Refines contour points for annotated regions in an image using active contour models.</span>
 
 <span style="color: #BA2121; font-style: italic">    This function reads polygonal shapes from a given JSON file corresponding to an image, processes</span>
 <span style="color: #BA2121; font-style: italic">    their contours, and refines them iteratively. It optionally visualizes and saves the results.</span>
@@ -3793,11 +3793,11 @@ NumPy array containing the coordinates of the contour points.</p>
 <span style="color: #BA2121; font-style: italic">    list of numpy.ndarray</span>
 <span style="color: #BA2121; font-style: italic">        A list of refined contour points for each shape in the JSON file. Each element is a 2D</span>
 <span style="color: #BA2121; font-style: italic">        NumPy array containing the coordinates of the contour points.</span>
-<span style="color: #BA2121; font-style: italic">    &quot;&quot;&quot;</span>
-    polys <span style="color: #666">=</span> json<span style="color: #666">.</span>load(<span style="color: #008000">open</span>(f[:<span style="color: #666">-4</span>] <span style="color: #666">+</span> <span style="color: #BA2121">&#39;.json&#39;</span>))[<span style="color: #BA2121">&#39;shapes&#39;</span>]
-    ps <span style="color: #666">=</span> [np<span style="color: #666">.</span>array(p[<span style="color: #BA2121">&#39;points&#39;</span>]) <span style="color: #008000; font-weight: bold">for</span> p <span style="color: #A2F; font-weight: bold">in</span> polys]
-    labels <span style="color: #666">=</span> [p[<span style="color: #BA2121">&#39;label&#39;</span>] <span style="color: #008000; font-weight: bold">for</span> p <span style="color: #A2F; font-weight: bold">in</span> polys]
-    label_color <span style="color: #666">=</span> {<span style="color: #BA2121">&#39;background&#39;</span>: <span style="color: #666">0</span>, <span style="color: #BA2121">&#39;flower&#39;</span>: <span style="color: #666">51</span>, <span style="color: #BA2121">&#39;peduncle&#39;</span>: <span style="color: #666">102</span>, <span style="color: #BA2121">&#39;stem&#39;</span>: <span style="color: #666">153</span>, <span style="color: #BA2121">&#39;leaf&#39;</span>: <span style="color: #666">204</span>, <span style="color: #BA2121">&#39;fruit&#39;</span>: <span style="color: #666">255</span>}
+<span style="color: #BA2121; font-style: italic">    """</span>
+    polys <span style="color: #666">=</span> json<span style="color: #666">.</span>load(<span style="color: #008000">open</span>(f[:<span style="color: #666">-4</span>] <span style="color: #666">+</span> <span style="color: #BA2121">'.json'</span>))[<span style="color: #BA2121">'shapes'</span>]
+    ps <span style="color: #666">=</span> [np<span style="color: #666">.</span>array(p[<span style="color: #BA2121">'points'</span>]) <span style="color: #008000; font-weight: bold">for</span> p <span style="color: #A2F; font-weight: bold">in</span> polys]
+    labels <span style="color: #666">=</span> [p[<span style="color: #BA2121">'label'</span>] <span style="color: #008000; font-weight: bold">for</span> p <span style="color: #A2F; font-weight: bold">in</span> polys]
+    label_color <span style="color: #666">=</span> {<span style="color: #BA2121">'background'</span>: <span style="color: #666">0</span>, <span style="color: #BA2121">'flower'</span>: <span style="color: #666">51</span>, <span style="color: #BA2121">'peduncle'</span>: <span style="color: #666">102</span>, <span style="color: #BA2121">'stem'</span>: <span style="color: #666">153</span>, <span style="color: #BA2121">'leaf'</span>: <span style="color: #666">204</span>, <span style="color: #BA2121">'fruit'</span>: <span style="color: #666">255</span>}
 
     im <span style="color: #666">=</span> cv2<span style="color: #666">.</span>imread(f)
     im <span style="color: #666">=</span> im <span style="color: #666">*</span> <span style="color: #666">0</span>
@@ -3856,7 +3856,7 @@ Optionally, it can also visualize or save results during refinement.</p>
                 <code>f</code>
             </td>
             <td>
-                  <code><a class="autorefs autorefs-external" href="https://docs.python.org/3/library/stdtypes.html#str">str</a></code>
+                  <code><a class="autorefs autorefs-external" href="https://docs.python.org/3/builtins/stdtypes.html#str">str</a></code>
             </td>
             <td>
               <div class="doc-md-description">
@@ -3873,7 +3873,7 @@ to have the same name but with a '.json' extension.</p>
                 <code>beta</code>
             </td>
             <td>
-                  <code><a class="autorefs autorefs-external" href="https://docs.python.org/3/library/functions.html#float">float</a></code>
+                  <code><a class="autorefs autorefs-external" href="https://docs.python.org/3/builtins/functions.html#float">float</a></code>
             </td>
             <td>
               <div class="doc-md-description">
@@ -3889,7 +3889,7 @@ to have the same name but with a '.json' extension.</p>
                 <code>alpha</code>
             </td>
             <td>
-                  <code><a class="autorefs autorefs-external" href="https://docs.python.org/3/library/functions.html#float">float</a></code>
+                  <code><a class="autorefs autorefs-external" href="https://docs.python.org/3/builtins/functions.html#float">float</a></code>
             </td>
             <td>
               <div class="doc-md-description">
@@ -3905,7 +3905,7 @@ to have the same name but with a '.json' extension.</p>
                 <code>tau</code>
             </td>
             <td>
-                  <code><a class="autorefs autorefs-external" href="https://docs.python.org/3/library/functions.html#float">float</a></code>
+                  <code><a class="autorefs autorefs-external" href="https://docs.python.org/3/builtins/functions.html#float">float</a></code>
             </td>
             <td>
               <div class="doc-md-description">
@@ -3921,7 +3921,7 @@ to have the same name but with a '.json' extension.</p>
                 <code>d</code>
             </td>
             <td>
-                  <code><a class="autorefs autorefs-external" href="https://docs.python.org/3/library/functions.html#float">float</a></code>
+                  <code><a class="autorefs autorefs-external" href="https://docs.python.org/3/builtins/functions.html#float">float</a></code>
             </td>
             <td>
               <div class="doc-md-description">
@@ -3937,7 +3937,7 @@ to have the same name but with a '.json' extension.</p>
                 <code>Nit</code>
             </td>
             <td>
-                  <code><a class="autorefs autorefs-external" href="https://docs.python.org/3/library/functions.html#int">int</a></code>
+                  <code><a class="autorefs autorefs-external" href="https://docs.python.org/3/builtins/functions.html#int">int</a></code>
             </td>
             <td>
               <div class="doc-md-description">
@@ -3953,7 +3953,7 @@ to have the same name but with a '.json' extension.</p>
                 <code>class_names</code>
             </td>
             <td>
-                  <code><span title="List">List</span>[<a class="autorefs autorefs-external" href="https://docs.python.org/3/library/stdtypes.html#str">str</a>]</code>
+                  <code><span title="List">List</span>[<a class="autorefs autorefs-external" href="https://docs.python.org/3/builtins/stdtypes.html#str">str</a>]</code>
             </td>
             <td>
               <div class="doc-md-description">
@@ -3969,7 +3969,7 @@ to have the same name but with a '.json' extension.</p>
                 <code>plotit</code>
             </td>
             <td>
-                  <code><span title="Optional">Optional</span>[<a class="autorefs autorefs-external" href="https://docs.python.org/3/library/functions.html#bool">bool</a>]</code>
+                  <code><span title="Optional">Optional</span>[<a class="autorefs autorefs-external" href="https://docs.python.org/3/builtins/functions.html#bool">bool</a>]</code>
             </td>
             <td>
               <div class="doc-md-description">
@@ -3986,7 +3986,7 @@ the binary masks per class.</p>
                 <code>saveit</code>
             </td>
             <td>
-                  <code><span title="Optional">Optional</span>[<a class="autorefs autorefs-external" href="https://docs.python.org/3/library/functions.html#bool">bool</a>]</code>
+                  <code><span title="Optional">Optional</span>[<a class="autorefs autorefs-external" href="https://docs.python.org/3/builtins/functions.html#bool">bool</a>]</code>
             </td>
             <td>
               <div class="doc-md-description">
@@ -4013,7 +4013,7 @@ visualization purposes.</p>
       <tbody>
           <tr class="doc-section-item">
             <td>
-                  <code><span title="Dict">Dict</span>[<a class="autorefs autorefs-external" href="https://docs.python.org/3/library/stdtypes.html#str">str</a>, <a class="autorefs autorefs-external" title="numpy.ndarray" href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray">ndarray</a>]</code>
+                  <code><span title="Dict">Dict</span>[<a class="autorefs autorefs-external" href="https://docs.python.org/3/builtins/stdtypes.html#str">str</a>, <a class="autorefs autorefs-external" title="numpy.ndarray" href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray">ndarray</a>]</code>
             </td>
             <td>
               <div class="doc-md-description">
@@ -4086,7 +4086,7 @@ visualization purposes.</p>
 <span style="color: inherit; background-color: transparent; padding-left: 5px; padding-right: 5px;">408</span>
 <span style="color: inherit; background-color: transparent; padding-left: 5px; padding-right: 5px;">409</span>
 <span style="color: inherit; background-color: transparent; padding-left: 5px; padding-right: 5px;">410</span></pre></div></td><td class="code"><div><pre style="line-height: 125%;"><span></span><code><span style="color: #008000; font-weight: bold">def</span><span style="color: #BBB"> </span><span style="color: #00F">run_refine_romidata</span>(f, beta, alpha, tau, d, Nit, class_names, plotit<span style="color: #666">=</span><span style="color: #008000; font-weight: bold">None</span>, saveit<span style="color: #666">=</span><span style="color: #008000; font-weight: bold">None</span>):
-<span style="color: #BBB">    </span><span style="color: #BA2121; font-style: italic">&quot;&quot;&quot;Refine and process region of interest (ROI) contours given an input multi-class segmentation dataset.</span>
+<span style="color: #BBB">    </span><span style="color: #BA2121; font-style: italic">"""Refine and process region of interest (ROI) contours given an input multi-class segmentation dataset.</span>
 
 <span style="color: #BA2121; font-style: italic">    This function reads a segmentation image and polygon annotations for multiple</span>
 <span style="color: #BA2121; font-style: italic">    classes, refines these polygons, and generates binary masks for each class.</span>
@@ -4096,7 +4096,7 @@ visualization purposes.</p>
 <span style="color: #BA2121; font-style: italic">    ----------</span>
 <span style="color: #BA2121; font-style: italic">    f : str</span>
 <span style="color: #BA2121; font-style: italic">        Path to the input image file. The corresponding annotation file is expected</span>
-<span style="color: #BA2121; font-style: italic">        to have the same name but with a &#39;.json&#39; extension.</span>
+<span style="color: #BA2121; font-style: italic">        to have the same name but with a '.json' extension.</span>
 <span style="color: #BA2121; font-style: italic">    beta : float</span>
 <span style="color: #BA2121; font-style: italic">        Stiffness parameter for contour refinement.</span>
 <span style="color: #BA2121; font-style: italic">    alpha : float</span>
@@ -4108,7 +4108,7 @@ visualization purposes.</p>
 <span style="color: #BA2121; font-style: italic">    Nit : int</span>
 <span style="color: #BA2121; font-style: italic">        Number of iterations for contour refinement.</span>
 <span style="color: #BA2121; font-style: italic">    class_names : List[str]</span>
-<span style="color: #BA2121; font-style: italic">        List of unique class names for the segmentation, including &quot;background&quot;.</span>
+<span style="color: #BA2121; font-style: italic">        List of unique class names for the segmentation, including "background".</span>
 <span style="color: #BA2121; font-style: italic">    plotit : Optional[bool]</span>
 <span style="color: #BA2121; font-style: italic">        If True, performs visualization during the refinement process by updating</span>
 <span style="color: #BA2121; font-style: italic">        the binary masks per class.</span>
@@ -4121,15 +4121,15 @@ visualization purposes.</p>
 <span style="color: #BA2121; font-style: italic">    Dict[str, numpy.ndarray]</span>
 <span style="color: #BA2121; font-style: italic">        A dictionary where keys are class names and values are binary masks</span>
 <span style="color: #BA2121; font-style: italic">        (numpy arrays) for the corresponding classes.</span>
-<span style="color: #BA2121; font-style: italic">    &quot;&quot;&quot;</span>
-    polys <span style="color: #666">=</span> json<span style="color: #666">.</span>load(<span style="color: #008000">open</span>(f[:<span style="color: #666">-4</span>] <span style="color: #666">+</span> <span style="color: #BA2121">&#39;.json&#39;</span>))[<span style="color: #BA2121">&#39;shapes&#39;</span>]
-    ps <span style="color: #666">=</span> [np<span style="color: #666">.</span>array(p[<span style="color: #BA2121">&#39;points&#39;</span>]) <span style="color: #008000; font-weight: bold">for</span> p <span style="color: #A2F; font-weight: bold">in</span> polys]
-    labels <span style="color: #666">=</span> [p[<span style="color: #BA2121">&#39;label&#39;</span>] <span style="color: #008000; font-weight: bold">for</span> p <span style="color: #A2F; font-weight: bold">in</span> polys]
+<span style="color: #BA2121; font-style: italic">    """</span>
+    polys <span style="color: #666">=</span> json<span style="color: #666">.</span>load(<span style="color: #008000">open</span>(f[:<span style="color: #666">-4</span>] <span style="color: #666">+</span> <span style="color: #BA2121">'.json'</span>))[<span style="color: #BA2121">'shapes'</span>]
+    ps <span style="color: #666">=</span> [np<span style="color: #666">.</span>array(p[<span style="color: #BA2121">'points'</span>]) <span style="color: #008000; font-weight: bold">for</span> p <span style="color: #A2F; font-weight: bold">in</span> polys]
+    labels <span style="color: #666">=</span> [p[<span style="color: #BA2121">'label'</span>] <span style="color: #008000; font-weight: bold">for</span> p <span style="color: #A2F; font-weight: bold">in</span> polys]
 
     im <span style="color: #666">=</span> cv2<span style="color: #666">.</span>imread(f)
     im <span style="color: #666">=</span> im <span style="color: #666">*</span> <span style="color: #666">0</span>
     npz <span style="color: #666">=</span> {class_name: im[:, :, <span style="color: #666">0</span>] <span style="color: #666">*</span> <span style="color: #666">0</span> <span style="color: #008000; font-weight: bold">for</span> class_name <span style="color: #A2F; font-weight: bold">in</span> class_names}
-    back <span style="color: #666">=</span> npz[<span style="color: #BA2121">&#39;background&#39;</span>]
+    back <span style="color: #666">=</span> npz[<span style="color: #BA2121">'background'</span>]
     <span style="color: #3D7B7B; font-style: italic">#  if plotit: cv2.polylines(im, ps, True, (242,240,218), thickness=10)</span>
     <span style="color: #3D7B7B; font-style: italic"># conts=[]</span>
     <span style="color: #008000; font-weight: bold">for</span> i, p <span style="color: #A2F; font-weight: bold">in</span> <span style="color: #008000">enumerate</span>(ps):
@@ -4141,7 +4141,7 @@ visualization purposes.</p>
     <span style="color: #008000; font-weight: bold">for</span> k <span style="color: #A2F; font-weight: bold">in</span> npz<span style="color: #666">.</span>keys():
         back <span style="color: #666">+=</span> npz[k]
     back <span style="color: #666">=</span> (back <span style="color: #666">==</span> <span style="color: #666">0</span>) <span style="color: #666">*</span> <span style="color: #666">255</span>
-    npz[<span style="color: #BA2121">&#39;background&#39;</span>] <span style="color: #666">=</span> back
+    npz[<span style="color: #BA2121">'background'</span>] <span style="color: #666">=</span> back
     <span style="color: #008000; font-weight: bold">return</span> npz
 </code></pre></div></td></tr></table></div>
             </details>
@@ -4250,7 +4250,7 @@ visualization purposes.</p>
       <script id="__config" type="application/json">{"annotate": null, "base": "../../../..", "features": ["navigation.tabs", "navigation.tabs.sticky", "content.code.copy"], "search": "../../../../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
     
     
-      <script src="../../../../assets/javascripts/bundle.79ae519e.min.js"></script>
+      <script src="../../../../assets/javascripts/bundle.d7400e89.min.js"></script>
       
         <script src="../../../../assets/_markdown_exec_pyodide.js"></script>
       

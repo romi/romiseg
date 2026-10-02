@@ -25,7 +25,7 @@
       
       
       <link rel="icon" href="../../../../assets/images/ROMI_logo_green_25.svg">
-      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.6">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.7">
     
     
       
@@ -33,7 +33,7 @@
       
     
     
-      <link rel="stylesheet" href="../../../../assets/stylesheets/main.484c7ddc.min.css">
+      <link rel="stylesheet" href="../../../../assets/stylesheets/main.ec1eaa64.min.css">
       
       
 
@@ -2013,7 +2013,7 @@ It employs a series of convolutional and upsampling layers to restore the input 
           <tr class="doc-section-item">
             <td><code><span title="romiseg.models.unet.ResNetUNet.base_layers">base_layers</span></code></td>
             <td>
-                  <code><a class="autorefs autorefs-external" href="https://docs.python.org/3/library/stdtypes.html#list">list</a></code>
+                  <code><a class="autorefs autorefs-external" href="https://docs.python.org/3/builtins/stdtypes.html#list">list</a></code>
             </td>
             <td>
               <div class="doc-md-description">
@@ -2289,7 +2289,7 @@ It employs a series of convolutional and upsampling layers to restore the input 
     <span style="color: #008000">self</span><span style="color: #666">.</span>layer4 <span style="color: #666">=</span> <span style="color: #008000">self</span><span style="color: #666">.</span>base_layers[<span style="color: #666">7</span>]  <span style="color: #3D7B7B; font-style: italic"># size=(N, 2048, x.H/32, x.W/32)</span>
     <span style="color: #008000">self</span><span style="color: #666">.</span>layer4_1x1 <span style="color: #666">=</span> convrelu(<span style="color: #666">2048</span>, <span style="color: #666">1024</span>, <span style="color: #666">1</span>, <span style="color: #666">0</span>)
 
-    <span style="color: #008000">self</span><span style="color: #666">.</span>upsample <span style="color: #666">=</span> nn<span style="color: #666">.</span>Upsample(scale_factor<span style="color: #666">=2</span>, mode<span style="color: #666">=</span><span style="color: #BA2121">&#39;bilinear&#39;</span>, align_corners<span style="color: #666">=</span><span style="color: #008000; font-weight: bold">True</span>)
+    <span style="color: #008000">self</span><span style="color: #666">.</span>upsample <span style="color: #666">=</span> nn<span style="color: #666">.</span>Upsample(scale_factor<span style="color: #666">=2</span>, mode<span style="color: #666">=</span><span style="color: #BA2121">'bilinear'</span>, align_corners<span style="color: #666">=</span><span style="color: #008000; font-weight: bold">True</span>)
 
     <span style="color: #008000">self</span><span style="color: #666">.</span>conv_up3 <span style="color: #666">=</span> convrelu(<span style="color: #666">512</span> <span style="color: #666">+</span> <span style="color: #666">1024</span>, <span style="color: #666">512</span>, <span style="color: #666">3</span>, <span style="color: #666">1</span>)
     <span style="color: #008000">self</span><span style="color: #666">.</span>conv_up2 <span style="color: #666">=</span> convrelu(<span style="color: #666">512</span> <span style="color: #666">+</span> <span style="color: #666">512</span>, <span style="color: #666">512</span>, <span style="color: #666">3</span>, <span style="color: #666">1</span>)
@@ -2481,7 +2481,7 @@ represents the final feature map or the reconstructed output.</p>
 <span style="color: inherit; background-color: transparent; padding-left: 5px; padding-right: 5px;">220</span>
 <span style="color: inherit; background-color: transparent; padding-left: 5px; padding-right: 5px;">221</span>
 <span style="color: inherit; background-color: transparent; padding-left: 5px; padding-right: 5px;">222</span></pre></div></td><td class="code"><div><pre style="line-height: 125%;"><span></span><code><span style="color: #008000; font-weight: bold">def</span><span style="color: #BBB"> </span><span style="color: #00F">forward</span>(<span style="color: #008000">self</span>, <span style="color: #008000">input</span>):
-<span style="color: #BBB">    </span><span style="color: #BA2121; font-style: italic">&quot;&quot;&quot;Perform the forward pass through the model for generating predictions based on input.</span>
+<span style="color: #BBB">    </span><span style="color: #BA2121; font-style: italic">"""Perform the forward pass through the model for generating predictions based on input.</span>
 
 <span style="color: #BA2121; font-style: italic">    Processes an input tensor through the network layers, performing a series of convolution,</span>
 <span style="color: #BA2121; font-style: italic">    upsampling, and concatenation operations to extract and merge multi-level features.</span>
@@ -2497,7 +2497,7 @@ represents the final feature map or the reconstructed output.</p>
 <span style="color: #BA2121; font-style: italic">    torch.Tensor</span>
 <span style="color: #BA2121; font-style: italic">        The output tensor after processing through the network. This tensor typically</span>
 <span style="color: #BA2121; font-style: italic">        represents the final feature map or the reconstructed output.</span>
-<span style="color: #BA2121; font-style: italic">    &quot;&quot;&quot;</span>
+<span style="color: #BA2121; font-style: italic">    """</span>
     x_original <span style="color: #666">=</span> <span style="color: #008000">self</span><span style="color: #666">.</span>conv_original_size0(<span style="color: #008000">input</span>)
     <span style="color: #3D7B7B; font-style: italic"># print(x_original.shape)</span>
     x_original <span style="color: #666">=</span> <span style="color: #008000">self</span><span style="color: #666">.</span>conv_original_size1(x_original)
@@ -2517,7 +2517,7 @@ represents the final feature map or the reconstructed output.</p>
     <span style="color: #3D7B7B; font-style: italic"># print(layer4.shape)</span>
 
     <span style="color: #3D7B7B; font-style: italic"># x = self.upsample(layer4)  # old API</span>
-    x <span style="color: #666">=</span> F<span style="color: #666">.</span>interpolate(layer4, scale_factor<span style="color: #666">=2</span>, mode<span style="color: #666">=</span><span style="color: #BA2121">&#39;bilinear&#39;</span>, align_corners<span style="color: #666">=</span><span style="color: #008000; font-weight: bold">False</span>)  <span style="color: #3D7B7B; font-style: italic"># new API</span>
+    x <span style="color: #666">=</span> F<span style="color: #666">.</span>interpolate(layer4, scale_factor<span style="color: #666">=2</span>, mode<span style="color: #666">=</span><span style="color: #BA2121">'bilinear'</span>, align_corners<span style="color: #666">=</span><span style="color: #008000; font-weight: bold">False</span>)  <span style="color: #3D7B7B; font-style: italic"># new API</span>
 
     <span style="color: #3D7B7B; font-style: italic"># print(x.shape)</span>
     <span style="color: #3D7B7B; font-style: italic"># Create the shortcut from the encoder</span>
@@ -2529,7 +2529,7 @@ represents the final feature map or the reconstructed output.</p>
     <span style="color: #3D7B7B; font-style: italic"># print(x.shape)</span>
 
     <span style="color: #3D7B7B; font-style: italic"># x = self.upsample(x)  # old API</span>
-    x <span style="color: #666">=</span> F<span style="color: #666">.</span>interpolate(x, scale_factor<span style="color: #666">=2</span>, mode<span style="color: #666">=</span><span style="color: #BA2121">&#39;bilinear&#39;</span>, align_corners<span style="color: #666">=</span><span style="color: #008000; font-weight: bold">False</span>)  <span style="color: #3D7B7B; font-style: italic"># new API</span>
+    x <span style="color: #666">=</span> F<span style="color: #666">.</span>interpolate(x, scale_factor<span style="color: #666">=2</span>, mode<span style="color: #666">=</span><span style="color: #BA2121">'bilinear'</span>, align_corners<span style="color: #666">=</span><span style="color: #008000; font-weight: bold">False</span>)  <span style="color: #3D7B7B; font-style: italic"># new API</span>
     <span style="color: #3D7B7B; font-style: italic"># print(x.shape)</span>
 
     layer2 <span style="color: #666">=</span> <span style="color: #008000">self</span><span style="color: #666">.</span>layer2_1x1(layer2)
@@ -2540,7 +2540,7 @@ represents the final feature map or the reconstructed output.</p>
     <span style="color: #3D7B7B; font-style: italic"># print(x.shape)</span>
 
     <span style="color: #3D7B7B; font-style: italic"># x = self.upsample(x)  # old API</span>
-    x <span style="color: #666">=</span> F<span style="color: #666">.</span>interpolate(x, scale_factor<span style="color: #666">=2</span>, mode<span style="color: #666">=</span><span style="color: #BA2121">&#39;bilinear&#39;</span>, align_corners<span style="color: #666">=</span><span style="color: #008000; font-weight: bold">False</span>)  <span style="color: #3D7B7B; font-style: italic"># new API</span>
+    x <span style="color: #666">=</span> F<span style="color: #666">.</span>interpolate(x, scale_factor<span style="color: #666">=2</span>, mode<span style="color: #666">=</span><span style="color: #BA2121">'bilinear'</span>, align_corners<span style="color: #666">=</span><span style="color: #008000; font-weight: bold">False</span>)  <span style="color: #3D7B7B; font-style: italic"># new API</span>
     <span style="color: #3D7B7B; font-style: italic"># print(x.shape)</span>
     layer1 <span style="color: #666">=</span> <span style="color: #008000">self</span><span style="color: #666">.</span>layer1_1x1(layer1)
     x <span style="color: #666">=</span> torch<span style="color: #666">.</span>cat([x, layer1], dim<span style="color: #666">=1</span>)
@@ -2549,7 +2549,7 @@ represents the final feature map or the reconstructed output.</p>
     <span style="color: #3D7B7B; font-style: italic"># print(x.shape)</span>
 
     <span style="color: #3D7B7B; font-style: italic"># x = self.upsample(x)  # old API</span>
-    x <span style="color: #666">=</span> F<span style="color: #666">.</span>interpolate(x, scale_factor<span style="color: #666">=2</span>, mode<span style="color: #666">=</span><span style="color: #BA2121">&#39;bilinear&#39;</span>, align_corners<span style="color: #666">=</span><span style="color: #008000; font-weight: bold">False</span>)  <span style="color: #3D7B7B; font-style: italic"># new API</span>
+    x <span style="color: #666">=</span> F<span style="color: #666">.</span>interpolate(x, scale_factor<span style="color: #666">=2</span>, mode<span style="color: #666">=</span><span style="color: #BA2121">'bilinear'</span>, align_corners<span style="color: #666">=</span><span style="color: #008000; font-weight: bold">False</span>)  <span style="color: #3D7B7B; font-style: italic"># new API</span>
     <span style="color: #3D7B7B; font-style: italic"># print(x.shape)</span>
     layer0 <span style="color: #666">=</span> <span style="color: #008000">self</span><span style="color: #666">.</span>layer0_1x1(layer0)
     x <span style="color: #666">=</span> torch<span style="color: #666">.</span>cat([x, layer0], dim<span style="color: #666">=1</span>)
@@ -2558,7 +2558,7 @@ represents the final feature map or the reconstructed output.</p>
     <span style="color: #3D7B7B; font-style: italic"># print(x.shape)</span>
 
     <span style="color: #3D7B7B; font-style: italic"># x = self.upsample(x)  # old API</span>
-    x <span style="color: #666">=</span> F<span style="color: #666">.</span>interpolate(x, scale_factor<span style="color: #666">=2</span>, mode<span style="color: #666">=</span><span style="color: #BA2121">&#39;bilinear&#39;</span>, align_corners<span style="color: #666">=</span><span style="color: #008000; font-weight: bold">False</span>)  <span style="color: #3D7B7B; font-style: italic"># new API</span>
+    x <span style="color: #666">=</span> F<span style="color: #666">.</span>interpolate(x, scale_factor<span style="color: #666">=2</span>, mode<span style="color: #666">=</span><span style="color: #BA2121">'bilinear'</span>, align_corners<span style="color: #666">=</span><span style="color: #008000; font-weight: bold">False</span>)  <span style="color: #3D7B7B; font-style: italic"># new API</span>
     <span style="color: #3D7B7B; font-style: italic"># print(x.shape)</span>
     x <span style="color: #666">=</span> torch<span style="color: #666">.</span>cat([x, x_original], dim<span style="color: #666">=1</span>)
     <span style="color: #3D7B7B; font-style: italic"># print(x.shape)</span>
@@ -2619,7 +2619,7 @@ manually instantiate and arrange layers.</p>
                 <code>in_channels</code>
             </td>
             <td>
-                  <code><a class="autorefs autorefs-external" href="https://docs.python.org/3/library/functions.html#int">int</a></code>
+                  <code><a class="autorefs autorefs-external" href="https://docs.python.org/3/builtins/functions.html#int">int</a></code>
             </td>
             <td>
               <div class="doc-md-description">
@@ -2635,7 +2635,7 @@ manually instantiate and arrange layers.</p>
                 <code>out_channels</code>
             </td>
             <td>
-                  <code><a class="autorefs autorefs-external" href="https://docs.python.org/3/library/functions.html#int">int</a></code>
+                  <code><a class="autorefs autorefs-external" href="https://docs.python.org/3/builtins/functions.html#int">int</a></code>
             </td>
             <td>
               <div class="doc-md-description">
@@ -2651,7 +2651,7 @@ manually instantiate and arrange layers.</p>
                 <code>kernel</code>
             </td>
             <td>
-                  <code><a class="autorefs autorefs-external" href="https://docs.python.org/3/library/functions.html#int">int</a> or <span title="Tuple">Tuple</span>[<a class="autorefs autorefs-external" href="https://docs.python.org/3/library/functions.html#int">int</a>, <a class="autorefs autorefs-external" href="https://docs.python.org/3/library/functions.html#int">int</a>]</code>
+                  <code><a class="autorefs autorefs-external" href="https://docs.python.org/3/builtins/functions.html#int">int</a> or <span title="Tuple">Tuple</span>[<a class="autorefs autorefs-external" href="https://docs.python.org/3/builtins/functions.html#int">int</a>, <a class="autorefs autorefs-external" href="https://docs.python.org/3/builtins/functions.html#int">int</a>]</code>
             </td>
             <td>
               <div class="doc-md-description">
@@ -2668,7 +2668,7 @@ manually instantiate and arrange layers.</p>
                 <code>padding</code>
             </td>
             <td>
-                  <code><a class="autorefs autorefs-external" href="https://docs.python.org/3/library/functions.html#int">int</a></code>
+                  <code><a class="autorefs autorefs-external" href="https://docs.python.org/3/builtins/functions.html#int">int</a></code>
             </td>
             <td>
               <div class="doc-md-description">
@@ -2739,7 +2739,7 @@ a ReLU activation function in order.</p>
 <span style="color: inherit; background-color: transparent; padding-left: 5px; padding-right: 5px;">46</span>
 <span style="color: inherit; background-color: transparent; padding-left: 5px; padding-right: 5px;">47</span>
 <span style="color: inherit; background-color: transparent; padding-left: 5px; padding-right: 5px;">48</span></pre></div></td><td class="code"><div><pre style="line-height: 125%;"><span></span><code><span style="color: #008000; font-weight: bold">def</span><span style="color: #BBB"> </span><span style="color: #00F">convrelu</span>(in_channels, out_channels, kernel, padding):
-<span style="color: #BBB">    </span><span style="color: #BA2121; font-style: italic">&quot;&quot;&quot;Creates a sequential container with a convolutional layer followed by a ReLU activation function.</span>
+<span style="color: #BBB">    </span><span style="color: #BA2121; font-style: italic">"""Creates a sequential container with a convolutional layer followed by a ReLU activation function.</span>
 
 <span style="color: #BA2121; font-style: italic">    The function constructs and returns a `torch.nn.Sequential` object, which</span>
 <span style="color: #BA2121; font-style: italic">    includes a 2D convolutional layer and a ReLU activation. It allows defining</span>
@@ -2763,7 +2763,7 @@ a ReLU activation function in order.</p>
 <span style="color: #BA2121; font-style: italic">    torch.nn.Sequential</span>
 <span style="color: #BA2121; font-style: italic">        A sequential container consisting of a convolutional layer followed by</span>
 <span style="color: #BA2121; font-style: italic">        a ReLU activation function in order.</span>
-<span style="color: #BA2121; font-style: italic">    &quot;&quot;&quot;</span>
+<span style="color: #BA2121; font-style: italic">    """</span>
     <span style="color: #008000; font-weight: bold">return</span> nn<span style="color: #666">.</span>Sequential(
         nn<span style="color: #666">.</span>Conv2d(in_channels, out_channels, kernel, padding<span style="color: #666">=</span>padding),
         nn<span style="color: #666">.</span>ReLU(inplace<span style="color: #666">=</span><span style="color: #008000; font-weight: bold">True</span>),
@@ -2875,7 +2875,7 @@ a ReLU activation function in order.</p>
       <script id="__config" type="application/json">{"annotate": null, "base": "../../../..", "features": ["navigation.tabs", "navigation.tabs.sticky", "content.code.copy"], "search": "../../../../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
     
     
-      <script src="../../../../assets/javascripts/bundle.79ae519e.min.js"></script>
+      <script src="../../../../assets/javascripts/bundle.d7400e89.min.js"></script>
       
         <script src="../../../../assets/_markdown_exec_pyodide.js"></script>
       

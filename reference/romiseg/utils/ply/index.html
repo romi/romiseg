@@ -25,7 +25,7 @@
       
       
       <link rel="icon" href="../../../../assets/images/ROMI_logo_green_25.svg">
-      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.6">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.7">
     
     
       
@@ -33,7 +33,7 @@
       
     
     
-      <link rel="stylesheet" href="../../../../assets/stylesheets/main.484c7ddc.min.css">
+      <link rel="stylesheet" href="../../../../assets/stylesheets/main.ec1eaa64.min.css">
       
       
 
@@ -2002,7 +2002,7 @@
       <tbody>
           <tr class="doc-section-item">
 <td><code>element</code></td>            <td>
-                  <code><a class="autorefs autorefs-external" href="https://docs.python.org/3/library/stdtypes.html#list">list</a>[<a class="autorefs autorefs-external" href="https://docs.python.org/3/library/stdtypes.html#str">str</a>]</code>
+                  <code><a class="autorefs autorefs-external" href="https://docs.python.org/3/builtins/stdtypes.html#list">list</a>[<a class="autorefs autorefs-external" href="https://docs.python.org/3/builtins/stdtypes.html#str">str</a>]</code>
             </td>
             <td>
               <div class="doc-md-description">
@@ -2041,7 +2041,7 @@
 <span style="color: inherit; background-color: transparent; padding-left: 5px; padding-right: 5px;">297</span>
 <span style="color: inherit; background-color: transparent; padding-left: 5px; padding-right: 5px;">298</span>
 <span style="color: inherit; background-color: transparent; padding-left: 5px; padding-right: 5px;">299</span></pre></div></td><td class="code"><div><pre style="line-height: 125%;"><span></span><code><span style="color: #008000; font-weight: bold">def</span><span style="color: #BBB"> </span><span style="color: #00F">describe_element</span>(name, df):
-<span style="color: #BBB">    </span><span style="color: #BA2121; font-style: italic">&quot;&quot;&quot; Takes the columns of the dataframe and builds a ply-like description</span>
+<span style="color: #BBB">    </span><span style="color: #BA2121; font-style: italic">""" Takes the columns of the dataframe and builds a ply-like description</span>
 
 <span style="color: #BA2121; font-style: italic">    Parameters</span>
 <span style="color: #BA2121; font-style: italic">    ----------</span>
@@ -2051,18 +2051,18 @@
 <span style="color: #BA2121; font-style: italic">    Returns</span>
 <span style="color: #BA2121; font-style: italic">    -------</span>
 <span style="color: #BA2121; font-style: italic">    element: list[str]</span>
-<span style="color: #BA2121; font-style: italic">    &quot;&quot;&quot;</span>
-    property_formats <span style="color: #666">=</span> {<span style="color: #BA2121">&#39;f&#39;</span>: <span style="color: #BA2121">&#39;float&#39;</span>, <span style="color: #BA2121">&#39;u&#39;</span>: <span style="color: #BA2121">&#39;uchar&#39;</span>, <span style="color: #BA2121">&#39;i&#39;</span>: <span style="color: #BA2121">&#39;int&#39;</span>}
-    element <span style="color: #666">=</span> [<span style="color: #BA2121">&#39;element &#39;</span> <span style="color: #666">+</span> name <span style="color: #666">+</span> <span style="color: #BA2121">&#39; &#39;</span> <span style="color: #666">+</span> <span style="color: #008000">str</span>(<span style="color: #008000">len</span>(df))]
+<span style="color: #BA2121; font-style: italic">    """</span>
+    property_formats <span style="color: #666">=</span> {<span style="color: #BA2121">'f'</span>: <span style="color: #BA2121">'float'</span>, <span style="color: #BA2121">'u'</span>: <span style="color: #BA2121">'uchar'</span>, <span style="color: #BA2121">'i'</span>: <span style="color: #BA2121">'int'</span>}
+    element <span style="color: #666">=</span> [<span style="color: #BA2121">'element '</span> <span style="color: #666">+</span> name <span style="color: #666">+</span> <span style="color: #BA2121">' '</span> <span style="color: #666">+</span> <span style="color: #008000">str</span>(<span style="color: #008000">len</span>(df))]
 
-    <span style="color: #008000; font-weight: bold">if</span> name <span style="color: #666">==</span> <span style="color: #BA2121">&#39;face&#39;</span>:
-        element<span style="color: #666">.</span>append(<span style="color: #BA2121">&quot;property list uchar int points_indices&quot;</span>)
+    <span style="color: #008000; font-weight: bold">if</span> name <span style="color: #666">==</span> <span style="color: #BA2121">'face'</span>:
+        element<span style="color: #666">.</span>append(<span style="color: #BA2121">"property list uchar int points_indices"</span>)
 
     <span style="color: #008000; font-weight: bold">else</span>:
         <span style="color: #008000; font-weight: bold">for</span> i <span style="color: #A2F; font-weight: bold">in</span> <span style="color: #008000">range</span>(<span style="color: #008000">len</span>(df<span style="color: #666">.</span>columns)):
             <span style="color: #3D7B7B; font-style: italic"># get first letter of dtype to infer format</span>
             f <span style="color: #666">=</span> property_formats[<span style="color: #008000">str</span>(df<span style="color: #666">.</span>dtypes[i])[<span style="color: #666">0</span>]]
-            element<span style="color: #666">.</span>append(<span style="color: #BA2121">&#39;property &#39;</span> <span style="color: #666">+</span> f <span style="color: #666">+</span> <span style="color: #BA2121">&#39; &#39;</span> <span style="color: #666">+</span> df<span style="color: #666">.</span>columns<span style="color: #666">.</span>values[i])
+            element<span style="color: #666">.</span>append(<span style="color: #BA2121">'property '</span> <span style="color: #666">+</span> f <span style="color: #666">+</span> <span style="color: #BA2121">' '</span> <span style="color: #666">+</span> df<span style="color: #666">.</span>columns<span style="color: #666">.</span>values[i])
 
     <span style="color: #008000; font-weight: bold">return</span> element
 </code></pre></div></td></tr></table></div>
@@ -2145,14 +2145,14 @@
     <p>Store data in file</p>
     <div class="language-pycon highlight" style="background: #f8f8f8"><pre style="line-height: 125%;"><span></span><code><span style="color: #000080; font-weight: bold">&gt;&gt;&gt; </span>points <span style="color: #666">=</span> np<span style="color: #666">.</span>random<span style="color: #666">.</span>rand(<span style="color: #666">5</span>, <span style="color: #666">3</span>)
 <span style="color: #000080; font-weight: bold">&gt;&gt;&gt; </span>values <span style="color: #666">=</span> np<span style="color: #666">.</span>random<span style="color: #666">.</span>randint(<span style="color: #666">2</span>, size<span style="color: #666">=10</span>)
-<span style="color: #000080; font-weight: bold">&gt;&gt;&gt; </span>write_ply(<span style="color: #BA2121">&#39;example.ply&#39;</span>, [points, values], [<span style="color: #BA2121">&#39;x&#39;</span>, <span style="color: #BA2121">&#39;y&#39;</span>, <span style="color: #BA2121">&#39;z&#39;</span>, <span style="color: #BA2121">&#39;values&#39;</span>])
+<span style="color: #000080; font-weight: bold">&gt;&gt;&gt; </span>write_ply(<span style="color: #BA2121">'example.ply'</span>, [points, values], [<span style="color: #BA2121">'x'</span>, <span style="color: #BA2121">'y'</span>, <span style="color: #BA2121">'z'</span>, <span style="color: #BA2121">'values'</span>])
 </code></pre></div>
     <p>Read the file</p>
-    <div class="language-pycon highlight" style="background: #f8f8f8"><pre style="line-height: 125%;"><span></span><code><span style="color: #000080; font-weight: bold">&gt;&gt;&gt; </span>data <span style="color: #666">=</span> read_ply(<span style="color: #BA2121">&#39;example.ply&#39;</span>)
-<span style="color: #000080; font-weight: bold">&gt;&gt;&gt; </span>values <span style="color: #666">=</span> data[<span style="color: #BA2121">&#39;values&#39;</span>]
+    <div class="language-pycon highlight" style="background: #f8f8f8"><pre style="line-height: 125%;"><span></span><code><span style="color: #000080; font-weight: bold">&gt;&gt;&gt; </span>data <span style="color: #666">=</span> read_ply(<span style="color: #BA2121">'example.ply'</span>)
+<span style="color: #000080; font-weight: bold">&gt;&gt;&gt; </span>values <span style="color: #666">=</span> data[<span style="color: #BA2121">'values'</span>]
 <span style="color: #717171">array([0, 0, 1, 1, 0])</span>
 </code></pre></div>
-    <div class="language-pycon highlight" style="background: #f8f8f8"><pre style="line-height: 125%;"><span></span><code><span style="color: #000080; font-weight: bold">&gt;&gt;&gt; </span>points <span style="color: #666">=</span> np<span style="color: #666">.</span>vstack((data[<span style="color: #BA2121">&#39;x&#39;</span>], data[<span style="color: #BA2121">&#39;y&#39;</span>], data[<span style="color: #BA2121">&#39;z&#39;</span>]))<span style="color: #666">.</span>T
+    <div class="language-pycon highlight" style="background: #f8f8f8"><pre style="line-height: 125%;"><span></span><code><span style="color: #000080; font-weight: bold">&gt;&gt;&gt; </span>points <span style="color: #666">=</span> np<span style="color: #666">.</span>vstack((data[<span style="color: #BA2121">'x'</span>], data[<span style="color: #BA2121">'y'</span>], data[<span style="color: #BA2121">'z'</span>]))<span style="color: #666">.</span>T
 <span style="color: #717171">array([[ 0.466  0.595  0.324]</span>
 <span style="color: #717171">       [ 0.538  0.407  0.654]</span>
 <span style="color: #717171">       [ 0.850  0.018  0.988]</span>
@@ -2223,8 +2223,8 @@
 <span style="color: inherit; background-color: transparent; padding-left: 5px; padding-right: 5px;">145</span>
 <span style="color: inherit; background-color: transparent; padding-left: 5px; padding-right: 5px;">146</span>
 <span style="color: inherit; background-color: transparent; padding-left: 5px; padding-right: 5px;">147</span></pre></div></td><td class="code"><div><pre style="line-height: 125%;"><span></span><code><span style="color: #008000; font-weight: bold">def</span><span style="color: #BBB"> </span><span style="color: #00F">read_ply</span>(filename):
-<span style="color: #BBB">    </span><span style="color: #BA2121; font-style: italic">&quot;&quot;&quot;</span>
-<span style="color: #BA2121; font-style: italic">    Read &quot;.ply&quot; files</span>
+<span style="color: #BBB">    </span><span style="color: #BA2121; font-style: italic">"""</span>
+<span style="color: #BA2121; font-style: italic">    Read ".ply" files</span>
 
 <span style="color: #BA2121; font-style: italic">    Parameters</span>
 <span style="color: #BA2121; font-style: italic">    ----------</span>
@@ -2242,34 +2242,34 @@
 
 <span style="color: #BA2121; font-style: italic">    &gt;&gt;&gt; points = np.random.rand(5, 3)</span>
 <span style="color: #BA2121; font-style: italic">    &gt;&gt;&gt; values = np.random.randint(2, size=10)</span>
-<span style="color: #BA2121; font-style: italic">    &gt;&gt;&gt; write_ply(&#39;example.ply&#39;, [points, values], [&#39;x&#39;, &#39;y&#39;, &#39;z&#39;, &#39;values&#39;])</span>
+<span style="color: #BA2121; font-style: italic">    &gt;&gt;&gt; write_ply('example.ply', [points, values], ['x', 'y', 'z', 'values'])</span>
 
 <span style="color: #BA2121; font-style: italic">    Read the file</span>
 
-<span style="color: #BA2121; font-style: italic">    &gt;&gt;&gt; data = read_ply(&#39;example.ply&#39;)</span>
-<span style="color: #BA2121; font-style: italic">    &gt;&gt;&gt; values = data[&#39;values&#39;]</span>
+<span style="color: #BA2121; font-style: italic">    &gt;&gt;&gt; data = read_ply('example.ply')</span>
+<span style="color: #BA2121; font-style: italic">    &gt;&gt;&gt; values = data['values']</span>
 <span style="color: #BA2121; font-style: italic">    array([0, 0, 1, 1, 0])</span>
 
-<span style="color: #BA2121; font-style: italic">    &gt;&gt;&gt; points = np.vstack((data[&#39;x&#39;], data[&#39;y&#39;], data[&#39;z&#39;])).T</span>
+<span style="color: #BA2121; font-style: italic">    &gt;&gt;&gt; points = np.vstack((data['x'], data['y'], data['z'])).T</span>
 <span style="color: #BA2121; font-style: italic">    array([[ 0.466  0.595  0.324]</span>
 <span style="color: #BA2121; font-style: italic">           [ 0.538  0.407  0.654]</span>
 <span style="color: #BA2121; font-style: italic">           [ 0.850  0.018  0.988]</span>
 <span style="color: #BA2121; font-style: italic">           [ 0.395  0.394  0.363]</span>
 <span style="color: #BA2121; font-style: italic">           [ 0.873  0.996  0.092]])</span>
 
-<span style="color: #BA2121; font-style: italic">    &quot;&quot;&quot;</span>
+<span style="color: #BA2121; font-style: italic">    """</span>
 
-    <span style="color: #008000; font-weight: bold">with</span> <span style="color: #008000">open</span>(filename, <span style="color: #BA2121">&#39;rb&#39;</span>) <span style="color: #008000; font-weight: bold">as</span> plyfile:
+    <span style="color: #008000; font-weight: bold">with</span> <span style="color: #008000">open</span>(filename, <span style="color: #BA2121">'rb'</span>) <span style="color: #008000; font-weight: bold">as</span> plyfile:
 
 
         <span style="color: #3D7B7B; font-style: italic"># Check if the file start with ply</span>
-        <span style="color: #008000; font-weight: bold">if</span> <span style="color: #BA2121">b&#39;ply&#39;</span> <span style="color: #A2F; font-weight: bold">not</span> <span style="color: #A2F; font-weight: bold">in</span> plyfile<span style="color: #666">.</span>readline():
-            <span style="color: #008000; font-weight: bold">raise</span> <span style="color: #CB3F38; font-weight: bold">ValueError</span>(<span style="color: #BA2121">&#39;The file does not start whith the word ply&#39;</span>)
+        <span style="color: #008000; font-weight: bold">if</span> <span style="color: #BA2121">b'ply'</span> <span style="color: #A2F; font-weight: bold">not</span> <span style="color: #A2F; font-weight: bold">in</span> plyfile<span style="color: #666">.</span>readline():
+            <span style="color: #008000; font-weight: bold">raise</span> <span style="color: #CB3F38; font-weight: bold">ValueError</span>(<span style="color: #BA2121">'The file does not start whith the word ply'</span>)
 
         <span style="color: #3D7B7B; font-style: italic"># get binary_little/big or ascii</span>
         fmt <span style="color: #666">=</span> plyfile<span style="color: #666">.</span>readline()<span style="color: #666">.</span>split()[<span style="color: #666">1</span>]<span style="color: #666">.</span>decode()
-        <span style="color: #008000; font-weight: bold">if</span> fmt <span style="color: #666">==</span> <span style="color: #BA2121">&quot;ascii&quot;</span>:
-            <span style="color: #008000; font-weight: bold">raise</span> <span style="color: #CB3F38; font-weight: bold">ValueError</span>(<span style="color: #BA2121">&#39;The file is not binary&#39;</span>)
+        <span style="color: #008000; font-weight: bold">if</span> fmt <span style="color: #666">==</span> <span style="color: #BA2121">"ascii"</span>:
+            <span style="color: #008000; font-weight: bold">raise</span> <span style="color: #CB3F38; font-weight: bold">ValueError</span>(<span style="color: #BA2121">'The file is not binary'</span>)
 
         <span style="color: #3D7B7B; font-style: italic"># get extension for building the numpy dtypes</span>
         ext <span style="color: #666">=</span> valid_formats[fmt]
@@ -2355,7 +2355,7 @@ as one field.</p>
                 <code>field_names</code>
             </td>
             <td>
-                  <code><a class="autorefs autorefs-external" href="https://docs.python.org/3/library/stdtypes.html#list">list</a></code>
+                  <code><a class="autorefs autorefs-external" href="https://docs.python.org/3/builtins/stdtypes.html#list">list</a></code>
             </td>
             <td>
               <div class="doc-md-description">
@@ -2373,14 +2373,14 @@ fields.</p>
 
 <p><span class="doc-section-title">Examples:</span></p>
     <div class="language-pycon highlight" style="background: #f8f8f8"><pre style="line-height: 125%;"><span></span><code><span style="color: #000080; font-weight: bold">&gt;&gt;&gt; </span>points <span style="color: #666">=</span> np<span style="color: #666">.</span>random<span style="color: #666">.</span>rand(<span style="color: #666">10</span>, <span style="color: #666">3</span>)
-<span style="color: #000080; font-weight: bold">&gt;&gt;&gt; </span>write_ply(<span style="color: #BA2121">&#39;example1.ply&#39;</span>, points, [<span style="color: #BA2121">&#39;x&#39;</span>, <span style="color: #BA2121">&#39;y&#39;</span>, <span style="color: #BA2121">&#39;z&#39;</span>])
+<span style="color: #000080; font-weight: bold">&gt;&gt;&gt; </span>write_ply(<span style="color: #BA2121">'example1.ply'</span>, points, [<span style="color: #BA2121">'x'</span>, <span style="color: #BA2121">'y'</span>, <span style="color: #BA2121">'z'</span>])
 </code></pre></div>
     <div class="language-pycon highlight" style="background: #f8f8f8"><pre style="line-height: 125%;"><span></span><code><span style="color: #000080; font-weight: bold">&gt;&gt;&gt; </span>values <span style="color: #666">=</span> np<span style="color: #666">.</span>random<span style="color: #666">.</span>randint(<span style="color: #666">2</span>, size<span style="color: #666">=10</span>)
-<span style="color: #000080; font-weight: bold">&gt;&gt;&gt; </span>write_ply(<span style="color: #BA2121">&#39;example2.ply&#39;</span>, [points, values], [<span style="color: #BA2121">&#39;x&#39;</span>, <span style="color: #BA2121">&#39;y&#39;</span>, <span style="color: #BA2121">&#39;z&#39;</span>, <span style="color: #BA2121">&#39;values&#39;</span>])
+<span style="color: #000080; font-weight: bold">&gt;&gt;&gt; </span>write_ply(<span style="color: #BA2121">'example2.ply'</span>, [points, values], [<span style="color: #BA2121">'x'</span>, <span style="color: #BA2121">'y'</span>, <span style="color: #BA2121">'z'</span>, <span style="color: #BA2121">'values'</span>])
 </code></pre></div>
     <div class="language-pycon highlight" style="background: #f8f8f8"><pre style="line-height: 125%;"><span></span><code><span style="color: #000080; font-weight: bold">&gt;&gt;&gt; </span>colors <span style="color: #666">=</span> np<span style="color: #666">.</span>random<span style="color: #666">.</span>randint(<span style="color: #666">255</span>, size<span style="color: #666">=</span>(<span style="color: #666">10</span>,<span style="color: #666">3</span>), dtype<span style="color: #666">=</span>np<span style="color: #666">.</span>uint8)
-<span style="color: #000080; font-weight: bold">&gt;&gt;&gt; </span>field_names <span style="color: #666">=</span> [<span style="color: #BA2121">&#39;x&#39;</span>, <span style="color: #BA2121">&#39;y&#39;</span>, <span style="color: #BA2121">&#39;z&#39;</span>, <span style="color: #BA2121">&#39;red&#39;</span>, <span style="color: #BA2121">&#39;green&#39;</span>, <span style="color: #BA2121">&#39;blue&#39;</span>, values<span style="color: #BA2121">&#39;]</span>
-<span style="color: #000080; font-weight: bold">&gt;&gt;&gt; </span>write_ply(<span style="color: #BA2121">&#39;example3.ply&#39;</span>, [points, colors, values], field_names)
+<span style="color: #000080; font-weight: bold">&gt;&gt;&gt; </span>field_names <span style="color: #666">=</span> [<span style="color: #BA2121">'x'</span>, <span style="color: #BA2121">'y'</span>, <span style="color: #BA2121">'z'</span>, <span style="color: #BA2121">'red'</span>, <span style="color: #BA2121">'green'</span>, <span style="color: #BA2121">'blue'</span>, values<span style="color: #BA2121">']</span>
+<span style="color: #000080; font-weight: bold">&gt;&gt;&gt; </span>write_ply(<span style="color: #BA2121">'example3.ply'</span>, [points, colors, values], field_names)
 </code></pre></div>
 
 
@@ -2487,13 +2487,13 @@ fields.</p>
 <span style="color: inherit; background-color: transparent; padding-left: 5px; padding-right: 5px;">270</span>
 <span style="color: inherit; background-color: transparent; padding-left: 5px; padding-right: 5px;">271</span>
 <span style="color: inherit; background-color: transparent; padding-left: 5px; padding-right: 5px;">272</span></pre></div></td><td class="code"><div><pre style="line-height: 125%;"><span></span><code><span style="color: #008000; font-weight: bold">def</span><span style="color: #BBB"> </span><span style="color: #00F">write_ply</span>(filename, field_list, field_names):
-<span style="color: #BBB">    </span><span style="color: #BA2121; font-style: italic">&quot;&quot;&quot;</span>
-<span style="color: #BA2121; font-style: italic">    Write &quot;.ply&quot; files</span>
+<span style="color: #BBB">    </span><span style="color: #BA2121; font-style: italic">"""</span>
+<span style="color: #BA2121; font-style: italic">    Write ".ply" files</span>
 
 <span style="color: #BA2121; font-style: italic">    Parameters</span>
 <span style="color: #BA2121; font-style: italic">    ----------</span>
 <span style="color: #BA2121; font-style: italic">    filename : string</span>
-<span style="color: #BA2121; font-style: italic">        the name of the file to which the data is saved. A &#39;.ply&#39; extension will be appended to the </span>
+<span style="color: #BA2121; font-style: italic">        the name of the file to which the data is saved. A '.ply' extension will be appended to the </span>
 <span style="color: #BA2121; font-style: italic">        file name if it does no already have one.</span>
 
 <span style="color: #BA2121; font-style: italic">    field_list : list, tuple, numpy array</span>
@@ -2508,25 +2508,25 @@ fields.</p>
 <span style="color: #BA2121; font-style: italic">    Examples</span>
 <span style="color: #BA2121; font-style: italic">    --------</span>
 <span style="color: #BA2121; font-style: italic">    &gt;&gt;&gt; points = np.random.rand(10, 3)</span>
-<span style="color: #BA2121; font-style: italic">    &gt;&gt;&gt; write_ply(&#39;example1.ply&#39;, points, [&#39;x&#39;, &#39;y&#39;, &#39;z&#39;])</span>
+<span style="color: #BA2121; font-style: italic">    &gt;&gt;&gt; write_ply('example1.ply', points, ['x', 'y', 'z'])</span>
 
 <span style="color: #BA2121; font-style: italic">    &gt;&gt;&gt; values = np.random.randint(2, size=10)</span>
-<span style="color: #BA2121; font-style: italic">    &gt;&gt;&gt; write_ply(&#39;example2.ply&#39;, [points, values], [&#39;x&#39;, &#39;y&#39;, &#39;z&#39;, &#39;values&#39;])</span>
+<span style="color: #BA2121; font-style: italic">    &gt;&gt;&gt; write_ply('example2.ply', [points, values], ['x', 'y', 'z', 'values'])</span>
 
 <span style="color: #BA2121; font-style: italic">    &gt;&gt;&gt; colors = np.random.randint(255, size=(10,3), dtype=np.uint8)</span>
-<span style="color: #BA2121; font-style: italic">    &gt;&gt;&gt; field_names = [&#39;x&#39;, &#39;y&#39;, &#39;z&#39;, &#39;red&#39;, &#39;green&#39;, &#39;blue&#39;, values&#39;]</span>
-<span style="color: #BA2121; font-style: italic">    &gt;&gt;&gt; write_ply(&#39;example3.ply&#39;, [points, colors, values], field_names)</span>
+<span style="color: #BA2121; font-style: italic">    &gt;&gt;&gt; field_names = ['x', 'y', 'z', 'red', 'green', 'blue', values']</span>
+<span style="color: #BA2121; font-style: italic">    &gt;&gt;&gt; write_ply('example3.ply', [points, colors, values], field_names)</span>
 
-<span style="color: #BA2121; font-style: italic">    &quot;&quot;&quot;</span>
+<span style="color: #BA2121; font-style: italic">    """</span>
 
     <span style="color: #3D7B7B; font-style: italic"># Format list input to the right form</span>
     field_list <span style="color: #666">=</span> <span style="color: #008000">list</span>(field_list) <span style="color: #008000; font-weight: bold">if</span> (<span style="color: #008000">type</span>(field_list) <span style="color: #666">==</span> <span style="color: #008000">list</span> <span style="color: #A2F; font-weight: bold">or</span> <span style="color: #008000">type</span>(field_list) <span style="color: #666">==</span> <span style="color: #008000">tuple</span>) <span style="color: #008000; font-weight: bold">else</span> <span style="color: #008000">list</span>((field_list,))
     <span style="color: #008000; font-weight: bold">for</span> i, field <span style="color: #A2F; font-weight: bold">in</span> <span style="color: #008000">enumerate</span>(field_list):
         <span style="color: #008000; font-weight: bold">if</span> field <span style="color: #A2F; font-weight: bold">is</span> <span style="color: #008000; font-weight: bold">None</span>:
-            <span style="color: #008000">print</span>(<span style="color: #BA2121">&#39;WRITE_PLY ERROR: a field is None&#39;</span>)
+            <span style="color: #008000">print</span>(<span style="color: #BA2121">'WRITE_PLY ERROR: a field is None'</span>)
             <span style="color: #008000; font-weight: bold">return</span> <span style="color: #008000; font-weight: bold">False</span>
         <span style="color: #008000; font-weight: bold">elif</span> field<span style="color: #666">.</span>ndim <span style="color: #666">&gt;</span> <span style="color: #666">2</span>:
-            <span style="color: #008000">print</span>(<span style="color: #BA2121">&#39;WRITE_PLY ERROR: a field have more than 2 dimensions&#39;</span>)
+            <span style="color: #008000">print</span>(<span style="color: #BA2121">'WRITE_PLY ERROR: a field have more than 2 dimensions'</span>)
             <span style="color: #008000; font-weight: bold">return</span> <span style="color: #008000; font-weight: bold">False</span>
         <span style="color: #008000; font-weight: bold">elif</span> field<span style="color: #666">.</span>ndim <span style="color: #666">&lt;</span> <span style="color: #666">2</span>:
             field_list[i] <span style="color: #666">=</span> field<span style="color: #666">.</span>reshape(<span style="color: #666">-1</span>, <span style="color: #666">1</span>)
@@ -2534,41 +2534,41 @@ fields.</p>
     <span style="color: #3D7B7B; font-style: italic"># check all fields have the same number of data</span>
     n_points <span style="color: #666">=</span> [field<span style="color: #666">.</span>shape[<span style="color: #666">0</span>] <span style="color: #008000; font-weight: bold">for</span> field <span style="color: #A2F; font-weight: bold">in</span> field_list]
     <span style="color: #008000; font-weight: bold">if</span> <span style="color: #A2F; font-weight: bold">not</span> np<span style="color: #666">.</span>all(np<span style="color: #666">.</span>equal(n_points, n_points[<span style="color: #666">0</span>])):
-        <span style="color: #008000">print</span>(<span style="color: #BA2121">&#39;wrong field dimensions&#39;</span>)
+        <span style="color: #008000">print</span>(<span style="color: #BA2121">'wrong field dimensions'</span>)
         <span style="color: #008000; font-weight: bold">return</span> <span style="color: #008000; font-weight: bold">False</span>    
 
     <span style="color: #3D7B7B; font-style: italic"># Check if field_names and field_list have same nb of column</span>
     n_fields <span style="color: #666">=</span> np<span style="color: #666">.</span>sum([field<span style="color: #666">.</span>shape[<span style="color: #666">1</span>] <span style="color: #008000; font-weight: bold">for</span> field <span style="color: #A2F; font-weight: bold">in</span> field_list])
     <span style="color: #008000; font-weight: bold">if</span> (n_fields <span style="color: #666">!=</span> <span style="color: #008000">len</span>(field_names)):
-        <span style="color: #008000">print</span>(<span style="color: #BA2121">&#39;wrong number of field names&#39;</span>)
+        <span style="color: #008000">print</span>(<span style="color: #BA2121">'wrong number of field names'</span>)
         <span style="color: #008000; font-weight: bold">return</span> <span style="color: #008000; font-weight: bold">False</span>
 
     <span style="color: #3D7B7B; font-style: italic"># Add extension if not there</span>
-    <span style="color: #008000; font-weight: bold">if</span> <span style="color: #A2F; font-weight: bold">not</span> filename<span style="color: #666">.</span>endswith(<span style="color: #BA2121">&#39;.ply&#39;</span>):
-        filename <span style="color: #666">+=</span> <span style="color: #BA2121">&#39;.ply&#39;</span>
+    <span style="color: #008000; font-weight: bold">if</span> <span style="color: #A2F; font-weight: bold">not</span> filename<span style="color: #666">.</span>endswith(<span style="color: #BA2121">'.ply'</span>):
+        filename <span style="color: #666">+=</span> <span style="color: #BA2121">'.ply'</span>
 
     <span style="color: #3D7B7B; font-style: italic"># open in text mode to write the header</span>
-    <span style="color: #008000; font-weight: bold">with</span> <span style="color: #008000">open</span>(filename, <span style="color: #BA2121">&#39;w&#39;</span>) <span style="color: #008000; font-weight: bold">as</span> plyfile:
+    <span style="color: #008000; font-weight: bold">with</span> <span style="color: #008000">open</span>(filename, <span style="color: #BA2121">'w'</span>) <span style="color: #008000; font-weight: bold">as</span> plyfile:
 
         <span style="color: #3D7B7B; font-style: italic"># First magical word</span>
-        header <span style="color: #666">=</span> [<span style="color: #BA2121">&#39;ply&#39;</span>]
+        header <span style="color: #666">=</span> [<span style="color: #BA2121">'ply'</span>]
 
         <span style="color: #3D7B7B; font-style: italic"># Encoding format</span>
-        header<span style="color: #666">.</span>append(<span style="color: #BA2121">&#39;format binary_&#39;</span> <span style="color: #666">+</span> sys<span style="color: #666">.</span>byteorder <span style="color: #666">+</span> <span style="color: #BA2121">&#39;_endian 1.0&#39;</span>)
+        header<span style="color: #666">.</span>append(<span style="color: #BA2121">'format binary_'</span> <span style="color: #666">+</span> sys<span style="color: #666">.</span>byteorder <span style="color: #666">+</span> <span style="color: #BA2121">'_endian 1.0'</span>)
 
         <span style="color: #3D7B7B; font-style: italic"># Points properties description</span>
         header<span style="color: #666">.</span>extend(header_properties(field_list, field_names))
 
         <span style="color: #3D7B7B; font-style: italic"># End of header</span>
-        header<span style="color: #666">.</span>append(<span style="color: #BA2121">&#39;end_header&#39;</span>)
+        header<span style="color: #666">.</span>append(<span style="color: #BA2121">'end_header'</span>)
 
         <span style="color: #3D7B7B; font-style: italic"># Write all lines</span>
         <span style="color: #008000; font-weight: bold">for</span> line <span style="color: #A2F; font-weight: bold">in</span> header:
-            plyfile<span style="color: #666">.</span>write(<span style="color: #BA2121">&quot;</span><span style="color: #A45A77; font-weight: bold">%s</span><span style="color: #AA5D1F; font-weight: bold">\n</span><span style="color: #BA2121">&quot;</span> <span style="color: #666">%</span> line)
+            plyfile<span style="color: #666">.</span>write(<span style="color: #BA2121">"</span><span style="color: #A45A77; font-weight: bold">%s</span><span style="color: #AA5D1F; font-weight: bold">\n</span><span style="color: #BA2121">"</span> <span style="color: #666">%</span> line)
 
 
     <span style="color: #3D7B7B; font-style: italic"># open in binary/append to use tofile</span>
-    <span style="color: #008000; font-weight: bold">with</span> <span style="color: #008000">open</span>(filename, <span style="color: #BA2121">&#39;ab&#39;</span>) <span style="color: #008000; font-weight: bold">as</span> plyfile:
+    <span style="color: #008000; font-weight: bold">with</span> <span style="color: #008000">open</span>(filename, <span style="color: #BA2121">'ab'</span>) <span style="color: #008000; font-weight: bold">as</span> plyfile:
 
         <span style="color: #3D7B7B; font-style: italic"># Create a structured array</span>
         i <span style="color: #666">=</span> <span style="color: #666">0</span>
@@ -2694,7 +2694,7 @@ fields.</p>
       <script id="__config" type="application/json">{"annotate": null, "base": "../../../..", "features": ["navigation.tabs", "navigation.tabs.sticky", "content.code.copy"], "search": "../../../../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
     
     
-      <script src="../../../../assets/javascripts/bundle.79ae519e.min.js"></script>
+      <script src="../../../../assets/javascripts/bundle.d7400e89.min.js"></script>
       
         <script src="../../../../assets/_markdown_exec_pyodide.js"></script>
       

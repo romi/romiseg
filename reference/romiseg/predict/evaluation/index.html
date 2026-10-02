@@ -25,7 +25,7 @@
       
       
       <link rel="icon" href="../../../../assets/images/ROMI_logo_green_25.svg">
-      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.6">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.7">
     
     
       
@@ -33,7 +33,7 @@
       
     
     
-      <link rel="stylesheet" href="../../../../assets/stylesheets/main.484c7ddc.min.css">
+      <link rel="stylesheet" href="../../../../assets/stylesheets/main.ec1eaa64.min.css">
       
       
 
@@ -2052,7 +2052,7 @@
 <span style="color: inherit; background-color: transparent; padding-left: 5px; padding-right: 5px;">45</span>
 <span style="color: inherit; background-color: transparent; padding-left: 5px; padding-right: 5px;">46</span>
 <span style="color: inherit; background-color: transparent; padding-left: 5px; padding-right: 5px;">47</span></pre></div></td><td class="code"><div><pre style="line-height: 125%;"><span></span><code><span style="color: #008000; font-weight: bold">def</span><span style="color: #BBB"> </span><span style="color: #00F">evaluate</span>(inputs, model):
-<span style="color: #BBB">    </span><span style="color: #BA2121; font-style: italic">&quot;&quot;&quot;</span>
+<span style="color: #BBB">    </span><span style="color: #BA2121; font-style: italic">"""</span>
 <span style="color: #BA2121; font-style: italic">    Evaluate a segmentation model on input images.</span>
 
 <span style="color: #BA2121; font-style: italic">    Parameters</span>
@@ -2066,7 +2066,7 @@
 <span style="color: #BA2121; font-style: italic">    -------</span>
 <span style="color: #BA2121; font-style: italic">    torch.Tensor</span>
 <span style="color: #BA2121; font-style: italic">        Predicted segmentation masks.</span>
-<span style="color: #BA2121; font-style: italic">    &quot;&quot;&quot;</span>
+<span style="color: #BA2121; font-style: italic">    """</span>
     <span style="color: #008000; font-weight: bold">with</span> torch<span style="color: #666">.</span>no_grad():
         inputs<span style="color: #666">.</span>requires_grad <span style="color: #666">=</span> <span style="color: #008000; font-weight: bold">False</span>
         <span style="color: #3D7B7B; font-style: italic"># Get the first batch - device is determined by inputs tensor</span>
@@ -2178,7 +2178,7 @@
       <tbody>
           <tr class="doc-section-item">
             <td>
-                  <code><a class="autorefs autorefs-external" href="https://docs.python.org/3/library/stdtypes.html#tuple">tuple</a></code>
+                  <code><a class="autorefs autorefs-external" href="https://docs.python.org/3/builtins/stdtypes.html#tuple">tuple</a></code>
             </td>
             <td>
               <div class="doc-md-description">
@@ -2228,7 +2228,7 @@
 <span style="color: inherit; background-color: transparent; padding-left: 5px; padding-right: 5px;">83</span>
 <span style="color: inherit; background-color: transparent; padding-left: 5px; padding-right: 5px;">84</span>
 <span style="color: inherit; background-color: transparent; padding-left: 5px; padding-right: 5px;">85</span></pre></div></td><td class="code"><div><pre style="line-height: 125%;"><span></span><code><span style="color: #008000; font-weight: bold">def</span><span style="color: #BBB"> </span><span style="color: #00F">test</span>(inputs, labels, model):
-<span style="color: #BBB">    </span><span style="color: #BA2121; font-style: italic">&quot;&quot;&quot;</span>
+<span style="color: #BBB">    </span><span style="color: #BA2121; font-style: italic">"""</span>
 <span style="color: #BA2121; font-style: italic">    Test a segmentation model on input images and labels.</span>
 
 <span style="color: #BA2121; font-style: italic">    Parameters</span>
@@ -2244,7 +2244,7 @@
 <span style="color: #BA2121; font-style: italic">    -------</span>
 <span style="color: #BA2121; font-style: italic">    tuple</span>
 <span style="color: #BA2121; font-style: italic">        Tuple containing the predicted segmentation masks and a dictionary of metrics.</span>
-<span style="color: #BA2121; font-style: italic">    &quot;&quot;&quot;</span>
+<span style="color: #BA2121; font-style: italic">    """</span>
     metrics <span style="color: #666">=</span> defaultdict(<span style="color: #008000">float</span>)
 
     <span style="color: #008000; font-weight: bold">with</span> torch<span style="color: #666">.</span>no_grad():
@@ -2370,7 +2370,7 @@
       <script id="__config" type="application/json">{"annotate": null, "base": "../../../..", "features": ["navigation.tabs", "navigation.tabs.sticky", "content.code.copy"], "search": "../../../../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
     
     
-      <script src="../../../../assets/javascripts/bundle.79ae519e.min.js"></script>
+      <script src="../../../../assets/javascripts/bundle.d7400e89.min.js"></script>
       
         <script src="../../../../assets/_markdown_exec_pyodide.js"></script>
       

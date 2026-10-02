@@ -25,7 +25,7 @@
       
       
       <link rel="icon" href="../../../../assets/images/ROMI_logo_green_25.svg">
-      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.6">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.7">
     
     
       
@@ -33,7 +33,7 @@
       
     
     
-      <link rel="stylesheet" href="../../../../assets/stylesheets/main.484c7ddc.min.css">
+      <link rel="stylesheet" href="../../../../assets/stylesheets/main.ec1eaa64.min.css">
       
       
 
@@ -2003,7 +2003,7 @@ inference.</p>
           <tr class="doc-section-item">
             <td><code><span title="romiseg.predict.datasets.DatasetImId.image_paths">image_paths</span></code></td>
             <td>
-                  <code><a class="autorefs autorefs-external" href="https://docs.python.org/3/library/stdtypes.html#list">list</a></code>
+                  <code><a class="autorefs autorefs-external" href="https://docs.python.org/3/builtins/stdtypes.html#list">list</a></code>
             </td>
             <td>
               <div class="doc-md-description">
@@ -2014,7 +2014,7 @@ inference.</p>
           <tr class="doc-section-item">
             <td><code><span title="romiseg.predict.datasets.DatasetImId.transforms">transforms</span></code></td>
             <td>
-                  <code><a class="autorefs autorefs-external" href="https://docs.python.org/3/library/functions.html#callable">callable</a></code>
+                  <code><a class="autorefs autorefs-external" href="https://docs.python.org/3/builtins/functions.html#callable">callable</a></code>
             </td>
             <td>
               <div class="doc-md-description">
@@ -2061,7 +2061,7 @@ be applied to the images.</p>
                 <code>transform</code>
             </td>
             <td>
-                  <code><a class="autorefs autorefs-external" href="https://docs.python.org/3/library/functions.html#callable">callable</a> or None</code>
+                  <code><a class="autorefs autorefs-external" href="https://docs.python.org/3/builtins/functions.html#callable">callable</a> or None</code>
             </td>
             <td>
               <div class="doc-md-description">
@@ -2098,7 +2098,7 @@ to be applied to the images. If None, no transformations are applied.</p>
 <span style="color: inherit; background-color: transparent; padding-left: 5px; padding-right: 5px;">47</span>
 <span style="color: inherit; background-color: transparent; padding-left: 5px; padding-right: 5px;">48</span>
 <span style="color: inherit; background-color: transparent; padding-left: 5px; padding-right: 5px;">49</span></pre></div></td><td class="code"><div><pre style="line-height: 125%;"><span></span><code><span style="color: #008000; font-weight: bold">def</span><span style="color: #BBB"> </span><span style="color: #00F">__init__</span>(<span style="color: #008000">self</span>, image_paths, transform):
-<span style="color: #BBB">    </span><span style="color: #BA2121; font-style: italic">&quot;&quot;&quot;Initializes a new instance.</span>
+<span style="color: #BBB">    </span><span style="color: #BA2121; font-style: italic">"""Initializes a new instance.</span>
 
 <span style="color: #BA2121; font-style: italic">    Parameters</span>
 <span style="color: #BA2121; font-style: italic">    ----------</span>
@@ -2107,7 +2107,7 @@ to be applied to the images. If None, no transformations are applied.</p>
 <span style="color: #BA2121; font-style: italic">    transform : callable or None</span>
 <span style="color: #BA2121; font-style: italic">        A callable object (e.g., a function) that defines the set of transformations</span>
 <span style="color: #BA2121; font-style: italic">        to be applied to the images. If None, no transformations are applied.</span>
-<span style="color: #BA2121; font-style: italic">    &quot;&quot;&quot;</span>
+<span style="color: #BA2121; font-style: italic">    """</span>
     <span style="color: #008000">self</span><span style="color: #666">.</span>image_paths <span style="color: #666">=</span> image_paths
     <span style="color: #008000">self</span><span style="color: #666">.</span>transforms <span style="color: #666">=</span> transform
 </code></pre></div></td></tr></table></div>
@@ -2158,7 +2158,7 @@ to be applied to the images. If None, no transformations are applied.</p>
                 <code>index</code>
             </td>
             <td>
-                  <code><a class="autorefs autorefs-external" href="https://docs.python.org/3/library/functions.html#int">int</a></code>
+                  <code><a class="autorefs autorefs-external" href="https://docs.python.org/3/builtins/functions.html#int">int</a></code>
             </td>
             <td>
               <div class="doc-md-description">
@@ -2194,7 +2194,7 @@ to be applied to the images. If None, no transformations are applied.</p>
           </tr>
           <tr class="doc-section-item">
             <td>
-                  <code><a class="autorefs autorefs-external" href="https://docs.python.org/3/library/stdtypes.html#str">str</a></code>
+                  <code><a class="autorefs autorefs-external" href="https://docs.python.org/3/builtins/stdtypes.html#str">str</a></code>
             </td>
             <td>
               <div class="doc-md-description">
@@ -2240,7 +2240,7 @@ to be applied to the images. If None, no transformations are applied.</p>
 <span style="color: inherit; background-color: transparent; padding-left: 5px; padding-right: 5px;">80</span>
 <span style="color: inherit; background-color: transparent; padding-left: 5px; padding-right: 5px;">81</span>
 <span style="color: inherit; background-color: transparent; padding-left: 5px; padding-right: 5px;">82</span></pre></div></td><td class="code"><div><pre style="line-height: 125%;"><span></span><code><span style="color: #008000; font-weight: bold">def</span><span style="color: #BBB"> </span><span style="color: #00F">__getitem__</span>(<span style="color: #008000">self</span>, index):
-<span style="color: #BBB">    </span><span style="color: #BA2121; font-style: italic">&quot;&quot;&quot;Retrieve an image and its corresponding ID from the dataset through indexing.</span>
+<span style="color: #BBB">    </span><span style="color: #BA2121; font-style: italic">"""Retrieve an image and its corresponding ID from the dataset through indexing.</span>
 
 <span style="color: #BA2121; font-style: italic">    Parameters</span>
 <span style="color: #BA2121; font-style: italic">    ----------</span>
@@ -2253,9 +2253,9 @@ to be applied to the images. If None, no transformations are applied.</p>
 <span style="color: #BA2121; font-style: italic">        The transformed image with only RGB channels.</span>
 <span style="color: #BA2121; font-style: italic">    str</span>
 <span style="color: #BA2121; font-style: italic">        The image ID, providing a unique identifier for the image.</span>
-<span style="color: #BA2121; font-style: italic">    &quot;&quot;&quot;</span>
+<span style="color: #BA2121; font-style: italic">    """</span>
     <span style="color: #008000; font-weight: bold">if</span> <span style="color: #A2F; font-weight: bold">not</span> <span style="color: #008000">self</span><span style="color: #666">.</span>image_paths:
-        <span style="color: #008000; font-weight: bold">raise</span> <span style="color: #CB3F38; font-weight: bold">IndexError</span>(<span style="color: #BA2121">f&quot;Empty dataset. Cannot access index &#39;</span><span style="color: #A45A77; font-weight: bold">{</span>index<span style="color: #A45A77; font-weight: bold">}</span><span style="color: #BA2121">&#39;.&quot;</span>)
+        <span style="color: #008000; font-weight: bold">raise</span> <span style="color: #CB3F38; font-weight: bold">IndexError</span>(<span style="color: #BA2121">f"Empty dataset. Cannot access index '</span><span style="color: #A45A77; font-weight: bold">{</span>index<span style="color: #A45A77; font-weight: bold">}</span><span style="color: #BA2121">'."</span>)
     <span style="color: #3D7B7B; font-style: italic"># Extract the file path of the image from the dataset using the provided index.</span>
     db_file <span style="color: #666">=</span> <span style="color: #008000">self</span><span style="color: #666">.</span>image_paths[index]
     <span style="color: #3D7B7B; font-style: italic"># Read the image from the file and convert it to a Pillow Image object.</span>
@@ -2269,7 +2269,7 @@ to be applied to the images. If None, no transformations are applied.</p>
     t_image <span style="color: #666">=</span> t_image[<span style="color: #666">0</span>:<span style="color: #666">3</span>, :, :]
 
     <span style="color: #3D7B7B; font-style: italic"># Debugging line for checking the maximum pixel value in the transformed image:</span>
-    logger<span style="color: #666">.</span>debug(<span style="color: #BA2121">f&quot;Max pixel value in transformed image: </span><span style="color: #A45A77; font-weight: bold">{</span>t_image<span style="color: #666">.</span>max()<span style="color: #A45A77; font-weight: bold">}</span><span style="color: #BA2121">&quot;</span>)
+    logger<span style="color: #666">.</span>debug(<span style="color: #BA2121">f"Max pixel value in transformed image: </span><span style="color: #A45A77; font-weight: bold">{</span>t_image<span style="color: #666">.</span>max()<span style="color: #A45A77; font-weight: bold">}</span><span style="color: #BA2121">"</span>)
     <span style="color: #008000; font-weight: bold">return</span> t_image, Path(db_file)<span style="color: #666">.</span>name
 </code></pre></div></td></tr></table></div>
             </details>
@@ -2304,7 +2304,7 @@ to be applied to the images. If None, no transformations are applied.</p>
       <tbody>
           <tr class="doc-section-item">
             <td>
-                  <code><a class="autorefs autorefs-external" href="https://docs.python.org/3/library/functions.html#int">int</a></code>
+                  <code><a class="autorefs autorefs-external" href="https://docs.python.org/3/builtins/functions.html#int">int</a></code>
             </td>
             <td>
               <div class="doc-md-description">
@@ -2327,13 +2327,13 @@ to be applied to the images. If None, no transformations are applied.</p>
 <span style="color: inherit; background-color: transparent; padding-left: 5px; padding-right: 5px;">90</span>
 <span style="color: inherit; background-color: transparent; padding-left: 5px; padding-right: 5px;">91</span>
 <span style="color: inherit; background-color: transparent; padding-left: 5px; padding-right: 5px;">92</span></pre></div></td><td class="code"><div><pre style="line-height: 125%;"><span></span><code><span style="color: #008000; font-weight: bold">def</span><span style="color: #BBB"> </span><span style="color: #00F">__len__</span>(<span style="color: #008000">self</span>):
-<span style="color: #BBB">    </span><span style="color: #BA2121; font-style: italic">&quot;&quot;&quot;Returns the number of images present in the dataset.</span>
+<span style="color: #BBB">    </span><span style="color: #BA2121; font-style: italic">"""Returns the number of images present in the dataset.</span>
 
 <span style="color: #BA2121; font-style: italic">    Returns</span>
 <span style="color: #BA2121; font-style: italic">    -------</span>
 <span style="color: #BA2121; font-style: italic">    int</span>
 <span style="color: #BA2121; font-style: italic">        The number of images present in the dataset.</span>
-<span style="color: #BA2121; font-style: italic">    &quot;&quot;&quot;</span>
+<span style="color: #BA2121; font-style: italic">    """</span>
     <span style="color: #008000; font-weight: bold">return</span> <span style="color: #008000">len</span>(<span style="color: #008000">self</span><span style="color: #666">.</span>image_paths)
 </code></pre></div></td></tr></table></div>
             </details>
@@ -2451,7 +2451,7 @@ to be applied to the images. If None, no transformations are applied.</p>
       <script id="__config" type="application/json">{"annotate": null, "base": "../../../..", "features": ["navigation.tabs", "navigation.tabs.sticky", "content.code.copy"], "search": "../../../../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
     
     
-      <script src="../../../../assets/javascripts/bundle.79ae519e.min.js"></script>
+      <script src="../../../../assets/javascripts/bundle.d7400e89.min.js"></script>
       
         <script src="../../../../assets/_markdown_exec_pyodide.js"></script>
       

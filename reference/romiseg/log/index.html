@@ -25,7 +25,7 @@
       
       
       <link rel="icon" href="../../../assets/images/ROMI_logo_green_25.svg">
-      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.6">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.7">
     
     
       
@@ -33,7 +33,7 @@
       
     
     
-      <link rel="stylesheet" href="../../../assets/stylesheets/main.484c7ddc.min.css">
+      <link rel="stylesheet" href="../../../assets/stylesheets/main.ec1eaa64.min.css">
       
       
 
@@ -2005,7 +2005,7 @@
 <span style="color: inherit; background-color: transparent; padding-left: 5px; padding-right: 5px;">73</span>
 <span style="color: inherit; background-color: transparent; padding-left: 5px; padding-right: 5px;">74</span>
 <span style="color: inherit; background-color: transparent; padding-left: 5px; padding-right: 5px;">75</span></pre></div></td><td class="code"><div><pre style="line-height: 125%;"><span></span><code><span style="color: #008000; font-weight: bold">def</span><span style="color: #BBB"> </span><span style="color: #00F">get_console_handler</span>():
-<span style="color: #BBB">    </span><span style="color: #BA2121; font-style: italic">&quot;&quot;&quot;Creates and configures a console handler for logging that outputs to the standard output stream.</span>
+<span style="color: #BBB">    </span><span style="color: #BA2121; font-style: italic">"""Creates and configures a console handler for logging that outputs to the standard output stream.</span>
 
 <span style="color: #BA2121; font-style: italic">    This handler uses a specific formatter for colored log messages.</span>
 
@@ -2013,7 +2013,7 @@
 <span style="color: #BA2121; font-style: italic">    -------</span>
 <span style="color: #BA2121; font-style: italic">    logging.StreamHandler</span>
 <span style="color: #BA2121; font-style: italic">        The configured console logging handler with a colored formatter.</span>
-<span style="color: #BA2121; font-style: italic">    &quot;&quot;&quot;</span>
+<span style="color: #BA2121; font-style: italic">    """</span>
     console_handler <span style="color: #666">=</span> logging<span style="color: #666">.</span>StreamHandler(sys<span style="color: #666">.</span>stdout)
     console_handler<span style="color: #666">.</span>setFormatter(COLORED_FORMATTER)
     <span style="color: #008000; font-weight: bold">return</span> console_handler
@@ -2058,7 +2058,7 @@ It is typically used for basic logging setups where no file-based or external co
                 <code>logger_name</code>
             </td>
             <td>
-                  <code><a class="autorefs autorefs-external" href="https://docs.python.org/3/library/stdtypes.html#str">str</a></code>
+                  <code><a class="autorefs autorefs-external" href="https://docs.python.org/3/builtins/stdtypes.html#str">str</a></code>
             </td>
             <td>
               <div class="doc-md-description">
@@ -2074,7 +2074,7 @@ It is typically used for basic logging setups where no file-based or external co
                 <code>log_level</code>
             </td>
             <td>
-                  <code><a class="autorefs autorefs-external" href="https://docs.python.org/3/library/functions.html#int">int</a> or <a class="autorefs autorefs-external" href="https://docs.python.org/3/library/stdtypes.html#str">str</a></code>
+                  <code><a class="autorefs autorefs-external" href="https://docs.python.org/3/builtins/functions.html#int">int</a> or <a class="autorefs autorefs-external" href="https://docs.python.org/3/builtins/stdtypes.html#str">str</a></code>
             </td>
             <td>
               <div class="doc-md-description">
@@ -2137,7 +2137,7 @@ It is typically used for basic logging setups where no file-based or external co
 <span style="color: inherit; background-color: transparent; padding-left: 5px; padding-right: 5px;">120</span>
 <span style="color: inherit; background-color: transparent; padding-left: 5px; padding-right: 5px;">121</span>
 <span style="color: inherit; background-color: transparent; padding-left: 5px; padding-right: 5px;">122</span></pre></div></td><td class="code"><div><pre style="line-height: 125%;"><span></span><code><span style="color: #008000; font-weight: bold">def</span><span style="color: #BBB"> </span><span style="color: #00F">get_dummy_logger</span>(logger_name, log_level<span style="color: #666">=</span>DEFAULT_LOG_LEVEL):
-<span style="color: #BBB">    </span><span style="color: #BA2121; font-style: italic">&quot;&quot;&quot;Creates and configures a dummy logger with a console handler.</span>
+<span style="color: #BBB">    </span><span style="color: #BA2121; font-style: italic">"""Creates and configures a dummy logger with a console handler.</span>
 
 <span style="color: #BA2121; font-style: italic">    This function generates a logger instance associated with the specified name and log level.</span>
 <span style="color: #BA2121; font-style: italic">    The logger is configured with a console handler to allow output of log statements to the console.</span>
@@ -2154,7 +2154,7 @@ It is typically used for basic logging setups where no file-based or external co
 <span style="color: #BA2121; font-style: italic">    -------</span>
 <span style="color: #BA2121; font-style: italic">    logging.Logger</span>
 <span style="color: #BA2121; font-style: italic">        The configured logger instance with a console handler attached.</span>
-<span style="color: #BA2121; font-style: italic">    &quot;&quot;&quot;</span>
+<span style="color: #BA2121; font-style: italic">    """</span>
     logger <span style="color: #666">=</span> logging<span style="color: #666">.</span>getLogger(logger_name)
     logger<span style="color: #666">.</span>setLevel(log_level)
     logger<span style="color: #666">.</span>addHandler(get_console_handler())
@@ -2200,7 +2200,7 @@ The log level determines the severity of messages that are captured by the handl
                 <code>log_file</code>
             </td>
             <td>
-                  <code><a class="autorefs autorefs-external" href="https://docs.python.org/3/library/stdtypes.html#str">str</a> or <a class="autorefs autorefs-external" title="pathlib.Path" href="https://docs.python.org/3/library/pathlib.html#pathlib.Path">Path</a></code>
+                  <code><a class="autorefs autorefs-external" href="https://docs.python.org/3/builtins/stdtypes.html#str">str</a> or <a class="autorefs autorefs-external" title="pathlib.Path" href="https://docs.python.org/3/library/pathlib.html#pathlib.Path">Path</a></code>
             </td>
             <td>
               <div class="doc-md-description">
@@ -2260,7 +2260,7 @@ The log level determines the severity of messages that are captured by the handl
 <span style="color: inherit; background-color: transparent; padding-left: 5px; padding-right: 5px;">95</span>
 <span style="color: inherit; background-color: transparent; padding-left: 5px; padding-right: 5px;">96</span>
 <span style="color: inherit; background-color: transparent; padding-left: 5px; padding-right: 5px;">97</span></pre></div></td><td class="code"><div><pre style="line-height: 125%;"><span></span><code><span style="color: #008000; font-weight: bold">def</span><span style="color: #BBB"> </span><span style="color: #00F">get_file_handler</span>(log_file):
-<span style="color: #BBB">    </span><span style="color: #BA2121; font-style: italic">&quot;&quot;&quot;Creates and configures a file handler for logging.</span>
+<span style="color: #BBB">    </span><span style="color: #BA2121; font-style: italic">"""Creates and configures a file handler for logging.</span>
 
 <span style="color: #BA2121; font-style: italic">    This function initializes a logging file handler, sets its level, and applies a predefined formatter to it.</span>
 <span style="color: #BA2121; font-style: italic">    The file handler writes log messages to the specified file in write mode.</span>
@@ -2275,8 +2275,8 @@ The log level determines the severity of messages that are captured by the handl
 <span style="color: #BA2121; font-style: italic">    -------</span>
 <span style="color: #BA2121; font-style: italic">    logging.FileHandler</span>
 <span style="color: #BA2121; font-style: italic">        The configured logging file handler for capturing log messages.</span>
-<span style="color: #BA2121; font-style: italic">    &quot;&quot;&quot;</span>
-    file_handler <span style="color: #666">=</span> logging<span style="color: #666">.</span>FileHandler(log_file, mode<span style="color: #666">=</span><span style="color: #BA2121">&#39;w&#39;</span>)
+<span style="color: #BA2121; font-style: italic">    """</span>
+    file_handler <span style="color: #666">=</span> logging<span style="color: #666">.</span>FileHandler(log_file, mode<span style="color: #666">=</span><span style="color: #BA2121">'w'</span>)
     file_handler<span style="color: #666">.</span>setFormatter(FORMATTER)
     <span style="color: #008000; font-weight: bold">return</span> file_handler
 </code></pre></div></td></tr></table></div>
@@ -2318,7 +2318,7 @@ The log level determines the severity of messages that are captured by the handl
                 <code>logger_name</code>
             </td>
             <td>
-                  <code><a class="autorefs autorefs-external" href="https://docs.python.org/3/library/stdtypes.html#str">str</a></code>
+                  <code><a class="autorefs autorefs-external" href="https://docs.python.org/3/builtins/stdtypes.html#str">str</a></code>
             </td>
             <td>
               <div class="doc-md-description">
@@ -2335,7 +2335,7 @@ Typically derived from the module or component that generates the logs.</p>
                 <code>log_file</code>
             </td>
             <td>
-                  <code><a class="autorefs autorefs-external" href="https://docs.python.org/3/library/stdtypes.html#str">str</a> or <a class="autorefs autorefs-external" title="pathlib.Path" href="https://docs.python.org/3/library/pathlib.html#pathlib.Path">Path</a></code>
+                  <code><a class="autorefs autorefs-external" href="https://docs.python.org/3/builtins/stdtypes.html#str">str</a> or <a class="autorefs autorefs-external" title="pathlib.Path" href="https://docs.python.org/3/library/pathlib.html#pathlib.Path">Path</a></code>
             </td>
             <td>
               <div class="doc-md-description">
@@ -2352,7 +2352,7 @@ Defaults to <code>None</code>, in which case no file handler is added.</p>
                 <code>log_level</code>
             </td>
             <td>
-                  <code><a class="autorefs autorefs-external" href="https://docs.python.org/3/library/functions.html#int">int</a> or <a class="autorefs autorefs-external" href="https://docs.python.org/3/library/stdtypes.html#str">str</a></code>
+                  <code><a class="autorefs autorefs-external" href="https://docs.python.org/3/builtins/functions.html#int">int</a> or <a class="autorefs autorefs-external" href="https://docs.python.org/3/builtins/stdtypes.html#str">str</a></code>
             </td>
             <td>
               <div class="doc-md-description">
@@ -2416,7 +2416,7 @@ Defaults to <code>None</code>, in which case no file handler is added.</p>
 <span style="color: inherit; background-color: transparent; padding-left: 5px; padding-right: 5px;">146</span>
 <span style="color: inherit; background-color: transparent; padding-left: 5px; padding-right: 5px;">147</span>
 <span style="color: inherit; background-color: transparent; padding-left: 5px; padding-right: 5px;">148</span></pre></div></td><td class="code"><div><pre style="line-height: 125%;"><span></span><code><span style="color: #008000; font-weight: bold">def</span><span style="color: #BBB"> </span><span style="color: #00F">get_logger</span>(logger_name, log_file<span style="color: #666">=</span><span style="color: #008000; font-weight: bold">None</span>, log_level<span style="color: #666">=</span>DEFAULT_LOG_LEVEL):
-<span style="color: #BBB">    </span><span style="color: #BA2121; font-style: italic">&quot;&quot;&quot;Get a logger with a specific name and log level for console output.</span>
+<span style="color: #BBB">    </span><span style="color: #BA2121; font-style: italic">"""Get a logger with a specific name and log level for console output.</span>
 
 <span style="color: #BA2121; font-style: italic">    This function retrieves an existing logger instance with the specified name, or creates a new one if none exists.</span>
 
@@ -2435,7 +2435,7 @@ Defaults to <code>None</code>, in which case no file handler is added.</p>
 <span style="color: #BA2121; font-style: italic">    -------</span>
 <span style="color: #BA2121; font-style: italic">    logging.Logger</span>
 <span style="color: #BA2121; font-style: italic">        The configured logger instance ready to log messages with the specified settings.</span>
-<span style="color: #BA2121; font-style: italic">    &quot;&quot;&quot;</span>
+<span style="color: #BA2121; font-style: italic">    """</span>
     <span style="color: #008000; font-weight: bold">if</span> <span style="color: #A2F; font-weight: bold">not</span> logging<span style="color: #666">.</span>getLogger(logger_name)<span style="color: #666">.</span>hasHandlers():
         <span style="color: #008000; font-weight: bold">return</span> _get_logger(logger_name, log_file<span style="color: #666">=</span>log_file, log_level<span style="color: #666">=</span>log_level)
     <span style="color: #008000; font-weight: bold">return</span> logging<span style="color: #666">.</span>getLogger(logger_name)
@@ -2546,7 +2546,7 @@ Defaults to <code>None</code>, in which case no file handler is added.</p>
       <script id="__config" type="application/json">{"annotate": null, "base": "../../..", "features": ["navigation.tabs", "navigation.tabs.sticky", "content.code.copy"], "search": "../../../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
     
     
-      <script src="../../../assets/javascripts/bundle.79ae519e.min.js"></script>
+      <script src="../../../assets/javascripts/bundle.d7400e89.min.js"></script>
       
         <script src="../../../assets/_markdown_exec_pyodide.js"></script>
       

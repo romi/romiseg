@@ -25,7 +25,7 @@
       
       
       <link rel="icon" href="../../../../assets/images/ROMI_logo_green_25.svg">
-      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.6">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.7">
     
     
       
@@ -33,7 +33,7 @@
       
     
     
-      <link rel="stylesheet" href="../../../../assets/stylesheets/main.484c7ddc.min.css">
+      <link rel="stylesheet" href="../../../../assets/stylesheets/main.ec1eaa64.min.css">
       
       
 
@@ -1954,23 +1954,23 @@ output: -extrinsics [torch tensor] 3x4 matrix of camera extrinsics:
 <span style="color: inherit; background-color: transparent; padding-left: 5px; padding-right: 5px;">115</span>
 <span style="color: inherit; background-color: transparent; padding-left: 5px; padding-right: 5px;">116</span>
 <span style="color: inherit; background-color: transparent; padding-left: 5px; padding-right: 5px;">117</span></pre></div></td><td class="code"><div><pre style="line-height: 125%;"><span></span><code><span style="color: #008000; font-weight: bold">def</span><span style="color: #BBB"> </span><span style="color: #00F">read_extrinsics</span>(images_fileset, N_cam):
-<span style="color: #BBB">    </span><span style="color: #BA2121; font-style: italic">&quot;&quot;&quot;</span>
+<span style="color: #BBB">    </span><span style="color: #BA2121; font-style: italic">"""</span>
 <span style="color: #BA2121; font-style: italic">    Read camera extrinsics</span>
 <span style="color: #BA2121; font-style: italic">    input: scan id fsdb</span>
 <span style="color: #BA2121; font-style: italic">    output: -extrinsics [torch tensor] 3x4 matrix of camera extrinsics:</span>
 <span style="color: #BA2121; font-style: italic">        rotation and translation of the object with respect to the camera</span>
-<span style="color: #BA2121; font-style: italic">    &quot;&quot;&quot;</span>
+<span style="color: #BA2121; font-style: italic">    """</span>
 
-    <span style="color: #3D7B7B; font-style: italic"># Collect camera positions, there are as many as images in the scan folder. Located in &quot;images.json&quot; file</span>
+    <span style="color: #3D7B7B; font-style: italic"># Collect camera positions, there are as many as images in the scan folder. Located in "images.json" file</span>
 
     <span style="color: #3D7B7B; font-style: italic"># camera extrinsics</span>
     extrinsics <span style="color: #666">=</span> torch<span style="color: #666">.</span>zeros((N_cam, <span style="color: #666">3</span>, <span style="color: #666">4</span>))
 
     <span style="color: #3D7B7B; font-style: italic"># Associate camera position to corresponding image</span>
     <span style="color: #008000; font-weight: bold">for</span> i, fi <span style="color: #A2F; font-weight: bold">in</span> <span style="color: #008000">enumerate</span>(images_fileset):
-        pose <span style="color: #666">=</span> fi<span style="color: #666">.</span>metadata[<span style="color: #BA2121">&#39;camera&#39;</span>]
-        rot <span style="color: #666">=</span> pose[<span style="color: #BA2121">&#39;rotmat&#39;</span>]
-        tvec <span style="color: #666">=</span> pose[<span style="color: #BA2121">&#39;tvec&#39;</span>]
+        pose <span style="color: #666">=</span> fi<span style="color: #666">.</span>metadata[<span style="color: #BA2121">'camera'</span>]
+        rot <span style="color: #666">=</span> pose[<span style="color: #BA2121">'rotmat'</span>]
+        tvec <span style="color: #666">=</span> pose[<span style="color: #BA2121">'tvec'</span>]
         extrinsics[i][:<span style="color: #666">3</span>, :<span style="color: #666">3</span>] <span style="color: #666">=</span> torch<span style="color: #666">.</span>Tensor(rot)
         extrinsics[i][:, <span style="color: #666">3</span>] <span style="color: #666">=</span> torch<span style="color: #666">.</span>Tensor(tvec)
 
@@ -2025,18 +2025,18 @@ output: -xinit, yinit [int] image height and width
 <span style="color: inherit; background-color: transparent; padding-left: 5px; padding-right: 5px;">91</span>
 <span style="color: inherit; background-color: transparent; padding-left: 5px; padding-right: 5px;">92</span>
 <span style="color: inherit; background-color: transparent; padding-left: 5px; padding-right: 5px;">93</span></pre></div></td><td class="code"><div><pre style="line-height: 125%;"><span></span><code><span style="color: #008000; font-weight: bold">def</span><span style="color: #BBB"> </span><span style="color: #00F">read_intrinsics</span>(camera_model):
-<span style="color: #BBB">    </span><span style="color: #BA2121; font-style: italic">&quot;&quot;&quot;</span>
+<span style="color: #BBB">    </span><span style="color: #BA2121; font-style: italic">"""</span>
 <span style="color: #BA2121; font-style: italic">    Read camera intrinsics</span>
 <span style="color: #BA2121; font-style: italic">    input: scan id fsdb</span>
 <span style="color: #BA2121; font-style: italic">    output: -xinit, yinit [int] image height and width</span>
 <span style="color: #BA2121; font-style: italic">            -intrinsics [torch tensor] 3x3 matrix of camera intrinsics: focal and optical center position on images</span>
-<span style="color: #BA2121; font-style: italic">    &quot;&quot;&quot;</span>
+<span style="color: #BA2121; font-style: italic">    """</span>
 
     <span style="color: #3D7B7B; font-style: italic"># image dimensions</span>
-    xinit <span style="color: #666">=</span> camera_model[<span style="color: #BA2121">&#39;height&#39;</span>]  <span style="color: #3D7B7B; font-style: italic"># image width</span>
-    yinit <span style="color: #666">=</span> camera_model[<span style="color: #BA2121">&#39;width&#39;</span>]  <span style="color: #3D7B7B; font-style: italic"># image height</span>
+    xinit <span style="color: #666">=</span> camera_model[<span style="color: #BA2121">'height'</span>]  <span style="color: #3D7B7B; font-style: italic"># image width</span>
+    yinit <span style="color: #666">=</span> camera_model[<span style="color: #BA2121">'width'</span>]  <span style="color: #3D7B7B; font-style: italic"># image height</span>
 
-    focal <span style="color: #666">=</span> camera_model[<span style="color: #BA2121">&#39;params&#39;</span>][<span style="color: #666">0</span>:<span style="color: #666">4</span>]  <span style="color: #3D7B7B; font-style: italic"># camera intrinsics</span>
+    focal <span style="color: #666">=</span> camera_model[<span style="color: #BA2121">'params'</span>][<span style="color: #666">0</span>:<span style="color: #666">4</span>]  <span style="color: #3D7B7B; font-style: italic"># camera intrinsics</span>
 
     <span style="color: #3D7B7B; font-style: italic"># buiding the extrinsics matrix</span>
     intrinsics <span style="color: #666">=</span> torch<span style="color: #666">.</span>zeros((<span style="color: #666">1</span>, <span style="color: #666">3</span>, <span style="color: #666">3</span>))
@@ -2154,7 +2154,7 @@ output: -xinit, yinit [int] image height and width
       <script id="__config" type="application/json">{"annotate": null, "base": "../../../..", "features": ["navigation.tabs", "navigation.tabs.sticky", "content.code.copy"], "search": "../../../../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
     
     
-      <script src="../../../../assets/javascripts/bundle.79ae519e.min.js"></script>
+      <script src="../../../../assets/javascripts/bundle.d7400e89.min.js"></script>
       
         <script src="../../../../assets/_markdown_exec_pyodide.js"></script>
       
