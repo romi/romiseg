@@ -1,6 +1,6 @@
 # Version 0.3.1 - 2026-10-02
 
-- Fix the Conda build: map pip dependency names to real Conda packages, install the CPU torch stack (`torch`, `torchvision`) from PyPI, add the `romi-eu` channel for `plantdb.commons`, and restrict the Python build matrix to supported versions.
+- Fix the Conda build: map pip dependency names to real Conda packages, add the `romi-eu` channel for `plantdb.commons`, restrict the Python build matrix to supported versions, and build with `--no-deps` (the CPU torch stack is pip-installed separately since conda-build blocks pip network access and `torchvision` 0.28 has no Conda build).
 
 # Version 0.3.0 - 2026-10-02
 
