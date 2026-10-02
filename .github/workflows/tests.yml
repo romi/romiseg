@@ -33,4 +33,5 @@ jobs:
           pip install .
 
       - name: Run unit tests
+        working-directory: tests
         run: python -m unittest test_datasets test_transforms -v
