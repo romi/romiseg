@@ -1,6 +1,5 @@
 {% set pyproject = load_file_data('../../pyproject.toml', 'toml', from_recipe_dir=True) %}
 {% set project = pyproject.get('project', {}) %}
-{% set deps = project.get('dependencies', {}) %}
 {% set urls = project.get('urls', {}) %}
 # https://docs.conda.io/projects/conda-build/en/latest/resources/define-metadata.html#loading-data-from-other-files
 # Source code for Jinja context: https://github.com/conda/conda-build/blob/main/conda_build/jinja_context.py
@@ -17,22 +16,30 @@ source:
 
 build:
   string: {{ 'py'+ PY_VER.replace('.','') + '_' + environ.get('GIT_DESCRIBE_HASH', 'latest') }}
-  script: python -m pip install .
+  # conda-build sets PIP_NO_INDEX, so pip cannot fetch anything during the build. Install only
+  # this package, no deps, without isolation (setuptools comes from the conda `build` reqs).
+  # Use $PYTHON (host python) so the package installs into the host prefix, not the build env.
+  script: $PYTHON -m pip install --no-deps --no-build-isolation .
 
 requirements:
   build:
     - setuptools
-    - python  {{ python }}
   host:
     - python  {{ python }}
   run:
     - python  {{ python }}
     - numpy<2  # `romiseg` & `romicgal` both require this!
-    {% for dep in deps %}
-    {% if not dep.startswith('open3d') %}
-    - {{ dep }}
-    {% endif %}
-    {% endfor %}
+    - appdirs
+    - future
+    - pillow
+    - requests
+    - tqdm
+    - plantdb.commons
+    # NOTE: `torch` and `torchvision` are intentionally NOT conda run deps. `torchvision` 0.28
+    # has no conda build on any channel, and conda-build blocks pip network access
+    # (PIP_NO_INDEX), so they can't be bundled here. `conda install romiseg` will not pull them.
+    # Consumers must install the CPU torch stack from PyPI themselves, e.g.:
+    #   pip install --index-url https://download.pytorch.org/whl/cpu torch==2.13.0 torchvision==0.28.0
 
 about:
   home: {{ urls.get('Homepage') }}
