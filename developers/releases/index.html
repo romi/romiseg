@@ -12,28 +12,28 @@
         <meta name="author" content="ROMI Team">
       
       
-        <link rel="canonical" href="https://romi.github.io/romiseg/reference/romiseg/predict/">
+        <link rel="canonical" href="https://romi.github.io/romiseg/developers/releases/">
       
       
-        <link rel="prev" href="../models/unet3d/">
+        <link rel="prev" href="../..">
       
       
-        <link rel="next" href="datasets/">
+        <link rel="next" href="../../training/">
       
       
         
       
       
-      <link rel="icon" href="../../../assets/images/ROMI_logo_green_25.svg">
+      <link rel="icon" href="../../assets/images/ROMI_logo_green_25.svg">
       <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.7">
     
     
       
-        <title>predict - ROMISeg</title>
+        <title>Release Guide - ROMISeg</title>
       
     
     
-      <link rel="stylesheet" href="../../../assets/stylesheets/main.ec1eaa64.min.css">
+      <link rel="stylesheet" href="../../assets/stylesheets/main.ec1eaa64.min.css">
       
       
 
@@ -52,15 +52,15 @@
       
     
     
-      <link rel="stylesheet" href="../../../assets/_markdown_exec_pyodide.css">
+      <link rel="stylesheet" href="../../assets/_markdown_exec_pyodide.css">
     
-      <link rel="stylesheet" href="../../../assets/_markdown_exec_ansi.css">
+      <link rel="stylesheet" href="../../assets/_markdown_exec_ansi.css">
     
-      <link rel="stylesheet" href="../../../assets/_mkdocstrings.css">
+      <link rel="stylesheet" href="../../assets/_mkdocstrings.css">
     
-      <link rel="stylesheet" href="../../../assets/css/extra.css">
+      <link rel="stylesheet" href="../../assets/css/extra.css">
     
-    <script>__md_scope=new URL("../../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
     
       
 
@@ -78,7 +78,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#romiseg.predict" class="md-skip">
+        <a href="#release-guide" class="md-skip">
           Skip to content
         </a>
       
@@ -96,7 +96,7 @@
   <nav class="md-header__inner md-grid" aria-label="Header">
     <a href="https://romi.github.io/romiseg/" title="ROMISeg" class="md-header__button md-logo" aria-label="ROMISeg" data-md-component="logo">
       
-  <img src="../../../assets/images/ROMI_logo_white.svg" alt="logo">
+  <img src="../../assets/images/ROMI_logo_white.svg" alt="logo">
 
     </a>
     <label class="md-header__button md-icon" for="__drawer">
@@ -113,7 +113,7 @@
         <div class="md-header__topic" data-md-component="header-topic">
           <span class="md-ellipsis">
             
-              predict
+              Release Guide
             
           </span>
         </div>
@@ -192,7 +192,7 @@
   
   
     <li class="md-tabs__item">
-      <a href="../../.." class="md-tabs__link">
+      <a href="../.." class="md-tabs__link">
         
   
   
@@ -209,11 +209,13 @@
   
   
   
+    
+  
   
     
     
-      <li class="md-tabs__item">
-        <a href="../../../developers/releases/" class="md-tabs__link">
+      <li class="md-tabs__item md-tabs__item--active">
+        <a href="./" class="md-tabs__link">
           
   
   
@@ -231,7 +233,7 @@
   
   
     <li class="md-tabs__item">
-      <a href="../../../training/" class="md-tabs__link">
+      <a href="../../training/" class="md-tabs__link">
         
   
   
@@ -250,7 +252,7 @@
   
   
     <li class="md-tabs__item">
-      <a href="../../../segmentation2d/" class="md-tabs__link">
+      <a href="../../segmentation2d/" class="md-tabs__link">
         
   
   
@@ -269,7 +271,7 @@
   
   
     <li class="md-tabs__item">
-      <a href="../../../annotation-finetuning/" class="md-tabs__link">
+      <a href="../../annotation-finetuning/" class="md-tabs__link">
         
   
   
@@ -288,7 +290,7 @@
   
   
     <li class="md-tabs__item">
-      <a href="../../../torch/" class="md-tabs__link">
+      <a href="../../torch/" class="md-tabs__link">
         
   
   
@@ -305,13 +307,11 @@
   
   
   
-    
-  
   
     
     
-      <li class="md-tabs__item md-tabs__item--active">
-        <a href="../" class="md-tabs__link">
+      <li class="md-tabs__item">
+        <a href="../../reference/romiseg/" class="md-tabs__link">
           
   
   
@@ -353,7 +353,7 @@
   <label class="md-nav__title" for="__drawer">
     <a href="https://romi.github.io/romiseg/" title="ROMISeg" class="md-nav__button md-logo" aria-label="ROMISeg" data-md-component="logo">
       
-  <img src="../../../assets/images/ROMI_logo_white.svg" alt="logo">
+  <img src="../../assets/images/ROMI_logo_white.svg" alt="logo">
 
     </a>
     ROMISeg
@@ -380,7 +380,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../.." class="md-nav__link">
+      <a href="../.." class="md-nav__link">
         
   
   
@@ -388,199 +388,6 @@
     
   
     Home
-  
-
-    
-  </span>
-  
-  
-
-      </a>
-    </li>
-  
-
-    
-      
-      
-  
-  
-  
-  
-    
-    
-    
-    
-      
-      
-    
-    
-    <li class="md-nav__item md-nav__item--nested">
-      
-        
-        
-        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2" >
-        
-          
-          <label class="md-nav__link" for="__nav_2" id="__nav_2_label" tabindex="0">
-            
-  
-  
-  <span class="md-ellipsis">
-    
-  
-    Developers
-  
-
-    
-  </span>
-  
-  
-
-            <span class="md-nav__icon md-icon"></span>
-          </label>
-        
-        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="false">
-          <label class="md-nav__title" for="__nav_2">
-            <span class="md-nav__icon md-icon"></span>
-            
-  
-    Developers
-  
-
-          </label>
-          <ul class="md-nav__list" data-md-scrollfix>
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../../../developers/releases/" class="md-nav__link">
-        
-  
-  
-  <span class="md-ellipsis">
-    
-  
-    Release Guide
-  
-
-    
-  </span>
-  
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-          </ul>
-        </nav>
-      
-    </li>
-  
-
-    
-      
-      
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../../../training/" class="md-nav__link">
-        
-  
-  
-  <span class="md-ellipsis">
-    
-  
-    Training
-  
-
-    
-  </span>
-  
-  
-
-      </a>
-    </li>
-  
-
-    
-      
-      
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../../../segmentation2d/" class="md-nav__link">
-        
-  
-  
-  <span class="md-ellipsis">
-    
-  
-    Segmentation2D
-  
-
-    
-  </span>
-  
-  
-
-      </a>
-    </li>
-  
-
-    
-      
-      
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../../../annotation-finetuning/" class="md-nav__link">
-        
-  
-  
-  <span class="md-ellipsis">
-    
-  
-    Annotation and Fine‑tuning
-  
-
-    
-  </span>
-  
-  
-
-      </a>
-    </li>
-  
-
-    
-      
-      
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../../../torch/" class="md-nav__link">
-        
-  
-  
-  <span class="md-ellipsis">
-    
-  
-    PyTorch
   
 
     
@@ -616,10 +423,272 @@
       
         
         
-        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_7" checked>
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2" checked>
         
           
-          <label class="md-nav__link" for="__nav_7" id="__nav_7_label" tabindex="">
+          <label class="md-nav__link" for="__nav_2" id="__nav_2_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Developers
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_2">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Developers
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Release Guide
+  
+
+    
+  </span>
+  
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Release Guide
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#versioning-convention" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Versioning Convention
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#gitflow-workflow" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Git‑Flow Workflow
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../training/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Training
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../segmentation2d/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Segmentation2D
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../annotation-finetuning/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Annotation and Fine‑tuning
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../torch/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    PyTorch
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_7" >
+        
+          
+          <label class="md-nav__link" for="__nav_7" id="__nav_7_label" tabindex="0">
             
   
   
@@ -637,7 +706,7 @@
             <span class="md-nav__icon md-icon"></span>
           </label>
         
-        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_7_label" aria-expanded="true">
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_7_label" aria-expanded="false">
           <label class="md-nav__title" for="__nav_7">
             <span class="md-nav__icon md-icon"></span>
             
@@ -652,8 +721,6 @@
                 
   
   
-    
-  
   
   
     
@@ -664,15 +731,15 @@
       
     
     
-    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+    <li class="md-nav__item md-nav__item--nested">
       
         
         
-        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_7_1" checked>
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_7_1" >
         
           
           <div class="md-nav__link md-nav__container">
-            <a href="../" class="md-nav__link ">
+            <a href="../../reference/romiseg/" class="md-nav__link ">
               
   
   
@@ -696,7 +763,7 @@
             
           </div>
         
-        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_7_1_label" aria-expanded="true">
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_7_1_label" aria-expanded="false">
           <label class="md-nav__title" for="__nav_7_1">
             <span class="md-nav__icon md-icon"></span>
             
@@ -729,7 +796,7 @@
         
           
           <div class="md-nav__link md-nav__container">
-            <a href="../cli/" class="md-nav__link ">
+            <a href="../../reference/romiseg/cli/" class="md-nav__link ">
               
   
   
@@ -771,7 +838,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../cli/convert_models/" class="md-nav__link">
+      <a href="../../reference/romiseg/cli/convert_models/" class="md-nav__link">
         
   
   
@@ -799,7 +866,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../cli/evaluate/" class="md-nav__link">
+      <a href="../../reference/romiseg/cli/evaluate/" class="md-nav__link">
         
   
   
@@ -827,7 +894,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../cli/finetune/" class="md-nav__link">
+      <a href="../../reference/romiseg/cli/finetune/" class="md-nav__link">
         
   
   
@@ -855,7 +922,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../cli/train_cnn/" class="md-nav__link">
+      <a href="../../reference/romiseg/cli/train_cnn/" class="md-nav__link">
         
   
   
@@ -906,7 +973,7 @@
         
           
           <div class="md-nav__link md-nav__container">
-            <a href="../common/" class="md-nav__link ">
+            <a href="../../reference/romiseg/common/" class="md-nav__link ">
               
   
   
@@ -948,7 +1015,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../common/dataset/" class="md-nav__link">
+      <a href="../../reference/romiseg/common/dataset/" class="md-nav__link">
         
   
   
@@ -976,7 +1043,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../common/io/" class="md-nav__link">
+      <a href="../../reference/romiseg/common/io/" class="md-nav__link">
         
   
   
@@ -1004,7 +1071,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../common/transforms/" class="md-nav__link">
+      <a href="../../reference/romiseg/common/transforms/" class="md-nav__link">
         
   
   
@@ -1032,7 +1099,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../common/visualization/" class="md-nav__link">
+      <a href="../../reference/romiseg/common/visualization/" class="md-nav__link">
         
   
   
@@ -1068,7 +1135,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../log/" class="md-nav__link">
+      <a href="../../reference/romiseg/log/" class="md-nav__link">
         
   
   
@@ -1111,7 +1178,7 @@
         
           
           <div class="md-nav__link md-nav__container">
-            <a href="../models/" class="md-nav__link ">
+            <a href="../../reference/romiseg/models/" class="md-nav__link ">
               
   
   
@@ -1153,7 +1220,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../models/unet/" class="md-nav__link">
+      <a href="../../reference/romiseg/models/unet/" class="md-nav__link">
         
   
   
@@ -1181,7 +1248,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../models/unet3d/" class="md-nav__link">
+      <a href="../../reference/romiseg/models/unet3d/" class="md-nav__link">
         
   
   
@@ -1214,8 +1281,6 @@
                 
   
   
-    
-  
   
   
     
@@ -1226,15 +1291,15 @@
       
     
     
-    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+    <li class="md-nav__item md-nav__item--nested">
       
         
         
-        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_7_1_5" checked>
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_7_1_5" >
         
           
           <div class="md-nav__link md-nav__container">
-            <a href="./" class="md-nav__link md-nav__link--active">
+            <a href="../../reference/romiseg/predict/" class="md-nav__link ">
               
   
   
@@ -1252,13 +1317,13 @@
             </a>
             
               
-              <label class="md-nav__link md-nav__link--active" for="__nav_7_1_5" id="__nav_7_1_5_label" tabindex="0">
+              <label class="md-nav__link " for="__nav_7_1_5" id="__nav_7_1_5_label" tabindex="0">
                 <span class="md-nav__icon md-icon"></span>
               </label>
             
           </div>
         
-        <nav class="md-nav" data-md-level="3" aria-labelledby="__nav_7_1_5_label" aria-expanded="true">
+        <nav class="md-nav" data-md-level="3" aria-labelledby="__nav_7_1_5_label" aria-expanded="false">
           <label class="md-nav__title" for="__nav_7_1_5">
             <span class="md-nav__icon md-icon"></span>
             
@@ -1276,7 +1341,7 @@
   
   
     <li class="md-nav__item">
-      <a href="datasets/" class="md-nav__link">
+      <a href="../../reference/romiseg/predict/datasets/" class="md-nav__link">
         
   
   
@@ -1304,7 +1369,7 @@
   
   
     <li class="md-nav__item">
-      <a href="evaluation/" class="md-nav__link">
+      <a href="../../reference/romiseg/predict/evaluation/" class="md-nav__link">
         
   
   
@@ -1332,7 +1397,7 @@
   
   
     <li class="md-nav__item">
-      <a href="segmentation/" class="md-nav__link">
+      <a href="../../reference/romiseg/predict/segmentation/" class="md-nav__link">
         
   
   
@@ -1383,7 +1448,7 @@
         
           
           <div class="md-nav__link md-nav__container">
-            <a href="../train/" class="md-nav__link ">
+            <a href="../../reference/romiseg/train/" class="md-nav__link ">
               
   
   
@@ -1425,7 +1490,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../train/datasets/" class="md-nav__link">
+      <a href="../../reference/romiseg/train/datasets/" class="md-nav__link">
         
   
   
@@ -1453,7 +1518,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../train/losses/" class="md-nav__link">
+      <a href="../../reference/romiseg/train/losses/" class="md-nav__link">
         
   
   
@@ -1481,7 +1546,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../train/metrics/" class="md-nav__link">
+      <a href="../../reference/romiseg/train/metrics/" class="md-nav__link">
         
   
   
@@ -1509,7 +1574,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../train/train_3d/" class="md-nav__link">
+      <a href="../../reference/romiseg/train/train_3d/" class="md-nav__link">
         
   
   
@@ -1537,7 +1602,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../train/trainer/" class="md-nav__link">
+      <a href="../../reference/romiseg/train/trainer/" class="md-nav__link">
         
   
   
@@ -1588,7 +1653,7 @@
         
           
           <div class="md-nav__link md-nav__container">
-            <a href="../utils/" class="md-nav__link ">
+            <a href="../../reference/romiseg/utils/" class="md-nav__link ">
               
   
   
@@ -1630,7 +1695,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../utils/active_contour/" class="md-nav__link">
+      <a href="../../reference/romiseg/utils/active_contour/" class="md-nav__link">
         
   
   
@@ -1658,7 +1723,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../utils/generate_3D_ground_truth/" class="md-nav__link">
+      <a href="../../reference/romiseg/utils/generate_3D_ground_truth/" class="md-nav__link">
         
   
   
@@ -1686,7 +1751,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../utils/generate_volume/" class="md-nav__link">
+      <a href="../../reference/romiseg/utils/generate_volume/" class="md-nav__link">
         
   
   
@@ -1714,7 +1779,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../utils/ply/" class="md-nav__link">
+      <a href="../../reference/romiseg/utils/ply/" class="md-nav__link">
         
   
   
@@ -1742,7 +1807,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../utils/proj_point_cloud/" class="md-nav__link">
+      <a href="../../reference/romiseg/utils/proj_point_cloud/" class="md-nav__link">
         
   
   
@@ -1770,7 +1835,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../utils/vox_to_coord/" class="md-nav__link">
+      <a href="../../reference/romiseg/utils/vox_to_coord/" class="md-nav__link">
         
   
   
@@ -1831,6 +1896,8 @@
   
   
   
+    
+  
   
     <label class="md-nav__title" for="__toc">
       <span class="md-nav__icon md-icon"></span>
@@ -1839,30 +1906,24 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#romiseg.predict" class="md-nav__link">
+  <a href="#versioning-convention" class="md-nav__link">
     <span class="md-ellipsis">
       
-        <code class="doc-symbol doc-symbol-toc doc-symbol-module"></code>&nbsp;predict
-      
-    </span>
-  </a>
-  
-    <nav class="md-nav" aria-label=" predict">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#romiseg.predict--prediction-submodule" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Prediction Submodule.
+        Versioning Convention
       
     </span>
   </a>
   
 </li>
-        
-      </ul>
-    </nav>
+      
+        <li class="md-nav__item">
+  <a href="#gitflow-workflow" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Git‑Flow Workflow
+      
+    </span>
+  </a>
   
 </li>
       
@@ -1886,50 +1947,218 @@
   
 
 
-  <h1>predict</h1>
+<h1 id="release-guide">Release Guide<a class="headerlink" href="#release-guide" title="Permanent link">Link</a></h1>
+<p>This document describes the steps required to create a new release.</p>
+<h2 id="versioning-convention">Versioning Convention<a class="headerlink" href="#versioning-convention" title="Permanent link">Link</a></h2>
+<p>Version numbers are expressed as <code>X.Y.Z</code>.</p>
+<ul>
+<li><strong>New features or API changes</strong>: Increment the <strong>major</strong> (X) and/or <strong>minor</strong> (Y) number, and reset the 
+  <strong>patch level</strong> (Z) to <code>0</code>.</li>
+<li><strong>Bug‑fix or hot‑fix releases</strong>: Increment only the <strong>patch level</strong> (Z).</li>
+</ul>
+<p><strong>WARNING</strong>: do NOT add a v prior to the version number, like <code>vX.Y.Z</code>.</p>
+<h2 id="gitflow-workflow">Git‑Flow Workflow<a class="headerlink" href="#gitflow-workflow" title="Permanent link">Link</a></h2>
+<p>The Git‑Flow model defines several branch types:</p>
+<ul>
+<li><strong>main</strong> - Production code</li>
+<li><strong>dev</strong> - Main integration branch for development</li>
+<li><strong>feature/</strong>* - Branches for developing new features (branched from <code>dev</code>)</li>
+<li><strong>release/</strong>* - Temporary branches to prepare releases (<code>dev</code> → <code>main</code>)</li>
+<li><strong>hotfix/</strong>* - Branches to quickly fix critical production bugs (branched from <code>main</code>)</li>
+</ul>
+<p>Git‑Flow also provides commands for managing these branch types:</p>
+<div class="language-shell highlight" style="background: #f8f8f8"><pre style="line-height: 125%;"><span></span><code>git<span style="color: #BBB"> </span>flow<span style="color: #BBB"> </span>feature<span style="color: #BBB"> </span>start<span style="color: #BBB"> </span>feature-name<span style="color: #BBB">          </span><span style="color: #3D7B7B; font-style: italic"># Same as: git checkout -b feature/feature-name dev</span>
+git<span style="color: #BBB"> </span>flow<span style="color: #BBB"> </span>feature<span style="color: #BBB"> </span>finish<span style="color: #BBB"> </span>feature-name<span style="color: #BBB">         </span><span style="color: #3D7B7B; font-style: italic"># Merge into dev and delete the feature branch</span>
 
-<div class="doc doc-object doc-module">
-
-
-
-<h2 id="romiseg.predict" class="doc doc-heading">
-            <span class="doc doc-object-name doc-module-name">romiseg.predict</span>
-
-
-<a href="#romiseg.predict" class="headerlink" title="Permanent link">Link</a></h2>
-
-    <div class="doc doc-contents first">
-
-        <h3 id="romiseg.predict--prediction-submodule">Prediction Submodule.<a class="headerlink" href="#romiseg.predict--prediction-submodule" title="Permanent link">Link</a></h3>
-<p>This module contains utilities for making predictions with trained segmentation models.</p>
-
-
-
-
-
-
-
-
-
-
-  <div class="doc doc-children">
-
-
-
-
-
-
-
-
-
-
-
-
-  </div>
-
-    </div>
-
-</div>
+git<span style="color: #BBB"> </span>flow<span style="color: #BBB"> </span>hotfix<span style="color: #BBB"> </span>start<span style="color: #BBB"> </span>X.Y.Z+1<span style="color: #BBB">                </span><span style="color: #3D7B7B; font-style: italic"># Create a hot‑fix branch from main</span>
+git<span style="color: #BBB"> </span>flow<span style="color: #BBB"> </span>hotfix<span style="color: #BBB"> </span>finish<span style="color: #BBB"> </span>X.Y.Z+1<span style="color: #BBB">               </span><span style="color: #3D7B7B; font-style: italic"># Merge into main AND dev, tag, then delete</span>
+</code></pre></div>
+<hr />
+<h1 id="release-steps-git-flow">Release Steps - Git Flow<a class="headerlink" href="#release-steps-git-flow" title="Permanent link">Link</a></h1>
+<h2 id="1-preparation">1. Preparation<a class="headerlink" href="#1-preparation" title="Permanent link">Link</a></h2>
+<p>Make sure your local <code>main</code> and <code>dev</code> branches are up‑to‑date with the remote repository:</p>
+<div class="language-shell highlight" style="background: #f8f8f8"><pre style="line-height: 125%;"><span></span><code>git<span style="color: #BBB"> </span>checkout<span style="color: #BBB"> </span>main<span style="color: #BBB"> </span><span style="color: #666">&amp;&amp;</span><span style="color: #BBB"> </span>git<span style="color: #BBB"> </span>pull
+git<span style="color: #BBB"> </span>checkout<span style="color: #BBB"> </span>dev<span style="color: #BBB"> </span><span style="color: #666">&amp;&amp;</span><span style="color: #BBB"> </span>git<span style="color: #BBB"> </span>pull
+</code></pre></div>
+<h2 id="2-create-the-release">2. Create the Release<a class="headerlink" href="#2-create-the-release" title="Permanent link">Link</a></h2>
+<p>Start the release with:</p>
+<div class="language-shell highlight" style="background: #f8f8f8"><pre style="line-height: 125%;"><span></span><code>git<span style="color: #BBB"> </span>flow<span style="color: #BBB"> </span>release<span style="color: #BBB"> </span>start<span style="color: #BBB"> </span>X.Y.Z
+</code></pre></div>
+<h2 id="3-update-files">3. Update Files<a class="headerlink" href="#3-update-files" title="Permanent link">Link</a></h2>
+<ol>
+<li>
+<p>Update the <code>CHANGELOG.md</code> to include the changes for this release:
+   <div class="language-markdown highlight" style="background: #f8f8f8"><pre style="line-height: 125%;"><span></span><code><span style="color: #000080; font-weight: bold"># Version X.Y.Z - YYYY-MM-DD</span>
+<span style="color: #BBB">   </span><span style="color: #008000; font-weight: bold">-</span><span style="color: #BBB"> </span>Description of the first change
+<span style="color: #BBB">   </span><span style="color: #008000; font-weight: bold">-</span><span style="color: #BBB"> </span>Description of the second change
+<span style="color: #BBB">   </span><span style="color: #008000; font-weight: bold">-</span><span style="color: #BBB"> </span>...
+</code></pre></div></p>
+</li>
+<li>
+<p>Update the version number in the <code>pyproject.toml</code> file (single <code>romiseg</code> package, at the repository root).</p>
+</li>
+<li>
+<p>Commit the changes:
+   <div class="language-shell highlight" style="background: #f8f8f8"><pre style="line-height: 125%;"><span></span><code>git<span style="color: #BBB"> </span>add<span style="color: #BBB"> </span>CHANGELOG.md<span style="color: #BBB"> </span>pyproject.toml
+git<span style="color: #BBB"> </span>commit<span style="color: #BBB"> </span>-m<span style="color: #BBB"> </span><span style="color: #BA2121">"release X.Y.Z"</span>
+</code></pre></div></p>
+</li>
+</ol>
+<h2 id="4-finish-the-release">4. Finish the Release<a class="headerlink" href="#4-finish-the-release" title="Permanent link">Link</a></h2>
+<p>Finish the release with:</p>
+<div class="language-shell highlight" style="background: #f8f8f8"><pre style="line-height: 125%;"><span></span><code>git<span style="color: #BBB"> </span>flow<span style="color: #BBB"> </span>release<span style="color: #BBB"> </span>finish<span style="color: #BBB"> </span>X.Y.Z
+</code></pre></div>
+<blockquote>
+<p>What this command does:
+- Merges the <code>release/X.Y.Z</code> branch into <code>main</code>
+- Adds a tag named after the version
+- Merges the release into <code>dev</code>
+- Deletes the <code>release/X.Y.Z</code> branch</p>
+</blockquote>
+<h2 id="5-publish-the-release">5. Publish the Release<a class="headerlink" href="#5-publish-the-release" title="Permanent link">Link</a></h2>
+<p>Push the updated branches and tag to the remote repository:</p>
+<div class="language-shell highlight" style="background: #f8f8f8"><pre style="line-height: 125%;"><span></span><code>git<span style="color: #BBB"> </span>push<span style="color: #BBB"> </span>--follow-tags<span style="color: #BBB"> </span>origin<span style="color: #BBB"> </span>dev<span style="color: #BBB"> </span>main
+</code></pre></div>
+<blockquote>
+<p>Note: This command pushes both <code>dev</code> and <code>main</code> branches, as well as the version tag.</p>
+</blockquote>
+<h1 id="release-steps-standard-git">Release Steps - Standard Git<a class="headerlink" href="#release-steps-standard-git" title="Permanent link">Link</a></h1>
+<h2 id="1-preparation_1">1. Preparation<a class="headerlink" href="#1-preparation_1" title="Permanent link">Link</a></h2>
+<p>Make sure your local <code>main</code> and <code>dev</code> branches are up‑to‑date with the remote repository:</p>
+<div class="language-shell highlight" style="background: #f8f8f8"><pre style="line-height: 125%;"><span></span><code>git<span style="color: #BBB"> </span>checkout<span style="color: #BBB"> </span>main<span style="color: #BBB"> </span><span style="color: #666">&amp;&amp;</span><span style="color: #BBB"> </span>git<span style="color: #BBB"> </span>pull
+git<span style="color: #BBB"> </span>checkout<span style="color: #BBB"> </span>dev<span style="color: #BBB"> </span><span style="color: #666">&amp;&amp;</span><span style="color: #BBB"> </span>git<span style="color: #BBB"> </span>pull
+</code></pre></div>
+<h2 id="2-create-the-release_1">2. Create the Release<a class="headerlink" href="#2-create-the-release_1" title="Permanent link">Link</a></h2>
+<p>Start the release with:</p>
+<div class="language-shell highlight" style="background: #f8f8f8"><pre style="line-height: 125%;"><span></span><code>git<span style="color: #BBB"> </span>checkout<span style="color: #BBB"> </span>dev
+git<span style="color: #BBB"> </span>pull
+git<span style="color: #BBB"> </span>checkout<span style="color: #BBB"> </span>-b<span style="color: #BBB"> </span>release/X.Y.Z<span style="color: #BBB"> </span>dev
+</code></pre></div>
+<h2 id="3-update-files_1">3. Update Files<a class="headerlink" href="#3-update-files_1" title="Permanent link">Link</a></h2>
+<ol>
+<li>
+<p>Update the <code>CHANGELOG.md</code> to include the changes for this release:
+   <div class="language-markdown highlight" style="background: #f8f8f8"><pre style="line-height: 125%;"><span></span><code><span style="color: #000080; font-weight: bold"># Version X.Y.Z - YYYY-MM-DD</span>
+<span style="color: #BBB">   </span><span style="color: #008000; font-weight: bold">-</span><span style="color: #BBB"> </span>Description of the first change
+<span style="color: #BBB">   </span><span style="color: #008000; font-weight: bold">-</span><span style="color: #BBB"> </span>Description of the second change
+<span style="color: #BBB">   </span><span style="color: #008000; font-weight: bold">-</span><span style="color: #BBB"> </span>...
+</code></pre></div></p>
+</li>
+<li>
+<p>Update the version number in the <code>pyproject.toml</code> file (single <code>romiseg</code> package, at the repository root).</p>
+</li>
+<li>
+<p>Commit the changes:
+   <div class="language-shell highlight" style="background: #f8f8f8"><pre style="line-height: 125%;"><span></span><code>git<span style="color: #BBB"> </span>add<span style="color: #BBB"> </span>CHANGELOG.md<span style="color: #BBB"> </span>pyproject.toml
+git<span style="color: #BBB"> </span>commit<span style="color: #BBB"> </span>-m<span style="color: #BBB"> </span><span style="color: #BA2121">"release X.Y.Z"</span>
+</code></pre></div></p>
+</li>
+</ol>
+<h2 id="4-finish-the-release_1">4. Finish the Release<a class="headerlink" href="#4-finish-the-release_1" title="Permanent link">Link</a></h2>
+<ol>
+<li>
+<p>Ensure branches are up‑to‑date
+   <div class="language-shell highlight" style="background: #f8f8f8"><pre style="line-height: 125%;"><span></span><code>git<span style="color: #BBB"> </span>checkout<span style="color: #BBB"> </span>dev
+git<span style="color: #BBB"> </span>pull
+git<span style="color: #BBB"> </span>checkout<span style="color: #BBB"> </span>main
+git<span style="color: #BBB"> </span>pull
+</code></pre></div></p>
+</li>
+<li>
+<p>Merge release into main
+   <div class="language-shell highlight" style="background: #f8f8f8"><pre style="line-height: 125%;"><span></span><code>git<span style="color: #BBB"> </span>checkout<span style="color: #BBB"> </span>main
+git<span style="color: #BBB"> </span>merge<span style="color: #BBB"> </span>--no-ff<span style="color: #BBB"> </span>release/X.Y.Z
+git<span style="color: #BBB"> </span>tag<span style="color: #BBB"> </span>-a<span style="color: #BBB"> </span>X.Y.Z<span style="color: #BBB"> </span>-m<span style="color: #BBB"> </span><span style="color: #BA2121">"Version X.Y.Z"</span>
+</code></pre></div></p>
+</li>
+<li>
+<p>Merge release into dev
+   <div class="language-shell highlight" style="background: #f8f8f8"><pre style="line-height: 125%;"><span></span><code>git<span style="color: #BBB"> </span>checkout<span style="color: #BBB"> </span>dev
+git<span style="color: #BBB"> </span>merge<span style="color: #BBB"> </span>--no-ff<span style="color: #BBB"> </span>release/X.Y.Z
+</code></pre></div></p>
+</li>
+<li>
+<p>Delete the release branch
+   <div class="language-shell highlight" style="background: #f8f8f8"><pre style="line-height: 125%;"><span></span><code>git<span style="color: #BBB"> </span>branch<span style="color: #BBB"> </span>-d<span style="color: #BBB"> </span>release/X.Y.Z
+</code></pre></div></p>
+</li>
+</ol>
+<h2 id="5-publish-the-release_1">5. Publish the Release<a class="headerlink" href="#5-publish-the-release_1" title="Permanent link">Link</a></h2>
+<p>Push the updated branches and tag to the remote repository:</p>
+<div class="language-shell highlight" style="background: #f8f8f8"><pre style="line-height: 125%;"><span></span><code>git<span style="color: #BBB"> </span>push<span style="color: #BBB"> </span>--follow-tags<span style="color: #BBB"> </span>origin<span style="color: #BBB"> </span>dev<span style="color: #BBB"> </span>main
+</code></pre></div>
+<blockquote>
+<p>Note: This command pushes both <code>dev</code> and <code>main</code> branches, as well as the version tag.</p>
+</blockquote>
+<hr />
+<h1 id="create-a-github-release">Create a GitHub Release<a class="headerlink" href="#create-a-github-release" title="Permanent link">Link</a></h1>
+<p>Publishing a GitHub release triggers the publishing workflows (<code>conda.yml</code>, <code>pip_build.yml</code>, <code>gh-pages.yml</code>). 
+This can be done either from the command line with the GitHub CLI (<code>gh</code>) or from the web page.</p>
+<h2 id="using-the-github-cli">Using the GitHub CLI<a class="headerlink" href="#using-the-github-cli" title="Permanent link">Link</a></h2>
+<p>Create a release from the tag, using the <code>CHANGELOG.md</code> content as the release notes:</p>
+<div class="language-shell highlight" style="background: #f8f8f8"><pre style="line-height: 125%;"><span></span><code>gh<span style="color: #BBB"> </span>release<span style="color: #BBB"> </span>create<span style="color: #BBB"> </span>X.Y.Z<span style="color: #BBB"> </span>--title<span style="color: #BBB"> </span><span style="color: #BA2121">"Version X.Y.Z"</span><span style="color: #BBB"> </span>--notes<span style="color: #BBB"> </span><span style="color: #BA2121">"</span><span style="color: #008000; font-weight: bold">$(</span>cat<span style="color: #BBB"> </span>CHANGELOG.md<span style="color: #008000; font-weight: bold">)</span><span style="color: #BA2121">"</span>
+</code></pre></div>
+<blockquote>
+<p>Note: The tag must already exist locally and be pushed to the remote (see the <em>Publish the Release</em> step above).</p>
+</blockquote>
+<h2 id="using-the-web-page">Using the Web Page<a class="headerlink" href="#using-the-web-page" title="Permanent link">Link</a></h2>
+<ol>
+<li>Go to the repository's <strong>Releases</strong> page: <code>https://github.com/&lt;owner&gt;/&lt;repo&gt;/releases</code>.</li>
+<li>Click <strong>Draft a new release</strong>.</li>
+<li>In the <strong>Choose a tag</strong> dropdown, select the existing <code>X.Y.Z</code> tag (or create a new tag on the target branch).</li>
+<li>Set the <strong>Release title</strong> to <code>Version X.Y.Z</code>.</li>
+<li>Paste the corresponding section of <code>CHANGELOG.md</code> into the <strong>Describe this release</strong> box.</li>
+<li>Click <strong>Publish release</strong>.</li>
+</ol>
+<hr />
+<h1 id="postrelease-verification">Post‑Release Verification<a class="headerlink" href="#postrelease-verification" title="Permanent link">Link</a></h1>
+<p>Verify that:</p>
+<ul>
+<li>The tag was created and pushed correctly.</li>
+<li><code>dev</code> and <code>main</code> contain the expected changes.</li>
+<li>CI/CD pipelines ran successfully.</li>
+</ul>
+<blockquote>
+<p>Note: Always replace <code>X.Y.Z</code> with the appropriate version number for your release.</p>
+</blockquote>
+<hr />
+<h1 id="cicd-workflows">CI/CD Workflows<a class="headerlink" href="#cicd-workflows" title="Permanent link">Link</a></h1>
+<p>The following GitHub Actions are automatically triggered during a release (or manually via the **Actions
+** tab) and help maintain code quality, build artifacts, and publish them to the respective platforms.</p>
+<table>
+<thead>
+<tr>
+<th>Workflow</th>
+<th>Trigger</th>
+<th>Short description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>tests.yml</strong></td>
+<td><code>pull_request</code></td>
+<td>Runs deterministic unit tests in <code>tests/unit/</code> on every PR (model and integration tests are excluded).</td>
+</tr>
+<tr>
+<td><strong>gh‑pages.yml</strong></td>
+<td><code>push</code> or <code>workflow_dispatch</code></td>
+<td>Builds the MkDocs documentation and deploys it to GitHub Pages, ensuring docs stay in sync with the latest code.</td>
+</tr>
+<tr>
+<td><strong>conda.yml</strong></td>
+<td><code>release</code> (published) or <code>workflow_dispatch</code></td>
+<td>Builds and uploads the Conda package to Anaconda.org.</td>
+</tr>
+<tr>
+<td><strong>pip_build.yml</strong></td>
+<td><code>release</code> (published) or <code>workflow_dispatch</code></td>
+<td>Builds the <code>romiseg</code> package, stores the wheel/source distributions as artifacts, and publishes them to PyPI via trusted publishing.</td>
+</tr>
+</tbody>
+</table>
+<p>These workflows run automatically when a new release is published, or they can be triggered manually from the 
+<strong>Actions</strong> tab for ad‑hoc testing or re‑runs.
+The documentation above gives you a quick reference to understand what each job does during the release process.</p>
 
 
 
@@ -2021,12 +2250,12 @@
     
       
       
-      <script id="__config" type="application/json">{"annotate": null, "base": "../../..", "features": ["navigation.tabs", "navigation.tabs.sticky", "content.code.copy"], "search": "../../../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
+      <script id="__config" type="application/json">{"annotate": null, "base": "../..", "features": ["navigation.tabs", "navigation.tabs.sticky", "content.code.copy"], "search": "../../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
     
     
-      <script src="../../../assets/javascripts/bundle.d7400e89.min.js"></script>
+      <script src="../../assets/javascripts/bundle.d7400e89.min.js"></script>
       
-        <script src="../../../assets/_markdown_exec_pyodide.js"></script>
+        <script src="../../assets/_markdown_exec_pyodide.js"></script>
       
         <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.0/MathJax.js?config=TeX-MML-AM_CHTML"></script>
       
