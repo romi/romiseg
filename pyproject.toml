@@ -1,5 +1,5 @@
 [build-system]
-requires = ["setuptools >=75"]
+requires = ["setuptools >=77"]
 build-backend = "setuptools.build_meta"
 
 [project]
@@ -18,7 +18,7 @@ dependencies = [
 description = "Image multiclass semantic segmentation using CNN models trained on virtual plant images (PyTorch)."
 readme = "README.md"
 requires-python = ">=3.10"
-license = { 'text' = "LGPL-3.0-or-later" }   # to replace by "LGPL-3.0-or-later" only in next release, pending deprecation
+license = "LGPL-3.0-or-later"   # PEP 639 SPDX expression
 authors = [
     { name = "Alienor Lahlou", email = "alienor.lahlou@espci.org" },
     { name = "Peter Hanappe", email = "peter.hanappe@sony.com" },
